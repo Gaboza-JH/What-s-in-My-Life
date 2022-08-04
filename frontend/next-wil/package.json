@@ -9,9 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@mui/material": "^5.9.0",
     "next": "12.2.2",
+    "next-auth": "^4.9.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-redux": "^8.0.2"
   },
   "devDependencies": {
     "eslint": "8.19.0",
