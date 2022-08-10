@@ -31,7 +31,7 @@ public class IndexController {
 
     @GetMapping("/user")
     public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principal) {
-        System.out.println("Principal : " + principal);
+        System.out.println("Principal : " + principal); //세션 정보 확인하기
         System.out.println("OAuth2 : "+principal.getUser().getProvider());
         Iterator<? extends GrantedAuthority> iter = principal.getAuthorities().iterator();
         while (iter.hasNext()) {

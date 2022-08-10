@@ -22,8 +22,8 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private String role;
-    private String provider;
+    private String role; //권한
+    private String provider; //google? kakao? naver?
     private String providerId;
     @CreationTimestamp
     private Timestamp createDate;
