@@ -12,7 +12,7 @@
  - 서예원
  - 황지원
 
-[FE] [DA]
+[FE], [DA]
  - 권준혁
  - 김현진
  - 원종혁
@@ -21,14 +21,13 @@
  
 ## 개발환경 및 사용언어
 ### IDE 
-- **IntelliJ** <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/IntelliJ_IDEA_Icon.svg" width=30px>
-- **Visual Studio Code (VS Code)** ![Visual Studio](https://img.shields.io/badge/-visualstudio-5C2D91?style=for-the-badge&logo=visualstudio&logoColor=white)
-
+- **IntelliJ** <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/IntelliJ_IDEA_Icon.svg" width=40px>
+- **Visual Studio Code (VS Code)** <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" width=40px>
 ### Language
-- **Java**  <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white">
+- **Java**  <img src="https://www.svgrepo.com/show/303388/java-4-logo.svg" width=40px>
 
-- **JavaScript** ![JavaScript](https://img.shields.io/badge/-JavaScript-%23F7DF1C?style=for-the-badge&logo=javascript&logoColor=000000&labelColor=%23F7DF1C&color=%23FFCE5A)
-- **HTML** <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+- **JavaScript** <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Javascript-shield.svg" width=30px>
+- **HTML** <img src="https://ko.wikipedia.org/wiki/HTML5#/media/%ED%8C%8C%EC%9D%BC:HTML5_logo_and_wordmark.svg" width=30px>
 - **CSS**  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 
 ### Framework
@@ -122,5 +121,5 @@ https://www.figma.com/file/YIHb3jB2SdT9S1T8JOfspM/Untitled?node-id=51%3A15
 
 <br>
 
-## WBS
-https://docs.google.com/spreadsheets/d/1bOsanxjV91-35bERrX4HfTuPIeBVuP5O5JR-1OD9w3A/edit#gid=1190077019
+## 사이트 제작 일정
+WBS 엑셀파일 캡쳐본?? 추가 예정 
