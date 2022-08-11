@@ -12,7 +12,7 @@
  - 서예원
  - 황지원
 
-[FE], [DA]
+[FE] [DA]
  - 권준혁
  - 김현진
  - 원종혁
@@ -122,5 +122,5 @@ https://www.figma.com/file/YIHb3jB2SdT9S1T8JOfspM/Untitled?node-id=51%3A15
 
 <br>
 
-## 사이트 제작 일정
-WBS 엑셀파일 캡쳐본?? 추가 예정 
+## WBS
+https://docs.google.com/spreadsheets/d/1bOsanxjV91-35bERrX4HfTuPIeBVuP5O5JR-1OD9w3A/edit#gid=1190077019
