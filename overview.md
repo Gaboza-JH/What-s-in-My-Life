@@ -2,7 +2,7 @@
 ### <strong>W</strong>hat's <strong>I</strong>n My <strong>L</strong>ife? (WIL) 
 
 - 기획의도 <br><br>
-최근 연예인을 비롯한 인플루언서들 사이에서 what's in my bag이라고 유명인들의 가방 속에는 무엇이 들어있을까? 라는 궁금증과 호기심을 발단으로 하나의 밈처럼 유행하기 시작하였습니다. 저희 웹 페이지는 이것을 모티브로 하여 'what's in my life' 바로 '나' 자신을 중심으로 나의 삶을 보여주고자 하는 의도로 기획 하였습니다.
+최근 연예인을 비롯한 인플루언서들 사이에서 'What's in my bag'이라고하여 유명인들의 가방 속에는 무엇이 들어있을까? 라는 궁금증과 호기심을 발단으로 하나의 밈처럼 유행하기 시작하였습니다. 저희 웹 페이지는 이것을 모티브로 하여 'What's in my life' 바로 '나' 자신을 중심으로 나의 삶을보여주고자 하는 의도로 기획 하였습니다.
 
 <br>
 
@@ -27,23 +27,23 @@
 - **Java**  <img src="https://www.svgrepo.com/show/303388/java-4-logo.svg" width=40px>
 
 - **JavaScript** <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Javascript-shield.svg" width=30px>
-- **HTML** <img src="https://ko.wikipedia.org/wiki/HTML5#/media/%ED%8C%8C%EC%9D%BC:HTML5_logo_and_wordmark.svg" width=30px>
-- **CSS**  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+- **HTML** <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" width=40px>
+- **CSS**  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/CSS.3.svg" width=30px>
 
 ### Framework
-- **SpringBoot** <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+- **SpringBoot** <img src="https://simpleicons.org/icons/springboot.svg" width=40px fill='#6DB33F'>
 
 ### Library
-- **react**  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
-- **Material UI 5 (MUI)** <img src="https://img.shields.io/badge/MUI-02569B?style=for-the-badge&logo=MUI&logoColor=white">
+- **react**  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" width=40px>
+- **Material UI 5 (MUI)** <img src="">
 
 ### Database
 
-- **MySQL**<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
+- **MySQL**<img src="https://www.vectorlogo.zone/logos/mysql/mysql-official.svg" width=100px> 
 
 ### 버전 형상 관리
-- **Git** <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-- **GitHub** <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+- **Git** <img src="https://simpleicons.org/icons/git.svg" width=40px fill=#F05032>
+- **GitHub** <img src="https://simpleicons.org/icons/github.svg" width=40px>
 
 <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white">
 
