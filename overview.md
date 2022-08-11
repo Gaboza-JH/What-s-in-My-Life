@@ -7,12 +7,12 @@
 <br>
 
 ## 팀원 소개 및 역할 
-[BE]
+### [BE]
  - 배서현
  - 서예원
  - 황지원
 
-[FE], [DA]
+### [FE] [DA]
  - 권준혁
  - 김현진
  - 원종혁
@@ -21,31 +21,36 @@
  
 ## 개발환경 및 사용언어
 ### IDE 
-- **IntelliJ** <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/IntelliJ_IDEA_Icon.svg" width=40px>
-- **Visual Studio Code (VS Code)** <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" width=40px>
-### Language
-- **Java**  <img src="https://www.svgrepo.com/show/303388/java-4-logo.svg" width=40px>
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/IntelliJ_IDEA_Icon.svg" width=40px> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" width=40px>
 
-- **JavaScript** <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Javascript-shield.svg" width=30px>
-- **HTML** <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" width=40px>
-- **CSS**  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/CSS.3.svg" width=30px>
+**IntelliJ** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Visual Studio Code (VS Code)**
+
+### Language
+<img src="https://www.svgrepo.com/show/303388/java-4-logo.svg" width=40px> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Javascript-shield.svg" width=30px> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" width=40px> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/CSS.3.svg" width=30px>
+
+&nbsp; **Java** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **JavaScript** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **HTML** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **CSS**  
+
 
 ### Framework
-- **SpringBoot** <img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F3G7EJ%2FbtqBHUirjvP%2F2J0QLAxvw3yFKsSswQwDy1%2Fimg.png" width=40px>
-- **Gradle** <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Gradle_logo.png" width=100px>
+<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F3G7EJ%2FbtqBHUirjvP%2F2J0QLAxvw3yFKsSswQwDy1%2Fimg.png" width=40px> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Gradle_logo.png" width=100px>
+
+**SpringBoot** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Gradle**
+
 ### Library
-- **react**  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" width=40px>
-- **Material UI 5 (MUI)** <img src="https://v4.material-ui.com/static/logo.png" width=50px>
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" width=40px> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://v4.material-ui.com/static/logo.png" width=50px>
+
+**react** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Material UI 5 (MUI)** 
 
 ### Database
+<img src="https://www.vectorlogo.zone/logos/mysql/mysql-official.svg" width=100px> 
 
-- **MySQL**<img src="https://www.vectorlogo.zone/logos/mysql/mysql-official.svg" width=100px> 
+&nbsp;&nbsp;&nbsp;&nbsp;**MySQL**
+
 
 ### 버전 형상 관리
-- **Git** <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/1200px-Git_icon.svg.png" width=40px>
-- **GitHub** <img src="https://simpleicons.org/icons/github.svg" width=40px>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/1200px-Git_icon.svg.png" width=40px> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://simpleicons.org/icons/github.svg" width=40px>
 
-<img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white">
+**Git** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **GitHub**
 
 <br>
 
@@ -121,5 +126,5 @@ https://www.figma.com/file/YIHb3jB2SdT9S1T8JOfspM/Untitled?node-id=51%3A15
 
 <br>
 
-## 사이트 제작 일정
-WBS 엑셀파일 캡쳐본?? 추가 예정 
+## WBS
+https://docs.google.com/spreadsheets/d/1bOsanxjV91-35bERrX4HfTuPIeBVuP5O5JR-1OD9w3A/edit#gid=1190077019
