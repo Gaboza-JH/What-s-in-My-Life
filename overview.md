@@ -7,12 +7,12 @@
 <br>
 
 ## 팀원 소개 및 역할 
-[BE]
+### [BE]
  - 배서현
  - 서예원
  - 황지원
 
-[FE], [DA]
+### [FE] [DA]
  - 권준혁
  - 김현진
  - 원종혁
@@ -65,14 +65,14 @@ https://www.figma.com/file/YIHb3jB2SdT9S1T8JOfspM/Untitled?node-id=51%3A15
 <br>
 
 ## 참고 사이트 (벤치마킹)
-[SNS]
+### [SNS]
 - instagram
 
-[FE]
+### [FE]
 - Mui 활용한 구성화면 참고 영상
     - https://www.youtube.com/watch?v=fzxEECHnsvU&list=PLb7QaHRKY0YpcrOwv-oAfAsTAc50anoYh&index=16&t=2465s
 
-[BE]
+### [BE]
 - 로그인 api구현시 참고한 사이트
 
   - https://www.youtube.com/watch?v=GEv_hw0VOxE&list=PL93mKxaRDidERCyMaobSLkvSPzYtIk0Ah&index=1&t=2s
@@ -92,7 +92,7 @@ https://www.figma.com/file/YIHb3jB2SdT9S1T8JOfspM/Untitled?node-id=51%3A15
 <br>
 
 ## 현재 진행상황 ( ~ 08.12)
-[FE] 
+### [FE] 
 - 필요한 페이지 구상
 - 페이지별 필요한 기능 구상
 - 기본 개발환경 틀 생성
@@ -100,7 +100,7 @@ https://www.figma.com/file/YIHb3jB2SdT9S1T8JOfspM/Untitled?node-id=51%3A15
 - 로그인 및 회원가입 페이지 생성
 - Mypage 기본틀 생성
 
-[BE]
+### [BE]
 - Local Login 
 - Social Login
     - Google login
@@ -110,7 +110,7 @@ https://www.figma.com/file/YIHb3jB2SdT9S1T8JOfspM/Untitled?node-id=51%3A15
 <br>
 
 ## 주간 계획 ( ~ 08.19)
-[FE] 
+### [FE] 
 - S3활용방법
 - Mypage에 구현될 기능들 추가
     - 비동기 페이지 요청
@@ -118,7 +118,7 @@ https://www.figma.com/file/YIHb3jB2SdT9S1T8JOfspM/Untitled?node-id=51%3A15
     - Text input 
     - Drag And Drop
 
-[BE]
+### [BE]
 - ERD 구성
 - API 명세서 작성
 - 로그인 API 코드 통합
