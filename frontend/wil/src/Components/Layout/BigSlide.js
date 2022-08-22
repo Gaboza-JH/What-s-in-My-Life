@@ -1,6 +1,8 @@
 import React from 'react'
 import { Carousel } from "react-bootstrap";
 import introduction from "../../src_assets/wil.gif"
+import {BsBoxArrowInRight} from "react-icons/bs";
+import "../../BigSlide.css"
 
 const BigSlide = () => {
   return (
@@ -11,15 +13,12 @@ const BigSlide = () => {
           src={introduction}
           alt="First slide"
         />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
       </Carousel.Item>
-      <Carousel.Item>
+
+      {/* <Carousel.Item>
         <img
           className="d-block w-100"
-          src="http://unsplash.it/1001"
+          src="https://cdn.pixabay.com/photo/2022/08/08/19/36/landscape-7373484_1280.jpg"
           alt="Second slide"
         />
 
@@ -31,7 +30,7 @@ const BigSlide = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="http://unsplash.it/1002"
+          src="https://cdn.pixabay.com/photo/2022/08/06/19/20/woman-7369219_1280.jpg"
           alt="Third slide"
         />
 
@@ -41,7 +40,8 @@ const BigSlide = () => {
             Praesent commodo cursus magna, vel scelerisque nisl consectetur.
           </p>
         </Carousel.Caption>
-      </Carousel.Item>
+      </Carousel.Item> */}
+    
     </Carousel>
   );
 }

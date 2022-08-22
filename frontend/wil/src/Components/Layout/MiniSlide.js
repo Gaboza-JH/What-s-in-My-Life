@@ -1,57 +1,78 @@
 import React from "react";
-import ReactCardSlider from "react-card-slider-component";
-// import { Carousel } from "@trendyol-js/react-carousel";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import "../../MiniSlide.css"
 
-const slides = [
+
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4,
+    slidesToSlide: 4 // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 768 },
+    items: 3,
+    slidesToSlide: 3 // optional, default to 1.
+  },
+  mobile: {
+    breakpoint: { max: 767, min: 464 },
+    items: 2,
+    slidesToSlide: 1 // optional, default to 1.
+  }
+};
+
+const sliderImageUrl = [
+  //First image url
   {
-    image: "https://picsum.photos/200/300",
-    title: "This is a title",
-    description: "This is a description"
-    // clickEvent: sliderClick
+    url:
+      "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg"
   },
   {
-    image: "https://picsum.photos/600/500",
-    title: "This is a second title",
-    description: "This is a second description"
-    // clickEvent: sliderClick
+    url:
+      "https://cdn.pixabay.com/photo/2015/03/04/15/03/sky-658888_1280.jpg"
   },
+  //Second image url
   {
-    image: "https://picsum.photos/700/600",
-    title: "This is a third title",
-    description: "This is a third description"
-    // clickEvent: sliderClick
+    url:
+      "https://cdn.pixabay.com/photo/2018/05/18/12/43/rose-3411110_1280.jpg"
   },
+  //Third image url
   {
-    image: "https://picsum.photos/500/400",
-    title: "This is a fourth title",
-    description: "This is a fourth description"
-    // clickEvent: sliderClick
+    url:
+      "https://cdn.pixabay.com/photo/2021/11/05/07/49/women-6770533_1280.jpg"
   },
+
+  //Fourth image url
+
   {
-    image: "https://picsum.photos/200/300",
-    title: "This is a fifth title",
-    description: "This is a fifth description"
-    // clickEvent: sliderClick
-  },
-  {
-    image: "https://picsum.photos/800/700",
-    title: "This is a sixth title",
-    description: "This is a sixth description"
-    // clickEvent: sliderClick
-  },
-  {
-    image: "https://picsum.photos/300/400",
-    title: "This is a seventh title",
-    description: "This is a seventh description"
-    // clickEvent: sliderClick
+    url:
+      "https://cdn.pixabay.com/photo/2022/08/08/06/04/chrysanthemums-7371966_1280.jpg"
   }
 ];
+
+
 const MiniSlide = () => {
   return (
-    <div style={{ margin: "0, 0, 0, 0" }}>
-      <ReactCardSlider slides={slides} />
+    <div className="parent">
+      <Carousel
+        responsive={responsive}
+        autoPlay={true}
+        swipeable={true}
+        draggable={true}
+        showDots={false}
+        infinite={true}
+        partialVisible={false}
+      >
+        {sliderImageUrl.map((imageUrl, index) => {
+          return (
+            <div className="slider" key={index}>
+              <img src={imageUrl.url} alt="movie" />
+            </div>
+          );
+        })}
+      </Carousel>
     </div>
   );
 };
-
 export default MiniSlide;
