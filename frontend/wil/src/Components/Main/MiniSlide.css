@@ -20,3 +20,6 @@
   padding: 0rem 0 0rem 0;
   }
 
+  .react-multi-carousel-list{
+    position: unset !important;
+  }
