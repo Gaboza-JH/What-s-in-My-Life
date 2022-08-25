@@ -1,9 +1,33 @@
-import React from 'react'
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import SignUp from "../Components/Sign/SignUp";
+import SignIn from "../Components/Sign/SignIn";
+import OverLay from "../Components/Sign/OverLay";
+import "../Components/Sign/Sign.css"
 
 const LoginSignupPage = () => {
-  return (
-    <div>LoginSignupPage</div>
-  )
-}
+  const [toggleClassName, setClassName] = useState("container");
 
-export default LoginSignupPage
+  function onClick() {
+    if (toggleClassName === "container") {
+      setClassName("container right-panel-active");
+    } else {
+      setClassName("container");
+    }
+  }
+
+  return (
+    <div className="body">
+      <div className={toggleClassName}>
+        <SignIn />
+        <SignUp />
+        <OverLay onClick={onClick} />
+      </div>
+    </div>
+  );
+};
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<LoginSignupPage />, rootElement);
+
+export default LoginSignupPage;
