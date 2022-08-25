@@ -55,6 +55,10 @@ button {
   transition: transform 80ms ease-in;
 }
 
+.btnsignup {
+    margin-top: 20px;
+}
+
 button:active {
   transform: scale(0.95);
 }
@@ -227,5 +231,9 @@ input {
 }
 .test {
   border: 10px solid #fff;
+}
+
+.spansignup{
+    margin-bottom: 20px;
 }
 

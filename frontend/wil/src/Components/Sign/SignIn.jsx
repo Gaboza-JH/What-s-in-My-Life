@@ -12,13 +12,13 @@ const SignIn = () => {
         <h1 className="header-signin">Sign in</h1>
         <div className="social-container">
           <a href="#">
-            <ImGoogle2 />
+            <ImGoogle2 color="#ed8f03"/>
           </a>
           <a href="#">
-            <SiKakaotalk />
+            <SiKakaotalk color="#ed8f03"/>
           </a>
           <a href="#">
-            <SiNaver />
+            <SiNaver color="#ed8f03"/>
           </a>
         </div>
         <input type="email" placeholder="Email" />

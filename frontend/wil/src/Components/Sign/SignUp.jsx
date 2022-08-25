@@ -11,20 +11,20 @@ const SignUp = () => {
         <h1 className="header-signin">Create Account</h1>
         <div className="social-container">
           <a href="#">
-            <ImGoogle2 />
+            <ImGoogle2 color="#ed8f03"/>
           </a>
           <a href="#">
-            <SiKakaotalk />
+            <SiKakaotalk color="#ed8f03"/>
           </a>
           <a href="#">
-            <SiNaver />
+            <SiNaver color="#ed8f03"/>
           </a>
         </div>
-        <span>or use your email for registration</span>
+        <span className="spansignup">or use your email for registration</span>
         <input type="text" placeholder="Name" />
         <input type="email" placeholder="Email" />
         <input type="password" placeholder="Password" />
-        <button>Sign Up</button>
+        <button className="btnsignup">Sign Up</button>
       </form>
     </div>
   );
