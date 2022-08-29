@@ -3,6 +3,7 @@ package com.example.wil.config.oauth;
 import com.example.wil.config.auth.PrincipalDetails;
 import com.example.wil.config.oauth.provider.GoogleUserInfo;
 import com.example.wil.config.oauth.provider.KakaoUserInfo;
+import com.example.wil.config.oauth.provider.NaverUserInfo;
 import com.example.wil.config.oauth.provider.OAuth2UserInfo;
 import com.example.wil.model.User;
 import com.example.wil.repository.UserRepository;
@@ -39,6 +40,10 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             System.out.println("카카오 로그인 요청~~");
             oAuth2UserInfo = new KakaoUserInfo(oAuth2User.getAttributes());
         }
+        if (userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
+            System.out.println("네이버 로그인 요청~~");
+            oAuth2UserInfo = new NaverUserInfo(oAuth2User.getAttributes());
+        }
         else {
             System.out.println("아직 다른 로그인은 구현하지 못했어요!");
         }
@@ -63,6 +68,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             userRepository.save(user);
         }
 
-        return new PrincipalDetails(user, oAuth2User.getAttributes());
+        return new PrincipalDetails(user, oAuth2UserInfo);
     }
 }

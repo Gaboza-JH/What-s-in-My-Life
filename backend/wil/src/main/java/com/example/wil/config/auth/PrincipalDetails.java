@@ -1,5 +1,6 @@
 package com.example.wil.config.auth;
 
+import com.example.wil.config.oauth.provider.OAuth2UserInfo;
 import com.example.wil.model.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,23 +15,29 @@ import java.util.Map;
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private User user;
-    private Map<String,Object> attributes;
+//    private Map<String,Object> attributes;
+    private OAuth2UserInfo oAuth2UserInfo;
 
     //일반 로그인
     public PrincipalDetails(User user) {
         this.user = user;
     }
 
-    //OAuth 로그인
-    public PrincipalDetails(User user, Map<String, Object> attributes) {
+//    //OAuth 로그인
+//    public PrincipalDetails(User user, Map<String, Object> attributes) {
+//        this.user = user;
+//        this.attributes=attributes;
+//    }
+
+    public PrincipalDetails(User user, OAuth2UserInfo oAuth2UserInfo) {
         this.user = user;
-        this.attributes=attributes;
+        this.oAuth2UserInfo = oAuth2UserInfo;
     }
 
-    @Override
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
+//    @Override
+//    public Map<String, Object> getAttributes() {
+//        return attributes;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -74,13 +81,34 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         return true;
     }
 
-    @Override
-    public String getName() {
-        return null;
-    }
+//    @Override
+//    public String getName() {
+//        return null;
+//    }
 
     public User getUser() {
         return user;
+    }
+
+    /**
+     * OAuth2User 구현
+     * @return
+     */
+    @Override
+    public Map<String, Object> getAttributes() {
+        //return attributes;
+        return oAuth2UserInfo.getAttributes();
+    }
+
+    /**
+     * OAuth2User 구현
+     * @return
+     */
+    @Override
+    public String getName() {
+        //String sub = attributes.get("sub").toString();
+        //return sub;
+        return oAuth2UserInfo.getProviderId();
     }
 
 }
