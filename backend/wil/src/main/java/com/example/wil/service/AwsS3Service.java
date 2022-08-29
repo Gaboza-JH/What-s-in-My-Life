@@ -18,9 +18,6 @@ import org.springframework.web.server.ResponseStatusException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,17 +33,23 @@ public class AwsS3Service {
     private final AmazonS3Client amazonS3Client;
 
     public String upload(MultipartFile multipartFile, String dirName) throws IOException{
-        File uploadFile = convert(multipartFile).orElseThrow(() -> new IllegalArgumentException("파일 전환 실패"));
+        System.out.println("originname : "+multipartFile.getOriginalFilename());
+        System.out.println("content-type : "+multipartFile.getContentType());
+        System.out.println("getname : "+multipartFile.getName());
+        System.out.println("hash : "+multipartFile.hashCode());
 
+        File uploadFile = convert(multipartFile).orElseThrow(() -> new IllegalArgumentException("파일 전환 실패"));
         return upload(uploadFile, dirName);
     }
     // S3로 파일 업로드하기
     private String upload(File uploadFile, String dirName) {
-        String fileName = dirName + "/" + UUID.randomUUID() + uploadFile.getName();   // S3에 저장된 파일 이름
+        System.out.println(uploadFile);
+        String fileName = dirName + "/" + UUID.randomUUID() + uploadFile.getName();   // S3에 dirName(static/) 폴더로 파일 이름을 UUID(범용 고유 식별자 Universally Unique IDntifier) 고유값으로 변환하여 저장
         String uploadImageUrl = putS3(uploadFile, fileName); // s3로 업로드
-        removeNewFile(uploadFile);
+        removeNewFile(uploadFile); // client로부터 업로드 될 이미지 파일 (로컬 이미지 파일)
         return uploadImageUrl;
     }
+
     // S3로 업로드
     private String putS3(File uploadFile, String fileName) {
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
@@ -55,6 +58,7 @@ public class AwsS3Service {
 
     // 로컬에 저장된 이미지 지우기
     private void removeNewFile(File targetFile) {
+        System.out.println(targetFile); // 현재 파일(client로 부터 받은 이미지 파일)을 로컬에 저장하지 않고 S3에 바로 저장하기 위해 로컬 이미지 삭제
         if (targetFile.delete()) {
             log.info("File delete success");
             return;
