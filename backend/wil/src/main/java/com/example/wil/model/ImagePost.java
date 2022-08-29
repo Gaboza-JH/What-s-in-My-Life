@@ -1,7 +1,6 @@
 package com.example.wil.model;
 
 import lombok.*;
-
 import javax.persistence.*;
 
 @Entity
