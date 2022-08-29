@@ -78,12 +78,13 @@ function S3upload(props){
     e.preventDefault(); //submit 멈춰
     const formData = new FormData();  
     formData.append("image", file)
+    console.log(formData);
     try {
       const res = await axios.post("http://localhost:8080/images", formData,{
         headers: { "Content-Type" : "multipart/form-data" },
         onUploadProgress: (e) => {
           setProgress(Math.round(100 * e.loaded/e.total));
-        }
+        },
       });
       toast.success("success!!  이미지 업로드 성공");
       setTimeout(() => {
