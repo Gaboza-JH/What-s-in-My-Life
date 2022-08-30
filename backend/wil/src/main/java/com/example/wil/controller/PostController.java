@@ -15,7 +15,7 @@ public class PostController {
     private PostService postService;
 
     @PostMapping("/post")
-    public Post save(@RequestBody Post post) {return postService.save(post);}
+    public String save(@RequestBody Post post) {return postService.save(post);}
 
     @GetMapping("/post")
     public List<Post> findAll() {return postService.findAll();}

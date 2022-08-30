@@ -1,6 +1,5 @@
 package com.example.wil.service;
 
-import com.example.wil.DTO.PostDTO;
 import com.example.wil.model.Post;
 import com.example.wil.model.User;
 import com.example.wil.repository.PostRepository;
@@ -18,9 +17,9 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-    public Post save(Post post){
+    public String save(Post post){
         postRepository.save(post);
-        return post;
+        return "회원가입완료";
     }
 
     public List<Post> findAll() {

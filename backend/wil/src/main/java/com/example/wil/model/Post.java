@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
@@ -20,7 +21,7 @@ public class Post {
 
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name="id")
-    private User userId; // User
+    private User user; // User
 
 }
 
