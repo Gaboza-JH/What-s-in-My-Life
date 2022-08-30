@@ -16,5 +16,5 @@ public class PostDTO {
     private int postId;
     private String content;
     private boolean shown;
-    private List<Integer> userDtoIdList;
+    private int userId;
 }

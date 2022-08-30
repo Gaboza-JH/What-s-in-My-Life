@@ -1,5 +1,6 @@
 package com.example.wil.service;
 
+import com.example.wil.DTO.PostDTO;
 import com.example.wil.model.Post;
 import com.example.wil.model.User;
 import com.example.wil.repository.PostRepository;
@@ -17,36 +18,70 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-    public String save(Post post){
-        postRepository.save(post);
-        return "회원가입완료";
+    @Autowired
+    private UserRepository userRepository;
+
+    public PostDTO save(PostDTO postDTO){
+        Post post = makePost(postDTO);
+        post = postRepository.save(post);
+        return makePostDTO(post);
     }
 
-    public List<Post> findAll() {
-        return postRepository.findAll();
+    public List<PostDTO> findAll() {
+        List<Post> postList = postRepository.findAll();
+        return makePostDTOList(postList);
     }
 
-    public List<Post> delete(int postId) {
-        final Optional<Post> foundPost = postRepository.findById(postId);
+
+    public List<PostDTO> delete(int postId) {
+        Optional<Post> foundPost = postRepository.findById(postId);
         foundPost.ifPresent(post -> {
             postRepository.delete(post);
         });
-        return postRepository.findAll();
+        List<Post> postList = postRepository.findAll();
+        return makePostDTOList(postList);
     }
 
-    public List<Post> update(int postId, Post post) {
-
-        final Optional<Post> foundPost = postRepository.findById(postId);
-
-        foundPost.ifPresent(newpost -> {
-            newpost.setContent(post.getContent());
-            newpost.setShown(post.isShown());
-            postRepository.save(newpost);
-        });
-
-        return postRepository.findAll();
-
+    public PostDTO update(int postId, PostDTO postDTO) {
+        Post post = postRepository.getById(postId);
+        post.setContent(postDTO.getContent());
+        post.setShown(postDTO.isShown());
+        post = postRepository.save(post);
+        return makePostDTO(post);
     }
+
+    private Post makePost(PostDTO postDTO){
+        User user = userRepository.getById(postDTO.getUserId());
+        return Post
+                .builder()
+                .postId(postDTO.getPostId())
+                .content(postDTO.getContent())
+                .shown(postDTO.isShown())
+                .user(user)
+                .build();
+    }
+
+    private PostDTO makePostDTO(Post post){
+        return PostDTO
+                .builder()
+                .postId(post.getPostId())
+                .content(post.getContent())
+                .shown(post.isShown())
+                .userId(post.getUser().getId())
+                .build();
+    }
+
+    private List<PostDTO> makePostDTOList(List<Post> postList){
+        List<PostDTO> postDTOList = new ArrayList<>();
+
+        for (Post post : postList) {
+            postDTOList.add(makePostDTO(post));
+        }
+        return postDTOList;
+    }
+
+
+
 
 
 

@@ -1,6 +1,7 @@
 package com.example.wil.controller;
 
 
+import com.example.wil.DTO.PostDTO;
 import com.example.wil.model.Post;
 import com.example.wil.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,15 @@ public class PostController {
     private PostService postService;
 
     @PostMapping("/post")
-    public String save(@RequestBody Post post) {return postService.save(post);}
+    public PostDTO save(@RequestBody PostDTO postDTO) {return postService.save(postDTO);}
 
     @GetMapping("/post")
-    public List<Post> findAll() {return postService.findAll();}
+    public List<PostDTO> findAll() {return postService.findAll();}
 
     @DeleteMapping("/post/{postId}")
-    public List<Post> delete(@PathVariable int postId) {return postService.delete(postId); }
+    public List<PostDTO> delete(@PathVariable int postId) {return postService.delete(postId); }
 
     @PutMapping("/post/{postId}")
-    public List<Post> update(@PathVariable int postId, @RequestBody Post post) {return postService.update(postId, post); }
+    public PostDTO update(@PathVariable int postId, @RequestBody PostDTO postDTO) {return postService.update(postId, postDTO); }
 
 }
