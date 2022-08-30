@@ -14,7 +14,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/users")
-    public User save(@RequestBody User user) {return userService.save(user);}
+    public User save(User user) {return userService.save(user);}
 
     @GetMapping("/users")
     public List<User> findAll() {return userService.findAll();}
