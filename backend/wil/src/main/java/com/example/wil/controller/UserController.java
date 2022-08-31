@@ -14,15 +14,18 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/users")
-    public User save(@RequestBody User user) {return userService.save(user);}
+    public User signUp(@RequestBody User user) {return userService.signUp(user);}
 
     @GetMapping("/users")
-    public List<User> findAll() {return userService.findAll();}
+    public List<User> findAllUsers() {return userService.findAllUsers();}
+
+    @GetMapping("/Users/{userId}")
+    public List<User> findUserById(@PathVariable int userId) {return userService.findUserById(userId);}
 
     @DeleteMapping("/users/{userId}")
-    public List<User> delete(@PathVariable int userId) {return userService.delete(userId); }
+    public List<User> deleteUser(@PathVariable int userId) {return userService.deleteUser(userId); }
 
     @PutMapping("/users/{userId}")
-    public List<User> update(@PathVariable int userId, @RequestBody User user) {return userService.update(userId, user); }
+    public List<User> updateUser(@PathVariable int userId, @RequestBody User user) {return userService.updateUser(userId, user); }
 
 }
