@@ -1,11 +1,11 @@
 
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import AWS from 'aws-sdk';
 import { Row, Col, Button, Input, Alert, Container } from 'reactstrap';
 import { useDropzone, FileWithPath } from "react-dropzone";
 import { useFormikContext, useField } from "formik";
-import { toast } from "react-toastify"
-import './S3upload.css'
+import { toast } from "react-toastify";
+import './S3upload.css';
 import Progressbar from './Progressbar';  
 import axios from 'axios';
 
@@ -38,7 +38,7 @@ function S3upload(props){
 
   const FileInputHandler = e => {
     const imgFile = e.target.files[0]; // 현재 이미지 파일
-    const imageUrl = URL.createObjectURL(imgFile) // 선택한 이미지 파일의 url
+    // const imageUrl = URL.createObjectURL(imgFile) // 선택한 이미지 파일의 url
     console.log(imgFile);
     setProgress(0);
     setFile(e.target.files[0]);
@@ -86,12 +86,22 @@ function S3upload(props){
           setProgress(Math.round(100 * e.loaded/e.total));
         },
       });
+      console.log(formData.fileName);
+      console.log("data : ", res.data);
+      console.log("headers : ", res.headers);
+      console.log("statusText : ", res.statusText);
+      console.log("config : ", res.config);
+      console.log("request : ", res.request);
+      console.log("request : ", res.file);
+      console.log("request : ", res.fileName);
+      console.log("request : ", res.fileUrl);
+      console.log("image upload success!");
       toast.success("success!!  이미지 업로드 성공");
       setTimeout(() => {
         setProgress(0);
         setFileName(defaultUpload);
         setFileUrl(null);
-      }, 3000);
+      }, 2000);
     } catch (error) {
       toast.error(error.message);
       setProgress(0);

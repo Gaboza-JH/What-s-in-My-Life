@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -66,7 +67,7 @@ public class AwsS3Service {
         log.info("File delete fail");
     }
 
-    private Optional<File> convert(MultipartFile multipartFile) throws IOException{
+    private Optional<File> convert(MultipartFile multipartFile) throws IOException {
         File convertFile = new File(System.getProperty("user.dir") + "/" + multipartFile.getOriginalFilename());
         // 바로 위에서 지정한 경로에 File이 생성됨 (경로가 잘못되었다면 생성 불가능)
         if (convertFile.createNewFile()) {
@@ -75,10 +76,11 @@ public class AwsS3Service {
             }
             return Optional.of(convertFile);
         }
-
         return Optional.empty();
-
     }
+
+    
+
 
 
 /*
