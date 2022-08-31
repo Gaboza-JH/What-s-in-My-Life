@@ -1,20 +1,20 @@
 package com.example.wil.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
     @Id // primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,18 +24,15 @@ public class User {
     private String email;
     private String role; //권한
     private String provider; //google? kakao? naver?
+    @Column(name = "provider_id")
     private String providerId;
+    @Column(nullable = false, unique = true)
+    private String nickname;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @CreationTimestamp
     private Timestamp createDate;
 
-    @Builder
-    public User(String username, String password, String email, String role, String provider, String providerId, Timestamp createDate) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-        this.provider = provider;
-        this.providerId = providerId;
-        this.createDate = createDate;
-    }
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Post> postList;
 }

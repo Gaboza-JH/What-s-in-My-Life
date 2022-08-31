@@ -16,15 +16,18 @@ public class PostController {
     private PostService postService;
 
     @PostMapping("/post")
-    public PostDTO save(@RequestBody PostDTO postDTO) {return postService.save(postDTO);}
+    public PostDTO putUpPost(@RequestBody PostDTO postDTO) {return postService.putUpPost(postDTO);}
 
     @GetMapping("/post")
-    public List<PostDTO> findAll() {return postService.findAll();}
+    public List<PostDTO> findAllPosts() {return postService.findAllPosts();}
+
+    @GetMapping("/post/{postId}")
+    public PostDTO findPostByPostId(@PathVariable int postId) { return postService.findPostByPostId(postId); }
 
     @DeleteMapping("/post/{postId}")
-    public List<PostDTO> delete(@PathVariable int postId) {return postService.delete(postId); }
+    public List<PostDTO> deletePost(@PathVariable int postId) {return postService.deletePost(postId); }
 
     @PutMapping("/post/{postId}")
-    public PostDTO update(@PathVariable int postId, @RequestBody PostDTO postDTO) {return postService.update(postId, postDTO); }
+    public PostDTO updatePost(@PathVariable int postId, @RequestBody PostDTO postDTO) {return postService.updatePost(postId, postDTO); }
 
 }
