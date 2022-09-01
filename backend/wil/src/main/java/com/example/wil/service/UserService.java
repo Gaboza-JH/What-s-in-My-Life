@@ -56,7 +56,9 @@ public class UserService {
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         foundUser.setPassword(encPassword);
         foundUser.setEmail(userDTO.getEmail());
-        foundUser.setNickname(userDTO.getNickname());
+        if (userDTO.getNickname() != null) {
+            foundUser.setNickname(userDTO.getNickname());
+        }
         User updatedUser = userRepository.save(foundUser);
         return transformUserDTO(updatedUser);
     }

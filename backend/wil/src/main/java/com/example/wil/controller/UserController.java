@@ -19,7 +19,7 @@ public class UserController {
     @GetMapping("/users")
     public List<UserDTO> findAllUsers() {return userService.findAllUsers();}
 
-    @GetMapping("/Users/{userId}")
+    @GetMapping("/users/{userId}")
     public UserDTO findUserById(@PathVariable int userId) {return userService.findUserById(userId);}
 
     @DeleteMapping("/users/{userId}")
