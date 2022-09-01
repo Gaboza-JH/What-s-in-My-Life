@@ -31,7 +31,6 @@ const App = () => {
             path="/mypage"
             element={user ? <MyPage user={user}/> : <Navigate to="/" />}
           />
-
           {/* Not FoundPage */}
 
         </Routes>
