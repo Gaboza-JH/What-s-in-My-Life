@@ -1,6 +1,6 @@
 package com.example.wil.controller;
 
-import com.example.wil.model.User;
+import com.example.wil.DTO.UserDTO;
 import com.example.wil.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +14,18 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/users")
-    public User signUp(@RequestBody User user) {return userService.signUp(user);}
+    public UserDTO signUp(@RequestBody UserDTO userDTO) {return userService.signUp(userDTO);}
 
     @GetMapping("/users")
-    public List<User> findAllUsers() {return userService.findAllUsers();}
+    public List<UserDTO> findAllUsers() {return userService.findAllUsers();}
 
     @GetMapping("/Users/{userId}")
-    public List<User> findUserById(@PathVariable int userId) {return userService.findUserById(userId);}
+    public UserDTO findUserById(@PathVariable int userId) {return userService.findUserById(userId);}
 
     @DeleteMapping("/users/{userId}")
-    public List<User> deleteUser(@PathVariable int userId) {return userService.deleteUser(userId); }
+    public List<UserDTO> deleteUser(@PathVariable int userId) {return userService.deleteUser(userId); }
 
     @PutMapping("/users/{userId}")
-    public List<User> updateUser(@PathVariable int userId, @RequestBody User user) {return userService.updateUser(userId, user); }
+    public UserDTO updateUser(@PathVariable int userId, @RequestBody UserDTO userDTO) {return userService.updateUser(userId, userDTO); }
 
 }

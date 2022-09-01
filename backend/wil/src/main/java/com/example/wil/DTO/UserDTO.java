@@ -25,5 +25,5 @@ public class UserDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @CreationTimestamp
     private Timestamp createDate;
-    private List<Integer> postDTOIdList;
+    private List<Integer> postIdList;
 }
