@@ -14,9 +14,14 @@ public class ImagePost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int img_id; // image 기본키값
 
-    private String file_name; // image
-    private String file_url; // image를 가져올 수 있는 url주소
-    @ManyToOne
-    @JoinColumn(name="post_id")
-    private Post post_id;
+    private String file_name; // image file url 정보
+
+//    @ManyToOne
+//    @JoinColumn(name="post_id")
+//    private Post post_id;
+
+
+    public ImagePost(String file_name) {
+        this.file_name = file_name;
+    }
 }
