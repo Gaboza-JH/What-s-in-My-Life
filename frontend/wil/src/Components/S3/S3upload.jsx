@@ -29,7 +29,8 @@ function S3upload(){
 
     const fileReader = new FileReader();
     fileReader.readAsDataURL(imageFile);
-    fileReader.onload = e => setFileUrl(e.target.result[0]);
+    
+    fileReader.onload = e => setFileUrl(e.target.result); 
   } 
  
  
