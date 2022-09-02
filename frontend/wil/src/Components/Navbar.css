@@ -1,5 +1,5 @@
 
-li {
+ li {
     list-style: none;
   }
   
@@ -19,6 +19,7 @@ li {
     /* box-shadow: 2px 2px 15px rgba(206, 100, 30, 0.3); */
     position: fixed;
     z-index: 1000;
+    padding-top: 20px;
   }
   
   .nav-container {

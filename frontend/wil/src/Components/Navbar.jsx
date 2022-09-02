@@ -1,8 +1,3 @@
-// import React from "react";
-// import Container from "react-bootstrap/Container";
-// import Nav from "react-bootstrap/Nav";
-// import Navbar from "react-bootstrap/Navbar";
-
 import { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
