@@ -26,22 +26,27 @@ const responsive = {
 const sliderImageUrl1 = [
   //First image url
   {
-    url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2015/03/04/15/03/sky-658888_1280.jpg",
+    url: "https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_960_720.jpg",
   },
   //Second image url
   {
-    url: "https://cdn.pixabay.com/photo/2018/05/18/12/43/rose-3411110_1280.jpg",
+    url: "https://cdn.pixabay.com/photo/2017/05/12/08/29/coffee-2306471_960_720.jpg",
   },
   //Third image url
   {
-    url: "https://cdn.pixabay.com/photo/2021/11/05/07/49/women-6770533_1280.jpg",
+    url: "https://cdn.pixabay.com/photo/2018/04/02/18/29/food-3284704_960_720.jpg",
   },
   //Fourth image url
   {
-    url: "https://cdn.pixabay.com/photo/2022/08/08/06/04/chrysanthemums-7371966_1280.jpg",
+    url: "https://cdn.pixabay.com/photo/2019/08/19/07/45/corgi-4415649_960_720.jpg",
+  },
+  //fifth image url
+  {
+    url: "https://cdn.pixabay.com/photo/2017/07/25/01/22/cat-2536662_960_720.jpg",
+  },
+  // sixth image url
+  {
+    url: "https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547_960_720.jpg",
   },
 ];
 
@@ -50,9 +55,6 @@ const sliderImageUrl2 = [
   {
     url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
   },
-  {
-    url: "https://cdn.pixabay.com/photo/2015/03/04/15/03/sky-658888_1280.jpg",
-  },
   //Second image url
   {
     url: "https://cdn.pixabay.com/photo/2018/05/18/12/43/rose-3411110_1280.jpg",
@@ -64,6 +66,10 @@ const sliderImageUrl2 = [
   //Fourth image url
   {
     url: "https://cdn.pixabay.com/photo/2022/08/08/06/04/chrysanthemums-7371966_1280.jpg",
+  },
+  // sixth image url
+  {
+    url: "https://cdn.pixabay.com/photo/2015/03/04/15/03/sky-658888_1280.jpg",
   },
 ];
 
@@ -103,7 +109,6 @@ const MiniSlide = ({ user }) => {
             ssr={true}
             renderDotsOutside={true}
             arrows={false}
-          
           >
             {sliderImageUrl2.map((imageUrl, index) => {
               return (

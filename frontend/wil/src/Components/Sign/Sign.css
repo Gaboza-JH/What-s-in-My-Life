@@ -220,12 +220,10 @@ input {
 }
 
 .social-container a {
-  border: 1px solid #ecd9bc;
-  border-radius: 50%;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  margin: 0 5px;
+  margin: 0 10px;
   height: 40px;
   width: 40px;
 }
@@ -234,6 +232,45 @@ input {
 }
 
 .spansignup{
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
+.interval{
+  margin-bottom: 10px;
+}
+
+.google{
+  color: rgba(066, 133, 244);
+  border: 1px solid rgba(066, 133, 244);
+  border-radius: 10%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 40px;
+  width: 40px;
+}
+
+.kakao{
+  color: #FAE100;
+  border: 1px solid #FAE100;
+  border-radius: 10%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 40px;
+  width: 40px;
+}
+
+.naver{
+  color: #1EC800;
+  border: 1px solid #1EC800;
+  border-radius: 10%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 40px;
+  width: 40px;
+}
