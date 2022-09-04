@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import "./Sign.css"
+import "./Sign.css";
 
 const OverLay = ({ onClick }) => {
   return (

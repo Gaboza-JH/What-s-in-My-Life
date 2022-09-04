@@ -9,9 +9,9 @@
 //     }, []);
 //     console.log({ images });
 //     const imgList = images.map((image) => (
-//      <img 
+//      <img
 //      key={image.key}
-//      style={{width:"100%"}} 
+//      style={{width:"100%"}}
 //      src={`http://localhost:8080/images/${image.key}`}
 //      />
 //      ));
@@ -71,7 +71,7 @@ const ImageList = () => {
       />
     </Link>
   ));
-  
+
   return (
     <div>
       <h3 style={{ display: "inline-block", marginRight: 10 }}>
