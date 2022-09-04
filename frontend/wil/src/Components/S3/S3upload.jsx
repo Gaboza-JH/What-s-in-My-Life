@@ -63,6 +63,7 @@ function S3upload() {
     <>
       <div>
         <form>
+
           <img
             src={fileUrl}
             className={`image-preview ${fileUrl && "image-preview-show"}`}
@@ -73,18 +74,13 @@ function S3upload() {
               alt="Upload Image"
               className="uploadImage"
             ></img>
+
             {fileName}
-            <input
-              id="image"
-              type="file"
-              multiple
-              accept="image/*"
-              onChange={FileInputHandler}
-            />
+            <input className="file-input" id="image" type="file" multiple accept="image/*" onChange={FileInputHandler}/>
           </div>
-          <button type="submit" className="upload-btn" onClick={clickPostSubmit}>
-            Upload
-          </button>
+
+          <button type="submit" className="upload-btn" onClick={clickPostSubmit}>Upload</button>
+
         </form>
       </div>
     </>

@@ -14,7 +14,7 @@
   height: 100vh;
 }
 
-h1 {
+.overlay-h1 {
   font-weight: bold;
   margin: 0;
 }
@@ -23,7 +23,7 @@ h1 {
   color: #ed8f03;
 }
 
-p {
+.sign-p {
   font-size: 14px;
   font-weight: 100;
   line-height: 20px;
@@ -31,18 +31,18 @@ p {
   margin: 20px 0 30px;
 }
 
-span {
+/* span {
   font-size: 12px;
-}
+} */
 
-a {
+.sign-a {
   color: #333;
   font-size: 14px;
   text-decoration: none;
   margin: 15px 0;
 }
 
-button {
+.sign-botton {
   border-radius: 10px;
   border: 1px solid #fdb254;
   background-color: #fdb254;
@@ -56,23 +56,39 @@ button {
 }
 
 .btnsignup {
-    margin-top: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: 1px solid #fdb254;
+  background-color: #fdb254;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
 }
 
-button:active {
+/* button:active {
   transform: scale(0.95);
 }
 
 button:focus {
   outline: none;
-}
+} */
 
 .btn-overlay {
   background-color: transparent;
   border-color: #ffffff;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  border-radius: 10px;
 }
 
-form {
+.sign-form {
   background-color: #ffffff;
   display: flex;
   align-items: center;
@@ -83,14 +99,14 @@ form {
   text-align: center;
 }
 
-input {
+/* input {
   background-color: #eee;
   border: none;
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
   border-radius: 5px;
-}
+} */
 
 .container {
   background-color: #fff;
@@ -237,6 +253,12 @@ input {
 
 .interval{
   margin-bottom: 10px;
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+  border-radius: 5px;
 }
 
 .google{
@@ -247,8 +269,8 @@ input {
   justify-content: center;
   align-items: center;
   margin: 0 5px;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
 }
 
 .kakao{
@@ -259,8 +281,8 @@ input {
   justify-content: center;
   align-items: center;
   margin: 0 5px;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
 }
 
 .naver{
@@ -271,6 +293,6 @@ input {
   justify-content: center;
   align-items: center;
   margin: 0 5px;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
 }

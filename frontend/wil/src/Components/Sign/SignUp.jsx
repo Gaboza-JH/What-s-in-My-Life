@@ -7,16 +7,16 @@ import { SiNaver } from "react-icons/si";
 const SignUp = () => {
   return (
     <div className="form-container sign-up-container">
-      <form>
+      <form className="sign-form">
         <h1 className="header-signin">Create Account</h1>
         <div className="social-container">
-          <a href="#">
+          <a className="sign-a" href="#">
             <ImGoogle2 className="google"/>
           </a>
-          <a href="#">
+          <a className="sign-a" href="#">
             <SiKakaotalk className="kakao"/>
           </a>
-          <a href="#">
+          <a className="sign-a" href="#">
             <SiNaver className="naver"/>
           </a>
         </div>

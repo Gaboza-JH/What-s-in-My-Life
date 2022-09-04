@@ -1,14 +1,14 @@
-li {
+/* li {
   list-style: none;
-}
+} */
 
-a {
+/* a {
   color: rgb(20, 20, 20);
-}
+} */
 
-.logo a{
+/* .logo a{
     text-decoration: none;
-}
+} */
 
 .nav-bar {
   width: 100%;
@@ -153,18 +153,18 @@ a {
   transform: translateY(-1px);
 }
 
-li {
+/* li {
     list-style: none;
   }
   
   a {
     color: rgb(20, 20, 20);
-  }
+  } */
   
   
-  .logo a{
+  /* .logo a{
       text-decoration: none;
-  }
+  } */
   
   .nav-bar {
     width: 100%;

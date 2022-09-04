@@ -110,11 +110,26 @@
 }
   
 .desc {
-  margin-top: 25px;
-  margin-bottom: 25px;
+  /* margin-top: 25px; */
+  /* margin-bottom: 25px; */
   display :flex; 
   align-items : center;
-  justify-content : center;
+  justify-content : center; 
+
+  max-height: 100%;
+  overflow-y:scroll;
+
+}
+
+.modal-form{
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
 }
 
 .header-profile {
@@ -127,9 +142,32 @@
 
 .btn-save {
   margin-top: 20px;
-  font-size: 1rem;
+  margin-bottom: 30px;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  width: 50%;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid #fdb254;
+  background-color: #fdb254;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in; 
 }
 
 .header-upload {
   color: #ed8f03;
+}
+
+.profile-input{
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+  border-radius: 5px;
 }
