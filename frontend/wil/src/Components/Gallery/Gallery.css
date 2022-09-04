@@ -6,7 +6,7 @@
     overflow: hidden;
     max-width: 100%;
     min-height: 480px;
-    padding: 0 10rem 0 10rem;
+    padding: 0 5rem 0 5rem;
   }
 
 .gallery {
@@ -23,6 +23,7 @@
     margin: 1rem;
     color: #fff;
     cursor: pointer;
+    
   }
   
   .gallery-item:hover .gallery-item-info,
@@ -44,7 +45,7 @@
   .gallery-item-info li {
     display: inline-block;
     font-size: 1.7rem;
-    font-weight: 600;
+    font-weight: 400;
   }
   
   .gallery-item-likes {
@@ -70,7 +71,8 @@
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+      grid-auto-rows: minmax(250px, auto);
+      grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
       grid-gap: 2rem;
     }
   
@@ -79,6 +81,4 @@
       width: auto;
       margin: 0;
     }
-  
-    
     }

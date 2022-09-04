@@ -1,6 +1,5 @@
 import "./Gallery.css"
-import { HiHeart } from "react-icons/hi";
-import { FaComment } from "react-icons/fa";
+import { HiOutlineHeart } from "react-icons/hi";
 
 
 
@@ -52,14 +51,10 @@ const Gallery = () => {
                         />
                     <div className="gallery-item-info">
                         <ul>
-                        <li className="gallery-item-likes">
-                            <span className="visually-hidden">Likes:</span>
-                            <HiHeart aria-hidden="true" /> 56
-                        </li>
-                        <li className="gallery-item-comments">
-                            <span className="visually-hidden">Comments:</span>
-                            <FaComment aria-hidden="true"/> 2
-                        </li>
+                            <li className="gallery-item-likes">
+                                <span className="visually-hidden">Likes:</span>
+                                <HiOutlineHeart aria-hidden="true"/> 56
+                            </li>
                         </ul>
                     </div>
                 </div>
