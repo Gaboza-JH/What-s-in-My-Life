@@ -8,23 +8,23 @@ import { SiNaver } from "react-icons/si";
 const SignIn = () => {
   return (
     <div className=" form-container sign-in-container">
-      <form>
+      <form className="sign-form">
         <h1 className="header-signin">Sign in</h1>
         <div className="social-container">
-        <a href="#">
+        <a className="sign-a" href="#">
             <ImGoogle2 className="google"/>
           </a>
-          <a href="#">
+          <a className="sign-a" href="#">
             <SiKakaotalk className="kakao"/>
           </a>
-          <a href="#">
+          <a className="sign-a" href="#">
             <SiNaver className="naver"/>
           </a>
         </div>
         <input className="interval" type="email" placeholder="Email" />
         <input className="interval" type="password" placeholder="Password" />
-        <a href="#">Forgot your password?</a>
-        <button>Sign In</button>
+        <a className="sign-a" href="#">Forgot your password?</a>
+        <button className="sign-botton">Sign In</button>
       </form>
     </div>
   );

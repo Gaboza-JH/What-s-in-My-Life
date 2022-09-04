@@ -41,12 +41,12 @@ const Profile = () => {
                   <HiOutlineX />
                 </span>
                 <div className="desc">
-                  <form>
+                  <form className="modal-form">
                     <h1 className="header-profile">Edit Profile</h1>
                     <span className="span-profile">
                       Please modify your profile as you please.
                     </span>
-                    <input type="text" placeholder="Nickname" />
+                    <input className="profile-input" type="text" placeholder="Nickname" />
                     <button className="btn-save">Save</button>
                   </form>
                 </div>
@@ -85,7 +85,7 @@ const Profile = () => {
                       <HiOutlineX />
                     </span>
                     <div className="desc">
-                      <form>
+                      <form className="modal-form">
                         <h1 className="header-upload">Upload Post</h1>
                         <span>Post a picture or write down what you want.</span>
                         <S3upload />
