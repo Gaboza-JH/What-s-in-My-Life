@@ -2,14 +2,9 @@ li {
   list-style: none;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> cae8c5fb3c7e23570745b8a38b1e6f0097a39ced
 a {
   color: rgb(20, 20, 20);
 }
-
 
 .logo a{
     text-decoration: none;
@@ -157,8 +152,7 @@ a {
   background: rgba(20, 20, 20, 0.9);
   transform: translateY(-1px);
 }
-<<<<<<< HEAD
-=======
+
 li {
     list-style: none;
   }
@@ -313,7 +307,3 @@ li {
     background: rgba(20, 20, 20, 0.9);
     transform: translateY(-1px);
   }
-  
->>>>>>> parent of 1b654b1 (FEAT : Profile 컴포넌트 생성)
-=======
->>>>>>> cae8c5fb3c7e23570745b8a38b1e6f0097a39ced
