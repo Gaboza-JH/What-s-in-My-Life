@@ -14,12 +14,6 @@ import java.util.List;
 public class ImageController {
     private final ImageService imageService;
 
-    /*@PostMapping("/images")
-    public String upload(@RequestParam("image")MultipartFile multipartFile)throws IOException {
-        awsS3Service.upload(multipartFile, "static");
-        return "image upload success!!";
-    }*/
-
     @PostMapping("/images")
     public String upload(@RequestParam("image") List<MultipartFile> multipartFile)throws IOException {
         if (multipartFile == null) {
@@ -30,11 +24,6 @@ public class ImageController {
 //        awsS3Service.upload(multipartFile, "static");
         return "image upload success!!";
     }
-//    @GetMapping("/images")
-//    public List<ImagePost> getImages(@RequestParam("image")MultipartFile multipartFile)throws IOException {
-//
-//        return imageService.findAll();
-//    }
 
 
 

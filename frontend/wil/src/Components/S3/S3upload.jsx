@@ -28,9 +28,8 @@ function S3upload() {
     fileReader.onload = (e) => setFileUrl(e.target.result);
   };
 
-  // form submit
-  const onSubmit = async (e) => {
-    e.preventDefault(); //submit 멈춰
+  const clickPostSubmit = async (e) => {
+    console.log("click",e.target);
 
     const formData = new FormData();
     for (let file of files) {
@@ -58,21 +57,20 @@ function S3upload() {
       setFileUrl(null);
       console.error(err);
     }
-  };
+  }
 
   return (
     <>
       <div>
-        <form onSubmit={onSubmit}>
+        <form>
           <img
             src={fileUrl}
             className={`image-preview ${fileUrl && "image-preview-show"}`}
-            alt="upload_img"
           />
           <div className="file-droper">
             <img
               src="https://img.icons8.com/pastel-glyph/2x/image-file.png"
-              alt="파일 아이콘"
+              alt="Upload Image"
               className="uploadImage"
             ></img>
             {fileName}
@@ -84,7 +82,7 @@ function S3upload() {
               onChange={FileInputHandler}
             />
           </div>
-          <button type="submit" className="upload-btn">
+          <button type="submit" className="upload-btn" onClick={clickPostSubmit}>
             Upload
           </button>
         </form>

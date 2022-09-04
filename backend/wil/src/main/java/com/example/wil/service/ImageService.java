@@ -116,8 +116,8 @@ public class ImageService {
                 amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
 
-                List<Image> images = Arrays.asList(new Image(fileName));
-                repository.saveAll(images);
+//                List<Image> images = Arrays.asList(new Image(fileName));
+//                repository.saveAll(images);
 
             } catch (IOException err) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드 실패!");

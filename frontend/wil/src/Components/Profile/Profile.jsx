@@ -25,6 +25,7 @@ const Profile = () => {
         <div className="profile-image">
           <img src={profileImg} alt="" />
         </div>
+        {/* <S3upload /> */}
 
         <div className="profile-user-settings">
           <h1 className="profile-user-name">Nickname</h1>
