@@ -6,6 +6,7 @@ import com.example.wil.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,15 +30,29 @@ public class IndexController {
         return "index";
     }
 
+
+//    @GetMapping("/user")
+//    public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principal) {
+//        System.out.println("Principal : " + principal); //세션 정보 확인하기
+//        System.out.println("OAuth2 : "+principal.getUser().getProvider());
+//        Iterator<? extends GrantedAuthority> iter = principal.getAuthorities().iterator();
+//        while (iter.hasNext()) {
+//            GrantedAuthority auth = iter.next();
+//            System.out.println(auth.getAuthority());
+//        }
+//        return "user";
+//    }
+
     @GetMapping("/user")
-    public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principal) {
+    public String user(Authentication authentication) {
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
         System.out.println("Principal : " + principal); //세션 정보 확인하기
         System.out.println("OAuth2 : "+principal.getUser().getProvider());
-        Iterator<? extends GrantedAuthority> iter = principal.getAuthorities().iterator();
-        while (iter.hasNext()) {
-            GrantedAuthority auth = iter.next();
-            System.out.println(auth.getAuthority());
-        }
+//        Iterator<? extends GrantedAuthority> iter = principal.getAuthorities().iterator();
+//        while (iter.hasNext()) {
+//            GrantedAuthority auth = iter.next();
+//            System.out.println(auth.getAuthority());
+//        }
         return "user";
     }
 
