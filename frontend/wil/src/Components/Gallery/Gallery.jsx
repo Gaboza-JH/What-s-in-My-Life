@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Gallery.css"
 import { HiOutlineHeart } from "react-icons/hi";
+import axios from 'axios';
 
 const galleryImageUrl = [
     {
@@ -46,6 +47,7 @@ const galleryImageUrl = [
 ]
 
 
+
 const Gallery = () => {
 
   const [isOpenPost, setIsOpenPost] = useState(false);
@@ -53,10 +55,38 @@ const Gallery = () => {
     setIsOpenPost(!isOpenPost);
   };
 
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  
+  const fetchUser = async () => {
+    try{
+      setError(null);
+      setUser(null);
+      setLoading(true);
+      const response = await axios.get(
+        'http://localhost:8080/users/1'
+      );
+      console.log(response.data);
+      setUser(response.data); // 데이터는 response.data 안에 들어있습니다.
+    } catch (e) {
+      setError(e);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  if (loading) return <div>로딩중..</div>; 
+  if (error) return <div>에러가 발생했습니다</div>;
+  if (!user) return null;
+
     return (
         <div className = "gallery-container">
           <div className="gallery">
-            {galleryImageUrl.map((imageUrl, content, index) => {
+            {galleryImageUrl.map((imageUrl, index) => {
                 return (
                   <div className="gallery-post" onClick={openPostModalHandler}>
                     {isOpenPost === true ? (
