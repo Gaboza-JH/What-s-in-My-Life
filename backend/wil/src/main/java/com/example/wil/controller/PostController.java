@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,11 +26,12 @@ public class PostController {
 
     @PostMapping("/post")
     public PostDTO putUpPost(@RequestPart(value = "PostDTO", required = false) PostDTO postDTO, @RequestPart(value = "image", required = false) List<MultipartFile> multipartFile) throws IOException {
-        System.out.println("putUpPost에요");
+        List<String> imgPaths = new ArrayList<>();
 
-        String defaultDir = "static";
-        List<String> imgPaths = imgService.upload(multipartFile, defaultDir);
-        System.out.println("Post imgurl??::::"+imgPaths);
+        if(multipartFile.isEmpty() == true) {
+            String defaultDir = "static";
+            imgPaths = imgService.upload(multipartFile, defaultDir);
+        }
         return postService.putUpPost(postDTO, imgPaths);
     }
 

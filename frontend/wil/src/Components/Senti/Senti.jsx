@@ -1,9 +1,9 @@
 import React from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2"; // npm install react-chartjs-2 chart.js
+// import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+// import { Doughnut } from "react-chartjs-2"; // npm install react-chartjs-2 chart.js
 import "./Senti.css";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+// ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Senti = () => {
     
@@ -22,7 +22,7 @@ const Senti = () => {
 
   return (
     <div className="senti">
-      <Doughnut data={data} />;
+      {/* <Doughnut data={data} />; */}
       <h1>감정 분석 결과</h1>
     </div>
   );

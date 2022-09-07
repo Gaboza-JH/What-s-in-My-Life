@@ -28,6 +28,9 @@ public class PostService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ImageService imgService;
+
 
     @Transactional
     public PostDTO putUpPost(PostDTO postDTO, List<String> imgPaths) {
@@ -40,19 +43,20 @@ public class PostService {
 
 
         List<String> imgUrlList = new ArrayList<>();
-
-        for (String imgUrl : imgPaths) {
-            Image img = new Image(imgUrl, post);
+        if(!imgUrlList.isEmpty()) {
+            for (String imgUrl : imgPaths) {
+                Image img = new Image(imgUrl, post);
 //            List<Image> imgl = Arrays.asList(new Image(imgUrl));
-            System.out.println("img::::"+img);
-            //System.out.println("imglist::::"+imgl);
-            imgRepository.save(img);
-            //imgRepository.saveAll(imgl);
-            System.out.println("repository success");
+                System.out.println("img::::" + img);
+                //System.out.println("imglist::::"+imgl);
+                imgRepository.save(img);
+                //imgRepository.saveAll(imgl);
+                System.out.println("repository success");
 
-            imgUrlList.add(imgUrl);
+                imgUrlList.add(imgUrl);
+            }
         }
-        System.out.println("imgURLList : : : "+ imgUrlList);
+        System.out.println("imgURLList : : : " + imgUrlList);
         return transformPostDTO(post);
     }
 
@@ -67,9 +71,20 @@ public class PostService {
     }
 
     public List<PostDTO> deletePost(int postId) {
+        System.out.println("PostService Delete Method Call!");
+
+
         Post foundPost = postRepository.getReferenceById(postId);
-        postRepository.delete(foundPost);
         List<Post> postList = postRepository.findAll();
+/**
+ * s3 버킷에 있는 이미지도 삭제
+ */
+        List<Image> imgs = imgRepository.findAllByPost(foundPost);
+        System.out.println("imgs ::"+imgs);
+        imgService.deleteS3(imgs);
+
+        postRepository.delete(foundPost);
+
         return transformPostDTOList(postList);
     }
 

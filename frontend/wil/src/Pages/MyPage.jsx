@@ -7,7 +7,7 @@ const MyPage = () => {
   return (
     <div>
       <Profile />
-      <Senti />
+      {/* <Senti /> */}
       <Gallery />
     </div>
   );
