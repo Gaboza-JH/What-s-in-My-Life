@@ -3,6 +3,7 @@ package com.example.wil.service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.wil.model.Image;
@@ -132,5 +133,13 @@ public class ImageService {
 //            List<Image> imageList = repository.findByPostId(postId);
 //            return imageList;
 //        }
+    
+    public void deleteS3(List<Image> imgs){
+        System.out.println("deleteS3 method Call!!!");
+        for (Image img : imgs){
+            System.out.println(img.getFile_name());
+            amazonS3.deleteObject(bucket, img.getFile_name());
+        }
+    }
 
 }
