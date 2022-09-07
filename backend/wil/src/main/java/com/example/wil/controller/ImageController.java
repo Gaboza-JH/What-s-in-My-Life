@@ -1,5 +1,7 @@
 package com.example.wil.controller;
 
+import com.example.wil.model.Image;
+import com.example.wil.repository.ImageRepository;
 import com.example.wil.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,7 @@ public class ImageController {
         return "image upload success!!";
     }
 
-
+//    @GetMapping("/images/{postId}")
+//    public List<Image> findImages(@PathVariable int postId) { return imageService.findImages(postId); }
 
 }

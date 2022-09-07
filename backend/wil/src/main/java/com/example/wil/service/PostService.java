@@ -66,6 +66,12 @@ public class PostService {
         return transformPostDTO(foundPost);
     }
 
+//    public PostDTO findPostByUserId(int userId) {
+//        Post foundPost = postRepository.findByUserId(userId);
+//        return transformPostDTO(foundPost);
+//    }
+
+
     public List<PostDTO> deletePost(int postId) {
         Post foundPost = postRepository.getReferenceById(postId);
         postRepository.delete(foundPost);

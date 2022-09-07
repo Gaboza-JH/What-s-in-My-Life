@@ -6,6 +6,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.wil.model.Image;
+import com.example.wil.model.Post;
 import com.example.wil.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -126,5 +127,10 @@ public class ImageService {
         }
         return imgUrlList;
     }
+
+//        public List<Image> findImages(int postId) {
+//            List<Image> imageList = repository.findByPostId(postId);
+//            return imageList;
+//        }
 
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { HiViewGridAdd } from "react-icons/hi";
 import { HiOutlineCog } from "react-icons/hi";
 import { HiOutlineHeart } from "react-icons/hi";
@@ -7,14 +7,10 @@ import { HiOutlineX } from "react-icons/hi";
 import profileImg from "../../static/img/profile_default.png";
 import S3upload from "../S3/S3upload";
 import "./Profile.css";
-import axios from 'axios';
 
 const Profile = (props) => {
   const [isOpenProfile, setIsOpenProfile] = useState(false);
   const [isOpenPostUpload, setIsOpenPostUpload] = useState(false);
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const openProfileModalHandler = () => {
     setIsOpenProfile(!isOpenProfile);
@@ -22,29 +18,6 @@ const Profile = (props) => {
   const openPostUploadModalHandler = () => {
     setIsOpenPostUpload(!isOpenPostUpload);
   };
-
-  const fetchUser = async () => {
-    try{
-      setError(null);
-      setUser(null);
-      setLoading(true);
-      const response = await axios.get(
-        'http://localhost:8080/users/1'
-      );
-      setUser(response.data);
-    } catch (e) {
-      setError(e);
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
-  if (loading) return <div>로딩중..</div>; 
-  if (error) return <div>에러가 발생했습니다</div>;
-  if (!user) return null;
 
   return (
     <div className="profile-header">
@@ -55,7 +28,7 @@ const Profile = (props) => {
         {/* <S3upload /> */}
 
         <div className="profile-user-settings">
-          <h1 className="profile-user-name">{user.nickname}</h1>
+          <h1 className="profile-user-name">{props.user.nickname}</h1>
           <button
             className="btn profile-edit-btn"
             onClick={openProfileModalHandler}
@@ -87,7 +60,7 @@ const Profile = (props) => {
           <ul>
             <li>
               <HiOutlineViewGrid />
-              <span className="profile-stat-count"> {user.postIdList.length}</span>
+              <span className="profile-stat-count"> {props.user.postIdList.length}</span>
             </li>
             <li>
               <HiOutlineHeart />
