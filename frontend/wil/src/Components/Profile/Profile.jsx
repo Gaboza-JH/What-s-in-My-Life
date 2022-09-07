@@ -89,7 +89,7 @@ const Profile = () => {
                         <h1 className="header-upload">Upload Post</h1>
                         <span>Post a picture or write down what you want.</span>
                         <S3upload />
-                        {/* <button className="btn-save">Save</button> */}
+                        <button className="btn-save">Save</button>
                       </form>
                     </div>
                   </div>

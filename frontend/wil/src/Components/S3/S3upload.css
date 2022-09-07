@@ -168,12 +168,12 @@ code {
 }
 
 .upload-btn{
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 30px;
   color: #fff;
   text-align: center;
   padding: 10px;
-  width: 50%;
+  width: 45%;
   border-radius: 6px;
   cursor: pointer;
   border: 1px solid #fdb254;
@@ -184,4 +184,43 @@ code {
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in; 
+}
+
+.upload-btn:hover{
+  background-color:#f98a03;
+}
+
+.text-input{
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  
+}
+
+.textInput-btn{
+  margin-top: 20px;
+  margin-bottom: 30px;
+  margin-right: 5px;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  width: 45%;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid #fdb254;
+  background-color: #fdb254;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+.textInput-btn:hover{
+  background-color:#f98a03;
+}
+
+.contentsResult{
+  margin-top: 20px;
 }

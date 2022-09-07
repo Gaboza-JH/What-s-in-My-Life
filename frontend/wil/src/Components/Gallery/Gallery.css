@@ -12,7 +12,7 @@
 .gallery {
     display: flex;
     flex-wrap: wrap;
-    padding-top: 3rem;
+    padding-top: 1rem;
     /* margin: -1rem -1rem; */
     padding-bottom: 3rem;
   }
@@ -82,3 +82,8 @@
       margin: 0;
     }
     }
+
+.main-h1{
+  text-align : center;
+  margin-top: 2rem;
+}  

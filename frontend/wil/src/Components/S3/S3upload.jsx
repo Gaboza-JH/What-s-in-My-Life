@@ -59,17 +59,30 @@ function S3upload() {
     }
   };
 
+  // 입력된 contents 글 화면에 출력
+  const clickTextInput = async (e) => {
+    console.log("content 저장 버튼 click?", e.target);
+    const contents = document.getElementById('textInput').value;
+    console.log(contents)
+    document.getElementById("result").innerText = contents;
+  }
+
   return (
     <>
       <div>
         <form>
-          <img src={fileUrl} className={`image-preview ${fileUrl && "image-preview-show"}`} alt="upload_img"/>
+            <img src={fileUrl} className={`image-preview ${fileUrl && "image-preview-show"}`} alt="upload_img"/> 
           <div className="file-droper">
             <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="upload_img" className="uploadImage"></img>
             {fileName}
             <input className="file-input" id="image" type="file" multiple accept="image/*" onChange={FileInputHandler}/>
           </div>
-          <button type="submit" className="upload-btn" onClick={clickPostSubmit}>Upload</button>
+          {/* 텍스트 글 입력 및 출력 버튼 */}
+          <div id='result' className="contentsResult"></div>
+          <input id="textInput" type="text" className="text-input" placeholder="Please enter your contents." />
+          <button id ="contents" type="button" className="textInput-btn" onClick={clickTextInput}>Text</button>
+          {/* s3 upload 버튼 */}
+          <button type="button" className="upload-btn" onClick={clickPostSubmit}>Upload</button>
         </form>
       </div>
     </>

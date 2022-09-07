@@ -21,6 +21,7 @@
 
 .header-signin {
   color: #ed8f03;
+  margin-top: 5px;
 }
 
 .sign-p {
@@ -55,6 +56,10 @@
   transition: transform 80ms ease-in;
 }
 
+.sign-botton:hover{
+  background-color:#f98a03;
+}
+
 .btnsignup {
   margin-top: 20px;
   border-radius: 10px;
@@ -67,6 +72,10 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
+}
+
+.btnsignup:hover{
+  background-color:#f98a03;
 }
 
 /* button:active {
@@ -86,6 +95,10 @@ button:focus {
   padding: 12px 45px;
   letter-spacing: 1px;
   border-radius: 10px;
+}
+
+.btn-overlay:hover{
+  background-color:#f98a03;
 }
 
 .sign-form {
@@ -251,12 +264,22 @@ button:focus {
   margin-bottom: 20px;
 }
 
-.interval{
+.interval-signin{
   margin-bottom: 10px;
   background-color: #eee;
   border: none;
   padding: 12px 15px;
   margin: 8px 0;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interval-signup{
+  margin-bottom: 10px;
+  background-color: #eee;
+  border: none;
+  padding: 10px 15px;
+  /* margin: 8px 0; */
   width: 100%;
   border-radius: 5px;
 }

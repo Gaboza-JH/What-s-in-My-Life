@@ -21,8 +21,8 @@ const SignIn = () => {
             <SiNaver className="naver"/>
           </a>
         </div>
-        <input className="interval" type="email" placeholder="Email" />
-        <input className="interval" type="password" placeholder="Password" />
+        <input className="interval-signin" type="email" placeholder="Email" />
+        <input className="interval-signin" type="password" placeholder="Password" />
         <a className="sign-a" href="#">Forgot your password?</a>
         <button className="sign-botton">Sign In</button>
       </form>
