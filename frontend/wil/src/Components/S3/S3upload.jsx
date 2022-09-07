@@ -29,7 +29,7 @@ function S3upload() {
   };
 
   const clickPostSubmit = async (e) => {
-    console.log("click", e.target);
+    console.log("click",e.target);
 
     const formData = new FormData();
     for (let file of files) {
@@ -57,7 +57,7 @@ function S3upload() {
       setFileUrl(null);
       console.error(err);
     }
-  };
+  }
 
   // 입력된 contents 글 화면에 출력
   const clickTextInput = async (e) => {
@@ -73,7 +73,7 @@ function S3upload() {
         <form>
             <img src={fileUrl} className={`image-preview ${fileUrl && "image-preview-show"}`} alt="upload_img"/> 
           <div className="file-droper">
-            <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="upload_img" className="uploadImage"></img>
+            <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="upload_Image" className="uploadImage"></img>
             {fileName}
             <input className="file-input" id="image" type="file" multiple accept="image/*" onChange={FileInputHandler}/>
           </div>
@@ -83,6 +83,7 @@ function S3upload() {
           <button id ="contents" type="button" className="textInput-btn" onClick={clickTextInput}>Text</button>
           {/* s3 upload 버튼 */}
           <button type="button" className="upload-btn" onClick={clickPostSubmit}>Upload</button>
+
         </form>
       </div>
     </>

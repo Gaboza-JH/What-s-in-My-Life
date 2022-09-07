@@ -1,19 +1,22 @@
 package com.example.wil.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "post")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+//@Data
+@Getter
+@Setter
 @Builder
 public class Post {
     @Id
@@ -30,6 +33,14 @@ public class Post {
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name="id")
     private User user; // User
+
+    @OneToMany(mappedBy = "postId", cascade = CascadeType.ALL) // 삭제시 연관관계에 있는 모든 것들도 삭제
+    Set<Likes> likes = new HashSet<>();
+
+    @Transient
+    private List<Image> image = new ArrayList<>();
+
+
 
 }
 

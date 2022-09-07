@@ -8,7 +8,7 @@ import profileImg from "../../static/img/profile_default.png";
 import S3upload from "../S3/S3upload";
 import "./Profile.css";
 
-const Profile = () => {
+const Profile = (props) => {
   const [isOpenProfile, setIsOpenProfile] = useState(false);
   const [isOpenPostUpload, setIsOpenPostUpload] = useState(false);
 
@@ -25,9 +25,10 @@ const Profile = () => {
         <div className="profile-image">
           <img src={profileImg} alt="" />
         </div>
+        {/* <S3upload /> */}
 
         <div className="profile-user-settings">
-          <h1 className="profile-user-name">Nickname</h1>
+          <h1 className="profile-user-name">{props.user.nickname}</h1>
           <button
             className="btn profile-edit-btn"
             onClick={openProfileModalHandler}
@@ -46,7 +47,7 @@ const Profile = () => {
                     <span className="span-profile">
                       Please modify your profile as you please.
                     </span>
-                    <input className="profile-input" type="text" placeholder="Nickname" />
+                    <input className="profile-input" type="text" placeholder="Nickname"/>
                     <button className="btn-save">Save</button>
                   </form>
                 </div>
@@ -59,7 +60,7 @@ const Profile = () => {
           <ul>
             <li>
               <HiOutlineViewGrid />
-              <span className="profile-stat-count"> 164</span>
+              <span className="profile-stat-count"> {props.user.postIdList.length}</span>
             </li>
             <li>
               <HiOutlineHeart />

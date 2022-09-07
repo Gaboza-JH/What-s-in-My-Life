@@ -3,20 +3,37 @@ package com.example.wil.controller;
 
 import com.example.wil.DTO.PostDTO;
 import com.example.wil.model.Post;
+import com.example.wil.service.ImageService;
 import com.example.wil.service.PostService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class PostController {
 
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private ImageService imgService;
+
     @PostMapping("/post")
-    public PostDTO putUpPost(@RequestBody PostDTO postDTO) {return postService.putUpPost(postDTO);}
+    public PostDTO putUpPost(@RequestPart(value = "PostDTO", required = false) PostDTO postDTO, @RequestPart(value = "image", required = false) List<MultipartFile> multipartFile) throws IOException {
+        List<String> imgPaths = new ArrayList<>();
+
+        if(multipartFile.isEmpty() == true) {
+            String defaultDir = "static";
+            imgPaths = imgService.upload(multipartFile, defaultDir);
+        }
+        return postService.putUpPost(postDTO, imgPaths);
+    }
 
     @GetMapping("/post")
     public List<PostDTO> findAllPosts() {return postService.findAllPosts();}

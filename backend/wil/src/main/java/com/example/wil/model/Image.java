@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 
 @Entity
+@Getter
 @Table(name = "image_post")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,12 +20,17 @@ public class Image {
     private String file_name; // image file url 정보
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="post_id")
+    @JoinColumn(name="post_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Post post_id;
+    private Post post;
 
 
     public Image(String file_name) {
         this.file_name = file_name;
+    }
+
+    public Image(String file_name, Post post) {
+        this.file_name = file_name;
+        this.post = post;
     }
 }

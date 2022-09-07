@@ -3,9 +3,11 @@ package com.example.wil.service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.wil.model.Image;
+import com.example.wil.model.Post;
 import com.example.wil.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -116,8 +118,8 @@ public class ImageService {
                 amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
 
-                List<Image> images = Arrays.asList(new Image(fileName));
-                repository.saveAll(images);
+//                List<Image> images = Arrays.asList(new Image(fileName));
+//                repository.saveAll(images);
 
             } catch (IOException err) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드 실패!");
@@ -125,6 +127,19 @@ public class ImageService {
             imgUrlList.add(fileName);
         }
         return imgUrlList;
+    }
+
+//        public List<Image> findImages(int postId) {
+//            List<Image> imageList = repository.findByPostId(postId);
+//            return imageList;
+//        }
+    
+    public void deleteS3(List<Image> imgs){
+        System.out.println("deleteS3 method Call!!!");
+        for (Image img : imgs){
+            System.out.println(img.getFile_name());
+            amazonS3.deleteObject(bucket, img.getFile_name());
+        }
     }
 
 }
