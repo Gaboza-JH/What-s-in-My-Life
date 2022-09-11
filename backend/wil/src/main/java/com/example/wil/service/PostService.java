@@ -36,23 +36,20 @@ public class PostService {
     public PostDTO putUpPost(PostDTO postDTO, List<String> imgPaths) {
         System.out.println("PostService :: PutUpPost :: ");
         System.out.println("imgList :" + imgPaths);
+        System.out.println("imgList? :" + imgPaths.isEmpty());
         Post post = transformPost(postDTO);
-        System.out.println("postDTO::::"+post);
+        System.out.println("postDTO::::"+post.getUser());
         post = postRepository.save(post);
         System.out.println("post value ?? : : : " + post);
 
 
         List<String> imgUrlList = new ArrayList<>();
-        if(!imgUrlList.isEmpty()) {
+        if(imgPaths.isEmpty()==false) {
             for (String imgUrl : imgPaths) {
                 Image img = new Image(imgUrl, post);
-//            List<Image> imgl = Arrays.asList(new Image(imgUrl));
                 System.out.println("img::::" + img);
-                //System.out.println("imglist::::"+imgl);
                 imgRepository.save(img);
-                //imgRepository.saveAll(imgl);
                 System.out.println("repository success");
-
                 imgUrlList.add(imgUrl);
             }
         }
@@ -62,6 +59,7 @@ public class PostService {
 
     public List<PostDTO> findAllPosts() {
         List<Post> postList = postRepository.findAll();
+
         return transformPostDTOList(postList);
     }
 

@@ -1,6 +1,7 @@
 package com.example.wil.controller;
 
 import com.example.wil.DTO.LikesDTO;
+import com.example.wil.model.Post;
 import com.example.wil.service.LikesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,7 @@ import java.util.Objects;
 public class LikeController {
     private final LikesService likesService;
 
-    //좋아요 등록
+    // 좋아요 등록
     @Transactional
     @PostMapping("/like")
     public boolean addLike(@RequestBody LikesDTO likesDTO)
@@ -32,7 +33,7 @@ public class LikeController {
         return result;
     }
 
-    //좋아요 취소
+    // 좋아요 취소
     @DeleteMapping("/like")
     public ResponseEntity<String> unLike(@RequestBody LikesDTO likesDTO)
     {
@@ -44,4 +45,9 @@ public class LikeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // 포스트당 좋아요 조회
+    @GetMapping("/like/{postId}")
+    public int countLike(@PathVariable int postId){
+        return likesService.countLike(postId);
+    }
 }

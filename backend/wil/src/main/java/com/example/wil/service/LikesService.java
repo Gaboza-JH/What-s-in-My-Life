@@ -54,9 +54,10 @@ public class LikesService {
     }
 
     //게시물당 좋아요 count
-    public int countLike(int userId, int postId){
+    public int countLike(int postId){
         Post post = postRepository.findById(postId).orElseThrow();
-        User user = userRepository.findById(userId).orElseThrow();
-        return 0;
+        System.out.println(postId);
+        System.out.println(post);
+        return likesRepository.countByPostId(post);
     }
 }
