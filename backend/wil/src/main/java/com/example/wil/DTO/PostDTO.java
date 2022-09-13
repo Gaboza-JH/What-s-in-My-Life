@@ -1,5 +1,6 @@
 package com.example.wil.DTO;
 
+import com.example.wil.model.Image;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @Builder
@@ -20,4 +22,5 @@ public class PostDTO {
     @CreationTimestamp
     private Timestamp createDate;
     private int userId;
+    private List<Image> imgList;
 }

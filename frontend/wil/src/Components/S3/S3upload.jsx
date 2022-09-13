@@ -13,6 +13,7 @@ function S3upload() {
   const [fileUrl, setFileUrl] = useState(null);
   const [fileName, setFileName] = useState(defaultUpload);
   const [showAlert, setShowAlert] = useState(false);
+  const [text, setText] = useState("");
 
   const FileInputHandler = (e) => {
     const imgFiles = e.target.files; // 현재 이미지 파일
@@ -28,17 +29,30 @@ function S3upload() {
     fileReader.onload = (e) => setFileUrl(e.target.result);
   };
 
+  const TextInputHandler = (e) => {
+    const textInput = e.target.value;
+    console.log(textInput);
+    setText=textInput;
+  }
+
   const clickPostSubmit = async (e) => {
     console.log("click",e.target);
 
     const formData = new FormData();
+    
+    const PostDTO = {
+      "content": content,
+      "shown": shown,
+      "userId": userId,
+    }
+
     for (let file of files) {
       // 여러파일 전송
       formData.append("image", file);
     }
-    // formData.append("image", files);
+    formData.append("PostDTO", new Blob([JSON.stringify(PostDTO)], {type: "application/json"}));
     try {
-      const res = await axios.post("http://localhost:8080/images", formData, {
+      const res = await axios.post("http://localhost:8080/post", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log("headers : ", res.headers);
@@ -79,7 +93,13 @@ function S3upload() {
           </div>
           {/* 텍스트 글 입력 및 출력 버튼 */}
           <div id='result' className="contentsResult"></div>
-          <input id="textInput" type="text" className="text-input" placeholder="Please enter your contents." />
+          <input id="textInput" type="text" className="text-input" onChange={TextInputHandler} placeholder="Please enter your contents." />
+          <label class="switch">
+          <input type="checkbox"/>
+          <span class="slider round"></span>
+        </label>
+        <p>OFF</p>
+        <p style="display:none;">ON</p>
           <button id ="contents" type="button" className="textInput-btn" onClick={clickTextInput}>Text</button>
           {/* s3 upload 버튼 */}
           <button type="button" className="upload-btn" onClick={clickPostSubmit}>Upload</button>

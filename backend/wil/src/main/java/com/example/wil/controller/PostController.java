@@ -16,6 +16,7 @@ import javax.servlet.MultipartConfigElement;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,20 +43,17 @@ public class PostController {
         System.out.println(CollectionUtils.isNullOrEmpty(multipartFile));
         System.out.println(multipartFile.size());
         for (MultipartFile imgfile :multipartFile) {
-
-//            if (!multipartFile.isEmpty()) {
-//                String defaultDir = "static";
-//                imgPaths = imgService.upload(multipartFile, defaultDir);
-//            }
-            
-            if (imgfile.getContentType().equals("image/png") |
-                    imgfile.getContentType().equals("image/jpg") |
-                    imgfile.getContentType().equals("image/jpeg") |
-                    imgfile.getContentType().equals("image/gif") |
-                    imgfile.getContentType().equals("image/webp")){
+            if (Objects.equals(imgfile.getContentType(), "image/png") |
+                Objects.equals(imgfile.getContentType(), "image/jpg") |
+                Objects.equals(imgfile.getContentType(), "image/jpeg") |
+                Objects.equals(imgfile.getContentType(), "image/gif") |
+                Objects.equals(imgfile.getContentType(), "image/webp")){
                 String defaultDir = "static";
                 imgPaths = imgService.upload(multipartFile, defaultDir);
+            }else {
+                break;
             }
+
         }
 
         return postService.putUpPost(postDTO, imgPaths);
