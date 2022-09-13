@@ -66,7 +66,6 @@ public class SecurityConfig {
                 .and()
                 .formLogin().disable()
                 .httpBasic().disable();
-        // 여기 밑에 전부 주석처리해도 로그인 똑같이 동작함.. (네트워크 확인) -> @Bean 설정하면 ? 되네..
         http
                 // AuthenticationManager를 통해서 로그인을 진행하기 때문에 꼭 파라미터로 넣어줘야 함
 //                .addFilter(new JwtAuthenticationFilter(authenticationManager))

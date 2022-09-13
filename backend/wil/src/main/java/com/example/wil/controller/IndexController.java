@@ -44,11 +44,13 @@ public class IndexController {
 //        return "로그인 성공 ! 이제 프론트로 리다이렉트 url 바꿔보자";
 //    }
 
-    @GetMapping({"","/"})
-    public void redirectToFront(HttpServletResponse response) throws IOException {
-        String redirect_uri="http://localhost:3000/";
-        response.sendRedirect(redirect_uri);
-        System.out.println(response);
+    @GetMapping(value = "token")
+    public String token(@RequestParam String token, @RequestParam String error) {
+        if (StringUtils.isNotBlank(error)) {
+            return error;
+        } else {
+            return token;
+        }
     }
 
 

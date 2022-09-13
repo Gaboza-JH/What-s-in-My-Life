@@ -2,11 +2,16 @@ package com.example.wil.config.auth;
 
 import com.example.wil.model.User;
 import com.example.wil.repository.UserRepository;
+import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.nio.file.attribute.UserPrincipal;
+import java.util.Optional;
 
 // http://localhost:8080/login
 // (Spring Security 로그인 기본 요청 주소가 /login임 )
@@ -23,6 +28,7 @@ public class PrincipalDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("PrincipalDetailsService의 loadUserByUsername() 동작");
         User userEntity = userRepository.findByUsername(username);
@@ -31,4 +37,6 @@ public class PrincipalDetailsService implements UserDetailsService {
         }
         return null;
     }
+
 }
+

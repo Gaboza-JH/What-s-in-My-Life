@@ -8,13 +8,8 @@ import { NAVER_AUTH_URL } from "../../OAuth";
 
 const NAVER_LOGIN_URL = "http://localhost:8080/oauth2/authorization/naver?redirect_uri=http://localhost:8080/oauth2/redirect_front"
 const KAKAO_LOGIN_URL = "http://localhost:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:8080/oauth2/redirect_front"
-// 여기서 리다이렉트 url 적는건 의미없나..?
 const GOOGLE_LOGIN_URL = "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/"
 
-// const onLogin = async () => {
-//   const res = await axios.get("http://localhost:8080");
-//   console.log(res);
-// };
 
 const SignIn = () => {
   return (
