@@ -60,12 +60,10 @@ public class PostService {
     public List<PostDTO> findAllPosts() {
         List<Post> postList = postRepository.findAll();
         List<Image> imageList = imgRepository.findAll();
-        for (Image img:imageList){
-            System.out.println(img);
-        }
-        List<PostDTO> postDTO = transformPostDTOList(postList);
 
+        List<PostDTO> postDTO = transformPostDTOList(postList);
         return transformPostDTOList(postList);
+        //return transformPostDTOList2(imageList);
     }
 
     public PostDTO findPostByPostId(int postId) {
@@ -129,6 +127,18 @@ public class PostService {
                 .build();
     }
 
+    private PostDTO transformPostDTO2(Image image){
+         return PostDTO
+                .builder()
+                .postId(image.getPost().getPostId())
+                .content(image.getPost().getContent())
+                .shown(image.getPost().isShown())
+                .createDate(image.getPost().getCreateDate())
+                .userId(image.getPost().getUser().getId())
+                .imgList(image.getPost().getImage())
+                .build();
+    }
+
     private List<PostDTO> transformPostDTOList(List<Post> postList){
         List<PostDTO> postDTOList = new ArrayList<>();
         for (Post post : postList) {
@@ -137,6 +147,13 @@ public class PostService {
         return postDTOList;
     }
 
+    private List<PostDTO> transformPostDTOList2(List<Image> imageList){
+        List<PostDTO> postDTOList = new ArrayList<>();
+        for (Image image : imageList) {
+            postDTOList.add(transformPostDTO2(image));
+        }
+        return postDTOList;
+    }
 
 
 }

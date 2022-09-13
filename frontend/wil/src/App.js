@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 const App = () => {
 
-  const user = false;
+  const user = true;
   
   if (window.location.search != null) {
     console.log(window.location.search);

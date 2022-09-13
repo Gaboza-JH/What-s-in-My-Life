@@ -32,7 +32,7 @@ function S3upload() {
   const TextInputHandler = (e) => {
     const textInput = e.target.value;
     console.log(textInput);
-    setText=textInput;
+    //setText=textInput;
   }
 
   const clickPostSubmit = async (e) => {
@@ -40,17 +40,17 @@ function S3upload() {
 
     const formData = new FormData();
     
-    const PostDTO = {
-      "content": content,
-      "shown": shown,
-      "userId": userId,
-    }
+    // const PostDTO = {
+    //   "content": content,
+    //   "shown": shown,
+    //   "userId": userId,
+    // }
 
     for (let file of files) {
       // 여러파일 전송
       formData.append("image", file);
     }
-    formData.append("PostDTO", new Blob([JSON.stringify(PostDTO)], {type: "application/json"}));
+    //formData.append("PostDTO", new Blob([JSON.stringify(PostDTO)], {type: "application/json"}));
     try {
       const res = await axios.post("http://localhost:8080/post", formData, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -94,12 +94,12 @@ function S3upload() {
           {/* 텍스트 글 입력 및 출력 버튼 */}
           <div id='result' className="contentsResult"></div>
           <input id="textInput" type="text" className="text-input" onChange={TextInputHandler} placeholder="Please enter your contents." />
-          <label class="switch">
+          {/* <label class="switch">
           <input type="checkbox"/>
           <span class="slider round"></span>
         </label>
         <p>OFF</p>
-        <p style="display:none;">ON</p>
+        <p style="display:none;">ON</p> */}
           <button id ="contents" type="button" className="textInput-btn" onClick={clickTextInput}>Text</button>
           {/* s3 upload 버튼 */}
           <button type="button" className="upload-btn" onClick={clickPostSubmit}>Upload</button>

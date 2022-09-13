@@ -82,7 +82,7 @@ public class SecurityConfig {
 //                        "/**/*.html",
 //                        "/**/*.css",
 //                        "/**/*.js").permitAll()
-                .antMatchers("/**/*", "/auth/**", "/oauth2/**", "/login/oauth2/**").permitAll() // Security 허용 Url
+                .antMatchers("/**/*", "/auth/**", "/oauth2/**", "/login/oauth2/**", "/users/**").permitAll() // Security 허용 Url
                 .anyRequest().authenticated() // 그 외엔 모두 인증 필요
                 .and()
                 .oauth2Login()// OAuth 2 로그인 기능에 대한 여러 설정의 진입점
