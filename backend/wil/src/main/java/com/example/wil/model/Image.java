@@ -1,5 +1,6 @@
 package com.example.wil.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -22,6 +23,7 @@ public class Image {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="post_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Post post;
 
 

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import "./Gallery.css";
 import axios from "axios";
-import Photos from "./Photos";
-import Postss from "./Postss";
 
 const galleryImageUrl = [
   {
@@ -52,47 +50,129 @@ const Gallery = (props) => {
   console.log(props.user.postIdList);
 
   const [postList, setPostList] = useState([]);
+  const [imgList, setImgList] = useState([]);
 
   const fetchPost = async () => {
     try {
-      const postList = [];
-      props.user.postIdList.map(async (postId, index) => {
+      const posts = [];
+      const imgs =[];
+      props.user.postIdList.map(async (postId) => {
         const postResponse = await axios.get(
           `http://localhost:8080/post/${postId}`
         );
-        postList.push(postResponse.data);
+        const imageResponse = await axios.get(
+          `http://localhost:8080/images/${postId}`
+        );
+      posts.push(postResponse.data);
+      imgs.push(imageResponse.data);
       });
-      console.log(postList);
-      setPostList(postList);
+      setPostList(posts);
+      setImgList(imgs);
     } catch (e) {
       <div>에러가 발생했습니다</div>;
     }
   };
+
+  console.log(postList);
+  console.log(imgList);
+
+  // imgList.map((imgs, index) => {
+  //   return(
+  //     <div key={index} tabindex="0">
+  //       {imgs.map((img, index) => {
+  //         {img.file_name}
+  //       })}
+  //     </div>
+  //   );
+  // })
+
 
   useEffect(() => {
     fetchPost();
   }, []);
 
   return (
-    <div className="gallery-container">
-      <div className="gallery">
-        {galleryImageUrl.map((imageUrl, index) => {
-          return (
-            <div className="gallery-item" key={index} tabindex="0">
-              <img src={imageUrl.url} className="gallery-image" alt="" />
-              <div className="gallery-item-info">
-                <ul>
-                  <li className="gallery-item-likes">
-                    <span className="visually-hidden">Likes:</span>
-                    <HiOutlineHeart aria-hidden="true" /> 56
-                  </li>
-                </ul>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <>
+    post와 img 데이터 postList, imgList에서 확인가능
+    화면단에 데이터를 뿌리는 과정에서 오류가 남.
+    차라리 처음부터 image 테이블에 img_Url 추가해서 쓰는 것이 더 나을 듯.
+
+    {
+      imgList.map((imgs, index) => {
+        const imgsList = [];
+        imgs.map((image, index) => {
+          imgsList.push("https://wil-s3.s3.ap-northeast-2.amazonaws.com/"+image.file_name)
+        })
+        console.log(imgList);
+        return(
+          <div key={index} tabindex="0">
+            {imgsList.map((imgSrc, index) => {
+              <img src={imgSrc}/>
+            })}
+          </div>
+        );
+      })    
+    }
+    {/* <Photo imgList={imgList} /> */}
+
+    {/* <div>
+      {postList.map((post, index) => {
+        return(
+          <div key={index} tabindex="0">
+            {post.content}
+          </div>
+        );
+      })}
+    </div> */}
+
+    {/* <div>
+      {imgList.map((img, index) => {
+        return(
+          <div key={index} tabindex="0">
+          <img src = {img} />
+          </div>
+        );
+      })}
+    </div> */}
+
+    </>
+    // <>
+    // {/* {postList.map((post, index) => {
+    //   return(
+    //     <div key={index} tabindex="0">
+    //       {post.content}
+    //     </div>
+    //   );
+    // })} */}
+    // </>
+      // <div className="gallery">
+      //   {galleryImageUrl.map((galleryPost, index) => {
+      //     return (
+      //       <div className="gallery-item" key={index} tabindex="0">
+      //          <div className="post-wrap">
+      //             <div className="post-image"> 
+      //               <img
+      //                 src="https://cdn.pixabay.com/index/2022/08/24/06-50-51-598_1440x550.jpg"
+      //                   className="gallery-image"
+      //                    alt=""
+      //                />
+      //             </div>
+      //               <div className="post-content">
+      //                 {galleryPost.content}
+      //             </div>
+      //           </div>
+      //          <div className="gallery-item-info">
+      //            <ul>
+      //              <li className="gallery-item-likes">
+      //                <span className="visually-hidden">Likes:</span>
+      //                <HiOutlineHeart aria-hidden="true" /> 56
+      //              </li>
+      //            </ul>
+      //          </div>
+      //       </div>
+      //     );
+      //   })}
+      // </div>
   );
 };
 

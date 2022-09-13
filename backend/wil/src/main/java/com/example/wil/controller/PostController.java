@@ -28,7 +28,7 @@ public class PostController {
     public PostDTO putUpPost(@RequestPart(value = "PostDTO", required = false) PostDTO postDTO, @RequestPart(value = "image", required = false) List<MultipartFile> multipartFile) throws IOException {
         List<String> imgPaths = new ArrayList<>();
 
-        if(multipartFile.isEmpty() == true) {
+        if(multipartFile.isEmpty() == false) {
             String defaultDir = "static";
             imgPaths = imgService.upload(multipartFile, defaultDir);
         }
