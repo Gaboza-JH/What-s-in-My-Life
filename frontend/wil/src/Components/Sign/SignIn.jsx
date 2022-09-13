@@ -15,14 +15,14 @@ const SignIn = () => {
       <form className="sign-form">
         <h1 className="header-signin">Sign in</h1>
         <div className="social-container">
-          <a href={GOOGLE_LOGIN_URL}>
-            <ImGoogle2 color="#ed8f03"/>
+          <a className="sign-a" href={GOOGLE_LOGIN_URL}>
+            <ImGoogle2 className="google"/>
           </a>
-          <a href={KAKAO_LOGIN_URL}>
-            <SiKakaotalk color="#ed8f03"/>
+          <a className="sign-a" href={KAKAO_LOGIN_URL}>
+            <SiKakaotalk className="kakao"/>
           </a>
-          <a href={NAVER_LOGIN_URL}>
-            <SiNaver color="#ed8f03"/>
+          <a className="sign-a" href={NAVER_LOGIN_URL}>
+            <SiNaver className="naver"/>
           </a>
         </div>
         <input className="interval-signin" type="email" placeholder="Email" />
