@@ -1,15 +1,23 @@
 package com.example.wil.service;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.example.wil.DTO.UserDTO;
+import com.example.wil.config.jwt.JwtProperties;
 import com.example.wil.model.Post;
 import com.example.wil.model.User;
 import com.example.wil.repository.PostRepository;
 import com.example.wil.repository.UserRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 
 @Service
 public class UserService {
@@ -22,6 +30,7 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    // 회원가입
     public UserDTO signUp(UserDTO userDTO){
         User user = transformUser(userDTO);
         user.setRole("ROLE_USER");
@@ -29,6 +38,7 @@ public class UserService {
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         user.setPassword(encPassword);
         user = userRepository.save(user);
+        System.out.println("user 회원 가입 성공");
         return transformUserDTO(user);
     }
 
