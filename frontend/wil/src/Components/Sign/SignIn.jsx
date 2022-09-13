@@ -4,17 +4,15 @@ import { ImGoogle2 } from "react-icons/im";
 import { SiKakaotalk } from "react-icons/si";
 import { SiNaver } from "react-icons/si";
 import axios from 'axios';
-import { NAVER_AUTH_URL } from "../../OAuth";
 
 const NAVER_LOGIN_URL = "http://localhost:8080/oauth2/authorization/naver?redirect_uri=http://localhost:8080/oauth2/redirect_front"
 const KAKAO_LOGIN_URL = "http://localhost:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:8080/oauth2/redirect_front"
 const GOOGLE_LOGIN_URL = "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/"
 
-
 const SignIn = () => {
   return (
     <div className=" form-container sign-in-container">
-      <form>
+      <form className="sign-form">
         <h1 className="header-signin">Sign in</h1>
         <div className="social-container">
           <a href={GOOGLE_LOGIN_URL}>
@@ -27,10 +25,10 @@ const SignIn = () => {
             <SiNaver color="#ed8f03"/>
           </a>
         </div>
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <a href="#">Forgot your password?</a>
-        <button>Sign In</button>
+        <input className="interval-signin" type="email" placeholder="Email" />
+        <input className="interval-signin" type="password" placeholder="Password" />
+        <a className="sign-a" href="#">Forgot your password?</a>
+        <button className="sign-botton">Sign In</button>
       </form>
     </div>
   );

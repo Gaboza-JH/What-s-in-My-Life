@@ -52,7 +52,6 @@ public class UserService {
         return transformUserDTO(foundUser);
     }
 
-
     public List<UserDTO> deleteUser(int userId) {
         User foundUser = userRepository.getReferenceById(userId);
         userRepository.delete(foundUser);

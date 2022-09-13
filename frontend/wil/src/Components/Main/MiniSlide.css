@@ -1,25 +1,24 @@
+.parent {
+  background: white;
+  position:relative;
+}
 
-  .parent {
-    background: rgb(190, 167, 144);
-    position:relative;
-  }
-
-  .slider {
-    margin:0 8px;
-    overflow:"hidden";
-    padding:1rem 0;
-  }
+.slider {
+  margin:0 8px;
+  overflow:"hidden";
+  padding:1rem 0;
+}
   
-  .slider img {
-    width: 100%;
-    border-radius:10px;
-    height: 250px;
-  }
+.slider img {
+  width: 100%;
+  border-radius:10px;
+  height: 250px;
+}
   
-  .react-multi-carousel-list {
+.react-multi-carousel-list {
   padding: 0rem 0 0rem 0;
-  }
+}
 
-  .react-multi-carousel-list{
-    position: unset !important;
-  }
+.react-multi-carousel-list{
+  position: unset !important;
+}

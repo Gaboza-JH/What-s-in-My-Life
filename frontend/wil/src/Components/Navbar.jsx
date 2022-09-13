@@ -9,7 +9,6 @@ import { CgClose } from "react-icons/cg";
 import "./Navbar.css";
 import WilLogo from "../static/img/WILlogo.png";
 
-
 // user 변수 명으로 App.jsx에서 user를 내려받음
 const Menubar = ({ user }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -25,7 +24,7 @@ const Menubar = ({ user }) => {
           <div className="nav-container">
             <div className="logo">
               <a href="/">
-                <img src={WilLogo} alt="erro img"/>
+                <img src={WilLogo} alt="erro img" />
               </a>
             </div>
             <ul className={isNavOpen ? "nav-links open" : "nav-links"}>
@@ -34,9 +33,6 @@ const Menubar = ({ user }) => {
               </a>
               <a href="/mypage" className="nav-link">
                 MyPage
-              </a>
-              <a href="/contact" className="nav-link">
-                Contact
               </a>
             </ul>
             <FiMenu
@@ -54,7 +50,7 @@ const Menubar = ({ user }) => {
           <div className="nav-container">
             <div className="logo">
               <a href="/">
-                <img src={WilLogo} alt="erro img"/>
+                <img src={WilLogo} alt="erro img" />
               </a>
             </div>
             <ul className={isNavOpen ? "nav-links open" : "nav-links"}>
@@ -63,9 +59,6 @@ const Menubar = ({ user }) => {
               </a>
               <a href="/loginsignup" className="nav-link">
                 Login
-              </a>
-              <a href="/contact" className="nav-link">
-                Contact
               </a>
             </ul>
             <FiMenu
