@@ -3,6 +3,8 @@ package com.example.wil.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -38,8 +40,8 @@ public class Post {
     Set<Likes> likes = new HashSet<>();
 
     @Transient
+    @Nullable
     private List<Image> image = new ArrayList<>();
-
 
 
 }
