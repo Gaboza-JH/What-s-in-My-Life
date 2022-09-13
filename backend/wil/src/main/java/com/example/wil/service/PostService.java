@@ -42,8 +42,8 @@ public class PostService {
         post = postRepository.save(post);
         System.out.println("post value ?? : : : " + post);
 
-
         List<String> imgUrlList = new ArrayList<>();
+
         if(imgPaths.isEmpty()==false) {
             for (String imgUrl : imgPaths) {
                 Image img = new Image(imgUrl, post);

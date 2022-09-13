@@ -26,7 +26,6 @@ const MyPage = () => {
     setLoading(false);
   };
 
-
   useEffect(() => {
     fetchUser();    
   }, []);

@@ -9,6 +9,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.wil.model.Image;
 import com.example.wil.model.Post;
 import com.example.wil.repository.ImageRepository;
+import com.example.wil.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class ImageService {
 
     @Autowired
     private ImageRepository repository;
+
+    @Autowired
+    private final PostRepository postRepository;
 
     public String upload(MultipartFile multipartFile, String dirName) throws IOException {
         System.out.println("originname : " + multipartFile.getOriginalFilename());
@@ -129,17 +133,19 @@ public class ImageService {
         return imgUrlList;
     }
 
-//        public List<Image> findImages(int postId) {
-//            List<Image> imageList = repository.findByPostId(postId);
-//            return imageList;
-//        }
-    
     public void deleteS3(List<Image> imgs){
         System.out.println("deleteS3 method Call!!!");
         for (Image img : imgs){
             System.out.println(img.getFile_name());
             amazonS3.deleteObject(bucket, img.getFile_name());
         }
+    }
+
+    public List<Image> findImages(int postId) {
+        Post foundPost = postRepository.getReferenceById(postId);
+        List<Image> imageList = repository.findAllByPost(foundPost);
+        System.out.println(imageList);
+        return imageList;
     }
 
 }

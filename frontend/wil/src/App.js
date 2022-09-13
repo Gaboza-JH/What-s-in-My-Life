@@ -7,13 +7,25 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 const App = () => {
 
-  const user = true;
+  const user = false;
+  
+  if (window.location.search != null) {
+    console.log(window.location.search);
+
+    let str = window.location.search;
+    let accessToken = str.split('=')[1];
+
+    console.log(accessToken);
+    // const user = true;
+  } else {
+    // user = false;
+  }
 
   return (
     <BrowserRouter>
       <div>
         {/* user 변수 명으로 App.jsx의 user를 내려줌 */}
-        <Menubar user={user} />
+        <Menubar user={user}/>
 
         <Routes>
           {/* Mainpage */}

@@ -7,6 +7,7 @@ import { HiOutlineX } from "react-icons/hi";
 import profileImg from "../../static/img/profile_default.png";
 import S3upload from "../S3/S3upload";
 import "./Profile.css";
+import axios from 'axios';
 
 const Profile = (props) => {
   const [isOpenProfile, setIsOpenProfile] = useState(false);
@@ -18,6 +19,20 @@ const Profile = (props) => {
   const openPostUploadModalHandler = () => {
     setIsOpenPostUpload(!isOpenPostUpload);
   };
+  
+
+  const [inputs, setInputs] = useState({
+    nickname: ""
+  });
+
+  const handleOnChange = (e) => {
+    setInputs({
+      ...inputs, 
+      [e.target.name]: e.target.value
+    });
+  };
+
+
 
   return (
     <div className="profile-header">
@@ -47,7 +62,7 @@ const Profile = (props) => {
                     <span className="span-profile">
                       Please modify your profile as you please.
                     </span>
-                    <input className="profile-input" type="text" placeholder="Nickname"/>
+                    <input className="profile-input" type="text" placeholder="Nickname" name="nickname" onChange={handleOnChange}/>
                     <button className="btn-save">Save</button>
                   </form>
                 </div>
