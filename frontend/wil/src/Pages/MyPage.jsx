@@ -24,6 +24,7 @@ const MyPage = () => {
       console.log(response.data);
       setUser(response.data);
     } catch (e) {
+      console.log("error"+error);
       setError(e);
     }
     setLoading(false);

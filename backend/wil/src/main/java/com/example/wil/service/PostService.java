@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -44,7 +45,7 @@ public class PostService {
 
         List<String> imgUrlList = new ArrayList<>();
 
-        if(imgPaths.isEmpty()==false) {
+        if(!imgPaths.isEmpty()) {
             for (String imgUrl : imgPaths) {
                 Image img = new Image(imgUrl, post);
                 System.out.println("img::::" + img);
@@ -61,13 +62,7 @@ public class PostService {
         List<Post> postList = postRepository.findAll();
         List<Image> imageList = imgRepository.findAll();
 
-        for (Image img:imageList){
-            System.out.println(img);
-
-        }
         List<PostDTO> postDTO = transformPostDTOList(postList);
-
-
         return transformPostDTOList(postList);
     }
 
@@ -76,10 +71,13 @@ public class PostService {
         return transformPostDTO(foundPost);
     }
 
-//    public PostDTO findPostByUserId(int userId) {
-//        Post foundPost = postRepository.findByUserId(userId);
-//        return transformPostDTO(foundPost);
-//    }
+    public List<PostDTO> findAllPostByUserId(int userId) {
+        System.out.println("findAllPostByUserId service");
+        Optional<User> user = userRepository.findById(userId);
+        List<Post> foundPost = postRepository.findAllByUser(user);
+        //return transformPostDTO(foundPost);
+        return transformPostDTOList(foundPost);
+    }
 
 
     public List<PostDTO> deletePost(int postId) {
@@ -121,6 +119,7 @@ public class PostService {
     }
 
     private PostDTO transformPostDTO(Post post){
+        List<Image> imageList = imgRepository.findAllByPost(post);
         return PostDTO
                 .builder()
                 .postId(post.getPostId())
@@ -128,7 +127,7 @@ public class PostService {
                 .shown(post.isShown())
                 .createDate(post.getCreateDate())
                 .userId(post.getUser().getId())
-                .imgList(post.getImage())
+                .imgList(imageList)
                 .build();
     }
 

@@ -33,7 +33,7 @@ public class Post {
     private Timestamp createDate;
 
     @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn(name="id")
+    @JoinColumn(name="user_id")
     private User user; // User
 
     @OneToMany(mappedBy = "postId", cascade = CascadeType.ALL) // 삭제시 연관관계에 있는 모든 것들도 삭제

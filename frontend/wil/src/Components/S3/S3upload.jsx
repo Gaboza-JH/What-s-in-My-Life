@@ -32,7 +32,7 @@ function S3upload() {
   const TextInputHandler = (e) => {
     const textInput = e.target.value;
     console.log(textInput);
-    setText=textInput;
+    //setText=textInput;
   }
 
   const clickPostSubmit = async (e) => {
@@ -50,7 +50,9 @@ function S3upload() {
       // 여러파일 전송
       formData.append("image", file);
     }
-    // formData.append("PostDTO", new Blob([JSON.stringify(PostDTO)], {type: "application/json"}));
+
+    //formData.append("PostDTO", new Blob([JSON.stringify(PostDTO)], {type: "application/json"}));
+
     try {
       const res = await axios.post("http://localhost:8080/post", formData, {
         headers: { "Content-Type": "multipart/form-data" },

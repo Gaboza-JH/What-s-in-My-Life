@@ -62,6 +62,9 @@ public class PostController {
     @GetMapping("/post")
     public List<PostDTO> findAllPosts() {return postService.findAllPosts();}
 
+    @GetMapping("/post/user/{userId}")
+    public List<PostDTO> findAllPostByUserId(@PathVariable int userId) {return postService.findAllPostByUserId(userId); }
+
     @GetMapping("/post/{postId}")
     public PostDTO findPostByPostId(@PathVariable int postId) { return postService.findPostByPostId(postId); }
 
