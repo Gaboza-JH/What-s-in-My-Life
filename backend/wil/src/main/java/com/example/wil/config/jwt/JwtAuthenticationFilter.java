@@ -35,31 +35,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 // 스프링 시큐리티에서 UsernamePasswordAuthenticationFilter가 있음
 // login 요청해서 username, password 전송하면 (post)
 // UsernamePasswordAuthenticationFilter 동작을 함
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private TokenProvider tokenProvider;
 
-//    @Override
-//    protected void doFilterInternal(
-//            HttpServletRequest request,
-//            HttpServletResponse response,
-//            FilterChain filterChain)  throws ServletException, IOException {
-//
-//        String tokenStr = HeaderUtils.getAccessToken(request);
-//
-//        if (tokenProvider.validateToken(tokenStr)) {
-//            Authentication authentication = tokenProvider.getAuthentication(token);
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//        }
-//
-//        filterChain.doFilter(request, response);
-//    }
+    @Override
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain)  throws ServletException, IOException {
+
+        String tokenStr = HeaderUtils.getAccessToken(request);
+
+        if (tokenProvider.validateToken(tokenStr)) {
+            Authentication authentication = tokenProvider.getAuthentication(tokenStr);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }
+
+        filterChain.doFilter(request, response);
+    }
 
 
 //    private final AuthenticationManager authenticationManager;

@@ -30,7 +30,22 @@ const Profile = (props) => {
       ...inputs, 
       [e.target.name]: e.target.value
     });
+    console.log(e.target.value);
   };
+
+  const clickHandler = async (e) => {
+    const token = localStorage.getItem("token");
+    
+    console.log("clickHandler안에서 event : " + e);
+    console.log(e.target.value);
+
+    const response = await axios.put(
+      `http://localhost:8080/users/${token}`, {
+        nickname : e.target.value
+      }
+    );
+    console.log("put request의 response : " + response);
+  }
 
 
 
@@ -43,7 +58,7 @@ const Profile = (props) => {
         {/* <S3upload /> */}
 
         <div className="profile-user-settings">
-          <h1 className="profile-user-name">{props.user.nickname}</h1>
+          <h1 className="profile-user-name">{props.user.username}</h1>
           <button
             className="btn profile-edit-btn"
             onClick={openProfileModalHandler}
@@ -63,7 +78,7 @@ const Profile = (props) => {
                       Please modify your profile as you please.
                     </span>
                     <input className="profile-input" type="text" placeholder="Nickname" name="nickname" onChange={handleOnChange}/>
-                    <button className="btn-save">Save</button>
+                    <button className="btn-save" onSubmit={clickHandler}>Save</button>
                   </form>
                 </div>
               </div>

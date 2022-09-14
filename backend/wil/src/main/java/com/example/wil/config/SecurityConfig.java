@@ -1,5 +1,6 @@
 package com.example.wil.config;
 
+import com.example.wil.config.jwt.JwtAuthenticationFilter;
 import com.example.wil.config.oauth.OAuth2AuthenticationFailureHandler;
 import com.example.wil.config.oauth.OAuth2AuthenticationSuccessHandler;
 import com.example.wil.config.auth.PrincipalDetailsService;
@@ -56,8 +57,7 @@ public class SecurityConfig {
 //        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
 //        // Get AuthenticationManager
 //        AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
-//
-//
+
         http
                 .addFilter(corsConfig.corsFilter())
                 .csrf().disable()
@@ -72,17 +72,17 @@ public class SecurityConfig {
 //                .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository))
 
                 .authorizeRequests()
-//                .antMatchers("/loginsignup",
-//                        "/error",
-//                        "/favicon.ico",
-//                        "/**/*.png",
-//                        "/**/*.gif",
-//                        "/**/*.svg",
-//                        "/**/*.jpg",
-//                        "/**/*.html",
-//                        "/**/*.css",
-//                        "/**/*.js").permitAll()
-                .antMatchers("/**/*", "/auth/**", "/oauth2/**", "/login/oauth2/**").permitAll() // Security 허용 Url
+                .antMatchers("/loginsignup",
+                        "/error",
+                        "/favicon.ico",
+                        "/**/*.png",
+                        "/**/*.gif",
+                        "/**/*.svg",
+                        "/**/*.jpg",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js").permitAll()
+                .antMatchers("/**/*", "/auth/**", "/oauth2/**", "/login/oauth2/**", "/users/**").permitAll() // Security 허용 Url
                 .anyRequest().authenticated() // 그 외엔 모두 인증 필요
                 .and()
                 .oauth2Login()// OAuth 2 로그인 기능에 대한 여러 설정의 진입점

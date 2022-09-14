@@ -61,10 +61,10 @@ public class UserService {
 
     public UserDTO updateUser(int userId, UserDTO userDTO) {
         User foundUser = userRepository.getReferenceById(userId);
-        String rawPassword = userDTO.getPassword();
-        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-        foundUser.setPassword(encPassword);
-        foundUser.setEmail(userDTO.getEmail());
+//        String rawPassword = userDTO.getPassword();
+//        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+//        foundUser.setPassword(encPassword);
+//        foundUser.setEmail(userDTO.getEmail());
         if (userDTO.getNickname() != null) {
             foundUser.setNickname(userDTO.getNickname());
         }

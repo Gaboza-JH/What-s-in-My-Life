@@ -10,16 +10,19 @@ const MyPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+
   const fetchUser = async () => {
     try{
+      const token = localStorage.getItem("token");
+      console.log("token 값 : " + token);
       setError(null);
       setUser(null);
       setLoading(true);
       const response = await axios.get(
-        'http://localhost:8080/users/1'
+        `http://localhost:8080/users/${token}`
       );
+      console.log(response.data);
       setUser(response.data);
-      console.log(user);
     } catch (e) {
       setError(e);
     }

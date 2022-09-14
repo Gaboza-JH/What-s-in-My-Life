@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.wil.config.auth.PrincipalDetails;
 import com.example.wil.exception.OAuth2AuthenticationProcessingException;
+import com.example.wil.exception.TokenValidFailedException;
 import io.jsonwebtoken.*;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,13 +32,19 @@ public class TokenProvider {
 //        Jwts.builder().compact(); 이 방식이랑 무슨 차이인지 찾아보기
         // Access Token 생성
         Date accessTokenExpiresIn = new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_TOKEN_EXPIRE_TIME);
+
         String accessToken = JWT.create()
-                .withSubject(principal.getUser().getUsername()) // payload "sub": "name"
+                .withSubject(Integer.toString(principal.getUser().getId())) // payload "sub": "userId integer 값"
                 .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_TOKEN_EXPIRE_TIME)) // payload "exp": 1516239022 (예시)
-                .withClaim("auth", principal.getUser().getRole()) // payload "auth": "ROLE_USER"
-                .withClaim("id", principal.getUser().getId())
-                .withClaim("nickname", principal.getUser().getNickname())
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET)); // header "alg": "HS512"
+
+//        String accessToken = JWT.create()
+//                .withSubject(principal.getUser().getUsername()) // payload "sub": "name"
+//                .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_TOKEN_EXPIRE_TIME)) // payload "exp": 1516239022 (예시)
+//                .withClaim("auth", principal.getUser().getRole()) // payload "auth": "ROLE_USER"
+//                .withClaim("id", principal.getUser().getId())
+//                .withClaim("nickname", principal.getUser().getNickname())
+//                .sign(Algorithm.HMAC512(JwtProperties.SECRET)); // header "alg": "HS512"
 
         System.out.println("Access Token : " + accessToken);
 
@@ -57,25 +64,26 @@ public class TokenProvider {
     }
 
     // JWT 토큰 정보 확인
-    public Long getUserIdFromToken(String token) {
+    public Integer getUserIdFromToken(String token) {
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(JwtProperties.SECRET)
+                .setSigningKey(JwtProperties.SECRET.getBytes())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
 
-        System.out.println("id : " + claims.getId());
-        System.out.println("username : " + claims.get("username"));
-        System.out.println("nickname : " + claims.get("nickname"));
+        System.out.println("id : " + claims.getSubject());
+//        System.out.println("username : " + claims.get("username"));
+//        System.out.println("nickname : " + claims.get("nickname"));
 
-        return Long.parseLong(claims.getSubject());
+        return Integer.parseInt(claims.getSubject());
     }
+
 
 
     // JWT 토큰 유효성 검사
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(JwtProperties.SECRET).build().parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(JwtProperties.SECRET.getBytes()).build().parseClaimsJws(token);
             return true;
 //        } catch (SignatureException e) { // 유효하지 않은 JWT 서명
 //            throw new OAuth2AuthenticationProcessingException("not valid jwt signature");
@@ -90,22 +98,31 @@ public class TokenProvider {
         }
     }
 
-//    public Authentication getAuthentication(String token) {
-//
-//        if(token.validate()) {
-//
-//            Claims claims = authToken.getTokenClaims();
-//            Collection<? extends GrantedAuthority> authorities =
-//                    Arrays.stream(new String[]{claims.get(AUTHORITIES_KEY).toString()})
-//                            .map(SimpleGrantedAuthority::new)
-//                            .collect(Collectors.toList());
-//
-//            log.debug("claims subject := [{}]", claims.getSubject());
-//            org.springframework.security.core.userdetails.User principal = new User(claims.getSubject(), "", authorities);
-//
-//            return new UsernamePasswordAuthenticationToken(principal, authToken, authorities);
-//        } else {
-//            throw new TokenValidFailedException();
-//        }
+    public Authentication getAuthentication(String token) {
+
+        if (validateToken(token)) {
+
+            // 토큰 복호화
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(JwtProperties.SECRET)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            System.out.println("claims.getSubject() : " + claims.getSubject());
+
+            // 클레임에서 권한 정보 가져오기
+            Collection<? extends GrantedAuthority> authorities =
+                    Arrays.stream(claims.get(JwtProperties.HEADER_STRING).toString().split(","))
+                            .map(SimpleGrantedAuthority::new)
+                            .collect(Collectors.toList());
+
+            UserDetails principal = new User(claims.getSubject(), "", authorities);
+
+            return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+        } else {
+            throw new TokenValidFailedException();
+        }
+    }
 
 }

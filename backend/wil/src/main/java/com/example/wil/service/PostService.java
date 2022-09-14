@@ -60,10 +60,13 @@ public class PostService {
     public List<PostDTO> findAllPosts() {
         List<Post> postList = postRepository.findAll();
         List<Image> imageList = imgRepository.findAll();
+
         for (Image img:imageList){
             System.out.println(img);
+
         }
         List<PostDTO> postDTO = transformPostDTOList(postList);
+
 
         return transformPostDTOList(postList);
     }
