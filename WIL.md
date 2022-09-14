@@ -30,7 +30,7 @@ WIL(***W***hat's ***I***n My ***L***ife)
 <br>
 
 ## 7. API 명세서
-[API 명세서](https://www.notion.so/895aa27c552c4b968b3396ad36481f9f?v=ce9a56d0f2ee4da792e96fffeb707dd6&p=48bd68d92caf4d54b9047ad5da507b07&pm=s)
+[API 명세서](https://amused-museum-d72.notion.site/895aa27c552c4b968b3396ad36481f9f?v=ce9a56d0f2ee4da792e96fffeb707dd6)
 
 ## 8. 화면 설계도
 
