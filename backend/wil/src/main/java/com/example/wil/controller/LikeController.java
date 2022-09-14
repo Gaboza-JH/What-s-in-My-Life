@@ -50,4 +50,10 @@ public class LikeController {
     public int countLike(@PathVariable int postId){
         return likesService.countLike(postId);
     }
+
+    // 포스트당 좋아요 조회
+    @GetMapping("/like/user/{userId}")
+    public int countLikesByUser(@PathVariable int userId){
+        return likesService.countLikesByUser(userId);
+    }
 }

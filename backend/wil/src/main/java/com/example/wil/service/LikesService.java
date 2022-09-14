@@ -60,4 +60,15 @@ public class LikesService {
         System.out.println(post);
         return likesRepository.countByPostId(post);
     }
+
+    public int countLikesByUser(int userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        List<Post> postList = postRepository.findAllByUser(Optional.of(user));
+        int userPostCnt = 0;
+        for (Post post:postList){
+            userPostCnt+=likesRepository.countByPostId(post);
+        }
+        return userPostCnt;
+
+    }
 }

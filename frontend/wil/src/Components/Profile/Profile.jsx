@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HiViewGridAdd } from "react-icons/hi";
 import { HiOutlineCog } from "react-icons/hi";
 import { HiOutlineHeart } from "react-icons/hi";
@@ -12,7 +12,13 @@ import axios from 'axios';
 const Profile = (props) => {
   const [isOpenProfile, setIsOpenProfile] = useState(false);
   const [isOpenPostUpload, setIsOpenPostUpload] = useState(false);
-
+  const [likes, setLikes] = useState(0);
+  
+  useEffect(()=>{
+    axios.get(`http://localhost:8080/like/user/1`)
+    .then(response => setLikes(response.data))
+  })
+  
   const openProfileModalHandler = () => {
     setIsOpenProfile(!isOpenProfile);
   };
@@ -94,7 +100,7 @@ const Profile = (props) => {
             </li>
             <li>
               <HiOutlineHeart />
-              <span className="profile-stat-count"> 188</span>
+              <span className="profile-stat-count"> {likes}</span>
             </li>
             <li>
               <button
