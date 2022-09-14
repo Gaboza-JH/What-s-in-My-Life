@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface ImageRepository extends JpaRepository<Image, Integer> {
     public List<Image> findAllByPost(Post postId);
+
     @EntityGraph(attributePaths = {"post"})
     List<Image> findAll();
 }

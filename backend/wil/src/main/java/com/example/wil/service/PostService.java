@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -44,7 +45,7 @@ public class PostService {
 
         List<String> imgUrlList = new ArrayList<>();
 
-        if(imgPaths.isEmpty()==false) {
+        if(!imgPaths.isEmpty()) {
             for (String imgUrl : imgPaths) {
                 Image img = new Image(imgUrl, post);
                 System.out.println("img::::" + img);
@@ -63,7 +64,6 @@ public class PostService {
 
         List<PostDTO> postDTO = transformPostDTOList(postList);
         return transformPostDTOList(postList);
-        //return transformPostDTOList2(imageList);
     }
 
     public PostDTO findPostByPostId(int postId) {
@@ -71,10 +71,13 @@ public class PostService {
         return transformPostDTO(foundPost);
     }
 
-//    public PostDTO findPostByUserId(int userId) {
-//        Post foundPost = postRepository.findByUserId(userId);
-//        return transformPostDTO(foundPost);
-//    }
+    public List<PostDTO> findAllPostByUserId(int userId) {
+        System.out.println("findAllPostByUserId service");
+        Optional<User> user = userRepository.findById(userId);
+        List<Post> foundPost = postRepository.findAllByUser(user);
+        //return transformPostDTO(foundPost);
+        return transformPostDTOList(foundPost);
+    }
 
 
     public List<PostDTO> deletePost(int postId) {
@@ -116,6 +119,7 @@ public class PostService {
     }
 
     private PostDTO transformPostDTO(Post post){
+        List<Image> imageList = imgRepository.findAllByPost(post);
         return PostDTO
                 .builder()
                 .postId(post.getPostId())
@@ -123,19 +127,7 @@ public class PostService {
                 .shown(post.isShown())
                 .createDate(post.getCreateDate())
                 .userId(post.getUser().getId())
-                .imgList(post.getImage())
-                .build();
-    }
-
-    private PostDTO transformPostDTO2(Image image){
-         return PostDTO
-                .builder()
-                .postId(image.getPost().getPostId())
-                .content(image.getPost().getContent())
-                .shown(image.getPost().isShown())
-                .createDate(image.getPost().getCreateDate())
-                .userId(image.getPost().getUser().getId())
-                .imgList(image.getPost().getImage())
+                .imgList(imageList)
                 .build();
     }
 
@@ -147,13 +139,6 @@ public class PostService {
         return postDTOList;
     }
 
-    private List<PostDTO> transformPostDTOList2(List<Image> imageList){
-        List<PostDTO> postDTOList = new ArrayList<>();
-        for (Image image : imageList) {
-            postDTOList.add(transformPostDTO2(image));
-        }
-        return postDTOList;
-    }
 
 
 }
