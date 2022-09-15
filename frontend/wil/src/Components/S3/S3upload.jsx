@@ -54,7 +54,9 @@ function S3upload() {
     //formData.append("PostDTO", new Blob([JSON.stringify(PostDTO)], {type: "application/json"}));
 
     try {
-      const res = await axios.post("http://localhost:8080/post", formData, {
+      const token = localStorage.getItem("token");
+      console.log(formData);
+      const res = await axios.post("http://localhost:8080/post/user/{token}", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log("headers : ", res.headers);

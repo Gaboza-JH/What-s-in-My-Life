@@ -3,48 +3,48 @@ import { HiOutlineHeart } from "react-icons/hi";
 import "./Gallery.css";
 import axios from "axios";
 
-const galleryImageUrl = [
-  {
-    url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
-    content: "해삼1",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2015/03/04/15/03/sky-658888_1280.jpg",
-    content: "해삼2",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2018/05/18/12/43/rose-3411110_1280.jpg",
-    content: "해삼3",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2021/11/05/07/49/women-6770533_1280.jpg",
-    content: "해삼4",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2022/08/08/06/04/chrysanthemums-7371966_1280.jpg",
-    content: "해삼5",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
-    content: "해삼6",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2015/03/04/15/03/sky-658888_1280.jpg",
-    content: "해삼7",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2018/05/18/12/43/rose-3411110_1280.jpg",
-    content: "해삼8",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2021/11/05/07/49/women-6770533_1280.jpg",
-    content: "해삼9",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2022/08/08/06/04/chrysanthemums-7371966_1280.jpg",
-    content: "해삼10",
-  },
-];
+// const galleryImageUrl = [
+//   {
+//     url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
+//     content: "해삼1",
+//   },
+//   {
+//     url: "https://cdn.pixabay.com/photo/2015/03/04/15/03/sky-658888_1280.jpg",
+//     content: "해삼2",
+//   },
+//   {
+//     url: "https://cdn.pixabay.com/photo/2018/05/18/12/43/rose-3411110_1280.jpg",
+//     content: "해삼3",
+//   },
+//   {
+//     url: "https://cdn.pixabay.com/photo/2021/11/05/07/49/women-6770533_1280.jpg",
+//     content: "해삼4",
+//   },
+//   {
+//     url: "https://cdn.pixabay.com/photo/2022/08/08/06/04/chrysanthemums-7371966_1280.jpg",
+//     content: "해삼5",
+//   },
+//   {
+//     url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
+//     content: "해삼6",
+//   },
+//   {
+//     url: "https://cdn.pixabay.com/photo/2015/03/04/15/03/sky-658888_1280.jpg",
+//     content: "해삼7",
+//   },
+//   {
+//     url: "https://cdn.pixabay.com/photo/2018/05/18/12/43/rose-3411110_1280.jpg",
+//     content: "해삼8",
+//   },
+//   {
+//     url: "https://cdn.pixabay.com/photo/2021/11/05/07/49/women-6770533_1280.jpg",
+//     content: "해삼9",
+//   },
+//   {
+//     url: "https://cdn.pixabay.com/photo/2022/08/08/06/04/chrysanthemums-7371966_1280.jpg",
+//     content: "해삼10",
+//   },
+// ];
 
 const Gallery = (props) => {
   console.log(props.user.postIdList);
@@ -63,6 +63,10 @@ const Gallery = (props) => {
         const imageResponse = await axios.get(
           `http://localhost:8080/images/${postId}`
         );
+      // const token = localStorage.getItem("token");
+      // const response = await axios.post(
+      //   `http://localhost:8080/users/${token}`
+      // );
       posts.push(postResponse.data);
       imgs.push(imageResponse.data);
       });

@@ -36,7 +36,7 @@ public class UserController {
 
 
     @GetMapping("/users/{token}")
-    public UserDTO findUserById(@PathVariable String token) { //백엔드에서 계속 활용할 수 있게 저장
+    public UserDTO findUserById(@PathVariable String token) {
         System.out.println("/users/{token} getmapping");
         if (tokenProvider.validateToken(token)) {
             System.out.println("/users/{token} getmapping tokenProvider.validate = true");

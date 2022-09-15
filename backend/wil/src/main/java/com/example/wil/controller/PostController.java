@@ -2,6 +2,7 @@ package com.example.wil.controller;
 
 import com.amazonaws.util.CollectionUtils;
 import com.example.wil.DTO.PostDTO;
+import com.example.wil.DTO.UserDTO;
 import com.example.wil.config.jwt.TokenProvider;
 import com.example.wil.service.ImageService;
 import com.example.wil.service.PostService;
@@ -101,11 +102,20 @@ public class PostController {
 
     }
 
-    @GetMapping("/post")
+    @GetMapping("/post/")
     public List<PostDTO> findAllPosts() {return postService.findAllPosts();}
 
-    @GetMapping("/post/user/{userId}")
-    public List<PostDTO> findAllPostByUserId(@PathVariable int userId) {return postService.findAllPostByUserId(userId); }
+    @GetMapping("/post/user/{token}")
+    public List<PostDTO> findAllPostByUserId(@PathVariable String token) {
+        System.out.println("/post/user/{token} getmapping");
+        if (tokenProvider.validateToken(token)) {
+            System.out.println("/post/user/{token} getmapping tokenProvider.validate = true");
+            Integer userId = tokenProvider.getUserIdFromToken(token);
+            return postService.findAllPostByUserId(userId);
+        } else {
+            return null;
+        }
+    }
 
     @GetMapping("/post/{postId}")
     public PostDTO findPostByPostId(@PathVariable int postId) { return postService.findPostByPostId(postId); }
