@@ -3,6 +3,7 @@ package com.example.wil.service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.wil.DTO.UserDTO;
+import com.example.wil.DTO.UserNicknameRequestDto;
 import com.example.wil.config.jwt.JwtProperties;
 import com.example.wil.model.Post;
 import com.example.wil.model.User;
@@ -65,7 +66,7 @@ public class UserService {
 //        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 //        foundUser.setPassword(encPassword);
 //        foundUser.setEmail(userDTO.getEmail());
-        if (userDTO.getNickname() != null) {
+        if (userDTO.getNickname() != foundUser.getUsername()) {
             foundUser.setNickname(userDTO.getNickname());
         }
         User updatedUser = userRepository.save(foundUser);

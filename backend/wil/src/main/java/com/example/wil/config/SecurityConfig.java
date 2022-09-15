@@ -82,7 +82,7 @@ public class SecurityConfig {
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js").permitAll()
-                .antMatchers("/**/*", "/auth/**", "/oauth2/**", "/login/oauth2/**", "/users/**").permitAll() // Security 허용 Url
+                .antMatchers("/**/*", "/auth/**", "/oauth2/**", "/login/oauth2/**", "/users/**", "/post/**").permitAll() // Security 허용 Url
                 .anyRequest().authenticated() // 그 외엔 모두 인증 필요
                 .and()
                 .oauth2Login()// OAuth 2 로그인 기능에 대한 여러 설정의 진입점
@@ -96,7 +96,8 @@ public class SecurityConfig {
                 .and()
                 .successHandler(oAuth2AuthenticationSuccessHandler) // 인증 성공 시 Handler
                 .failureHandler(oAuth2AuthenticationFailureHandler); // 인증 실패 시 Handler
-//                .antMatchers("/user/**")
+
+//                .antMatchers("/users/**", "/post/**")
 //                .access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
 //                .antMatchers("/manager/**")
 //                .access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")

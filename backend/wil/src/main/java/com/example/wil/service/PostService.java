@@ -58,6 +58,31 @@ public class PostService {
         return transformPostDTO(post);
     }
 
+    @Transactional
+    public PostDTO putUpPost(Integer userId, PostDTO postDTO, List<String> imgPaths) {
+        System.out.println("PostService :: PutUpPost :: ");
+        System.out.println("imgList :" + imgPaths);
+        System.out.println("imgList? :" + imgPaths.isEmpty());
+        Post post = transformPost(postDTO, userId);
+        System.out.println("postDTO::::"+ post.getUser());
+        post = postRepository.save(post);
+        System.out.println("post value ?? : : : " + post);
+
+        List<String> imgUrlList = new ArrayList<>();
+
+        if(!imgPaths.isEmpty()) {
+            for (String imgUrl : imgPaths) {
+                Image img = new Image(imgUrl, post);
+                System.out.println("img::::" + img);
+                imgRepository.save(img);
+                System.out.println("repository success");
+                imgUrlList.add(imgUrl);
+            }
+        }
+        System.out.println("imgURLList : : : " + imgUrlList);
+        return transformPostDTO(post);
+    }
+
     public List<PostDTO> findAllPosts() {
         List<Post> postList = postRepository.findAll();
         List<Image> imageList = imgRepository.findAll();
@@ -108,6 +133,19 @@ public class PostService {
 
     private Post transformPost(PostDTO postDTO){
         User user = userRepository.getReferenceById(postDTO.getUserId());
+        return Post
+                .builder()
+                .postId(postDTO.getPostId())
+                .content(postDTO.getContent())
+                .shown(postDTO.isShown())
+                .createDate(postDTO.getCreateDate())
+                .user(user)
+                .build();
+    }
+
+    private Post transformPost(PostDTO postDTO, Integer userId){
+        User user = userRepository.getReferenceById(userId);
+        System.out.println("user : " + user);
         return Post
                 .builder()
                 .postId(postDTO.getPostId())

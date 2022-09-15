@@ -1,5 +1,6 @@
 package com.example.wil.config.oauth;
 
+import com.example.wil.config.jwt.JwtProperties;
 import com.example.wil.config.jwt.TokenProvider;
 //import com.example.wil.config.oauth.AppProperties;
 import com.example.wil.exception.BadRequestException;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Date;
 import java.util.Optional;
 
 import static com.example.wil.repository.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
@@ -49,7 +51,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         System.out.println(response);
         System.out.println(authentication);
         System.out.println("OAuth2AuthenticationSuccessHandler onAuthenticationSuccess() finish");
-        String url = makeRedirectUrl(tokenProvider.createToken(authentication));
+        String url = makeRedirectUrl(tokenProvider.createToken(authentication), JwtProperties.ACCESS_TOKEN_EXPIRE_TIME);
 
         if (response.isCommitted()) {
             System.out.println("응답이 이미 커밋된 상태입니다. " + url + "로 리다이렉트하도록 바꿀 수 없습니다.");
@@ -58,11 +60,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         getRedirectStrategy().sendRedirect(request, response, url);
     }
 
-    private String makeRedirectUrl(String token) {
+    private String makeRedirectUrl(String token, Long expiredTime) {
         System.out.println("OAuth2AuthenticationSuccessHandler makeRedirectUrl() start and return");
 
         String redirectUrl = UriComponentsBuilder.fromHttpUrl("http://localhost:3000/")
                 .queryParam("token", token)
+                .queryParam("expiredTime", expiredTime) // 만료 시간도 같이 보내줌
                 .build().toUriString();
 
         System.out.println("redirectUrl : " + redirectUrl);
