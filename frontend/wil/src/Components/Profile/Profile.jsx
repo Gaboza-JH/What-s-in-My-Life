@@ -31,6 +31,7 @@ const Profile = (props) => {
     nickname: ""
   });
 
+
   const handleOnChange = (e) => {
     setInputs({
       ...inputs, 
@@ -41,14 +42,10 @@ const Profile = (props) => {
 
   const clickHandler = async (e) => {
     const token = localStorage.getItem("token");
-    
-    console.log("clickHandler안에서 event : " + e);
-    console.log(e.target.value);
+    console.log(inputs);
 
     const response = await axios.put(
-      `http://localhost:8080/users/${token}`, {
-        nickname : e.target.value
-      }
+      `http://localhost:8080/users/${token}`, inputs
     );
     console.log("put request의 response : " + response);
   }
@@ -84,7 +81,7 @@ const Profile = (props) => {
                       Please modify your profile as you please.
                     </span>
                     <input className="profile-input" type="text" placeholder="Nickname" name="nickname" onChange={handleOnChange}/>
-                    <button className="btn-save" onSubmit={clickHandler}>Save</button>
+                    <button type="button" className="btn-save" onClick={clickHandler}>Save</button>
                   </form>
                 </div>
               </div>

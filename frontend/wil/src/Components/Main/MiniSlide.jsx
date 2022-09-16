@@ -70,6 +70,7 @@ const MiniSlide = ({ user, token }) => {
   if (error) return <div>전체 게시물 에러가 발생했습니다</div>;
   if (!allPost) return null;
 
+
   return (
     <div>
       {user ? (
