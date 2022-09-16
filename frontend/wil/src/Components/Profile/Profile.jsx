@@ -5,7 +5,7 @@ import { HiOutlineHeart } from "react-icons/hi";
 import { HiOutlineViewGrid } from "react-icons/hi";
 import { HiOutlineX } from "react-icons/hi";
 import profileImg from "../../static/img/profile_default.png";
-import S3upload from "../S3/S3upload";
+import S3upload from "../S3/S3upload2";
 import "./Profile.css";
 import axios from 'axios';
 
@@ -64,7 +64,7 @@ const Profile = (props) => {
         {/* <S3upload /> */}
 
         <div className="profile-user-settings">
-          <h1 className="profile-user-name">{props.user.username}</h1>
+          <h1 className="profile-user-name">{props.user.nickname /* nickname */}</h1>
           <button
             className="btn profile-edit-btn"
             onClick={openProfileModalHandler}
@@ -126,7 +126,7 @@ const Profile = (props) => {
                         <h1 className="header-upload">Upload Post</h1>
                         <span>Post a picture or write down what you want.</span>
                         <S3upload />
-                        <button className="btn-save">Save</button>
+                        {/* <button className="btn-save">Save</button> */}
                       </form>
                     </div>
                   </div>
