@@ -74,6 +74,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
         User user;
 
+        String nickname = "닉네임 설정해주세요";
+
         if (userOptional.isPresent()) {
             user = userOptional.get();
             user.setEmail(oAuth2UserInfo.getEmail());
@@ -85,10 +87,11 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                     .role("ROLE_USER")
                     .provider(oAuth2UserInfo.getProvider())
                     .providerId(oAuth2UserInfo.getProviderId())
-                    .nickname(oAuth2UserInfo.getProviderId()) // 임의로 작성함.
+                    .nickname(nickname) // 임의로 작성함.
                     .build();
             userRepository.save(user);
         }
+
 
         System.out.println("PrincipalOauth2UserService processOAuth2User() finish");
         return new PrincipalDetails(user, oAuth2UserInfo);
