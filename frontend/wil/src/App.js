@@ -3,7 +3,7 @@ import Menubar from "./Components/Navbar";
 import MainPage from "./Pages/MainPage";
 import MyPage from "./Pages/MyPage"
 import LoginSignupPage from "./Pages/LoginSignupPage"
-import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Redshift } from "aws-sdk";
 
 // function getToken() {
@@ -99,7 +99,7 @@ import { Redshift } from "aws-sdk";
 
 //   console.log(user);
 function getToken() {
-  if (window.location.search != '') {
+  if (window.location.search !== '') {
     console.log(window.location.search);
 
     const str = window.location.search;
@@ -113,7 +113,7 @@ function getToken() {
 // 토큰 만료시간에 다시 false로 바꿔주고
 // localStorage에서 delete 해주는 로직 추가 해야 함
 function isToken() {
-  if (window.location.search != '') {
+  if (window.location.search !== '') {
     return true;
   } else {
     return false;
@@ -124,7 +124,7 @@ const App = () => {
 
   const user = { booleanValue: null};
 
-  if (isToken() && (window.location.search.split('=')[0] == "?token")) {
+  if (isToken() && (window.location.search.split('=')[0] === "?token")) {
     localStorage.setItem("token", getToken());
   } else {
     user.booleanValue = false;
@@ -133,7 +133,7 @@ const App = () => {
   // 더 구현해야 할 디테일들
   // 1. 다시 로그인 페이지로 가려고 하면 막아야 하는 로직
   // 2. accesstoken 만료 시간도 서버로부터 받아와서 그 시간 내에만 true 값으로 되도록
-  if (localStorage.length == 1) { // token이 localStorage에 저장되어 있으면
+  if (localStorage.length === 1) { // token이 localStorage에 저장되어 있으면
     user.booleanValue = true;
   }
 
@@ -150,7 +150,7 @@ const App = () => {
           <Route path="/loginsignup" element={<LoginSignupPage />} />
 
           {/* Mainpage */}
-          <Route path="/" element={<MainPage user={user.booleanValue} />} />
+          <Route path="/" element={<MainPage user={user.booleanValue} token={localStorage.getItem("token")} />} />
 
           {/* MyPage */}
           <Route path="/mypage" element={<MyPage user={user.booleanValue} token={localStorage.getItem("token")} />} />

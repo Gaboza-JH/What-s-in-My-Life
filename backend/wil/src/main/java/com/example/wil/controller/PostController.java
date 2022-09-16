@@ -35,7 +35,7 @@ public class PostController {
     @Bean
     MultipartConfigElement multipartConfigElement(){
         MultipartConfigFactory multipartConfigFactory = new MultipartConfigFactory();
-        multipartConfigFactory.setLocation("d://data/tmp");
+        multipartConfigFactory.setLocation("c://data/tmp");
         return multipartConfigFactory.createMultipartConfig();
     }
 

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState} from 'react'
+import axios from 'axios';
 // import ReactCardSlider from "react-card-slider-component";
 // import { Carousel } from "@trendyol-js/react-carousel";
 import Carousel from "react-multi-carousel";
@@ -29,97 +30,61 @@ const responsive = {
 const loginPost = [
   {
     url: "https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_960_720.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2017/05/12/08/29/coffee-2306471_960_720.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2018/04/02/18/29/food-3284704_960_720.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2019/08/19/07/45/corgi-4415649_960_720.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2017/07/25/01/22/cat-2536662_960_720.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547_960_720.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2015/03/04/15/03/sky-658888_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2018/05/18/12/43/rose-3411110_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2021/11/05/07/49/women-6770533_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2022/08/08/06/04/chrysanthemums-7371966_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2015/03/04/15/03/sky-658888_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2018/05/18/12/43/rose-3411110_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2021/11/05/07/49/women-6770533_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2022/08/08/06/04/chrysanthemums-7371966_1280.jpg",
-  },
+  }
 ];
 
 const logoutPost = [
   {
     url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2018/05/18/12/43/rose-3411110_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2021/11/05/07/49/women-6770533_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2022/08/08/06/04/chrysanthemums-7371966_1280.jpg",
-  },
-  {
-    url: "https://cdn.pixabay.com/photo/2015/03/04/15/03/sky-658888_1280.jpg",
-  },
+  }
 ];
 
-const MiniSlide = ({ user }) => {
+const MiniSlide = ({ user, token }) => {
+
+  const [allPost, setAllPost] = useState(null);
+  const [loading, setLoding] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchPost = async () => {
+    try{
+      setError(null);
+      setAllPost(null);
+      setLoding(true);
+      const response = await axios.get(
+        `http://localhost:8080/post/`
+      );
+      console.log(response.data);
+      setAllPost(response.data);
+    } catch (e) {
+      console.log("error : " + error);
+      setError(e);
+    }
+    setLoding(false);
+  }
+
+  useEffect(() => {
+    fetchPost();
+  }, []);
+
+  if (loading) return <div>로딩 중....</div>; 
+  if (error) return <div>전체 게시물 에러가 발생했습니다</div>;
+  if (!allPost) return null;
+
   return (
     <div>
       {user ? (
         <div className="gallery-container">
           <h1 className="main-h1">전체 게시물</h1>
-          <div className="gallery">
-            {loginPost.map((imageUrl, index) => {
-              return (
-                <div className="gallery-item" key={index} tabindex="0">
-                  <img src={imageUrl.url} className="gallery-image" alt="" />
-                  <div className="gallery-item-info">
-                    <ul>
-                      <li className="gallery-item-likes">
-                        <span className="visually-hidden">Likes:</span>
-                        <HiOutlineHeart aria-hidden="true" /> 56
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+
+          {/* for문이나 map으로 돌려서리스트 크기만큼 뿌려주면 된다 */}
+          {/* content 출력 */}
+          <h1 className="profile-user-name">{allPost[3].content}</h1>
+          {/* post 출력 */}
+          <img src={"https://wil-s3.s3.ap-northeast-2.amazonaws.com/" + allPost[3].imgList[0].file_name} alt="" />
+
         </div>
       ) : (
+        // 비로그인 일 때 추천수 많은 게시물 뿌려줘야한다 아직 더미 데이터 이다
         <div className="parent">
           <h1 className="main-h1">추천 게시물 또는 금주의 게시물</h1>
           <Carousel

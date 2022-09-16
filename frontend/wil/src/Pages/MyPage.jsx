@@ -10,7 +10,7 @@ const MyPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-
+ 
   const fetchUser = async () => {
     try{
       const token = localStorage.getItem("token");
