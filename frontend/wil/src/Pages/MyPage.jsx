@@ -9,8 +9,8 @@ const MyPage = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [userPosts, setUserPosts] = useState(null);
 
+ 
   const fetchUser = async () => {
     try{
       const token = localStorage.getItem("token");

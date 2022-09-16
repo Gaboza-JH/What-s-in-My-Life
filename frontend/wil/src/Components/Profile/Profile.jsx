@@ -18,7 +18,7 @@ const Profile = (props) => {
     axios.get(`http://localhost:8080/like/user/1`)
     .then(response => setLikes(response.data))
   })
-  
+
   const openProfileModalHandler = () => {
     setIsOpenProfile(!isOpenProfile);
   };
@@ -64,7 +64,7 @@ const Profile = (props) => {
         {/* <S3upload /> */}
 
         <div className="profile-user-settings">
-          <h1 className="profile-user-name">{props.user.nickname /* nickname */}</h1>
+          <h1 className="profile-user-name">{props.user.nickname}</h1>
           <button
             className="btn profile-edit-btn"
             onClick={openProfileModalHandler}
