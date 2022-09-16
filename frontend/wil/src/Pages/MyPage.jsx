@@ -10,7 +10,7 @@ const MyPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-
+ 
   const fetchUser = async () => {
     try{
       const token = localStorage.getItem("token");
@@ -31,8 +31,12 @@ const MyPage = () => {
   };
 
   useEffect(() => {
-    fetchUser();    
+    fetchUser();
+    // const token = localStorage.getItem("token");
+    // axios.get(`http://localhost:8080/post/user/${token}`)
+    // .then(response => setUserPosts(response.data));    
   }, []);
+
 
   if (loading) return <div>로딩중..</div>; 
   if (error) return <div>에러가 발생했습니다</div>;
