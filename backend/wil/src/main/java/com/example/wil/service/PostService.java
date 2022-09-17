@@ -3,9 +3,11 @@ package com.example.wil.service;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.example.wil.DTO.PostDTO;
 import com.example.wil.model.Image;
+import com.example.wil.model.Likes;
 import com.example.wil.model.Post;
 import com.example.wil.model.User;
 import com.example.wil.repository.ImageRepository;
+import com.example.wil.repository.LikesRepository;
 import com.example.wil.repository.PostRepository;
 import com.example.wil.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class PostService {
     private ImageRepository imgRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private LikesRepository likesRepository;
+
 
     @Autowired
     private ImageService imgService;
@@ -177,6 +182,19 @@ public class PostService {
         return postDTOList;
     }
 
+    public List<PostDTO> topLike() {
+        List<Likes> likes = likesRepository.findGroupByPostId();
+        List<Post> postList = new ArrayList<>();
+        for (Likes like:likes){
+            System.out.println("like1:::" +like.getPostId().getPostId());
+            int postId = like.getPostId().getPostId();
+            Post post = postRepository.getReferenceById(postId);
+            postList.add(post);
+
+        }
+        System.out.println(postList.get(1).getPostId());
+        return transformPostDTOList(postList);
+    }
 
 
 }
