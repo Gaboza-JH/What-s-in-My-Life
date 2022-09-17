@@ -1,0 +1,12 @@
+FROM node:18-alpine
+
+WORKDIR /wil/src/app
+
+COPY package.json ./
+
+RUN npm install
+RUN npn install -g npm@8.19.2
+
+COPY ./ ./
+
+CMD [ "npm", "run", "start" ]
