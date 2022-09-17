@@ -92,6 +92,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             userRepository.save(user);
         }
 
+
         System.out.println("PrincipalOauth2UserService processOAuth2User() finish");
         return new PrincipalDetails(user, oAuth2UserInfo);
     }
