@@ -2,13 +2,46 @@ import React, { useEffect, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import "./Gallery.css";
 import axios from "axios";
+import { HiOutlineX } from "react-icons/hi";
 
-// 게시물 유무 판별 로직 추가
+// 게시물 유무 판별 로직 추가 해야 함
 const Gallery = (props) => {
   const postIdIndex = props.user.postIdList;
   const [postList, setPostList] = useState();
   const [error, setError] = useState(null);
   const [postLike, setPostLike] = useState(null);
+  const [isOpenPost, setIsOpenPost] = useState(false);
+  const [clickImg, setClickImg] = useState(null);
+  const [clickImgPostId, setClickImgPostId] = useState(null);
+
+  const openPostModalHandler = (e) => {
+    console.log("게시물 modal 활성화 / 비활성");
+    setIsOpenPost(!isOpenPost);
+    console.log(e);
+    console.log(e.target);
+    setClickImg(e.target);
+    setClickImgPostId(e.target.id);
+  };
+
+  // postId DTO로 같이 보내줘야 함
+  const clickHandler = async (e) => {
+    console.log("좋아요 버튼 클릭");
+
+    const postId = Number(clickImgPostId);
+    const likeDTO = {
+      "postId" : postId
+    };
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `http://localhost:8080/like/${token}`, likeDTO
+      );
+    } catch (e) {
+      console.log("error : " + error);
+      setError(e);
+    }
+  };
 
   // 유저가 업로드한 포스트 조회
   const fetchPost = async () => {
@@ -26,9 +59,9 @@ const Gallery = (props) => {
 
   // 포스트 당 좋아요 수 조회
   const fetchPostLike = async () => {
-    const likes =[]
+    const likes = []
     try {
-      for (let index = 0; index < postIdIndex.length; index++){
+      for (let index = 0; index < postIdIndex.length; index++) {
         const response = await axios.get(`http://localhost:8080/like/${postIdIndex[index]}`);
         likes.push(response.data)
       }
@@ -58,14 +91,18 @@ const Gallery = (props) => {
     for (let index = 0; index < Object.keys(postList).length; index++) {
       result.push(
         <div className="gallery-item" key={index} tabindex="0">
-          <img
-            src={
-              "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
-              postList[index].imgList[0].file_name
-            }
-            className="gallery-image"
-            alt=""
-          />
+          <div>
+            <img
+              src={
+                "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
+                postList[index].imgList[0].file_name
+              }
+              className="gallery-image"
+              id={postList[index].postId}
+              alt=""
+              onClick={openPostModalHandler}
+            />
+          </div>
           {/* 좋아요 수 표시*/}
           <div className="gallery-item-info">
             <ul>
@@ -81,11 +118,32 @@ const Gallery = (props) => {
     }
     return result;
   };
+  console.log(clickImg);
 
   return (
     <div>
       <div className="gallery-container">
         <div className="gallery">{rendering()}</div>
+        {/* modal 기능 */}
+        {isOpenPost === true ? (
+            <div className="backdrop">
+              <div className="modal-view" onClick={(e) => e.stopPropagation()}>
+                <div className="desc">
+                  <form className="modal-form">
+                    <h1 className="header-profile">게시물 출력</h1>
+                    <span className="span-profile">좋아요 버튼</span>
+                    <button
+                      className="btn-save"
+                      type="button"
+                      onClick={clickHandler}
+                    >
+                      :하트2::하트2:
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          ) : null}
       </div>
     </div>
   );

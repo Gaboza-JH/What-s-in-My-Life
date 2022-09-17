@@ -25,21 +25,45 @@ public class LikeController {
     private final PostService postService;
 
     private final UserService userService;
+
+//    // 좋아요 등록
+//    @Transactional
+//    @PostMapping("/like")
+//    public boolean addLike(@RequestBody LikesDTO likesDTO)
+//    {
+//        System.out.println(">>Likes Controller ");
+//        System.out.println(likesDTO.getPostId());
+//        System.out.println(likesDTO.getUserId());
+//        int userId = likesDTO.getUserId();
+//        int postId = likesDTO.getPostId();
+//
+//        //if (user session 정보가 있을때 (로그인 했을때)){ // user의 세션을 가지고 와서 session 정보와 맞을때 수행할 수 있도록 변경 필요
+//        boolean result = likesService.addLike(userId, postId);
+//        //}
+//        return result;
+//    }
+
     // 좋아요 등록
     @Transactional
-    @PostMapping("/like")
-    public boolean addLike(@RequestBody LikesDTO likesDTO)
+    @PostMapping("/like/{token}")
+    public boolean addLike(@PathVariable String token, @RequestBody LikesDTO likesDTO)
     {
-        System.out.println(">>Likes Controller ");
-        System.out.println(likesDTO.getPostId());
-        System.out.println(likesDTO.getUserId());
-        int userId = likesDTO.getUserId();
-        int postId = likesDTO.getPostId();
+        System.out.println("/like/{token} postmapping");
+        if (tokenProvider.validateToken(token)) {
+            System.out.println("/like/{token} postmapping tokenProvider.validate = true");
+            Integer userId = tokenProvider.getUserIdFromToken(token);
+            System.out.println(">>Likes Controller ");
+            System.out.println(likesDTO.getPostId());
+            System.out.println(likesDTO.getUserId());
+            int postId = likesDTO.getPostId();
 
-        //if (user session 정보가 있을때 (로그인 했을때)){ // user의 세션을 가지고 와서 session 정보와 맞을때 수행할 수 있도록 변경 필요
-        boolean result = likesService.addLike(userId, postId);
-        //}
-        return result;
+            //if (user session 정보가 있을때 (로그인 했을때)){ // user의 세션을 가지고 와서 session 정보와 맞을때 수행할 수 있도록 변경 필요
+            boolean result = likesService.addLike(userId, postId);
+            //}
+            return result;
+        } else {
+            return false;
+        }
     }
 
     // 좋아요 취소
@@ -64,9 +88,9 @@ public class LikeController {
     @GetMapping("/like/user/{token}")
     public int countLikesByUser(@PathVariable String token){
 
-        System.out.println("/users/{token} getmapping");
+        System.out.println("/like/user/{token} getmapping");
         if (tokenProvider.validateToken(token)) {
-            System.out.println("/users/{token} getmapping tokenProvider.validate = true");
+            System.out.println("/like/user/{token} getmapping tokenProvider.validate = true");
             Integer userId = tokenProvider.getUserIdFromToken(token);
             return likesService.countLikesByUser(userId);
         } else {
