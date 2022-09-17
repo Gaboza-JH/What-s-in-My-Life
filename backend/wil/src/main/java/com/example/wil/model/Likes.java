@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "like_id")
     private int likeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
