@@ -1,21 +1,29 @@
 package com.example.wil.service;
 
+import com.example.wil.DTO.LikesDTO;
+import com.example.wil.DTO.PostDTO;
+import com.example.wil.model.Image;
 import com.example.wil.model.Likes;
 import com.example.wil.model.Post;
 import com.example.wil.model.User;
 import com.example.wil.repository.LikesRepository;
 import com.example.wil.repository.PostRepository;
 import com.example.wil.repository.UserRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @Transactional
+@Getter
 @Service
 public class LikesService {
     @Autowired
@@ -71,4 +79,5 @@ public class LikesService {
         return userPostCnt;
 
     }
+
 }

@@ -1,6 +1,7 @@
 package com.example.wil.controller;
 
 import com.example.wil.DTO.LikesDTO;
+import com.example.wil.DTO.PostDTO;
 import com.example.wil.model.Post;
 import com.example.wil.service.LikesService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController

@@ -7,6 +7,7 @@ import com.example.wil.exception.BadRequestException;
 import com.example.wil.repository.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.example.wil.util.CookieUtils;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
@@ -63,9 +66,15 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     private String makeRedirectUrl(String token, Long expiredTime) {
         System.out.println("OAuth2AuthenticationSuccessHandler makeRedirectUrl() start and return");
 
+        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        Date time = new Date();
+        String startTime = format1.format(time);
+        System.out.println(startTime);
+
         String redirectUrl = UriComponentsBuilder.fromHttpUrl("http://localhost:3000/")
                 .queryParam("token", token)
                 .queryParam("expiredTime", expiredTime) // 만료 시간도 같이 보내줌
+                .queryParam("startTime", startTime)
                 .build().toUriString();
 
         System.out.println("redirectUrl : " + redirectUrl);
