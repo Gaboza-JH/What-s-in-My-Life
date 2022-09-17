@@ -94,18 +94,16 @@ const Gallery = (props) => {
     for (let index = 0; index < Object.keys(postList).length; index++) {
       result.push(
         <div className="gallery-item" key={index} tabindex="0">
-          <div>
-            <img
-              src={
-                "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
-                postList[index].imgList[0].file_name
-              }
-              className="gallery-image"
-              id={postList[index].postId}
-              alt=""
-              onClick={openPostModalHandler}
-            />
-          </div>
+          <img
+            src={
+              "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
+              postList[index].imgList[0].file_name
+            }
+            className="gallery-image"
+            id={postList[index].postId}
+            alt=""
+            onClick={openPostModalHandler}
+          />
           {/* 좋아요 수 표시*/}
           <div className="gallery-item-info">
             <ul>
@@ -123,42 +121,39 @@ const Gallery = (props) => {
   };
   return (
     <>
-      <div className="gallery-container">
-        <h1 className="main-h1">전체 게시물</h1>
-        <div className="gallery">{rendering()}</div>
-      </div>
-      {/* modal 기능 */}
-      {isOpenPost === true ? (
-        <div className="backdrop">
-          <div className="modal-view" onClick={(e) => e.stopPropagation()}>
-            <span onClick={openPostModalHandler} className="close-btn">
-              <HiOutlineX />
-            </span>
-            <div className="desc">
-              <form className="modal-form">
-                <h1 className="header-profile">게시물</h1>
-                <div className="modal-gallery-container">
-                  <div className="gallery-item">
-                    <img
-                      src={clickImg.src}
-                      className="modal-gallery-image"
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <button
-                  className="btn-save"
-                  type="button"
-                  onClick={clickHandler}
-                >
-                  ❤좋아요❤
-                </button>
-              </form>
-            </div>
+          <div className="gallery-container">
+            <h1 className="main-h1">전체 게시물</h1>
+            <div className="gallery">{rendering()}</div>
           </div>
-        </div>
-      ) : null}
-    </>
+          {/* modal 기능 */}
+          {isOpenPost === true ? (
+            <div className="backdrop">
+              <div className="modal-view" onClick={(e) => e.stopPropagation()}>
+                <span onClick={openPostModalHandler} className="close-btn">
+                  <HiOutlineX />
+                </span>
+                <div className="desc">
+                  <form className="modal-form">
+                    <h1 className="header-profile">게시물</h1>
+                    <div className="modal-gallery-container">
+                        <div className="gallery-item">
+                          <img src={clickImg.src} className="modal-gallery-image" alt="" />
+                        </div>
+                    </div>
+                    {/* <h3>{content.content}</h3> */}
+                    <button
+                      className="btn-save"
+                      type="button"
+                      onClick={clickHandler}
+                    >
+                      ❤좋아요❤
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          ) : null}
+        </>
   );
 };
 export default Gallery;
