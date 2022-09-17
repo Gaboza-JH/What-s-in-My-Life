@@ -13,7 +13,6 @@ function PostUpload() {
   const [fileUrl, setFileUrl] = useState(null);
   const [fileName, setFileName] = useState(defaultUpload);
   const [showAlert, setShowAlert] = useState(false);
-  const [text, setText] = useState("");
 
   // <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="upload_Image" className="uploadImage"></img>
   //           {fileName}
@@ -38,26 +37,11 @@ function PostUpload() {
     }
   };
 
-
-  // {/* 텍스트 글 입력 및 출력 버튼 */}
-  // <div id='result' className="contentsResult"></div>
-  // <input id="textInput" type="text" className="text-input" onChange={TextInputHandler} placeholder="Please enter your contents." />
-
   // onChange Handler
   const TextInputHandler = (e) => {
     const textInput = e.target.value;
     console.log(textInput);
     //setText=textInput;
-  }
-
-  // <button id="contents" type="button" className="textInput-btn" onClick={clickTextInput}>Text</button>
-  // onCLick Handler 입력된 contents 글 화면에 출력
-  const clickTextInput = async (e) => {
-    console.log("content 저장 버튼 click?", e.target);
-    const contents = document.getElementById('textInput').value;
-    console.log(contents)
-    document.getElementById("result").innerText = contents;
-    console.log(document.getElementById("result").innerText);
   }
 
 
@@ -107,8 +91,6 @@ function PostUpload() {
     }
   }
 
-
-
   return (
     <>
       <div>
@@ -122,16 +104,8 @@ function PostUpload() {
           {/* 텍스트 글 입력 및 출력 버튼 */}
           <div id='result' className="contentsResult"></div>
           <input id="textInput" type="text" className="text-input" onChange={TextInputHandler} placeholder="Please enter your contents." />
-          {/* <label class="switch">
-          <input type="checkbox"/>
-          <span class="slider round"></span>
-        </label>
-        <p>OFF</p>
-        <p style="display:none;">ON</p> */}
-          <button id="contents" type="button" className="textInput-btn" onClick={clickTextInput}>Text</button>
           {/* s3 upload 버튼 */}
           <button type="button" className="upload-btn" onClick={clickPostSubmit}>Upload</button>
-          <button id="contents" type="button" className="btn-save">Save</button>
         </form>
       </div>
     </>
@@ -139,4 +113,4 @@ function PostUpload() {
 }
 
 export default PostUpload;
-//export default withStyles(styles)(FileUpload)
+

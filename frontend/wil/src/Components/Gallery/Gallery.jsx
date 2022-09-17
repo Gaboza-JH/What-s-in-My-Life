@@ -2,13 +2,47 @@ import React, { useEffect, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import "./Gallery.css";
 import axios from "axios";
+import { HiOutlineX } from "react-icons/hi";
 
-// 게시물 유무 판별 로직 추가
+// 게시물 유무 판별 로직 추가 해야 함
 const Gallery = (props) => {
   const postIdIndex = props.user.postIdList;
   const [postList, setPostList] = useState();
   const [error, setError] = useState(null);
   const [postLike, setPostLike] = useState(null);
+  const [isOpenPost, setIsOpenPost] = useState(false);
+  const [clickImg, setClickImg] = useState(null);
+  const [clickImgPostId, setClickImgPostId] = useState(null);
+
+  const openPostModalHandler = (e) => {
+    console.log("게시물 modal 활성화 / 비활성");
+    setIsOpenPost(!isOpenPost);
+    console.log(e);
+    console.log(e.target);
+    setClickImg(e.target);
+    setClickImgPostId(e.target.id);
+  };
+
+  // postId DTO로 같이 보내줘야 함
+  const clickHandler = async (e) => {
+    console.log("좋아요 버튼 클릭");
+
+    const postId = Number(clickImgPostId);
+    const likeDTO = {
+      postId: postId,
+    };
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `http://localhost:8080/like/${token}`,
+        likeDTO
+      );
+    } catch (e) {
+      console.log("error : " + error);
+      setError(e);
+    }
+  };
 
   // 유저가 업로드한 포스트 조회
   const fetchPost = async () => {
@@ -26,13 +60,15 @@ const Gallery = (props) => {
 
   // 포스트 당 좋아요 수 조회
   const fetchPostLike = async () => {
-    const likes =[]
+    const likes = [];
     try {
-      for (let index = 0; index < postIdIndex.length; index++){
-        const response = await axios.get(`http://localhost:8080/like/${postIdIndex[index]}`);
-        likes.push(response.data)
+      for (let index = 0; index < postIdIndex.length; index++) {
+        const response = await axios.get(
+          `http://localhost:8080/like/${postIdIndex[index]}`
+        );
+        likes.push(response.data);
       }
-      setPostLike(likes)
+      setPostLike(likes);
     } catch (e) {
       console.log("error : " + error);
       setError(e);
@@ -64,7 +100,9 @@ const Gallery = (props) => {
               postList[index].imgList[0].file_name
             }
             className="gallery-image"
+            id={postList[index].postId}
             alt=""
+            onClick={openPostModalHandler}
           />
           {/* 좋아요 수 표시*/}
           <div className="gallery-item-info">
@@ -81,13 +119,41 @@ const Gallery = (props) => {
     }
     return result;
   };
-
   return (
-    <div>
-      <div className="gallery-container">
-        <div className="gallery">{rendering()}</div>
-      </div>
-    </div>
+    <>
+          <div className="gallery-container">
+            <h1 className="main-h1">전체 게시물</h1>
+            <div className="gallery">{rendering()}</div>
+          </div>
+          {/* modal 기능 */}
+          {isOpenPost === true ? (
+            <div className="backdrop">
+              <div className="modal-view" onClick={(e) => e.stopPropagation()}>
+                <span onClick={openPostModalHandler} className="close-btn">
+                  <HiOutlineX />
+                </span>
+                <div className="desc">
+                  <form className="modal-form">
+                    <h1 className="header-profile">게시물</h1>
+                    <div className="modal-gallery-container">
+                        <div className="gallery-item">
+                          <img src={clickImg.src} className="modal-gallery-image" alt="" />
+                        </div>
+                    </div>
+                    {/* <h3>{content.content}</h3> */}
+                    <button
+                      className="btn-save"
+                      type="button"
+                      onClick={clickHandler}
+                    >
+                      ❤좋아요❤
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          ) : null}
+        </>
   );
 };
 export default Gallery;

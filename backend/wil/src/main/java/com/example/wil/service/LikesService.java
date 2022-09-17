@@ -10,6 +10,8 @@ import com.example.wil.repository.UserRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +21,8 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Transactional
-@Service
 @Getter
+@Service
 public class LikesService {
     @Autowired
     private final LikesRepository likesRepository;
@@ -78,7 +80,6 @@ public class LikesService {
         return userPostCnt;
 
     }
-
 
 //    public List<Post> topLike() {
 //        List<Likes> likes = likesRepository.findGroupByPostId();
