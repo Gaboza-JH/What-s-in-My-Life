@@ -113,13 +113,7 @@ const MiniSlide = ({ user, token, userData}) => {
       {user ? (
         <div className="gallery-container">
           <h1 className="main-h1">전체 게시물</h1>
-
-          {/* for문이나 map으로 돌려서리스트 크기만큼 뿌려주면 된다 */}
-          {/* content 출력 */}
-          <h1 className="profile-user-name">{allPost[0].content}</h1>
-          {/* post 출력 */}
-          <img src={"https://wil-s3.s3.ap-northeast-2.amazonaws.com/" + allPost[0].imgList[0].file_name} alt="" />
-
+          <div className="gallery">{rendering()}</div>
         </div>
       ) : (
         // 비로그인 일 때 추천수 많은 게시물 뿌려줘야한다 아직 더미 데이터 이다
