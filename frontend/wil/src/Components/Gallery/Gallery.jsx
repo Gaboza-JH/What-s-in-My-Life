@@ -6,7 +6,7 @@ import axios from "axios";
 // 게시물 유무 판별 로직 추가
 const Gallery = (props) => {
 
-  const [postList, setPostListt] = useState();
+  const [postList, setPostList] = useState();
   const [error, setError] = useState(null);
   
   const fetchPost = async () => {
@@ -17,7 +17,7 @@ const Gallery = (props) => {
         `http://localhost:8080/post/user/${token}`
       );
 
-      setPostListt(postResponse.data);
+      setPostList(postResponse.data);
 
     } catch (e) {
       console.log("error : " + error);

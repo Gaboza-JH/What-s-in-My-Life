@@ -39,7 +39,14 @@ import { Redshift } from "aws-sdk";
 //   let dyMilli = hrMilli * 24 // 1일은 24시간
 //   const currentTime = new Date().getTime(); // 70년 1월 1일부터 현재 시각까지의 밀리 타임
 //   const adjExpirationTime = new Date(expirationTime).getTime();
-//   const tokenEndTime = adjExpirationTime + currentTime;
+//   const tokenEndTime = adjExpirationTime - currentTime;
+//   console.log("currentTime");
+//   console.log(currentTime); // 16633_48319971
+//   // console.log(tokenEndTime); // 16633_84336740 (더한 값)
+//   console.log("----------------");
+//   console.log("tokenEnd");
+//   console.log(tokenEndTime);
+//   console.log("----------------");
 
 //   // console.log("currentTime");
 //   // console.log(currentTime);
@@ -53,7 +60,7 @@ import { Redshift } from "aws-sdk";
 //   // console.log(Math.round(adjExpirationTime/hrMilli) + "만큼의 시간이 지났습니다");
 //   // console.log(Math.round(adjExpirationTime/miMilli) + "만큼의 분이 지났습니다");
 
-//   return tokenEndTime; // 토큰이 만료되는 시각
+//   return currentTime; // 토큰 받았을 때 현재 시각
 // };
 
 
@@ -65,6 +72,8 @@ import { Redshift } from "aws-sdk";
 //   }
 // }
 
+
+// console.log("----------------------------------------------------------------------------------------");
 // const App = () => {
 
 //   const user = { booleanValue: null };
@@ -78,16 +87,15 @@ import { Redshift } from "aws-sdk";
 
 //     if (localStorage.length == 2) {
 //       user.booleanValue = true;
-//       const tokenEndTime = calculateTime(Number(getExpiredTime()));
-//       if ((tokenEndTime - new Date().getTime()) <= 5000) {
+//       const remaingTime = calculateTime(+ Number(getExpiredTime()));
+//       if (remaingTime <= 1000*60*598) { // 598분
 //         localStorage.removeItem('token');
 //         localStorage.removeItem('expiredTime');
 //         user.booleanValue = false;
 //       }
-//     }
-//   } else {
+//     } else {
 //     user.booleanValue = false;
-//   }
+//     }
 
 //   // 더 구현해야 할 디테일들
 //   // 1. 다시 로그인 페이지로 가려고 하면 막아야 하는 로직
@@ -98,6 +106,35 @@ import { Redshift } from "aws-sdk";
 
 
 //   console.log(user);
+
+//   return (
+//     <BrowserRouter>
+//       <div>
+//         {/* user 변수 명으로 App.jsx의 user를 내려줌 */}
+//         <Menubar user={user.booleanValue} />
+
+//         <Routes>
+//           {/* loginSignupPage */}
+//           <Route path="/loginsignup" element={<LoginSignupPage />} />
+
+//           {/* Mainpage */}
+//           <Route path="/" element={<MainPage user={user.booleanValue} token={localStorage.getItem("token")} />} />
+
+//           {/* MyPage */}
+//           <Route path="/mypage" element={<MyPage user={user.booleanValue} token={localStorage.getItem("token")} />} />
+
+//           {/* Not FoundPage */}
+
+//         </Routes>
+
+//       </div>
+//     </BrowserRouter>
+//   );
+// };
+
+// export default App;
+
+
 function getToken() {
   if (window.location.search !== '') {
     console.log(window.location.search);

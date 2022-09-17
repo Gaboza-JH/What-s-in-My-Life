@@ -65,7 +65,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         String redirectUrl = UriComponentsBuilder.fromHttpUrl("http://localhost:3000/")
                 .queryParam("token", token)
-//                .queryParam("expiredTime", expiredTime) // 만료 시간도 같이 보내줌
+                .queryParam("expiredTime", expiredTime) // 만료 시간도 같이 보내줌
                 .build().toUriString();
 
         System.out.println("redirectUrl : " + redirectUrl);
