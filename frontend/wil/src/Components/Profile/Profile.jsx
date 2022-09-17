@@ -5,7 +5,7 @@ import { HiOutlineHeart } from "react-icons/hi";
 import { HiOutlineViewGrid } from "react-icons/hi";
 import { HiOutlineX } from "react-icons/hi";
 import profileImg from "../../static/img/profile_default.png";
-import S3upload from "../S3/S3upload2";
+import PostUpload from "../S3/PostUpload";
 import "./Profile.css";
 import axios from 'axios';
 
@@ -15,7 +15,8 @@ const Profile = (props) => {
   const [likes, setLikes] = useState(0);
   
   useEffect(()=>{
-    axios.get(`http://localhost:8080/like/user/1`)
+    const token = localStorage.getItem("token");
+    axios.get(`http://localhost:8080/like/user/${token}`)
     .then(response => setLikes(response.data))
   })
 
@@ -123,7 +124,7 @@ const Profile = (props) => {
                       <form className="modal-form">
                         <h1 className="header-upload">Upload Post</h1>
                         <span>Post a picture or write down what you want.</span>
-                        <S3upload />
+                        <PostUpload />
                         {/* <button className="btn-save">Save</button> */}
                       </form>
                     </div>

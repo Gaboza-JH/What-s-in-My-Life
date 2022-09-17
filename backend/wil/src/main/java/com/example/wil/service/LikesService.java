@@ -1,8 +1,6 @@
 package com.example.wil.service;
 
 import com.example.wil.DTO.LikesDTO;
-import com.example.wil.DTO.PostDTO;
-import com.example.wil.model.Image;
 import com.example.wil.model.Likes;
 import com.example.wil.model.Post;
 import com.example.wil.model.User;
@@ -32,6 +30,9 @@ public class LikesService {
     private final PostRepository postRepository;
     @Autowired
     private final UserRepository userRepository;
+
+    @Autowired
+    private final PostService postService;
 
     //좋아요 추가
     public boolean addLike(int userId, int postId) {
@@ -80,4 +81,18 @@ public class LikesService {
 
     }
 
+//    public List<Post> topLike() {
+//        List<Likes> likes = likesRepository.findGroupByPostId();
+//        List<Post> postList = new ArrayList<>();
+//        for (Likes like:likes){
+//            System.out.println("like1:::" +like.getPostId().getPostId());
+//            int postId = like.getPostId().getPostId();
+//            Post post = postRepository.getReferenceById(postId);
+//            postList.add(post);
+//        }
+//
+//        System.out.println(postList.get(1).getPostId());
+//        return postList;
+//
+//    }
 }

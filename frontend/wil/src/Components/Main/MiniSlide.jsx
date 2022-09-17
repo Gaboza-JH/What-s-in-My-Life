@@ -27,45 +27,57 @@ const responsive = {
   },
 };
 
-const loginPost = [
-  {
-    url: "https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_960_720.jpg",
-  },
-];
-
 const logoutPost = [
   {
     url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
   },
 ];
 
-const MiniSlide = ({ user, token }) => {
+const MiniSlide = ({ user, token, userData}) => {
   const [allPost, setAllPost] = useState(null);
-  const [loading, setLoding] = useState(false);
   const [error, setError] = useState(null);
+  const [postLike, setPostLike] = useState(null);
 
   const fetchPost = async () => {
     try {
-      setError(null);
-      setAllPost(null);
-      setLoding(true);
+      // 전체 게시물 조회
       const response = await axios.get(`http://localhost:8080/post/`);
       console.log(response.data);
       setAllPost(response.data);
+
+      // postIdIndexList 생성
+      const postIdIndex =[]
+      for (let index = 0; index < response.data.length; index++){
+        postIdIndex.push(response.data[index].postId)
+        }
+      console.log(postIdIndex);
+
+      // 포스트 당 좋아요 수 조회
+      const likes =[]
+      try {
+        for (let index = 0; index < postIdIndex.length; index++){
+          const response = await axios.get(`http://localhost:8080/like/${postIdIndex[index]}`);
+          likes.push(response.data)
+        }
+        setPostLike(likes);
+        console.log(likes);
+      } catch (e) {
+        console.log("error : " + error);
+        setError(e);
+      }
     } catch (e) {
       console.log("error : " + error);
       setError(e);
     }
-    setLoding(false);
   };
 
   useEffect(() => {
     fetchPost();
   }, []);
 
-  if (loading) return <div>로딩 중....</div>;
   if (error) return <div>전체 게시물 에러가 발생했습니다</div>;
   if (!allPost) return null;
+  if (!postLike) return null;
 
   const rendering = () => {
     const result = [];
@@ -86,7 +98,7 @@ const MiniSlide = ({ user, token }) => {
               <li className="gallery-item-likes">
                 <span className="visually-hidden">Likes:</span>
                 {/* 게시물 마다 좋아요 눌러진 수 만큼 출력되야된다  */}
-                <HiOutlineHeart aria-hidden="true" /> 56
+                <HiOutlineHeart aria-hidden="true" /> {postLike[index]}
               </li>
             </ul>
           </div>

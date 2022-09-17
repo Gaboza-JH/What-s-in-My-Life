@@ -5,18 +5,34 @@ import axios from "axios";
 
 // 게시물 유무 판별 로직 추가
 const Gallery = (props) => {
+  const postIdIndex = props.user.postIdList;
   const [postList, setPostList] = useState();
   const [error, setError] = useState(null);
+  const [postLike, setPostLike] = useState(null);
 
+  // 유저가 업로드한 포스트 조회
   const fetchPost = async () => {
     try {
       const token = localStorage.getItem("token");
-
       const postResponse = await axios.get(
         `http://localhost:8080/post/user/${token}`
       );
-
       setPostList(postResponse.data);
+    } catch (e) {
+      console.log("error : " + error);
+      setError(e);
+    }
+  };
+
+  // 포스트 당 좋아요 수 조회
+  const fetchPostLike = async () => {
+    const likes =[]
+    try {
+      for (let index = 0; index < postIdIndex.length; index++){
+        const response = await axios.get(`http://localhost:8080/like/${postIdIndex[index]}`);
+        likes.push(response.data)
+      }
+      setPostLike(likes)
     } catch (e) {
       console.log("error : " + error);
       setError(e);
@@ -25,13 +41,17 @@ const Gallery = (props) => {
 
   useEffect(() => {
     fetchPost();
+    fetchPostLike();
   }, []);
 
-  if (error) return <div>전체 게시물 에러가 발생했습니다</div>;
+  if (error) return <div>포스트 조회 에러가 발생했습니다</div>;
   if (!postList) return null;
+  if (!postLike) return null;
 
   console.log("postList -->");
   console.log(postList);
+  console.log("postLikes -->");
+  console.log(postLike);
 
   const rendering = () => {
     const result = [];
@@ -52,7 +72,7 @@ const Gallery = (props) => {
               <li className="gallery-item-likes">
                 <span className="visually-hidden">Likes:</span>
                 {/* 게시물 마다 좋아요 눌러진 수 만큼 출력되야된다  */}
-                <HiOutlineHeart aria-hidden="true" /> 56
+                <HiOutlineHeart aria-hidden="true" /> {postLike[index]}
               </li>
             </ul>
           </div>

@@ -4,10 +4,10 @@ import { Row, Col, Button, Input, Alert, Container } from "reactstrap";
 import { useDropzone, FileWithPath } from "react-dropzone";
 import { useFormikContext, useField } from "formik";
 import { toast } from "react-toastify";
-import "./S3upload.css";
+import "./PostUpload.css";
 import axios from "axios";
 
-function S3upload() {
+function PostUpload() {
   const defaultUpload = "Drag files to upload.";
   const [files, setFiles] = useState(null);
   const [fileUrl, setFileUrl] = useState(null);
@@ -138,5 +138,5 @@ function S3upload() {
   );
 }
 
-export default S3upload;
+export default PostUpload;
 //export default withStyles(styles)(FileUpload)

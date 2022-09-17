@@ -74,7 +74,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
         User user;
 
-        String nickname = "닉네임 설정해주세요";
+
+        String nickname = "닉네임을 설정해주세요";
 
         if (userOptional.isPresent()) {
             user = userOptional.get();

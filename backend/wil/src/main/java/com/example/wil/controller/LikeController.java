@@ -2,8 +2,10 @@ package com.example.wil.controller;
 
 import com.example.wil.DTO.LikesDTO;
 import com.example.wil.DTO.PostDTO;
-import com.example.wil.model.Post;
+import com.example.wil.config.jwt.TokenProvider;
 import com.example.wil.service.LikesService;
+import com.example.wil.service.PostService;
+import com.example.wil.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,11 @@ import java.util.Objects;
 public class LikeController {
     private final LikesService likesService;
 
+    private final TokenProvider tokenProvider;
+
+    private final PostService postService;
+
+    private final UserService userService;
     // 좋아요 등록
     @Transactional
     @PostMapping("/like")
@@ -53,9 +60,21 @@ public class LikeController {
         return likesService.countLike(postId);
     }
 
-    // 포스트당 좋아요 조회
-    @GetMapping("/like/user/{userId}")
-    public int countLikesByUser(@PathVariable int userId){
-        return likesService.countLikesByUser(userId);
+    // 유저의 포스트당 좋아요 조회
+    @GetMapping("/like/user/{token}")
+    public int countLikesByUser(@PathVariable String token){
+
+        System.out.println("/users/{token} getmapping");
+        if (tokenProvider.validateToken(token)) {
+            System.out.println("/users/{token} getmapping tokenProvider.validate = true");
+            Integer userId = tokenProvider.getUserIdFromToken(token);
+            return likesService.countLikesByUser(userId);
+        } else {
+            return 0;
+        }
     }
+
+    //인기 게시물 Top 5 조회
+    @GetMapping("/like/top_post")
+    public List<PostDTO> topLike(){ return postService.topLike();}
 }
