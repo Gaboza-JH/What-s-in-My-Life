@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Redshift } from "aws-sdk";
 
 function getToken() {
-  if (window.location.search != '') {
+  if (window.location.search !== '') {
     console.log(window.location.search);
 
     const str = window.location.search;
@@ -21,7 +21,7 @@ function getToken() {
 }
 
 function getExpiredTime() {
-  if (window.location.search != '') {
+  if (window.location.search !== '') {
     const str = window.location.search;
     const str2 = str.split('=')[2]; // accessToken 만료 시간
     const expiredTime = str2.split('&')[0];
@@ -33,7 +33,7 @@ function getExpiredTime() {
 }
 
 function getTokenStartTime() {
-  if (window.location.search != '') {
+  if (window.location.search !== '') {
     const str = window.location.search;
     const tokenStartTime = str.split('=')[3]; // 2022-09-17%2015:32:36
 
@@ -81,7 +81,7 @@ function getTokenStartTime() {
 
 
 function isToken() {
-  if (window.location.search != '') {
+  if (window.location.search !== '') {
     return true;
   } else {
     return false;
@@ -94,7 +94,7 @@ const App = () => {
   const time = { start: 0, expiredTime: null };
 
   // 로그인 후 리다이렉트 되었을떄
-  if (window.location.search.split('=')[0] == "?token") {
+  if (window.location.search.split('=')[0] === "?token") {
     localStorage.setItem("token", getToken());
     localStorage.setItem("expiredTime", getExpiredTime());
     localStorage.setItem("startTime", getTokenStartTime());

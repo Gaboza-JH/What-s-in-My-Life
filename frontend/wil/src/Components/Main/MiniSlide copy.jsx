@@ -6,7 +6,6 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./MiniSlide.css";
 
-import { HiOutlineX } from "react-icons/hi";
 import { HiOutlineHeart } from "react-icons/hi";
 import "../Gallery/Gallery.css";
 
@@ -40,13 +39,10 @@ const MiniSlide = ({ user, token, userData }) => {
   const [postLike, setPostLike] = useState(null);
 
   const [isOpenPost, setIsOpenPost] = useState(false);
-  const [clickImg, setClickImg] = useState(null);
 
-  const openPostModalHandler = (e) => {
+  const openPostModalHandler = () => {
     console.log("게시물 modal 활성화 / 비활성");
     setIsOpenPost(!isOpenPost);
-    setClickImg(e.target);
-    console.log(e.target.src);
   };
 
   const clickHandler = async (e) => {
@@ -77,7 +73,7 @@ const MiniSlide = ({ user, token, userData }) => {
           likes.push(response.data);
         }
         setPostLike(likes);
-        // console.log(likes);
+        console.log(likes);
       } catch (e) {
         console.log("error : " + error);
         setError(e);
@@ -95,17 +91,6 @@ const MiniSlide = ({ user, token, userData }) => {
   if (error) return <div>전체 게시물 에러가 발생했습니다</div>;
   if (!allPost) return null;
   if (!postLike) return null;
-
-  const contentsDef = () => {
-    const contents = [];
-    for (let index = 0; index < Object.keys(allPost).length; index++) {
-      contents.push(
-        allPost[index].content
-      );
-    }
-    console.log(contents);
-    return contents;
-  };
 
   const rendering = () => {
     const result = [];
@@ -131,52 +116,47 @@ const MiniSlide = ({ user, token, userData }) => {
               </li>
             </ul>
           </div>
-        </div>
-      );
-    }
-    return result;
-  };
-
-  console.log(contentsDef());
-  console.log(rendering());
-
-  return (
-    <div>
-      {user ? (
-        <>
-          <div className="gallery-container">
-            <h1 className="main-h1">전체 게시물</h1>
-            <div className="gallery">{rendering()}</div>
-          </div>
           {/* modal 기능 */}
           {isOpenPost === true ? (
             <div className="backdrop">
               <div className="modal-view" onClick={(e) => e.stopPropagation()}>
-                <span onClick={openPostModalHandler} className="close-btn">
-                  <HiOutlineX />
-                </span>
                 <div className="desc">
                   <form className="modal-form">
-                    <h1 className="header-profile">게시물</h1>
-                    <div className="modal-gallery-container">
-                        <div className="gallery-item">
-                          <img src={clickImg.src} className="modal-gallery-image" alt="" />
-                        </div>
-                    </div>
-                    {/* <h3>{content.content}</h3> */}
+                    <h1 className="header-profile">게시물 출력</h1>
+                    <img
+                      src={
+                        "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
+                        allPost[index].imgList[0].file_name
+                      }
+                      className="gallery-image"
+                      alt=""
+                    />
+                    <span className="span-profile">좋아요 버튼</span>
                     <button
                       className="btn-save"
                       type="button"
                       onClick={clickHandler}
                     >
-                      ❤좋아요❤
+                      ❤❤
                     </button>
                   </form>
                 </div>
               </div>
             </div>
           ) : null}
-        </>
+        </div>
+      );
+    }
+    return result;
+  };
+
+  return (
+    <div>
+      {user ? (
+        <div className="gallery-container">
+          <h1 className="main-h1">전체 게시물</h1>
+          <div className="gallery">{rendering()}</div>
+        </div>
       ) : (
         // 비로그인 일 때 추천수 많은 게시물 뿌려줘야한다 아직 더미 데이터 이다
         <div className="parent">
