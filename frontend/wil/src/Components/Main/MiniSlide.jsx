@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from 'react'
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 // import ReactCardSlider from "react-card-slider-component";
 // import { Carousel } from "@trendyol-js/react-carousel";
 import Carousel from "react-multi-carousel";
@@ -30,29 +30,26 @@ const responsive = {
 const loginPost = [
   {
     url: "https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_960_720.jpg",
-  }
+  },
 ];
 
 const logoutPost = [
   {
     url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
-  }
+  },
 ];
 
 const MiniSlide = ({ user, token }) => {
-
   const [allPost, setAllPost] = useState(null);
   const [loading, setLoding] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchPost = async () => {
-    try{
+    try {
       setError(null);
       setAllPost(null);
       setLoding(true);
-      const response = await axios.get(
-        `http://localhost:8080/post/`
-      );
+      const response = await axios.get(`http://localhost:8080/post/`);
       console.log(response.data);
       setAllPost(response.data);
     } catch (e) {
@@ -60,21 +57,51 @@ const MiniSlide = ({ user, token }) => {
       setError(e);
     }
     setLoding(false);
-  }
+  };
 
   useEffect(() => {
     fetchPost();
   }, []);
 
-  if (loading) return <div>로딩 중....</div>; 
+  if (loading) return <div>로딩 중....</div>;
   if (error) return <div>전체 게시물 에러가 발생했습니다</div>;
   if (!allPost) return null;
+
+  const rendering = () => {
+    const result = [];
+    for (let index = 0; index < Object.keys(allPost).length; index++) {
+      result.push(
+        <div className="gallery-item" key={index} tabindex="0">
+          <img
+            src={
+              "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
+              allPost[index].imgList[0].file_name
+            }
+            className="gallery-image"
+            alt=""
+          />
+          {/* 좋아요 수 표시*/}
+          <div className="gallery-item-info">
+            <ul>
+              <li className="gallery-item-likes">
+                <span className="visually-hidden">Likes:</span>
+                {/* 게시물 마다 좋아요 눌러진 수 만큼 출력되야된다  */}
+                <HiOutlineHeart aria-hidden="true" /> 56
+              </li>
+            </ul>
+          </div>
+        </div>
+      );
+    }
+    return result;
+  };
 
   return (
     <div>
       {user ? (
         <div className="gallery-container">
           <h1 className="main-h1">전체 게시물</h1>
+<<<<<<< HEAD
 
           {/* for문이나 map으로 돌려서리스트 크기만큼 뿌려주면 된다 */}
           {/* content 출력 */}
@@ -82,6 +109,9 @@ const MiniSlide = ({ user, token }) => {
           {/* post 출력 */}
           <img src={"https://wil-s3.s3.ap-northeast-2.amazonaws.com/" + allPost[0].imgList[0].file_name} alt="" />
 
+=======
+          <div className="gallery">{rendering()}</div>
+>>>>>>> 0710d672ed6b7142b8ffe2d7737702b0f9d069df
         </div>
       ) : (
         // 비로그인 일 때 추천수 많은 게시물 뿌려줘야한다 아직 더미 데이터 이다

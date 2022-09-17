@@ -17,6 +17,8 @@ const ImageList = () => {
   const [me] = useContext(AuthContext);
   const elementRef = useRef(null);
 
+
+  // 이미지가 더 있는지 확인
   const loaderMoreImages = useCallback(() => {
     if (images.length === 0 || imageLoading) return;
     const lastImageId = images[images.length - 1]._id;

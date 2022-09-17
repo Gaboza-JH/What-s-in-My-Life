@@ -3,12 +3,11 @@ import { HiOutlineHeart } from "react-icons/hi";
 import "./Gallery.css";
 import axios from "axios";
 
-
+// 게시물 유무 판별 로직 추가
 const Gallery = (props) => {
-
-  const [postList, setPostListt] = useState();
+  const [postList, setPostList] = useState();
   const [error, setError] = useState(null);
-  
+
   const fetchPost = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -17,8 +16,7 @@ const Gallery = (props) => {
         `http://localhost:8080/post/user/${token}`
       );
 
-      setPostListt(postResponse.data);
-
+      setPostList(postResponse.data);
     } catch (e) {
       console.log("error : " + error);
       setError(e);
@@ -35,15 +33,41 @@ const Gallery = (props) => {
   console.log("postList -->");
   console.log(postList);
 
+  const rendering = () => {
+    const result = [];
+    for (let index = 0; index < Object.keys(postList).length; index++) {
+      result.push(
+        <div className="gallery-item" key={index} tabindex="0">
+          <img
+            src={
+              "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
+              postList[index].imgList[0].file_name
+            }
+            className="gallery-image"
+            alt=""
+          />
+          {/* 좋아요 수 표시*/}
+          <div className="gallery-item-info">
+            <ul>
+              <li className="gallery-item-likes">
+                <span className="visually-hidden">Likes:</span>
+                {/* 게시물 마다 좋아요 눌러진 수 만큼 출력되야된다  */}
+                <HiOutlineHeart aria-hidden="true" /> 56
+              </li>
+            </ul>
+          </div>
+        </div>
+      );
+    }
+    return result;
+  };
+
   return (
     <div>
-      {/* 메인 페이지와 똑같이 for문이나 map으로 모두 뿌려주면 될거 같다. */}
-      {/* 특정 유저가 작성한 content 출력 */}
-      <h1 className="profile-user-name">{postList[0].content}</h1>
-      {/* 특정 유저가 업로드한 post 출력 */}
-      <img src={"https://wil-s3.s3.ap-northeast-2.amazonaws.com/" + postList[0].imgList[0].file_name} alt="" />
+      <div className="gallery-container">
+        <div className="gallery">{rendering()}</div>
+      </div>
     </div>
-
   );
 };
 export default Gallery;
