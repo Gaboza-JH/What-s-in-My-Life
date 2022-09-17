@@ -101,7 +101,6 @@ const MiniSlide = ({ user, token }) => {
       {user ? (
         <div className="gallery-container">
           <h1 className="main-h1">전체 게시물</h1>
-<<<<<<< HEAD
 
           {/* for문이나 map으로 돌려서리스트 크기만큼 뿌려주면 된다 */}
           {/* content 출력 */}
@@ -109,9 +108,6 @@ const MiniSlide = ({ user, token }) => {
           {/* post 출력 */}
           <img src={"https://wil-s3.s3.ap-northeast-2.amazonaws.com/" + allPost[0].imgList[0].file_name} alt="" />
 
-=======
-          <div className="gallery">{rendering()}</div>
->>>>>>> 0710d672ed6b7142b8ffe2d7737702b0f9d069df
         </div>
       ) : (
         // 비로그인 일 때 추천수 많은 게시물 뿌려줘야한다 아직 더미 데이터 이다
