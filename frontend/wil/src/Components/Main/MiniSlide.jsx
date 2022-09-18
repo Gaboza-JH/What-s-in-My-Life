@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import ReactCardSlider from "react-card-slider-component";
-// import { Carousel } from "@trendyol-js/react-carousel";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./MiniSlide.css";
@@ -28,12 +26,6 @@ const responsive = {
   },
 };
 
-const logoutPost = [
-  {
-    url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
-  },
-];
-
 const MiniSlide = ({ user, token, userData }) => {
   const [allPost, setAllPost] = useState(null);
   const [topPost, setTopPost] = useState(null);
@@ -43,15 +35,17 @@ const MiniSlide = ({ user, token, userData }) => {
   const [isOpenPost, setIsOpenPost] = useState(false);
   const [clickImg, setClickImg] = useState(null);
   const [clickImgPostId, setClickImgPostId] = useState(null);
+  const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
 
   const openPostModalHandler = (e) => {
     console.log("게시물 modal 활성화 / 비활성");
     setIsOpenPost(!isOpenPost);
     console.log(e);
     console.log(e.target);
+    console.log(Number(e.target.id)-1);
     setClickImg(e.target);
     setClickImgPostId(e.target.id);
-
+    setModalClickImgPostId(Number(e.target.id)-1)
   };
 
   // postId DTO로 같이 보내줘야 함
@@ -241,13 +235,13 @@ const MiniSlide = ({ user, token, userData }) => {
                           <img src={clickImg.src} className="modal-gallery-image" alt="" />
                         </div>
                     </div>
-                    {/* <h3>{content.content}</h3> */}
+                    <h3 className="modal-content">{allPost[modalclickImgPostId].content}</h3>
                     <button
                       className="btn-save"
                       type="button"
                       onClick={clickHandler}
                     >
-                      ❤좋아요❤
+                      ❤ 좋아요 ❤
                     </button>
                   </form>
                 </div>
@@ -258,9 +252,7 @@ const MiniSlide = ({ user, token, userData }) => {
       ) : (
         // 비로그인 일 때 추천수 많은 게시물 뿌려줘야한다 아직 더미 데이터 이다
         <div className="parent">
-          <h1 className="main-h1">추천 게시물 또는 금주의 게시물</h1>
-          {/* <div className="gallery">{renderingTop()}</div> */}
-          
+          <h1 className="main-h1">🎉게시물 순위🎉</h1>
           <Carousel
             responsive={responsive}
             autoPlay={true}
@@ -273,8 +265,8 @@ const MiniSlide = ({ user, token, userData }) => {
             {renderingTop()}
             {/* {logoutPost.map((imageUrl, index) => {
               return (
-                <div className="slider" key={index}>
-                  <img src={imageUrl.url} alt="movie" />
+                <div className="slider" key={index} tabindex="0">
+                  <img src={imageUrl.props.children[0].props.src} alt="error" />
                 </div>
               );
             })} */}
