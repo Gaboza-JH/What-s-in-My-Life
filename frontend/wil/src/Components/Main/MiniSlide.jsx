@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import ReactCardSlider from "react-card-slider-component";
-// import { Carousel } from "@trendyol-js/react-carousel";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./MiniSlide.css";
@@ -27,12 +25,6 @@ const responsive = {
     slidesToSlide: 1, // optional, default to 1.
   },
 };
-
-const logoutPost = [
-  {
-    url: "https://cdn.pixabay.com/photo/2022/06/12/11/57/street-7257864_1280.jpg",
-  },
-];
 
 const MiniSlide = ({ user, token, userData }) => {
   const [allPost, setAllPost] = useState(null);
@@ -249,7 +241,7 @@ const MiniSlide = ({ user, token, userData }) => {
                       type="button"
                       onClick={clickHandler}
                     >
-                      ❤좋아요❤
+                      ❤ 좋아요 ❤
                     </button>
                   </form>
                 </div>

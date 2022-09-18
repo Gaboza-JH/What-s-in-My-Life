@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
-import "./Gallery.css";
-import axios from "axios";
 import { HiOutlineX } from "react-icons/hi";
+import axios from "axios";
+import "./Gallery.css";
 
 // 게시물 유무 판별 로직 추가 해야 함
 const Gallery = (props) => {
@@ -41,7 +41,6 @@ const Gallery = (props) => {
   // postId DTO로 같이 보내줘야 함
   const clickHandler = async (e) => {
     console.log("좋아요 버튼 클릭");
-
     const postId = Number(clickImgPostId);
     const likeDTO = {
       postId: postId,
