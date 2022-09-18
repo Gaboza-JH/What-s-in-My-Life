@@ -32,7 +32,7 @@ const Main = ({ user, token }) => {
     }
     setLoading(false);
   };
-  console.log("userdata"+userData);
+  console.log("userdata : "+ userData);
   
 
   // const topLikesPost = async () => {
@@ -46,8 +46,7 @@ const Main = ({ user, token }) => {
   //     setError(e);
   //   }
   // }
-  console.log("qqqqqqqqqqqqqqqq"+topLike);
-
+ 
   useEffect(() => {
     fetchUser();  
     

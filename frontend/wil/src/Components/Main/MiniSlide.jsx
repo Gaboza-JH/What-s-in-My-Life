@@ -79,6 +79,7 @@ const MiniSlide = ({ user, token, userData }) => {
       const topResponse = await axios.get(`http://localhost:8080/like/top_post/`);
       console.log(topResponse.data);
       setTopPost(topResponse.data);
+      console.log(topPostLike);
 
 
       // postIdIndexList 생성
@@ -118,6 +119,7 @@ const MiniSlide = ({ user, token, userData }) => {
         }
         setTopPostLike(topLikes);
         console.log(topLikes);
+        console.log(topPostLike);
       } catch (e) {
         console.log("error : " + error);
         setError(e);
@@ -171,7 +173,7 @@ const MiniSlide = ({ user, token, userData }) => {
               <li className="gallery-item-likes">
                 <span className="visually-hidden">Likes:</span>
                 {/* 게시물 마다 좋아요 눌러진 수 만큼 출력되야된다  */}
-                <HiOutlineHeart aria-hidden="true" /> {postLike[index]}
+                {/* <HiOutlineHeart aria-hidden="true" /> {postLike[index]} */}
               </li>
             </ul>
           </div>
