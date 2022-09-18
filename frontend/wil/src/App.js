@@ -96,7 +96,6 @@ const App = () => {
       user.booleanValue = false;
     }
   }
-
   // 더 구현해야 할 디테일들
   // 1. 다시 로그인 페이지로 가려고 하면 막아야 하는 로직
   // 로그인된 유저가 url로 login signup으로 접급하려고하면 logout도 진행해주세요 라는 경고창 띄우기

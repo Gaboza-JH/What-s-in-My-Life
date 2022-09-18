@@ -78,6 +78,7 @@ const MiniSlide = ({ user, token, userData }) => {
       const topResponse = await axios.get(`http://localhost:8080/like/top_post`);
       console.log(topResponse.data);
       setTopPost(topResponse.data);
+      console.log(topPostLike);
 
       // postIdIndexList 생성
       const postIdIndex = [];
@@ -239,6 +240,7 @@ const MiniSlide = ({ user, token, userData }) => {
               return (
                 <div className="slider" key={index} tabindex="0">
                   <img src={imageUrl.props.children[0].props.src} alt="error" />
+
                 </div>
               );
             })}

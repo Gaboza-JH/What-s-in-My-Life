@@ -24,7 +24,6 @@ const Main = ({ user, token }) => {
       setError(e);
     }
   };
-
   useEffect(() => {
     fetchUser();
   }, []);
