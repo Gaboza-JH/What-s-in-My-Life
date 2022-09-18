@@ -31,7 +31,7 @@ const MiniSlide = ({ user, token, userData }) => {
   const [topPost, setTopPost] = useState(null);
   const [error, setError] = useState(null);
   const [postLike, setPostLike] = useState(null);
-  const [topPostLike, setTopPostLike] = useState(null);
+  const [topPostLike, setTopPostLike] = useState([]);
   const [isOpenPost, setIsOpenPost] = useState(false);
   const [clickImg, setClickImg] = useState(null);
   const [clickImgPostId, setClickImgPostId] = useState(null);
@@ -104,7 +104,8 @@ const MiniSlide = ({ user, token, userData }) => {
           likes.push(response.data)
         }
         setPostLike(likes);
-        // console.log(likes);
+        console.log(likes);
+        console.log(postLike);
       } catch (e) {
         console.log("error : " + error);
         setError(e);
@@ -173,7 +174,7 @@ const MiniSlide = ({ user, token, userData }) => {
               <li className="gallery-item-likes">
                 <span className="visually-hidden">Likes:</span>
                 {/* 게시물 마다 좋아요 눌러진 수 만큼 출력되야된다  */}
-                {/* <HiOutlineHeart aria-hidden="true" /> {postLike[index]} */}
+                <HiOutlineHeart aria-hidden="true" /> {postLike[index]}
               </li>
             </ul>
           </div>
@@ -204,7 +205,7 @@ const MiniSlide = ({ user, token, userData }) => {
               <li className="gallery-item-likes">
                 <span className="visually-hidden">Likes:</span>
                 {/* 게시물 마다 좋아요 눌러진 수 만큼 출력되야된다  */}
-                {/* <HiOutlineHeart aria-hidden="true" /> {topPostLike[index]} */}
+                <HiOutlineHeart aria-hidden="true" /> {topPostLike[index]}
               </li>
             </ul>
           </div>
@@ -268,6 +269,7 @@ const MiniSlide = ({ user, token, userData }) => {
               return (
                 <div className="slider" key={index} tabindex="0">
                   <img src={imageUrl.props.children[0].props.src} alt="error" />
+
                 </div>
               );
             })}

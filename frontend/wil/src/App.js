@@ -98,53 +98,53 @@ const App = () => {
     localStorage.setItem("token", getToken());
     localStorage.setItem("expiredTime", getExpiredTime());
     localStorage.setItem("startTime", getTokenStartTime());
-  }
-
-  time.start = localStorage.getItem("startTime");
-  time.expiredTime = localStorage.getItem("expiredTime");
-
-  const now_sec = time.expiredTime / 1000;
-  let hour = now_sec / 3600;
-  let min = (now_sec % 3600) / 60;
-  let sec = now_sec % 60;
-
-  // hour = String(hour).padStart(2, '0');
-  // min = String(min).padStart(2, '0');
-  // sec = String(sec).padStart(2, '0');
-  console.log(now_sec);
-  console.log(hour);
-  console.log(min);
-  console.log(sec);
-
-  // 2022-09-17%2015:32:36
-  console.log(time.start.substring(13, 21));
-  console.log(time.start.split('%')[0] + time.start.substring(13, 21));
-  const date = { start : new Date(time.start.split('%')[0] + "T" + time.start.substring(13, 21))};
-  console.log("StartDate");
-  console.log(date.start);
-  
-  let endDate = new Date(date.start);
-  endDate.setHours(endDate.getHours() + hour);
-  endDate.setMinutes(endDate.getMinutes() + min);
-  endDate.setSeconds(endDate.getSeconds() + sec);
-  console.log("EndDate");
-  console.log(endDate);
- 
 
 
-  // 문제점 : 현재 시간이 계속 변함 --> 백엔드에서 보내주는걸로
-  if (localStorage.length == 3) {
-    user.booleanValue = true;
-    // const remaingTime = calculateTime(+ Number(getExpiredTime()));
-    if (new Date().getTime()  >= endDate) { 
-      localStorage.removeItem('token');
-      localStorage.removeItem('expiredTime');
+    time.start = localStorage.getItem("startTime");
+    time.expiredTime = localStorage.getItem("expiredTime");
+
+    const now_sec = time.expiredTime / 1000;
+    let hour = now_sec / 3600;
+    let min = (now_sec % 3600) / 60;
+    let sec = now_sec % 60;
+
+    // hour = String(hour).padStart(2, '0');
+    // min = String(min).padStart(2, '0');
+    // sec = String(sec).padStart(2, '0');
+    console.log(now_sec);
+    console.log(hour);
+    console.log(min);
+    console.log(sec);
+
+    // 2022-09-17%2015:32:36
+    // console.log(time.start.substring(13, 21));
+    // console.log(time.start.split('%')[0] + time.start.substring(13, 21));
+    const date = { start: new Date(time.start.split('%')[0] + "T" + time.start.substring(13, 21)) };
+    console.log("StartDate");
+    console.log(date.start);
+
+    let endDate = new Date(date.start);
+    endDate.setHours(endDate.getHours() + hour);
+    endDate.setMinutes(endDate.getMinutes() + min);
+    endDate.setSeconds(endDate.getSeconds() + sec);
+    console.log("EndDate");
+    console.log(endDate);
+
+
+
+    // 문제점 : 현재 시간이 계속 변함 --> 백엔드에서 보내주는걸로
+    if (localStorage.length == 3) {
+      user.booleanValue = true;
+      // const remaingTime = calculateTime(+ Number(getExpiredTime()));
+      if (new Date().getTime() >= endDate) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('expiredTime');
+        user.booleanValue = false;
+      }
+    } else {
       user.booleanValue = false;
     }
-  } else {
-    user.booleanValue = false;
   }
-
   // 더 구현해야 할 디테일들
   // 1. 다시 로그인 페이지로 가려고 하면 막아야 하는 로직
   // 2. accesstoken 만료 시간도 서버로부터 받아와서 그 시간 내에만 true 값으로 되도록

@@ -8,7 +8,7 @@ const Main = ({ user, token }) => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [topLike, setTopLike] = useState();
+  const [topLike, setTopLike] = useState([]);
 
  
   const fetchUser = async () => {
@@ -55,6 +55,7 @@ const Main = ({ user, token }) => {
   if (loading) return <div>로딩중..</div>; 
   if (error) return <div>에러가 발생했습니다</div>;
   if (!userData) return null;
+  if (!topLike) return null;
   
   return (
     <div>

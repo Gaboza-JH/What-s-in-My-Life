@@ -100,5 +100,7 @@ public class LikeController {
 
     //인기 게시물 Top 5 조회
     @GetMapping("/like/top_post")
-    public List<PostDTO> topLike(){ return postService.topLike();}
+    public List<PostDTO> topLike(){
+        return postService.topLike();
+    }
 }
