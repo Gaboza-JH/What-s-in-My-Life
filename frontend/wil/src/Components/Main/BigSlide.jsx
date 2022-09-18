@@ -17,22 +17,22 @@ const BigSlide = ({ user }) => {
             <img className="d-block w-100" src={catPunch} alt="Third slide" />
           </Carousel.Item> */}
 
-          <Carousel.Item>
-            <img className="d-block w-100" src={catPunch} alt="First slide" />
+          <Carousel.Item className="bigslide-container">
+            <img className="d-block" src={catPunch} alt="First slide" />
             <Carousel.Caption>
               <h3>catPunch</h3>
             </Carousel.Caption>
           </Carousel.Item>
 
           <Carousel.Item>
-          <img className="d-block w-100" src={kimchiPancake} alt="Second slide" />
+          <img className="d-block" src={kimchiPancake} alt="Second slide" />
             <Carousel.Caption>
               <h3>kimchiPancake</h3>
             </Carousel.Caption>
           </Carousel.Item>
 
           <Carousel.Item>
-          <img className="d-block w-100" src={cuteDog} alt="Third slide" />
+          <img className="d-block" src={cuteDog} alt="Third slide" />
             <Carousel.Caption>
               <h3>cuteDog</h3>
             </Carousel.Caption>

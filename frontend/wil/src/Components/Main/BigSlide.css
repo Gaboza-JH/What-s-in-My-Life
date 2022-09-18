@@ -2,3 +2,14 @@
     font-family: 'Fredericka the Great', cursive;
     text-align: right;
 }
+
+.bigslide-container{
+}
+
+.d-block{
+    width: 800px;
+    height: 600px;
+    margin-top: 100px;
+    margin:0 auto;
+    border-radius: 10px;
+}
