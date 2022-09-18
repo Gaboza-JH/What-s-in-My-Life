@@ -63,6 +63,41 @@ public class TokenProvider {
 //                .build();
     }
 
+    public String createTokenLocal(Integer userId) {
+
+        // Access Token 생성
+        Date accessTokenExpiresIn = new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_TOKEN_EXPIRE_TIME);
+
+        String accessToken = JWT.create()
+                .withSubject(Integer.toString(userId)) // payload "sub": "userId integer 값"
+                .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_TOKEN_EXPIRE_TIME)) // payload "exp": 1516239022 (예시)
+                .sign(Algorithm.HMAC512(JwtProperties.SECRET)); // header "alg": "HS512"
+
+//        String accessToken = JWT.create()
+//                .withSubject(principal.getUser().getUsername()) // payload "sub": "name"
+//                .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_TOKEN_EXPIRE_TIME)) // payload "exp": 1516239022 (예시)
+//                .withClaim("auth", principal.getUser().getRole()) // payload "auth": "ROLE_USER"
+//                .withClaim("id", principal.getUser().getId())
+//                .withClaim("nickname", principal.getUser().getNickname())
+//                .sign(Algorithm.HMAC512(JwtProperties.SECRET)); // header "alg": "HS512"
+
+        System.out.println("Access Token : " + accessToken);
+
+        // Refresh Token 생성
+        String refreshToken = JWT.create()
+                .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.REFRESH_TOKEN_EXPIRE_TIME))
+                .sign(Algorithm.HMAC512(JwtProperties.SECRET));
+
+        return accessToken;
+
+//        return TokenDto.builder()
+//                .grantType(JwtProperties.TOKEN_PREFIX)
+//                .accessToken(accessToken)
+//                .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
+//                .refreshToken(refreshToken)
+//                .build();
+    }
+
     // JWT 토큰 정보 확인
     public Integer getUserIdFromToken(String token) {
         Claims claims = Jwts.parserBuilder()

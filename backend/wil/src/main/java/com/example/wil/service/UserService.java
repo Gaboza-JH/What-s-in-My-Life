@@ -5,16 +5,21 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.example.wil.DTO.UserDTO;
 import com.example.wil.DTO.UserNicknameRequestDto;
 import com.example.wil.config.jwt.JwtProperties;
+import com.example.wil.config.jwt.TokenProvider;
 import com.example.wil.model.Post;
 import com.example.wil.model.User;
 import com.example.wil.repository.PostRepository;
 import com.example.wil.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,8 +36,11 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private TokenProvider tokenProvider;
+
     // 회원가입
-    public UserDTO signUp(UserDTO userDTO){
+    public String signUp(UserDTO userDTO){
         User user = transformUser(userDTO);
         user.setRole("ROLE_USER");
         String rawPassword = user.getPassword();
@@ -40,7 +48,28 @@ public class UserService {
         user.setPassword(encPassword);
         user = userRepository.save(user);
         System.out.println("user 회원 가입 성공");
-        return transformUserDTO(user);
+        String url = makeRedirectUrl(tokenProvider.createTokenLocal(user.getId()), JwtProperties.ACCESS_TOKEN_EXPIRE_TIME);
+
+        System.out.println("local login url : " + url);
+        return url;
+    }
+
+    private String makeRedirectUrl(String token, Long expiredTime) {
+        System.out.println("localLogin makeRedirectUrl() start and return");
+
+        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        Date time = new Date();
+        String startTime = format1.format(time);
+        System.out.println(startTime);
+
+        String redirectUrl = UriComponentsBuilder.fromHttpUrl("http://localhost:3000/")
+                .queryParam("token", token)
+                .queryParam("expiredTime", expiredTime) // 만료 시간도 같이 보내줌
+                .queryParam("startTime", startTime)
+                .build().toUriString();
+
+        System.out.println("redirectUrl : " + redirectUrl);
+        return redirectUrl;
     }
 
     public List<UserDTO> findAllUsers() {

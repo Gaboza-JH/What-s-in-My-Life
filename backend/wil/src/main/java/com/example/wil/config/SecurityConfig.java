@@ -64,7 +64,6 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
-                .formLogin().disable()
                 .httpBasic().disable();
         http
                 // AuthenticationManager를 통해서 로그인을 진행하기 때문에 꼭 파라미터로 넣어줘야 함
@@ -96,6 +95,7 @@ public class SecurityConfig {
                 .and()
                 .successHandler(oAuth2AuthenticationSuccessHandler) // 인증 성공 시 Handler
                 .failureHandler(oAuth2AuthenticationFailureHandler); // 인증 실패 시 Handler
+
 
 //                .antMatchers("/users/**", "/post/**")
 //                .access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")

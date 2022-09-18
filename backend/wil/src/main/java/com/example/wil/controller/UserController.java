@@ -4,16 +4,19 @@ import com.example.wil.DTO.UserDTO;
 import com.example.wil.DTO.UserNicknameRequestDto;
 import com.example.wil.config.jwt.JwtProperties;
 import com.example.wil.config.jwt.TokenProvider;
+import com.example.wil.config.oauth.OAuth2AuthenticationSuccessHandler;
 import com.example.wil.exception.OAuth2AuthenticationProcessingException;
 import com.example.wil.model.User;
 import com.example.wil.service.UserService;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.SignatureException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -24,9 +27,13 @@ public class UserController {
     @Autowired
     private TokenProvider tokenProvider;
 
+    @Autowired
+    private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+
     @PostMapping("/users")
-    public UserDTO signUp(@RequestBody UserDTO userDTO) {
-        return userService.signUp(userDTO);
+    public String signUp(@RequestBody UserDTO userDTO) {
+        String redirectUrl = userService.signUp(userDTO);
+        return "redirect:" + redirectUrl;
     }
 
     @GetMapping("/users")
