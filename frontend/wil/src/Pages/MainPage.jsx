@@ -8,6 +8,7 @@ const Main = ({ user, token }) => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [topLike, setTopLike] = useState();
 
  
   const fetchUser = async () => {
@@ -19,15 +20,37 @@ const Main = ({ user, token }) => {
         `http://localhost:8080/users/${token}`
       );
       setUserData(response.data);
+
+      const topResponse = await axios.get(`http://localhost:8080/like/top_post/`);
+      console.log(topResponse.data);
+      setTopLike(topResponse.data);
+
+
     } catch (e) {
       console.log("error"+error);
       setError(e);
     }
     setLoading(false);
   };
+  console.log("userdata"+userData);
+  
+
+  // const topLikesPost = async () => {
+  //   try{
+  //     const topResponse = await axios.get(`http://localhost:8080/like/top_post/`);
+  //     console.log(topResponse.data);
+  //     setTopLike(topResponse.data);
+      
+  //   } catch (e) {
+  //     console.log("error"+error);
+  //     setError(e);
+  //   }
+  // }
+  console.log("qqqqqqqqqqqqqqqq"+topLike);
 
   useEffect(() => {
     fetchUser();  
+    
   }, []);
 
   if (loading) return <div>로딩중..</div>; 
@@ -36,7 +59,7 @@ const Main = ({ user, token }) => {
   
   return (
     <div>
-        <BigSlide  user={user} token={token} userData={userData} />
+        <BigSlide  user={user} token={token} userData={userData} topLikesPost={topLike ? topLike : null}/>
         <MiniSlide user={user} token={token} userData={userData} />
     </div>
   );

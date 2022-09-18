@@ -8,6 +8,7 @@
     max-width: 100%;
     min-height: 480px;
     padding: 0 5rem 0 5rem;
+    gap: 12px;
   }
 
   .modal-gallery-container {

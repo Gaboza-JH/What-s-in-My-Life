@@ -259,8 +259,9 @@ const MiniSlide = ({ user, token, userData }) => {
         // 비로그인 일 때 추천수 많은 게시물 뿌려줘야한다 아직 더미 데이터 이다
         <div className="parent">
           <h1 className="main-h1">추천 게시물 또는 금주의 게시물</h1>
-          <div className="gallery">{renderingTop()}</div>
-          {/* <Carousel
+          {/* <div className="gallery">{renderingTop()}</div> */}
+          
+          <Carousel
             responsive={responsive}
             autoPlay={true}
             swipeable={true}
@@ -269,14 +270,15 @@ const MiniSlide = ({ user, token, userData }) => {
             infinite={true}
             partialVisible={false}
           >
-            {logoutPost.map((imageUrl, index) => {
+            {renderingTop()}
+            {/* {logoutPost.map((imageUrl, index) => {
               return (
                 <div className="slider" key={index}>
                   <img src={imageUrl.url} alt="movie" />
                 </div>
               );
-            })}
-          </Carousel> */}
+            })} */}
+          </Carousel>
         </div>
       )}
     </div>
