@@ -1,68 +1,49 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import BigSlide from '../Components/Main/BigSlide'
-import MiniSlide from '../Components/Main/MiniSlide'
+import BigSlide from "../Components/Main/BigSlide";
+import MiniSlide from "../Components/Main/MiniSlide";
 
 const Main = ({ user, token }) => {
-
   const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [topLike, setTopLike] = useState();
+  const [topLikesPost, setTopLikePost] = useState(null);
 
- 
   const fetchUser = async () => {
-    try{
-      setError(null);
-      setUserData(null);
-      setLoading(true);
-      const response = await axios.get(
-        `http://localhost:8080/users/${token}`
-      );
+    try {
+      // 특정 유저 정보 조회
+      const response = await axios.get(`http://localhost:8080/users/${token}`);
       setUserData(response.data);
 
-      const topResponse = await axios.get(`http://localhost:8080/like/top_post/`);
-      console.log(topResponse.data);
-      setTopLike(topResponse.data);
-
-
+      // 인기 게시물 5개 조회
+      const topResponse = await axios.get(
+        `http://localhost:8080/like/top_post`
+      );
+      setTopLikePost(topResponse.data);
     } catch (e) {
-      console.log("error"+error);
+      console.log("error" + error);
       setError(e);
     }
-    setLoading(false);
   };
-  console.log("userdata"+userData);
-  
-
-  // const topLikesPost = async () => {
-  //   try{
-  //     const topResponse = await axios.get(`http://localhost:8080/like/top_post/`);
-  //     console.log(topResponse.data);
-  //     setTopLike(topResponse.data);
-      
-  //   } catch (e) {
-  //     console.log("error"+error);
-  //     setError(e);
-  //   }
-  // }
-  console.log("qqqqqqqqqqqqqqqq"+topLike);
 
   useEffect(() => {
-    fetchUser();  
-    
+    fetchUser();
   }, []);
 
-  if (loading) return <div>로딩중..</div>; 
   if (error) return <div>에러가 발생했습니다</div>;
   if (!userData) return null;
-  
+  if (!topLikesPost) return null;
+
   return (
     <div>
-        <BigSlide  user={user} token={token} userData={userData} topLikesPost={topLike ? topLike : null}/>
-        <MiniSlide user={user} token={token} userData={userData} />
+      <BigSlide
+        user={user}
+        token={token}
+        userData={userData}
+        topLikesPost={topLikesPost}
+      />
+      <MiniSlide user={user} token={token} userData={userData} />
     </div>
   );
 };
 
-export default Main
+export default Main;

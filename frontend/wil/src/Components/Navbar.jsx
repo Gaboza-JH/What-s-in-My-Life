@@ -1,16 +1,9 @@
-// import React from "react";
-// import Container from "react-bootstrap/Container";
-// import Nav from "react-bootstrap/Nav";
-// import Navbar from "react-bootstrap/Navbar";
-
 import { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
-import "./Navbar.css";
 import WilLogo from "../static/img/WILlogo.png";
+import "./Navbar.css";
 
-
-// user 변수 명으로 App.jsx에서 user를 내려받음
 const Menubar = ({ user }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
@@ -19,8 +12,8 @@ const Menubar = ({ user }) => {
   };
 
   const handleOnClick = (e) => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiredTime');
+    localStorage.removeItem("token");
+    localStorage.removeItem("expiredTime");
     user = false;
   };
 
@@ -40,7 +33,7 @@ const Menubar = ({ user }) => {
               </a>
               <a href="/mypage" className="nav-link">
                 MyPage
-              </a> 
+              </a>
               <a href="/" className="nav-link" onClick={handleOnClick}>
                 Logout
               </a>

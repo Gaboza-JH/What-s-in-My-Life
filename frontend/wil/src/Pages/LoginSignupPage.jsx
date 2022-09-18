@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import SignUp from "../Components/Sign/SignUp";
 import SignIn from "../Components/Sign/SignIn";
 import OverLay from "../Components/Sign/OverLay";
-import "../Components/Sign/Sign.css"
+import "../Components/Sign/Sign.css";
 
 const LoginSignupPage = () => {
   const [toggleClassName, setClassName] = useState("container");

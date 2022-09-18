@@ -192,7 +192,7 @@ public class PostService {
             postList.add(post);
 
         }
-        System.out.println(postList.get(1).getPostId());
+//        System.out.println(postList.get(1).getPostId());
         return transformPostDTOList(postList);
     }
 

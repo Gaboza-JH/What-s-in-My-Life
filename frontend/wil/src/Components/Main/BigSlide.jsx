@@ -1,24 +1,15 @@
-import React, { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import introduction from "../../static/gif/wil.gif";
 import "./BigSlide.css";
-import axios from "axios";
 
-//const BigSlide = ({ user }) => {
+
 const BigSlide = (props) => {
-  console.log(props.user);
-  const [topLikes, setTopLikes] = useState([]);
 
-  console.log("toplike1 ? " + props.topLikesPost);
-  console.log("toplike2 ? " + Object.keys(props.topLikesPost).length);
-  //console.log("toplike==== ? "+props.topLikesPost[0]);
+  // 추천수 많은 5개 게시물 조회 및 리스트에 추가
+  const topLikes = []
   if (Object.keys(props.topLikesPost).length != null) {
     try {
-      for (
-        let index = 0;
-        index < Object.keys(props.topLikesPost).length;
-        index++
-      ) {
+      for ( let index = 0; index < Object.keys(props.topLikesPost).length; index++) {
         topLikes.push(
           <Carousel.Item>
             <img

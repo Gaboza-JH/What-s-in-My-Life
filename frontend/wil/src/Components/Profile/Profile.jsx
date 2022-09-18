@@ -7,52 +7,53 @@ import { HiOutlineX } from "react-icons/hi";
 import profileImg from "../../static/img/profile_default.png";
 import PostUpload from "../S3/PostUpload";
 import "./Profile.css";
-import axios from 'axios';
+import axios from "axios";
 
 const Profile = (props) => {
   const [isOpenProfile, setIsOpenProfile] = useState(false);
   const [isOpenPostUpload, setIsOpenPostUpload] = useState(false);
   const [likes, setLikes] = useState(0);
-  
-  useEffect(()=>{
-    const token = localStorage.getItem("token");
-    axios.get(`http://localhost:8080/like/user/${token}`)
-    .then(response => setLikes(response.data))
-  })
 
+  // 유저의 게시물당  좋아요 수 조회
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios
+      .get(`http://localhost:8080/like/user/${token}`)
+      .then((response) => setLikes(response.data));
+  });
+
+  // ProfileModal
   const openProfileModalHandler = () => {
     setIsOpenProfile(!isOpenProfile);
   };
+  // UploadModal
   const openPostUploadModalHandler = () => {
     setIsOpenPostUpload(!isOpenPostUpload);
   };
-  
 
+  // 닉네임 초기화
   const [inputs, setInputs] = useState({
-    nickname: ""
+    nickname: "",
   });
 
+  // 입력된 닉네임값을 받아오는 이벤트 핸들러
   const handleOnChange = (e) => {
     setInputs({
-      ...inputs, 
-      [e.target.name]: e.target.value
+      ...inputs,
+      [e.target.name]: e.target.value,
     });
     console.log(e.target.value);
   };
 
+  // 닉네임 수정
   const clickHandler = async (e) => {
     const token = localStorage.getItem("token");
-    
-    console.log(inputs);
-    console.log(e.target.value);
-
     const response = await axios.put(
-      `http://localhost:8080/users/${token}`, inputs
+      `http://localhost:8080/users/${token}`,
+      inputs
     );
     console.log("put request의 response : " + response);
-  }
-
-
+  };
 
   return (
     <div className="profile-header">
@@ -60,7 +61,6 @@ const Profile = (props) => {
         <div className="profile-image">
           <img src={profileImg} alt="" />
         </div>
-        {/* <S3upload /> */}
 
         <div className="profile-user-settings">
           <h1 className="profile-user-name">{props.user.nickname}</h1>
@@ -82,8 +82,20 @@ const Profile = (props) => {
                     <span className="span-profile">
                       Please modify your profile as you please.
                     </span>
-                    <input className="profile-input" type="text" placeholder="Nickname" name="nickname" onChange={handleOnChange}/>
-                    <button type="button" className="btn-save" onClick={clickHandler}>Save</button>
+                    <input
+                      className="profile-input"
+                      type="text"
+                      placeholder="Nickname"
+                      name="nickname"
+                      onChange={handleOnChange}
+                    />
+                    <button
+                      type="button"
+                      className="btn-save"
+                      onClick={clickHandler}
+                    >
+                      Save
+                    </button>
                   </form>
                 </div>
               </div>
@@ -95,7 +107,10 @@ const Profile = (props) => {
           <ul>
             <li>
               <HiOutlineViewGrid />
-              <span className="profile-stat-count"> {props.user.postIdList.length}</span>
+              <span className="profile-stat-count">
+                {" "}
+                {props.user.postIdList.length}
+              </span>
             </li>
             <li>
               <HiOutlineHeart />
@@ -125,7 +140,6 @@ const Profile = (props) => {
                         <h1 className="header-upload">Upload Post</h1>
                         <span>Post a picture or write down what you want.</span>
                         <PostUpload />
-                        {/* <button className="btn-save">Save</button> */}
                       </form>
                     </div>
                   </div>
