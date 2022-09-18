@@ -37,7 +37,7 @@ const SignUp = () => {
           </a>
         </div>
         <span className="spansignup">or use your email for registration</span>
-        <div onChange={handleOnChange}>
+        <div>
           <input className="interval-signup" type="text" placeholder="Name" />
           <input className="interval-signup" type="text" placeholder="Nickname" />
           <input className="interval-signup" type="email" placeholder="Email" />

@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import introduction from "../../static/gif/wil.gif";
-import catPunch from "../../static/gif/cat_punch.gif";
-import cuteDog from "../../static/gif/dog_cute.gif";
-import kimchiPancake from "../../static/gif/Kimchi_pancake.gif";
 import "./BigSlide.css";
 import axios from "axios";
 
@@ -25,16 +22,13 @@ const BigSlide = (props) => {
         topLikes.push(
           <Carousel.Item>
             <img
-              className="d-block w-100"
+              className="d-block"
               src={
                 "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
                 props.topLikesPost[index].imgList[0].file_name
               }
               alt="First slide"
             />
-            <Carousel.Caption>
-              <h3>catPunch</h3>
-            </Carousel.Caption>
           </Carousel.Item>
         );
       }
