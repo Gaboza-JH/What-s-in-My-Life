@@ -13,14 +13,29 @@ const Gallery = (props) => {
   const [isOpenPost, setIsOpenPost] = useState(false);
   const [clickImg, setClickImg] = useState(null);
   const [clickImgPostId, setClickImgPostId] = useState(null);
+  const [allPost, setAllPost] = useState(null);
+  const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
 
   const openPostModalHandler = (e) => {
     console.log("게시물 modal 활성화 / 비활성");
     setIsOpenPost(!isOpenPost);
     console.log(e);
     console.log(e.target);
+    console.log(Number(e.target.id)-1);
     setClickImg(e.target);
     setClickImgPostId(e.target.id);
+    setModalClickImgPostId(Number(e.target.id)-1)
+  };
+
+  // 전체 게시물 조회
+  const allFetchPost = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/post/`);
+      setAllPost(response.data);
+    } catch (e) {
+      console.log("error : " + error);
+      setError(e);
+    }
   };
 
   // postId DTO로 같이 보내줘야 함
@@ -76,6 +91,7 @@ const Gallery = (props) => {
   };
 
   useEffect(() => {
+    allFetchPost();
     fetchPost();
     fetchPostLike();
   }, []);
@@ -119,6 +135,9 @@ const Gallery = (props) => {
     }
     return result;
   };
+
+  console.log(postList)
+
   return (
     <>
           <div className="gallery-container">
@@ -140,7 +159,7 @@ const Gallery = (props) => {
                           <img src={clickImg.src} className="modal-gallery-image" alt="" />
                         </div>
                     </div>
-                    {/* <h3>{content.content}</h3> */}
+                    <h3 className="modal-content">{allPost[modalclickImgPostId].content}</h3>
                     <button
                       className="btn-save"
                       type="button"

@@ -85,6 +85,12 @@
     object-fit: cover;
   }
 
+  .modal-content{
+    margin-top: 15px;
+    text-shadow:2px 2px gray;
+    color:rgb(35, 35, 35);
+  }
+
   @supports (display: grid) {
 
     .gallery {

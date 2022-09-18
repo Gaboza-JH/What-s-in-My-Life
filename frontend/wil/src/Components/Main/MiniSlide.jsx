@@ -43,15 +43,17 @@ const MiniSlide = ({ user, token, userData }) => {
   const [isOpenPost, setIsOpenPost] = useState(false);
   const [clickImg, setClickImg] = useState(null);
   const [clickImgPostId, setClickImgPostId] = useState(null);
+  const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
 
   const openPostModalHandler = (e) => {
     console.log("게시물 modal 활성화 / 비활성");
     setIsOpenPost(!isOpenPost);
     console.log(e);
     console.log(e.target);
+    console.log(Number(e.target.id)-1);
     setClickImg(e.target);
     setClickImgPostId(e.target.id);
-
+    setModalClickImgPostId(Number(e.target.id)-1)
   };
 
   // postId DTO로 같이 보내줘야 함
@@ -241,7 +243,7 @@ const MiniSlide = ({ user, token, userData }) => {
                           <img src={clickImg.src} className="modal-gallery-image" alt="" />
                         </div>
                     </div>
-                    {/* <h3>{content.content}</h3> */}
+                    <h3 className="modal-content">{allPost[modalclickImgPostId].content}</h3>
                     <button
                       className="btn-save"
                       type="button"
@@ -258,9 +260,8 @@ const MiniSlide = ({ user, token, userData }) => {
       ) : (
         // 비로그인 일 때 추천수 많은 게시물 뿌려줘야한다 아직 더미 데이터 이다
         <div className="parent">
-          <h1 className="main-h1">추천 게시물 또는 금주의 게시물</h1>
-          <div className="gallery">{renderingTop()}</div>
-          {/* <Carousel
+          <h1 className="main-h1">🎉게시물 순위🎉</h1>
+          <Carousel
             responsive={responsive}
             autoPlay={true}
             swipeable={true}
@@ -269,14 +270,14 @@ const MiniSlide = ({ user, token, userData }) => {
             infinite={true}
             partialVisible={false}
           >
-            {logoutPost.map((imageUrl, index) => {
+            {renderingTop().map((imageUrl, index) => {
               return (
-                <div className="slider" key={index}>
-                  <img src={imageUrl.url} alt="movie" />
+                <div className="slider" key={index} tabindex="0">
+                  <img src={imageUrl.props.children[0].props.src} alt="error" />
                 </div>
               );
             })}
-          </Carousel> */}
+          </Carousel>
         </div>
       )}
     </div>
