@@ -13,7 +13,7 @@ const GOOGLE_LOGIN_URL =
 const SignIn = () => {
   return (
     <div className=" form-container sign-in-container">
-      <form className="sign-form">
+    <form className="sign-form">
         <h1 className="header-signin">Sign in</h1>
         <div className="social-container">
           <a className="sign-a" href={GOOGLE_LOGIN_URL}>
