@@ -64,19 +64,21 @@ const App = () => {
     localStorage.setItem("token", getToken());
     localStorage.setItem("expiredTime", getExpiredTime());
     localStorage.setItem("startTime", getTokenStartTime());
+  }
 
-    time.start = localStorage.getItem("startTime");
-    time.expiredTime = localStorage.getItem("expiredTime");
+  time.start = localStorage.getItem("startTime");
+  time.expiredTime = localStorage.getItem("expiredTime");
 
-    const now_sec = time.expiredTime / 1000;
-    let hour = now_sec / 3600;
-    let min = (now_sec % 3600) / 60;
-    let sec = now_sec % 60;
+  const now_sec = time.expiredTime / 1000;
+  let hour = now_sec / 3600;
+  let min = (now_sec % 3600) / 60;
+  let sec = now_sec % 60;
 
+  if (time.start != null) {
     const date = {
       start: new Date(
         time.start.split("%")[0] + "T" + time.start.substring(13, 21)
-      ),
+      )
     };
 
     let endDate = new Date(date.start);
