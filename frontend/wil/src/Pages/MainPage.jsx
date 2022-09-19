@@ -11,12 +11,12 @@ const Main = ({ user, token }) => {
   const fetchUser = async () => {
     try {
       // 특정 유저 정보 조회
-      const response = await axios.get(`http://localhost:8080/users/${token}`);
+      const response = await axios.get(`http://3.37.184.148:8080/users/${token}`);
       setUserData(response.data);
 
       // 인기 게시물 5개 조회
       const topResponse = await axios.get(
-        `http://localhost:8080/like/top_post`
+        `http://3.37.184.148:8080/like/top_post`
       );
       setTopLikePost(topResponse.data);
     } catch (e) {

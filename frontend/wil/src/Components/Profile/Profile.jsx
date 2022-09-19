@@ -18,7 +18,7 @@ const Profile = (props) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`http://localhost:8080/like/user/${token}`)
+      .get(`http://3.37.184.148:8080/like/user/${token}`)
       .then((response) => setLikes(response.data));
   });
 
@@ -49,7 +49,7 @@ const Profile = (props) => {
   const clickHandler = async (e) => {
     const token = localStorage.getItem("token");
     const response = await axios.put(
-      `http://localhost:8080/users/${token}`,
+      `http://3.37.184.148:8080/users/${token}`,
       inputs
     );
     console.log("put request의 response : " + response);

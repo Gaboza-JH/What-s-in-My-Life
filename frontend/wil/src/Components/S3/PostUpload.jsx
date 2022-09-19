@@ -63,7 +63,7 @@ function PostUpload() {
       console.log(PostDTO);
 
       const res = await axios.post(
-        `http://localhost:8080/post/${token}`,
+        `http://3.37.184.148:8080/post/${token}`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

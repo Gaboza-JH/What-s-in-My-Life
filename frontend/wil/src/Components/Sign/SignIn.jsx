@@ -4,11 +4,11 @@ import { SiKakaotalk } from "react-icons/si";
 import { SiNaver } from "react-icons/si";
 
 const NAVER_LOGIN_URL =
-  "http://localhost:8080/oauth2/authorization/naver?redirect_uri=http://localhost:8080/oauth2/redirect_front";
+  "http://3.37.184.148:8080/oauth2/authorization/naver?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 const KAKAO_LOGIN_URL =
-  "http://localhost:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:8080/oauth2/redirect_front";
+  "http://3.37.184.148:8080/oauth2/authorization/kakao?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 const GOOGLE_LOGIN_URL =
-  "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:8080/oauth2/redirect_front";
+  "http://3.37.184.148:8080/oauth2/authorization/google?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 
 const SignIn = () => {
   return (
