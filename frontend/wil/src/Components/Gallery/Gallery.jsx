@@ -16,15 +16,19 @@ const Gallery = (props) => {
   const [allPost, setAllPost] = useState(null);
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
 
+  // modal 활성화 되었을 때 이벤트핸들러
   const openPostModalHandler = (e) => {
     console.log("게시물 modal 활성화 / 비활성");
     setIsOpenPost(!isOpenPost);
     console.log(e);
     console.log(e.target);
-    console.log(Number(e.target.id)-1);
+    console.log(Number(e.target.id) - 1);
+    // 이미지 클릭
     setClickImg(e.target);
+    // ImgPostId 정보
     setClickImgPostId(e.target.id);
-    setModalClickImgPostId(Number(e.target.id)-1)
+    // 클릭한 이미지에 관한 ImgPostId 정보
+    setModalClickImgPostId(Number(e.target.id) - 1);
   };
 
   // 전체 게시물 조회
@@ -38,7 +42,7 @@ const Gallery = (props) => {
     }
   };
 
-  // postId DTO로 같이 보내줘야 함
+  // 좋아요 버튼
   const clickHandler = async (e) => {
     console.log("좋아요 버튼 클릭");
     const postId = Number(clickImgPostId);
@@ -48,6 +52,7 @@ const Gallery = (props) => {
 
     try {
       const token = localStorage.getItem("token");
+      // 좋아요 등록
       const response = await axios.post(
         `http://localhost:8080/like/${token}`,
         likeDTO
@@ -58,7 +63,7 @@ const Gallery = (props) => {
     }
   };
 
-  // 유저가 업로드한 포스트 조회
+  // 유저가 업로드한 게시물 조회
   const fetchPost = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -72,7 +77,7 @@ const Gallery = (props) => {
     }
   };
 
-  // 포스트 당 좋아요 수 조회
+  // 게시물 당 좋아요 수 조회
   const fetchPostLike = async () => {
     const likes = [];
     try {
@@ -99,11 +104,7 @@ const Gallery = (props) => {
   if (!postList) return null;
   if (!postLike) return null;
 
-  console.log("postList -->");
-  console.log(postList);
-  console.log("postLikes -->");
-  console.log(postLike);
-
+  // 전체 게시물 rendering 함수
   const rendering = () => {
     const result = [];
     for (let index = 0; index < Object.keys(postList).length; index++) {
@@ -124,7 +125,6 @@ const Gallery = (props) => {
             <ul>
               <li className="gallery-item-likes">
                 <span className="visually-hidden">Likes:</span>
-                {/* 게시물 마다 좋아요 눌러진 수 만큼 출력되야된다  */}
                 <HiOutlineHeart aria-hidden="true" /> {postLike[index]}
               </li>
             </ul>
@@ -135,43 +135,47 @@ const Gallery = (props) => {
     return result;
   };
 
-  console.log(postList)
-
   return (
     <>
-          <div className="gallery-container">
-            <h1 className="main-h1">전체 게시물</h1>
-            <div className="gallery">{rendering()}</div>
-          </div>
-          {/* modal 기능 */}
-          {isOpenPost === true ? (
-            <div className="backdrop">
-              <div className="modal-view" onClick={(e) => e.stopPropagation()}>
-                <span onClick={openPostModalHandler} className="close-btn">
-                  <HiOutlineX />
-                </span>
-                <div className="desc">
-                  <form className="modal-form">
-                    <h1 className="header-profile">게시물</h1>
-                    <div className="modal-gallery-container">
-                        <div className="gallery-item">
-                          <img src={clickImg.src} className="modal-gallery-image" alt="" />
-                        </div>
-                    </div>
-                    <h3 className="modal-content">{allPost[modalclickImgPostId].content}</h3>
-                    <button
-                      className="btn-save"
-                      type="button"
-                      onClick={clickHandler}
-                    >
-                      ❤좋아요❤
-                    </button>
-                  </form>
+      <div className="gallery-container">
+        <h1 className="main-h1">내 게시물</h1>
+        <div className="gallery">{rendering()}</div>
+      </div>
+      {/* modal 기능 */}
+      {isOpenPost === true ? (
+        <div className="backdrop">
+          <div className="modal-view" onClick={(e) => e.stopPropagation()}>
+            <span onClick={openPostModalHandler} className="close-btn">
+              <HiOutlineX />
+            </span>
+            <div className="desc">
+              <form className="modal-form">
+                <h1 className="header-profile">게시물</h1>
+                <div className="modal-gallery-container">
+                  <div className="gallery-item">
+                    <img
+                      src={clickImg.src}
+                      className="modal-gallery-image"
+                      alt=""
+                    />
+                  </div>
                 </div>
-              </div>
+                <h3 className="modal-content">
+                  {allPost[modalclickImgPostId].content}
+                </h3>
+                <button
+                  className="btn-save"
+                  type="button"
+                  onClick={clickHandler}
+                >
+                  ❤좋아요❤
+                </button>
+              </form>
             </div>
-          ) : null}
-        </>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 };
 export default Gallery;

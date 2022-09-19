@@ -5,7 +5,7 @@ WORKDIR /wil/src/app
 COPY package.json ./
 
 RUN npm install
-RUN npn install -g npm@8.19.2
+RUN npm install -g npm@8.19.2
 
 COPY ./ ./
 

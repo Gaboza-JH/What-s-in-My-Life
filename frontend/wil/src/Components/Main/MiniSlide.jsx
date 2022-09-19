@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import "./MiniSlide.css";
-
 import { HiOutlineX } from "react-icons/hi";
 import { HiOutlineHeart } from "react-icons/hi";
+import "react-multi-carousel/lib/styles.css";
+import "./MiniSlide.css";
 import "../Gallery/Gallery.css";
 
 const responsive = {
@@ -31,12 +30,13 @@ const MiniSlide = ({ user, token, userData }) => {
   const [topPost, setTopPost] = useState(null);
   const [error, setError] = useState(null);
   const [postLike, setPostLike] = useState(null);
-  const [topPostLike, setTopPostLike] = useState(null);
+  const [topPostLike, setTopPostLike] = useState([]);
   const [isOpenPost, setIsOpenPost] = useState(false);
   const [clickImg, setClickImg] = useState(null);
   const [clickImgPostId, setClickImgPostId] = useState(null);
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
 
+  // modal창 활성화 핸들러
   const openPostModalHandler = (e) => {
     console.log("게시물 modal 활성화 / 비활성");
     setIsOpenPost(!isOpenPost);
@@ -48,17 +48,16 @@ const MiniSlide = ({ user, token, userData }) => {
     setModalClickImgPostId(Number(e.target.id)-1)
   };
 
-  // postId DTO로 같이 보내줘야 함
+  // 좋아요 버튼
   const clickHandler = async (e) => {
     console.log("좋아요 버튼 클릭");
-
     const postId = Number(clickImgPostId);
     const likeDTO = {
       "postId": postId
     };
-
     try {
       const token = localStorage.getItem("token");
+      // 좋아요 등록
       const response = await axios.post(
         `http://localhost:8080/like/${token}`, likeDTO
       );
@@ -76,10 +75,10 @@ const MiniSlide = ({ user, token, userData }) => {
       setAllPost(response.data);
 
       // 좋아요 수 Top5 게시물 조회 
-      const topResponse = await axios.get(`http://localhost:8080/like/top_post/`);
+      const topResponse = await axios.get(`http://localhost:8080/like/top_post`);
       console.log(topResponse.data);
       setTopPost(topResponse.data);
-
+      console.log(topPostLike);
 
       // postIdIndexList 생성
       const postIdIndex = [];
@@ -97,38 +96,26 @@ const MiniSlide = ({ user, token, userData }) => {
 
       // 포스트 당 좋아요 수 조회
       const likes = []
-      try {
-        for (let index = 0; index < postIdIndex.length; index++) {
-          const response = await axios.get(`http://localhost:8080/like/${postIdIndex[index]}`);
-          likes.push(response.data)
-        }
-        setPostLike(likes);
-        // console.log(likes);
-      } catch (e) {
-        console.log("error : " + error);
-        setError(e);
+      for (let index = 0; index < postIdIndex.length; index++) {
+        const response = await axios.get(`http://localhost:8080/like/${postIdIndex[index]}`);
+        likes.push(response.data)
       }
+      setPostLike(likes);
+      console.log(likes);
 
       // 인기 포스트 당 좋아요 수 조회
       const topLikes = []
-      try {
-        for (let index = 0; index < topPostIdIndex.length; index++) {
-          const response = await axios.get(`http://localhost:8080/like/${topPostIdIndex[index]}`);
-          topLikes.push(response.data)
-        }
-        setTopPostLike(topLikes);
-        console.log(topLikes);
-      } catch (e) {
-        console.log("error : " + error);
-        setError(e);
+      for (let index = 0; index < topPostIdIndex.length; index++) {
+        const response = await axios.get(`http://localhost:8080/like/${topPostIdIndex[index]}`);
+        topLikes.push(response.data)
       }
+      setTopPostLike(topLikes);
+      console.log(topLikes);
 
     } catch (e) {
       console.log("error : " + error);
       setError(e);
     }
-
-
   };
 
   useEffect(() => {
@@ -138,17 +125,6 @@ const MiniSlide = ({ user, token, userData }) => {
   if (error) return <div>전체 게시물 에러가 발생했습니다</div>;
   if (!allPost) return null;
   if (!postLike) return null;
-
-  const contentsDef = () => {
-    const contents = [];
-    for (let index = 0; index < Object.keys(allPost).length; index++) {
-      contents.push(
-        allPost[index].content
-      );
-    }
-    console.log(contents);
-    return contents;
-  };
 
   const rendering = () => {
     const result = [];
@@ -201,8 +177,7 @@ const MiniSlide = ({ user, token, userData }) => {
             <ul>
               <li className="gallery-item-likes">
                 <span className="visually-hidden">Likes:</span>
-                {/* 게시물 마다 좋아요 눌러진 수 만큼 출력되야된다  */}
-                {/* <HiOutlineHeart aria-hidden="true" /> {topPostLike[index]} */}
+                <HiOutlineHeart aria-hidden="true" /> {topPostLike[index]}
               </li>
             </ul>
           </div>
@@ -250,7 +225,6 @@ const MiniSlide = ({ user, token, userData }) => {
           ) : null}
         </>
       ) : (
-        // 비로그인 일 때 추천수 많은 게시물 뿌려줘야한다 아직 더미 데이터 이다
         <div className="parent">
           <h1 className="main-h1">🎉게시물 순위🎉</h1>
           <Carousel
@@ -266,6 +240,7 @@ const MiniSlide = ({ user, token, userData }) => {
               return (
                 <div className="slider" key={index} tabindex="0">
                   <img src={imageUrl.props.children[0].props.src} alt="error" />
+
                 </div>
               );
             })}
