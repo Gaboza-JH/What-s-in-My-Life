@@ -1,0 +1,14 @@
+.Caption1{
+    font-family: 'Fredericka the Great', cursive;
+    text-align: right;
+}
+
+.bigslide-container{
+}
+
+.d-block{
+    width: 800px;
+    height: 600px;
+    margin:100px auto;
+    border-radius: 10px;
+}
