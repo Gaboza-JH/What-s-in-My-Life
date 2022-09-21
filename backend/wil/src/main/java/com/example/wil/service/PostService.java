@@ -190,9 +190,7 @@ public class PostService {
             int postId = like.getPostId().getPostId();
             Post post = postRepository.getReferenceById(postId);
             postList.add(post);
-
         }
-//        System.out.println(postList.get(1).getPostId());
         return transformPostDTOList(postList);
     }
 
