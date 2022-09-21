@@ -97,10 +97,14 @@ function PostUpload() {
         }
       );
       console.log(modelRes);
-      console.log(modelRes.data.sentence);
+      // 모델 API
+      // console.log(modelRes.data.sentence);
+
+      // 로컬 테스트 API
+      console.log(modelRes.data.senti);
 
       const sentiDTO = {
-        senti: modelRes.data.sentence
+        senti: modelRes.data.senti
       };
         
       // request -> {"senti" : 0 또는 1 }
