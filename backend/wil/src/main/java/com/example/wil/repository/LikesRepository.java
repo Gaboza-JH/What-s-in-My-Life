@@ -25,7 +25,7 @@ public interface LikesRepository extends JpaRepository<Likes, Integer> {
     @QueryHints
     @Query(value =
             "SELECT c.like_id, c.user_id, c.post_id " +
-            "FROM Likes AS c " +
+            "FROM likes AS c " +
             "GROUP BY c.post_id " +
             "ORDER BY count(c.post_id) DESC " +
             "limit 5 ", nativeQuery = true )
