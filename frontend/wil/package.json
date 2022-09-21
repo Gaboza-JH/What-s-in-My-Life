@@ -60,5 +60,9 @@
     "css-loader": "^6.7.1",
     "style-loader": "^3.3.1"
   },
+<<<<<<< HEAD
   "proxy": "http://3.37.184.148:8080"
+=======
+  "proxy":"http://localhost:8080/"
+>>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
 }

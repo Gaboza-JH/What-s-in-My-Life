@@ -14,12 +14,18 @@ import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.security.SignatureException;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class UserController {
+public class UserController{
 
     @Autowired
     private UserService userService;
@@ -30,10 +36,15 @@ public class UserController {
     @Autowired
     private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
 
+    // [해야 할 것]
+    // 1. 프론트로 리다이렉트 or 프론트에서 받은 url로 리다이렉트
+    // 2. 로컬 유저가 로그인을 할 때 email, password 보고 유저 찾아서 일치하는 경우 로그인 성공(프론트로 리다이렉트)
     @PostMapping("/users")
-    public String signUp(@RequestBody UserDTO userDTO) {
+    public String signUp(HttpServletRequest request, HttpServletResponse response, @RequestBody UserDTO userDTO) throws IOException {
         String redirectUrl = userService.signUp(userDTO);
-        return "redirect:" + redirectUrl;
+//        oAuth2AuthenticationSuccessHandler.onLocalLoginSuccess(request, response, redirectUrl);
+        System.out.println("리다이렉트..");
+        return redirectUrl;
     }
 
     @GetMapping("/users")
@@ -42,6 +53,7 @@ public class UserController {
     }
 
 
+    // 닉네임 수정
     @GetMapping("/users/{token}")
     public UserDTO findUserById(@PathVariable String token) {
         System.out.println("/users/{token} getmapping");

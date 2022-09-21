@@ -1,23 +1,73 @@
+import axios from "axios";
 import React from "react";
+import { Link, Redirect, Route, Router, Routes } from 'react-router-dom';
 import { useState } from "react";
 import { ImGoogle2 } from "react-icons/im";
 import { SiKakaotalk } from "react-icons/si";
 import { SiNaver } from "react-icons/si";
 
 const SignUp = () => {
-  // const [userName, setUerName] = useState(null);
-  // const [nickName, setNickName] = useState(null);
-  // const [email, setEmail] = useState(null);
-  // const [password, setPassword] = useState(null);
+  const [userLocalPostDTO, setUserLocalPostDTO] = useState(null);
+  const [isAllWrited, setIsAllWrited] = useState([]);
 
-  // const handleOnChange = (e) => {
-  //   if (e.target.placeholder == "Name") {
-  //     setUerName(e.target.value);
-  //   }
-  //   console.log(e.target.placeholder);
-  //   console.log(userName);
-  // };
+  const handleOnChange = (e) => {
 
+<<<<<<< HEAD
+=======
+    if (e.target.placeholder == "Name") {
+      setUserLocalPostDTO({
+        ...userLocalPostDTO,
+        ["username"]: e.target.value,
+      });
+    }
+
+    if (e.target.placeholder == "Nickname") {
+      setUserLocalPostDTO({
+        ...userLocalPostDTO,
+        ["nickname"]: e.target.value,
+      });
+    }
+
+    if (e.target.placeholder == "Email") {
+      setUserLocalPostDTO({
+        ...userLocalPostDTO,
+        ["email"]: e.target.value,
+      });
+    }
+
+    if (e.target.placeholder == "Password") {
+      setUserLocalPostDTO({
+        ...userLocalPostDTO,
+        ["password"]: e.target.value,
+      });
+    }
+
+    // 디테일 작업
+    // 썼다 지운 경우 ''이 들어가게 되는데 그런 경우 다시 작성하라고 해아 함
+    // 이메일 형식에 맞춰 작성하게 하도록 로직 추가
+    // setIsAllWrited(isAllWrited.push(userLocalPostDTO)); // 전부 다 작성된 경우 '4' 값 가짐
+
+    console.log(e.target.placeholder);
+    console.log(e.target.value);
+  };
+
+
+  // 회원 가입은 등록만 하면 됨
+  const clickLocalSignUpubmit = async (e) => {
+    try {
+      const res = await axios.post(
+        `http://localhost:8080/users`, userLocalPostDTO
+      );
+      console.log("success!! 로컬 회원가입 성공");
+      console.log("responst : " + res);
+      console.log(res);
+      // 등록 완료되면 alert 창 띄워주기 (로그인 시도해주라는 내용으로)
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+>>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
   return (
     <div className="form-container sign-up-container">
       <form className="sign-form">
@@ -36,11 +86,15 @@ const SignUp = () => {
         <span className="spansignup">or use your email for registration</span>
         <div>
           <input className="interval-signup" type="text" placeholder="Name" />
+<<<<<<< HEAD
           <input
             className="interval-signup"
             type="text"
             placeholder="Nickname"
           />
+=======
+          <input className="interval-signup" type="text" placeholder="Nickname"/>
+>>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
           <input className="interval-signup" type="email" placeholder="Email" />
           <input
             className="interval-signup"
@@ -48,7 +102,7 @@ const SignUp = () => {
             placeholder="Password"
           />
         </div>
-        <button className="btnsignup">Sign Up</button>
+        <button type="button" className="btnsignup" onClick={clickLocalSignUpubmit}>Sign Up</button>
       </form>
     </div>
   );

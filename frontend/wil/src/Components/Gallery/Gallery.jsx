@@ -104,6 +104,10 @@ const Gallery = (props) => {
   if (!postList) return null;
   if (!postLike) return null;
 
+<<<<<<< HEAD
+=======
+  console.log(postList);
+>>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
   // 전체 게시물 rendering 함수
   const rendering = () => {
     const result = [];

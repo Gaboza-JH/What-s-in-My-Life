@@ -70,6 +70,7 @@ public class PostService {
         System.out.println("imgList? :" + imgPaths.isEmpty());
         Post post = transformPost(postDTO, userId);
         System.out.println("postDTO::::"+ post.getUser());
+        System.out.println("postDTO content : " + postDTO.getContent());
         post = postRepository.save(post);
         System.out.println("post value ?? : : : " + post);
 
@@ -130,8 +131,9 @@ public class PostService {
 
     public PostDTO updatePost(int postId, PostDTO postDTO) {
         Post foundPost = postRepository.getReferenceById(postId);
-        foundPost.setContent(postDTO.getContent());
-        foundPost.setShown(postDTO.isShown());
+        foundPost.setSenti(postDTO.getSenti());
+//        foundPost.setContent(postDTO.getContent());
+//        foundPost.setShown(postDTO.isShown());
         Post updatedPost = postRepository.save(foundPost);
         return transformPostDTO(updatedPost);
     }
@@ -145,6 +147,7 @@ public class PostService {
                 .shown(postDTO.isShown())
                 .createDate(postDTO.getCreateDate())
                 .user(user)
+                .senti(postDTO.getSenti())
                 .build();
     }
 
@@ -171,6 +174,7 @@ public class PostService {
                 .createDate(post.getCreateDate())
                 .userId(post.getUser().getId())
                 .imgList(imageList)
+                .senti(post.getSenti())
                 .build();
     }
 
