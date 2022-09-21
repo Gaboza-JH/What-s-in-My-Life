@@ -88,7 +88,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                     .role("ROLE_USER")
                     .provider(oAuth2UserInfo.getProvider())
                     .providerId(oAuth2UserInfo.getProviderId())
-                    .nickname(nickname) // 임의로 작성함.
+                    .nickname(oAuth2UserInfo.getProvider() + "_" + oAuth2UserInfo.getProviderId()) // 임의로 작성함.
                     .build();
             userRepository.save(user);
         }

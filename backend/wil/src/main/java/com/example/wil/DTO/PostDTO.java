@@ -18,6 +18,7 @@ public class PostDTO {
     private int postId;
     private String content;
     private boolean shown;
+    private int senti;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @CreationTimestamp
     private Timestamp createDate;
