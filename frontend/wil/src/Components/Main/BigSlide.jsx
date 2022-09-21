@@ -9,10 +9,7 @@ const BigSlide = (props) => {
   const topLikes = []
   if (Object.keys(props.topLikesPost).length != null) {
     try {
-<<<<<<< HEAD
-=======
       console.log(props.user);
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
       for ( let index = 0; index < Object.keys(props.topLikesPost).length; index++) {
         topLikes.push(
           <Carousel.Item>
