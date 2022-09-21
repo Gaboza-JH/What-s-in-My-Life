@@ -3,7 +3,7 @@ import Menubar from "./Components/Navbar";
 import MainPage from "./Pages/MainPage";
 import MyPage from "./Pages/MyPage";
 import LoginSignupPage from "./Pages/LoginSignupPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Redshift } from "aws-sdk";
 
 // 토큰 받아오기
@@ -126,12 +126,12 @@ const App = () => {
           {/* MyPage */}
           <Route
             path="/mypage"
-            element={
+            element={user ?
               <MyPage
                 user={user.booleanValue}
-                token={localStorage.getItem("token")}
+                token={localStorage.getItem("token")} 
               />
-            }
+              : <Navigate to="/" />}
           />
 
           {/* Not FoundPage */}

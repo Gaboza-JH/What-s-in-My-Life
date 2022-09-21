@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.authentication.OAuth2LoginAuthenticationToken;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -35,9 +36,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     @Autowired
     private TokenProvider tokenProvider;
 
-//    @Autowired
-//    private AppProperties appProperties;
-
     @Autowired
     private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
@@ -54,6 +52,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         System.out.println(response);
         System.out.println(authentication);
         System.out.println("OAuth2AuthenticationSuccessHandler onAuthenticationSuccess() finish");
+
         String url = makeRedirectUrl(tokenProvider.createToken(authentication), JwtProperties.ACCESS_TOKEN_EXPIRE_TIME);
 
         if (response.isCommitted()) {

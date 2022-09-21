@@ -37,8 +37,8 @@ const MyPage = () => {
   return (
     <div>
       <Profile user={user} />
-      <Senti />
-      <Gallery user={user} />
+      <Senti user={user}/>
+      <Gallery user={user}/>
     </div>
   );
 };

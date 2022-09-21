@@ -1,9 +1,12 @@
 package com.example.wil.DTO;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
 public class LoginRequestDto {
-    private String username;
+    private String email;
     private String password;
 }

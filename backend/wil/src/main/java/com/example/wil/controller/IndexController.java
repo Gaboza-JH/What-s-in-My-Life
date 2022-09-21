@@ -1,33 +1,26 @@
 package com.example.wil.controller;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.example.wil.config.auth.PrincipalDetails;
-import com.example.wil.config.jwt.JwtProperties;
+import com.example.wil.DTO.LoginRequestDto;
+import com.example.wil.DTO.UserDTO;
+import com.example.wil.DTO.test.ResultDTO;
+import com.example.wil.DTO.test.TestDTO;
+import com.example.wil.config.auth.PrincipalDetailsService;
 import com.example.wil.config.oauth.PrincipalOauth2UserService;
-import com.example.wil.model.User;
 import com.example.wil.repository.UserRepository;
 import com.nimbusds.oauth2.sdk.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
-import java.util.Iterator;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("oauth2/redirect_front")
 public class IndexController {
 
     @Autowired
@@ -38,6 +31,9 @@ public class IndexController {
 
     @Autowired
     private PrincipalOauth2UserService principalOauth2UserService;
+
+    @Autowired
+    private PrincipalDetailsService principalDetailsService;
 
 //    @GetMapping({"","/"})
 //    public String index(){
@@ -52,6 +48,7 @@ public class IndexController {
             return token;
         }
     }
+
 
 
 //    @GetMapping("/user")
@@ -137,6 +134,21 @@ public class IndexController {
     public String joinForm() {
         return "joinForm";
     }
+
+    @GetMapping("/fail")
+    public String fail() {
+        return "실패";
+    }
+
+    @GetMapping("/success")
+    public String success() {
+        return "redirect: http://localhost:3000/";
+    }
+
+//    @PostMapping("/login")
+//    public void signUp(HttpServletRequest request, HttpServletResponse response, @RequestBody LoginRequestDto loginRequestDto) throws IOException {
+//        principalDetailsService.loadUserByEmail(loginRequestDto.getEmail());
+//    }
 
     @Secured("ROLE_ADMIN")
     @GetMapping("/info")
