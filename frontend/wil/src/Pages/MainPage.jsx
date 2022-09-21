@@ -34,7 +34,7 @@ const Main = ({ user, token }) => {
 
   if (error) return <div>에러가 발생했습니다</div>;
   // if (!userData) return null;
-  // if (!topLikesPost) return null;
+  if (!topLikesPost) return null;
 
   return (
     <div>
