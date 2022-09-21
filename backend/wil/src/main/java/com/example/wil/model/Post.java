@@ -27,6 +27,7 @@ public class Post {
     private int postId; // 게시물 기본키값
     private String content; // 게시물 내용
     private boolean shown; // 게시물 공개 여부
+    private int senti; // 게시물 내용 -> 감정 분석 결과
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @CreationTimestamp
