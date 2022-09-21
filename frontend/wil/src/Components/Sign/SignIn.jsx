@@ -1,16 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-import { ImGoogle2 } from "react-icons/im";
-import { SiKakaotalk } from "react-icons/si";
-import { SiNaver } from "react-icons/si";
-
-const NAVER_LOGIN_URL =
-  "http://3.37.184.148:8080/oauth2/authorization/naver?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
-const KAKAO_LOGIN_URL =
-  "http://3.37.184.148:8080/oauth2/authorization/kakao?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
-const GOOGLE_LOGIN_URL =
-  "http://3.37.184.148:8080/oauth2/authorization/google?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
-=======
 import { useState } from "react";
 import { ImGoogle2 } from "react-icons/im";
 import { SiKakaotalk } from "react-icons/si";
@@ -18,12 +6,11 @@ import { SiNaver } from "react-icons/si";
 import axios from "axios";
 
 const NAVER_LOGIN_URL =
-  "http://localhost:8080/oauth2/authorization/naver?redirect_uri=http://localhost:8080/oauth2/redirect_front";
+  "http://3.37.184.148:8080/oauth2/authorization/naver?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 const KAKAO_LOGIN_URL =
-  "http://localhost:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:8080/oauth2/redirect_front";
+  "http://3.37.184.148:8080/oauth2/authorization/kakao?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 const GOOGLE_LOGIN_URL =
-  "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:8080/oauth2/redirect_front";
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
+  "http://3.37.184.148:8080/oauth2/authorization/google?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 
 const SignIn = () => {
   const [userLocalPostDTO, setUserLocalPostDTO] = useState(null);
@@ -58,7 +45,7 @@ const SignIn = () => {
       // );
 
       const res = await axios.post(
-        `http://localhost:8080/login`, userLocalPostDTO,
+        `http://3.37.184.148:8080/login`, userLocalPostDTO,
         // {
         //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
         // }
@@ -87,18 +74,6 @@ const SignIn = () => {
             <SiNaver className="naver" />
           </a>
         </div>
-<<<<<<< HEAD
-        <input className="interval-signin" type="email" placeholder="Email" />
-        <input
-          className="interval-signin"
-          type="password"
-          placeholder="Password"
-        />
-        <a className="sign-a" href="#">
-          Forgot your password?
-        </a>
-        <button className="sign-botton">Sign In</button>
-=======
         <div onChange={handleOnChange}>
           <input className="interval-signin" name= "email" type="email" placeholder="Email" />
           <input className="interval-signin" type="password" placeholder="Password" />
@@ -107,7 +82,6 @@ const SignIn = () => {
           </a>
           <button type="button" className="sign-botton" onClick={clickLocalSignInsubmit}>Sign In</button>
         </div>
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
       </form>
     </div>
   );

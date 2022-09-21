@@ -17,11 +17,7 @@ const MyPage = () => {
       setError(null);
       setUser(null);
       setLoading(true);
-<<<<<<< HEAD
       const response = await axios.get(`http://3.37.184.148:8080/users/${token}`);
-=======
-      const response = await axios.get(`http://localhost:8080/users/${token}`);
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
       setUser(response.data);
     } catch (e) {
       console.log("error" + error);
@@ -41,13 +37,8 @@ const MyPage = () => {
   return (
     <div>
       <Profile user={user} />
-<<<<<<< HEAD
-      <Senti />
-      <Gallery user={user} />
-=======
       <Senti user={user}/>
       <Gallery user={user}/>
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
     </div>
   );
 };

@@ -57,35 +57,24 @@ function PostUpload() {
       "PostDTO",
       new Blob([JSON.stringify(PostDTO)], { type: "application/json" })
     );
-<<<<<<< HEAD
-=======
 
     const textDTO = {
       text: contents
     };
     console.log(textDTO);
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
 
     // 게시물 등록하는 요청
     try {
       const token = localStorage.getItem("token");
       console.log(PostDTO);
 
-<<<<<<< HEAD
       const res = await axios.post(
         `http://3.37.184.148:8080/post/${token}`,
-=======
-      // Spring 서버로 게시물 등록 서비스 요청 (content, shown, img)
-      const res = await axios.post(
-        `http://localhost:8080/post/${token}`,
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-<<<<<<< HEAD
-=======
       console.log(res);
       console.log(res.data.postId);
 
@@ -118,12 +107,11 @@ function PostUpload() {
       };
         
       // request -> {"senti" : 0 또는 1 }
-      const resultPostRes = await axios.put(`http://localhost:8080/post/${res.data.postId}`, sentiDTO);
+      const resultPostRes = await axios.put(`http://3.37.184.148:8080/post/${res.data.postId}`, sentiDTO);
       console.log(resultPostRes);
       setfinalPost(resultPostRes.data);
 
 
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
       console.log(res);
       console.log("headers : ", res.headers);
       console.log("config : ", res.config);
@@ -141,12 +129,9 @@ function PostUpload() {
       console.error(err);
     }
   };
-<<<<<<< HEAD
-=======
 
   console.log("senti 값까지 update된 post 정보");
   console.log(finalPost);
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
 
   return (
     <>
@@ -185,11 +170,7 @@ function PostUpload() {
             type="button"
             className="upload-btn"
             onClick={clickPostSubmit}
-<<<<<<< HEAD
-          >
-=======
           > 
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
             Upload
           </button>
         </form>

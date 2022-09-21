@@ -12,8 +12,6 @@ const SignUp = () => {
 
   const handleOnChange = (e) => {
 
-<<<<<<< HEAD
-=======
     if (e.target.placeholder == "Name") {
       setUserLocalPostDTO({
         ...userLocalPostDTO,
@@ -56,7 +54,7 @@ const SignUp = () => {
   const clickLocalSignUpubmit = async (e) => {
     try {
       const res = await axios.post(
-        `http://localhost:8080/users`, userLocalPostDTO
+        `http://3.37.184.148:8080/users`, userLocalPostDTO
       );
       console.log("success!! 로컬 회원가입 성공");
       console.log("responst : " + res);
@@ -67,7 +65,6 @@ const SignUp = () => {
     }
   }
 
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
   return (
     <div className="form-container sign-up-container">
       <form className="sign-form">
@@ -86,15 +83,7 @@ const SignUp = () => {
         <span className="spansignup">or use your email for registration</span>
         <div>
           <input className="interval-signup" type="text" placeholder="Name" />
-<<<<<<< HEAD
-          <input
-            className="interval-signup"
-            type="text"
-            placeholder="Nickname"
-          />
-=======
           <input className="interval-signup" type="text" placeholder="Nickname"/>
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
           <input className="interval-signup" type="email" placeholder="Email" />
           <input
             className="interval-signup"

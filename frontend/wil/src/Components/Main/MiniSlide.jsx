@@ -75,11 +75,7 @@ const MiniSlide = ({ user, token, userData }) => {
       setAllPost(response.data);
 
       // 좋아요 수 Top5 게시물 조회 
-<<<<<<< HEAD
       const topResponse = await axios.get(`http://3.37.184.148:8080/like/top_post`);
-=======
-      const topResponse = await axios.get(`http://localhost:8080/like/top_post`);
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
       console.log(topResponse.data);
       setTopPost(topResponse.data);
       console.log(topPostLike);
@@ -101,11 +97,7 @@ const MiniSlide = ({ user, token, userData }) => {
       // 포스트 당 좋아요 수 조회
       const likes = []
       for (let index = 0; index < postIdIndex.length; index++) {
-<<<<<<< HEAD
         const response = await axios.get(`http://3.37.184.148:8080/like/${postIdIndex[index]}`);
-=======
-        const response = await axios.get(`http://localhost:8080/like/${postIdIndex[index]}`);
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
         likes.push(response.data)
       }
       setPostLike(likes);
@@ -114,11 +106,7 @@ const MiniSlide = ({ user, token, userData }) => {
       // 인기 포스트 당 좋아요 수 조회
       const topLikes = []
       for (let index = 0; index < topPostIdIndex.length; index++) {
-<<<<<<< HEAD
         const response = await axios.get(`http://3.37.184.148:8080/like/${topPostIdIndex[index]}`);
-=======
-        const response = await axios.get(`http://localhost:8080/like/${topPostIdIndex[index]}`);
->>>>>>> 087c92dabae4a904777361971ac6dedeff1ba5d6
         topLikes.push(response.data)
       }
       setTopPostLike(topLikes);
