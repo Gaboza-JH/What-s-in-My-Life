@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "./PostUpload.css";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 function PostUpload() {
   const defaultUpload = "Drag files to upload.";
@@ -9,6 +9,7 @@ function PostUpload() {
   const [fileUrl, setFileUrl] = useState(null);
   const [fileName, setFileName] = useState(defaultUpload);
   const [showAlert, setShowAlert] = useState(false);
+  const [finalPost, setfinalPost] = useState([]);
 
   // FileInput onChange Handler
   const FileInputHandler = (e) => {
@@ -57,11 +58,17 @@ function PostUpload() {
       new Blob([JSON.stringify(PostDTO)], { type: "application/json" })
     );
 
+    const textDTO = {
+      text: contents
+    };
+    console.log(textDTO);
+
     // 게시물 등록하는 요청
     try {
       const token = localStorage.getItem("token");
       console.log(PostDTO);
 
+      // Spring 서버로 게시물 등록 서비스 요청 (content, shown, img)
       const res = await axios.post(
         `http://localhost:8080/post/${token}`,
         formData,
@@ -69,6 +76,39 @@ function PostUpload() {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
+      console.log(res);
+      console.log(res.data.postId);
+
+
+      // 데이터 모델로 content 내용 보내기 (for 감정 분석)
+      // request -> {'text' : "나는 오늘 기분이 안좋아"} 
+      const modelRes = await axios.post(
+        // `http://127.0.0.1:8080/predict/`, textDTO,
+        // `http://3.35.30.11:8000/predict/`, textDTO,
+          `http://localhost:8080/predict/`, textDTO,
+        {
+          withCredentials: true // 쿠키 cors 통신 설정
+        },
+        {
+          headers: { "Access‑Control‑Allow‑Origin": "*", 
+          "Access‑Control‑Allow‑Headers": "Origin, X‑Requested‑With, Content‑Type, Accept",
+          "Access‑Control‑Allow‑Methods":"GET,PUT,POST,DELETE,OPTIONS",
+          "Access‑Control‑Allow‑Credentials":'true',},
+        }
+      );
+      console.log(modelRes);
+      console.log(modelRes.data.sentence);
+
+      const sentiDTO = {
+        senti: modelRes.data.sentence
+      };
+        
+      // request -> {"senti" : 0 또는 1 }
+      const resultPostRes = await axios.put(`http://localhost:8080/post/${res.data.postId}`, sentiDTO);
+      console.log(resultPostRes);
+      setfinalPost(resultPostRes.data);
+
+
       console.log(res);
       console.log("headers : ", res.headers);
       console.log("config : ", res.config);
@@ -86,6 +126,9 @@ function PostUpload() {
       console.error(err);
     }
   };
+
+  console.log("senti 값까지 update된 post 정보");
+  console.log(finalPost);
 
   return (
     <>

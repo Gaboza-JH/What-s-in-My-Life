@@ -3,6 +3,8 @@ package com.example.wil.controller;
 import com.amazonaws.util.CollectionUtils;
 import com.example.wil.DTO.PostDTO;
 import com.example.wil.DTO.UserDTO;
+import com.example.wil.DTO.test.ResultDTO;
+import com.example.wil.DTO.test.TestDTO;
 import com.example.wil.config.jwt.TokenProvider;
 import com.example.wil.service.ImageService;
 import com.example.wil.service.PostService;
@@ -123,7 +125,17 @@ public class PostController {
     @DeleteMapping("/post/{postId}")
     public List<PostDTO> deletePost(@PathVariable int postId) {return postService.deletePost(postId); }
 
+    // 감정 분석 결과 수정 (update)
+    // request -> {"senti" : 0 또는 1 }
     @PutMapping("/post/{postId}")
     public PostDTO updatePost(@PathVariable int postId, @RequestBody PostDTO postDTO) {return postService.updatePost(postId, postDTO); }
 
+    // 모델 API 대신 test API
+    @PostMapping("/predict")
+    // request ->  {'text' : "나는 오늘 기분이 안좋아"}
+    public ResultDTO predict(@RequestBody TestDTO testDTO) {
+        System.out.println("predict postmapping 들어옴");
+        // response -> {"senti" : 0 또는 1 }
+        return ResultDTO.builder().senti(1).build(); // 임의로 1로 작성함
+    }
 }
