@@ -8,8 +8,8 @@ RUN npm install -g npm@8.19.2
 RUN npm install --force
 
 
-RUN sed -i 's/ const disableFirewall =$/ const disableFirewall = 'true';/' ./node_modules/react-scripts/config/webpackDevServer.config.js
-RUN sed -i 's/!proxy/\/\/proxy/' ./node_modules/react-scripts/config/webpackDevServer.config.js
+#RUN sed -i 's/ const disableFirewall =$/ const disableFirewall = 'true';/' ./node_modules/react-scripts/config/webpackDevServer.config.js
+#RUN sed -i 's/!proxy/\/\/proxy/' ./node_modules/react-scripts/config/webpackDevServer.config.js
 
 COPY ./ ./
 
