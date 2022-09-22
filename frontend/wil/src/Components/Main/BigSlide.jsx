@@ -9,6 +9,7 @@ const BigSlide = (props) => {
   const topLikes = []
   if (Object.keys(props.topLikesPost).length != null) {
     try {
+      console.log(props.user);
       for ( let index = 0; index < Object.keys(props.topLikesPost).length; index++) {
         topLikes.push(
           <Carousel.Item>
@@ -27,7 +28,6 @@ const BigSlide = (props) => {
       console.log("error " + e);
     }
   }
-
   return (
     <div>
       {props.user ? (

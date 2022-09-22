@@ -5,7 +5,7 @@ import "./Senti.css";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Senti = () => {
+const Senti = (props) => {
     
   const data = {
     labels: ["부정", "긍정"],
@@ -20,6 +20,7 @@ const Senti = () => {
     ],
   };
 
+  console.log(props.user);
   return (
     <>
       <div className="senti">
