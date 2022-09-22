@@ -4,6 +4,7 @@ import { ImGoogle2 } from "react-icons/im";
 import { SiKakaotalk } from "react-icons/si";
 import { SiNaver } from "react-icons/si";
 import axios from "axios";
+import { useEffect } from "react";
 
 const NAVER_LOGIN_URL =
   "http://3.37.184.148:8080/oauth2/authorization/naver?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
@@ -14,6 +15,7 @@ const GOOGLE_LOGIN_URL =
 
 const SignIn = () => {
   const [userLocalPostDTO, setUserLocalPostDTO] = useState(null);
+  const [redirect, setRedirect] = useState();
 
   const handleOnChange = (e) => {
 
@@ -53,11 +55,27 @@ const SignIn = () => {
       console.log("success!! 로컬 로그인 성공");
       console.log("response : " + res);
       console.log(res);
-      console.log(res.headers);
+      console.log(res.request.responseURL);
+      setRedirect(res.request.responseURL);
+      // window.open();
+      // window.location = redirectURL;
+      console.log(e);
     } catch (err) {
       console.error(err);
     }
   };
+
+  if (redirect != undefined) {
+    window.location = redirect;
+  }
+  
+  // useEffect(() => {
+  //   document.querySelector('button').addEventListener('click', e=>{
+  //     if(redirectURL != undefined) {
+  //       window.location = redirectURL;
+  //     }
+  //   });
+  // }, []);
 
   return (
     <div className=" form-container sign-in-container">
@@ -81,6 +99,11 @@ const SignIn = () => {
             Forgot your password?
           </a>
           <button type="button" className="sign-botton" onClick={clickLocalSignInsubmit}>Sign In</button>
+          {/* <script>{
+          document.querySelector('button').addEventListener('click',e=>{
+            window.location = redirectURL;})
+            }
+          </script> */}
         </div>
       </form>
     </div>
@@ -88,3 +111,4 @@ const SignIn = () => {
 };
 
 export default SignIn;
+

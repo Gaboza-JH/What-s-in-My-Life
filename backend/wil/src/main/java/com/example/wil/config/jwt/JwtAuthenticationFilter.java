@@ -156,7 +156,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 //                .withClaim("username", principalDetailis.getUser().getUsername())
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
-//        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken); // 헤더에 안들어가 있음
+        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken); // 헤더에 안들어가 있음
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -177,6 +177,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         System.out.println("redirectUrl : " + redirectUrl);
 
+        response.getWriter().write(redirectUrl);
 //        oAuth2AuthenticationSuccessHandler.onAuthenticationSuccess(request, response, authResult);
 //        redirectStrategy.sendRedirect(request, response, redirectUrl);
         System.out.println("jwtToken : " + jwtToken);

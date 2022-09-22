@@ -111,6 +111,7 @@ public class SecurityConfig {
                 .httpBasic().disable();
 
         http
+                .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository))
                 // authorizeRequests() : 요청에 대한 권한 지정. Security 처리에 HttpServletRequest를 이용한다는 것을 의미한다
                 .authorizeRequests()
                 // antMatchers() : 특정 경로를 지정합니다. 보통 뒤에 다른 메서드가 붙습니다

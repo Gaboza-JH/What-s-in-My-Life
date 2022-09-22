@@ -81,15 +81,11 @@ const SignUp = () => {
           </a>
         </div>
         <span className="spansignup">or use your email for registration</span>
-        <div>
+        <div onChange={handleOnChange}>
           <input className="interval-signup" type="text" placeholder="Name" />
           <input className="interval-signup" type="text" placeholder="Nickname"/>
           <input className="interval-signup" type="email" placeholder="Email" />
-          <input
-            className="interval-signup"
-            type="password"
-            placeholder="Password"
-          />
+          <input className="interval-signup" type="password" placeholder="Password" />
         </div>
         <button type="button" className="btnsignup" onClick={clickLocalSignUpubmit}>Sign Up</button>
       </form>

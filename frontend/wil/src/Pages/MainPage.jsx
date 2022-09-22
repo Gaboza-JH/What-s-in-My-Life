@@ -12,7 +12,15 @@ const Main = ({ user, token }) => {
     try {
       if (user == true) {
         // 특정 유저 정보 조회
-        const response = await axios.get(`http://3.37.184.148:8080/users/${token}`);
+        const response = await axios.get(
+          `http://3.37.184.148:8080/users/${token}`,
+          // {
+          //   withCredentials: true // 쿠키 cors 통신 설정
+          // },
+          {
+            headers: { "Authorization": "Bearer " + token, },
+          },
+          );
         setUserData(response.data);
       }
 
