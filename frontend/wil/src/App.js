@@ -61,6 +61,7 @@ const App = () => {
 
   // 로그인 후 리다이렉트 되었을떄
   if (window.location.search.split("=")[0] == "?token") {
+    localStorage.setItem("iame", 'hi');
     localStorage.setItem("token", getToken());
     localStorage.setItem("expiredTime", getExpiredTime());
     localStorage.setItem("startTime", getTokenStartTime());
