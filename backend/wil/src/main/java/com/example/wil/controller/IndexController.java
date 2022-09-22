@@ -142,7 +142,7 @@ public class IndexController {
 
     @GetMapping("/success")
     public String success() {
-        return "redirect: http://localhost:3000/";
+        return "redirect: http://3.37.184.148:3000/";
     }
 
 //    @PostMapping("/login")
