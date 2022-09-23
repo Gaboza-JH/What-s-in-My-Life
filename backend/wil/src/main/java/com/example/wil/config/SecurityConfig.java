@@ -29,7 +29,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Component;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -60,7 +59,6 @@ public class SecurityConfig {
 
     @Autowired
     private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
-
     private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     // 등록된 AuthenticationManager을 불러오기 위한 Bean
@@ -112,6 +110,7 @@ public class SecurityConfig {
 
         http
                 .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository))
+
                 // authorizeRequests() : 요청에 대한 권한 지정. Security 처리에 HttpServletRequest를 이용한다는 것을 의미한다
                 .authorizeRequests()
                 // antMatchers() : 특정 경로를 지정합니다. 보통 뒤에 다른 메서드가 붙습니다
