@@ -47,6 +47,10 @@
 
 <img width="983" alt="image" src="https://user-images.githubusercontent.com/103571758/191890872-35732b23-a751-46d3-9c36-054cad5d1181.png">
 
+> Jenkins Freestyle Project에서 Docker Image 하나씩 만들어서 Spring, React 각각 실행 (Test)
+<img width="1153" alt="image" src="https://user-images.githubusercontent.com/103571758/191893754-a950af27-2c63-4560-829e-b04566ab96e2.png">
+
+
 > Jenkins Pipeline 실행
  - git Repository Clone하여 코드 최신버전 빌드
  - Docker image build 후 compose로 실행
