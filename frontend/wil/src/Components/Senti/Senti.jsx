@@ -81,7 +81,6 @@ const Senti = (props) => {
 
   return (
     <>
-      <a>aavs</a>
       <div className="Senti">
         <div className="Sentilist">
             <img className="SentiItem1" src={senti1} />
