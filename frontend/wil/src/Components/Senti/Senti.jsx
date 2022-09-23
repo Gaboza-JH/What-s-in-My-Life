@@ -1,13 +1,22 @@
-import React, { Component } from "react";
+import axios from "axios";
+import React, { Component, useEffect, useState } from "react";
 import Chart from 'react-apexcharts';
+import senti0 from "../../static/img/senti01.png"
+import senti1 from '../../static/img/senti11.png';
 import "./Senti.css";
 
-const Senti = () => {
+const Senti = (props) => {
+  const postIdIndex = props.user.postIdList;
+  // const [postList, setPostList] = useState();
+  const [sentiN, setSenti0] = useState(null);
+  const [sentiP, setSenti1] = useState(null);
+  const [error, setError] = useState(null);
+
   const options = {
     chart: {
       type: 'donut',
     },
-    colors : ['#ffeb7a', '#cac6af'],
+    colors: ['#ffeb7a', '#cac6af'],
     plotOptions: {
       pie: {
         startAngle: -90,
@@ -37,33 +46,54 @@ const Senti = () => {
       }
     }]
   }
-  const series = [44, 16];
+  const series = [sentiN, sentiP];
 
-// ChartJS.register(ArcElement, Tooltip, Legend);
+  // chart값 뿌려주기 
+  const fetchSenti = async () => {
+    // const sentis = [];
+    const sentiN = [];
+    const sentiP = [];
+    try {
+      for (let index = 1; index <= postIdIndex.length; index++) {
+        const response = await axios.get(
+          `http://localhost:8080/post/${index}`
+        );
+        if (response.data.senti == 0) {
+          sentiN.push(response.data.senti)
+          console.log(sentiN.length)
+          setSenti0(sentiN.length)
+        } else {
+          sentiP.push(response.data.senti)
+          console.log(sentiP.length)
+          setSenti1(sentiP.length)
+        }
+      }
+    } catch (e) {
+      console.log("error : " + error);
+      setError(e);
+    }
+  }
 
-// const Senti = (props) => {
-    
-//   const data = {
-//     labels: ["부정", "긍정"],
-//     datasets: [
-//       {
-//         label: "# of Votes",
-//         data: [3, 7],
-//         backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
-//         borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
-//         borderWidth: 1,
-//       },
-//     ],
-//   };
+  useEffect(() => {
+    fetchSenti();
+  }, []);
 
-  // console.log(props.user);
+
   return (
     <>
       <div className="Senti">
+        <div className="Sentilist">
+            <img className="SentiItem1" src={senti1} />
+            <img className="SentiItem0" src={senti0} />
+        </div>
         <Chart options={options} series={series} type="donut" width="550" />
+          {/* <div className="Sentilist">
+            <img className="SentiItem1" src={senti1} />
+            <img className="SentiItem0" src={senti0} />
+          </div> */}
       </div>
     </>
   );
-}
+};
 
 export default Senti;

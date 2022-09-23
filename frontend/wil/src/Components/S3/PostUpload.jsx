@@ -44,11 +44,11 @@ function PostUpload() {
     const formData = new FormData();
 
     for (let file of files) {
-      // 여러파일 전송
+      // 여러 파일 전송
       formData.append("image", file);
     }
 
-    // 등록하고싶은 게시물 정보
+    // 등록 하고 싶은 게시물 정보
     const PostDTO = {
       content: contents,
       shown: true,
@@ -84,8 +84,8 @@ function PostUpload() {
       // request -> {'text' : "나는 오늘 기분이 안좋아"} 
       const modelRes = await axios.post(
         // `http://127.0.0.1:8080/predict/`, textDTO,
-        // `http://3.35.30.11:8000/predict/`, textDTO,
-          `http://localhost:8080/predict/`, textDTO,
+        `http://3.35.30.11:8000/predict/`, textDTO,
+          // `http://localhost:8080/predict/`, textDTO,
         {
           withCredentials: true // 쿠키 cors 통신 설정
         },

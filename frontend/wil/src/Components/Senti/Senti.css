@@ -1,6 +1,23 @@
 .Senti{
-    width: 90vw;
-    max-width: 300px;
-    margin:auto;
-    
+    width: 550px;
+    display : block;
+    margin: auto;
+    justify-content: center;
 }
+
+.Sentilist{
+    display: flex;
+    width : 550px;
+    justify-content: space-between;
+}
+
+.SentiItem0{
+    width: 40%;
+    float: left;
+}
+
+.SentiItem1{
+    width: 40%;
+    float: right;
+}
+
