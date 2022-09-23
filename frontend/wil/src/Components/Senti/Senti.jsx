@@ -1,34 +1,101 @@
-import React from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2"; // npm install react-chartjs-2 chart.js
+import axios from "axios";
+import React, { Component, useEffect, useState } from "react";
+import Chart from 'react-apexcharts';
+import senti0 from "../../static/img/senti01.png"
+import senti1 from '../../static/img/senti11.png';
 import "./Senti.css";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
-
 const Senti = (props) => {
-    
-  const data = {
-    labels: ["부정", "긍정"],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [3, 7],
-        backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
-        borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
-        borderWidth: 1,
-      },
-    ],
-  };
+  const postIdIndex = props.user.postIdList;
+  // const [postList, setPostList] = useState();
+  const [sentiN, setSenti0] = useState(null);
+  const [sentiP, setSenti1] = useState(null);
+  const [error, setError] = useState(null);
 
-  console.log(props.user);
+  const options = {
+    chart: {
+      type: 'donut',
+    },
+    colors: ['#cac6af', '#ffeb7a'],
+    plotOptions: {
+      pie: {
+        startAngle: -90,
+        endAngle: 90,
+        offsetY: 10,
+      }
+    },
+    legend: {
+      show: false,
+      position: 'bottom'
+    },
+    grid: {
+      padding: {
+        bottom: -80
+      }
+    },
+    fill: {
+      colors: ['#cac6af', '#ffeb7a'],
+    },
+    labels: ['부정이', '긍정이'],
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        chart: {
+          width: 200
+        },
+      }
+    }]
+  }
+  const series = [sentiN, sentiP];
+
+  // chart값 뿌려주기 
+  const fetchSenti = async () => {
+    // const sentis = [];
+    const sentiN = [];
+    const sentiP = [];
+    try {
+      for (let index = 1; index <= postIdIndex.length; index++) {
+        const response = await axios.get(
+          `http://localhost:8080/post/${index}`
+        );
+        if (response.data.senti == 0) {
+          sentiN.push(response.data.senti)
+          console.log(sentiN.length)
+          setSenti0(sentiN.length)
+        } else {
+          sentiP.push(response.data.senti)
+          console.log(sentiP.length)
+          setSenti1(sentiP.length)
+        }
+      }
+      console.log("0값 : " + sentiN.length);
+      console.log("1값 : " + sentiP.length);
+    } catch (e) {
+      console.log("error : " + error);
+      setError(e);
+    }
+  }
+
+
+  useEffect(() => {
+    fetchSenti();
+  }, []);
+
   return (
     <>
-      <div className="senti">
-        <Doughnut data={data} />;
-        <h1>감정 분석 결과</h1>
+      <div className="Senti">
+        <div className="Sentilist">
+            <img className="SentiItem0" src={senti0} />
+            <img className="SentiItem1" src={senti1} />
+        </div>
+        <Chart options={options} series={series} type="donut" width="550" />
+          {/* <div className="Sentilist">
+            <img className="SentiItem1" src={senti1} />
+            <img className="SentiItem0" src={senti0} />
+          </div> */}
       </div>
     </>
-  );  
+  );
 };
 
 export default Senti;

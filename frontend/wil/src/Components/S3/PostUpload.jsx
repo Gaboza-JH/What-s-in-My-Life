@@ -44,11 +44,11 @@ function PostUpload() {
     const formData = new FormData();
 
     for (let file of files) {
-      // 여러파일 전송
+      // 여러 파일 전송
       formData.append("image", file);
     }
 
-    // 등록하고싶은 게시물 정보
+    // 등록 하고 싶은 게시물 정보
     const PostDTO = {
       content: contents,
       shown: true,

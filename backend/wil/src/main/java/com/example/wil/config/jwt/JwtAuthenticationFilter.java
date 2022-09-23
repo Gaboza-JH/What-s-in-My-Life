@@ -80,7 +80,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     // Authentication 객체 만들어서 리턴 => 의존 : AuthenticationManager
     // 인증 요청시에 실행되는 함수 => /login
     private final AuthenticationManager authenticationManager;
-
     private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Autowired
@@ -157,6 +156,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 //                .withClaim("username", principalDetailis.getUser().getUsername())
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
+
+
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken); // 헤더에 안들어가 있음
 
         response.setContentType("application/json");
@@ -187,4 +188,5 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.sendRedirect(redirectUrl);
         return;
     }
+
 }

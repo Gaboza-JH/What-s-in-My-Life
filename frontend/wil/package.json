@@ -57,7 +57,9 @@
     ]
   },
   "devDependencies": {
+    "apexcharts": "^3.35.5",
     "css-loader": "^6.7.1",
+    "react-apexcharts": "^1.4.0",
     "style-loader": "^3.3.1"
   },
   "proxy": "http://3.37.184.148:8080"
