@@ -78,7 +78,6 @@ const Senti = (props) => {
     fetchSenti();
   }, []);
 
-
   return (
     <>
       <div className="Senti">

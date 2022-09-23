@@ -1,6 +1,7 @@
 package com.example.wil.config.jwt;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.FilterChain;
@@ -34,6 +35,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.auth0.jwt.JWT;
@@ -43,6 +46,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.UriComponentsBuilder;
 
 // 스프링 시큐리티에서 UsernamePasswordAuthenticationFilter가 있음
 // /login 요청해서 username, password 전송하면 (post)
@@ -75,6 +79,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     // Authentication 객체 만들어서 리턴 => 의존 : AuthenticationManager
     // 인증 요청시에 실행되는 함수 => /login
     private final AuthenticationManager authenticationManager;
+    private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Autowired
     private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
@@ -145,16 +150,41 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String jwtToken = JWT.create()
                 .withSubject(Integer.toString(principalDetailis.getUser().getId()))
-                .withExpiresAt(new Date(System.currentTimeMillis()+JwtProperties.EXPIRATION_TIME))
+                .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.EXPIRATION_TIME))
 //                .withClaim("id", principalDetailis.getUser().getId())
 //                .withClaim("username", principalDetailis.getUser().getUsername())
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
-        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
+
+
+        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken); // 헤더에 안들어가 있음
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"jwtToken\"" + ":" + "\"Bearer " + jwtToken + "\" + "+"}");
+//        response.getWriter().write("{\"jwtToken\"" + ":" + "\"Bearer " + jwtToken + "\""
+//                + ",\"refreshToken\"" + ":" + "\"Bearer " + jwtToken + "\"" +"}");
+
+        SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+        Date time = new Date();
+        String startTime = format1.format(time);
+        System.out.println(startTime);
+
+        String redirectUrl = UriComponentsBuilder.fromHttpUrl("http://localhost:3000/")
+                .queryParam("token", jwtToken)
+                .queryParam("expiredTime", JwtProperties.EXPIRATION_TIME) // 만료 시간도 같이 보내줌
+                .queryParam("startTime", startTime)
+                .build().toUriString();
+
+        System.out.println("redirectUrl : " + redirectUrl);
+
+        response.getWriter().write(redirectUrl);
+//        oAuth2AuthenticationSuccessHandler.onAuthenticationSuccess(request, response, authResult);
+//        redirectStrategy.sendRedirect(request, response, redirectUrl);
         System.out.println("jwtToken : " + jwtToken);
         System.out.println("successfulAuthentication 성공, UsernamePasswordAuthenticationToken 생성 완료");
-
-        chain.doFilter(request, response);
+        response.sendRedirect(redirectUrl);
+        return;
     }
 
 }

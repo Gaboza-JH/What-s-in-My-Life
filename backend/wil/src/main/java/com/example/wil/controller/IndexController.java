@@ -140,6 +140,13 @@ public class IndexController {
         return "실패";
     }
 
+
+    @GetMapping("/success")
+    public String success() {
+        return "redirect: http://localhost:3000/";
+    }
+
+
 //    @PostMapping("/login")
 //    public void signUp(HttpServletRequest request, HttpServletResponse response, @RequestBody LoginRequestDto loginRequestDto) throws IOException {
 //        principalDetailsService.loadUserByEmail(loginRequestDto.getEmail());

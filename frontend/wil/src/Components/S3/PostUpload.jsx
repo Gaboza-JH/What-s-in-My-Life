@@ -83,8 +83,8 @@ function PostUpload() {
       // 데이터 모델로 content 내용 보내기 (for 감정 분석)
       // request -> {'text' : "나는 오늘 기분이 안좋아"} 
       const modelRes = await axios.post(
-        // `http://127.0.0.1:8080/predict/`, textDTO,
-        `http://3.35.30.11:8000/predict/`, textDTO,
+        // `http://127.0.0.1:8080/predict`, textDTO,
+        `http://3.35.30.11:8000/predict`, textDTO,
           // `http://localhost:8080/predict/`, textDTO,
         {
           withCredentials: true // 쿠키 cors 통신 설정
@@ -98,10 +98,10 @@ function PostUpload() {
       );
       console.log(modelRes);
       // 모델 API
-      // console.log(modelRes.data.sentence);
+      console.log(modelRes.data.sentence);
 
       // 로컬 테스트 API
-      console.log(modelRes.data.senti);
+      // console.log(modelRes.data.senti);
 
       const sentiDTO = {
         senti: modelRes.data.senti
@@ -171,7 +171,7 @@ function PostUpload() {
             type="button"
             className="upload-btn"
             onClick={clickPostSubmit}
-          >
+          > 
             Upload
           </button>
         </form>
