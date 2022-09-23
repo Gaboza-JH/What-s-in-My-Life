@@ -1,13 +1,12 @@
 ## <strong>W</strong>hat's <strong>I</strong>n My <strong>L</strong>ife? (WIL) 
 
-<hr>
 <br>
 
 ## 파트별 현재 진행 상황 및 주간 계획 (~ 09/23)
 <hr>
 
 ## [FE/BE]
->1 진행 
+>1 진행 사항
  - 프론트 연동 완료 :
     - 마이페이지
         - 게시물 등록 연동 완료 + 버튼 통합
@@ -71,10 +70,11 @@
    ![image](https://user-images.githubusercontent.com/103519499/191882414-2e97319d-7f99-4728-82b2-a742f7789925.png)
 
 - workflow 구상 및 작성
-   - 구상
+   - 구상 <br>
+     ![image](https://user-images.githubusercontent.com/103519499/191893360-29c7597d-b3f3-4ff9-b38c-4356c6bc09c8.png)
    
-   - DAG
-   ![image](https://user-images.githubusercontent.com/103519499/191884366-ec5175eb-029a-4fa7-a971-5f37df232a3d.png)
+   - DAG <br>
+    ![image](https://user-images.githubusercontent.com/103519499/191884366-ec5175eb-029a-4fa7-a971-5f37df232a3d.png)
 
    - Task 및 Operator
       - PythonOperator (Python함수를 실행위한 Operator)
@@ -97,14 +97,14 @@
    ![image](https://user-images.githubusercontent.com/103519499/191883415-fa3583d1-94f7-4e11-ac95-d170dd0fe2e5.png)
 
 - 결과 확인
-   - daily
+   - daily <br>
       ![image](https://user-images.githubusercontent.com/103519499/191886581-c2b5c588-022c-4dcd-acb0-25a6135e411f.png)
 
       ![image](https://user-images.githubusercontent.com/103519499/191892264-315f1994-d43f-4bf9-b8b8-243b7049e172.png)
 
       ![image](https://user-images.githubusercontent.com/103519499/191892472-8a2c3950-7b02-4f4e-970e-b7ee8f7af2f7.png)
       
-   - weekly
+   - weekly <br>
       ![image](https://user-images.githubusercontent.com/103519499/191892539-f8cb5ffa-761e-49b1-ac5d-2d9f479c0877.png)
 
       ![image](https://user-images.githubusercontent.com/103519499/191892783-4e416833-6570-41df-a362-1029144ea937.png)
