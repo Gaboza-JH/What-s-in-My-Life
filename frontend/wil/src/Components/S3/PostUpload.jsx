@@ -104,7 +104,7 @@ function PostUpload() {
       // console.log(modelRes.data.senti);
 
       const sentiDTO = {
-        senti: modelRes.data.senti
+        senti: modelRes.data.sentence
       };
         
       // request -> {"senti" : 0 또는 1 }

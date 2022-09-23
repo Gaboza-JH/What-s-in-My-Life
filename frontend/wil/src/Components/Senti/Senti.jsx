@@ -16,7 +16,7 @@ const Senti = (props) => {
     chart: {
       type: 'donut',
     },
-    colors: ['#ffeb7a', '#cac6af'],
+    colors: ['#cac6af', '#ffeb7a'],
     plotOptions: {
       pie: {
         startAngle: -90,
@@ -34,9 +34,9 @@ const Senti = (props) => {
       }
     },
     fill: {
-      colors: ['#ffeb7a', '#cac6af']
+      colors: ['#cac6af', '#ffeb7a'],
     },
-    labels: ['긍정이', '부정이'],
+    labels: ['부정이', '긍정이'],
     responsive: [{
       breakpoint: 480,
       options: {
@@ -68,11 +68,14 @@ const Senti = (props) => {
           setSenti1(sentiP.length)
         }
       }
+      console.log("0값 : " + sentiN.length);
+      console.log("1값 : " + sentiP.length);
     } catch (e) {
       console.log("error : " + error);
       setError(e);
     }
   }
+
 
   useEffect(() => {
     fetchSenti();
@@ -82,8 +85,8 @@ const Senti = (props) => {
     <>
       <div className="Senti">
         <div className="Sentilist">
-            <img className="SentiItem1" src={senti1} />
             <img className="SentiItem0" src={senti0} />
+            <img className="SentiItem1" src={senti1} />
         </div>
         <Chart options={options} series={series} type="donut" width="550" />
           {/* <div className="Sentilist">
