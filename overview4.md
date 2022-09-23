@@ -47,6 +47,10 @@
 
 <img width="983" alt="image" src="https://user-images.githubusercontent.com/103571758/191890872-35732b23-a751-46d3-9c36-054cad5d1181.png">
 
+> EC2 인스턴스 환경에서 도커 테스트 필요
+<img width="963" alt="image" src="https://user-images.githubusercontent.com/103571758/191895490-b2bef32b-f50b-4cc7-a6b7-5bcd55283545.png">
+
+
 > Jenkins Freestyle Project에서 Docker Image 하나씩 만들어서 Spring, React 각각 실행 (Test)
 <img width="1153" alt="image" src="https://user-images.githubusercontent.com/103571758/191893754-a950af27-2c63-4560-829e-b04566ab96e2.png">
 
