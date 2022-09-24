@@ -72,7 +72,6 @@ public class PostController {
         System.out.println("/post/{token} postmapping");
 
         // 프론트에 저장되어 있는 토큰
-
         // 저장된 토큰을 이용해서 값을 리턴해주는 메서드를 만듦
         if (tokenProvider.validateToken(token)) {
             System.out.println("/post/{token} postmapping tokenProvider.validate = true");
@@ -80,11 +79,11 @@ public class PostController {
 //            if(postDTO.getUserId() == userId)
             List<String> imgPaths = new ArrayList<>();
             System.out.println("imgPaths : " + imgPaths);
-
             System.out.println("putUpPost !!!");
-            System.out.println("postController multipartfile empty? "+multipartFile.isEmpty());
+            System.out.println("postController multipartfile empty? "+ multipartFile.isEmpty());
             System.out.println(CollectionUtils.isNullOrEmpty(multipartFile));
             System.out.println(multipartFile.size());
+            System.out.println(("multipartFile : " + multipartFile));
             for (MultipartFile imgfile :multipartFile) {
                 if (Objects.equals(imgfile.getContentType(), "image/png") |
                         Objects.equals(imgfile.getContentType(), "image/jpg") |
@@ -92,7 +91,9 @@ public class PostController {
                         Objects.equals(imgfile.getContentType(), "image/gif") |
                         Objects.equals(imgfile.getContentType(), "image/webp")){
                     String defaultDir = "static";
+                    System.out.println("imgfile : " + imgfile);
                     imgPaths = imgService.upload(multipartFile, defaultDir);
+                    System.out.println("imgPaths : " + imgPaths);
                 }else {
                     break;
                 }

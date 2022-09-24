@@ -66,8 +66,8 @@ public class PostService {
     @Transactional
     public PostDTO putUpPost(Integer userId, PostDTO postDTO, List<String> imgPaths) {
         System.out.println("PostService :: PutUpPost :: ");
-        System.out.println("imgList :" + imgPaths);
-        System.out.println("imgList? :" + imgPaths.isEmpty());
+        System.out.println("imgList :" + imgPaths); // imgList :[static/95aab3da-cd60-44ac-ba6e-1f239ca13951조명.jpg]
+        System.out.println("imgList? :" + imgPaths.isEmpty()); // imgList? :false
         Post post = transformPost(postDTO, userId);
         System.out.println("postDTO::::"+ post.getUser());
         System.out.println("postDTO content : " + postDTO.getContent());
@@ -79,13 +79,13 @@ public class PostService {
         if(!imgPaths.isEmpty()) {
             for (String imgUrl : imgPaths) {
                 Image img = new Image(imgUrl, post);
-                System.out.println("img::::" + img);
+                System.out.println("img::::" + img); // img::::Image(img_id=0, file_name=static/95aab3da-cd60-44ac-ba6e-1f239ca13951조명.jpg, post=com.example.wil.model.Post@2df05337)
                 imgRepository.save(img);
                 System.out.println("repository success");
                 imgUrlList.add(imgUrl);
             }
         }
-        System.out.println("imgURLList : : : " + imgUrlList);
+        System.out.println("imgURLList : : : " + imgUrlList); // imgURLList : : : [static/95aab3da-cd60-44ac-ba6e-1f239ca13951조명.jpg]
         return transformPostDTO(post);
     }
 

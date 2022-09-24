@@ -22,6 +22,7 @@ public class UserDTO {
     private String provider;
     private String providerId;
     private String nickname;
+    private String profileImg;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @CreationTimestamp
     private Timestamp createDate;

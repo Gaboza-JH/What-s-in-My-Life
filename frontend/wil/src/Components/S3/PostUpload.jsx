@@ -10,6 +10,7 @@ function PostUpload() {
   const [fileName, setFileName] = useState(defaultUpload);
   const [showAlert, setShowAlert] = useState(false);
   const [finalPost, setfinalPost] = useState([]);
+  const [clickUpload, setClickUpload] = useState(false);
 
   // FileInput onChange Handler
   const FileInputHandler = (e) => {
@@ -84,8 +85,8 @@ function PostUpload() {
       // request -> {'text' : "나는 오늘 기분이 안좋아"} 
       const modelRes = await axios.post(
         // `http://127.0.0.1:8080/predict`, textDTO,
-        `http://3.35.30.11:8000/predict`, textDTO,
-          // `http://localhost:8080/predict/`, textDTO,
+        // `http://3.35.30.11:8000/predict`, textDTO,
+          `http://localhost:8080/predict/`, textDTO,
         {
           withCredentials: true // 쿠키 cors 통신 설정
         },
@@ -104,7 +105,7 @@ function PostUpload() {
       // console.log(modelRes.data.senti);
 
       const sentiDTO = {
-        senti: modelRes.data.sentence
+        senti: modelRes.data.senti
       };
         
       // request -> {"senti" : 0 또는 1 }
@@ -123,6 +124,7 @@ function PostUpload() {
         setFileName(defaultUpload);
         setFileUrl(null);
       }, 2000);
+      setClickUpload(true);
     } catch (err) {
       toast.error(err.message);
       setFileName(defaultUpload);
@@ -133,6 +135,12 @@ function PostUpload() {
 
   console.log("senti 값까지 update된 post 정보");
   console.log(finalPost);
+
+  // if (clickUpload == true) {
+  //   setTimeout(() => {
+  //     window.location = "http://localhost:3000/mypage";
+  //   }, 1000);
+  // }
 
   return (
     <>
@@ -168,7 +176,7 @@ function PostUpload() {
             placeholder="Please enter your contents."
           />
           <button
-            type="button"
+            // type="button"
             className="upload-btn"
             onClick={clickPostSubmit}
           > 

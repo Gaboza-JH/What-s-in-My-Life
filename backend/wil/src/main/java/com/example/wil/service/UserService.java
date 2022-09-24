@@ -6,8 +6,10 @@ import com.example.wil.DTO.UserDTO;
 import com.example.wil.DTO.UserNicknameRequestDto;
 import com.example.wil.config.jwt.JwtProperties;
 import com.example.wil.config.jwt.TokenProvider;
+import com.example.wil.model.Image;
 import com.example.wil.model.Post;
 import com.example.wil.model.User;
+import com.example.wil.repository.ImageRepository;
 import com.example.wil.repository.PostRepository;
 import com.example.wil.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
@@ -32,6 +34,9 @@ public class UserService {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private ImageRepository imgRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -89,7 +94,7 @@ public class UserService {
         return transformUserDTOList(userList);
     }
 
-    public UserDTO updateUser(int userId, UserDTO userDTO) {
+    public UserDTO updateUserNickname(int userId, UserDTO userDTO) {
         User foundUser = userRepository.getReferenceById(userId);
 //        String rawPassword = userDTO.getPassword();
 //        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
@@ -97,6 +102,19 @@ public class UserService {
 //        foundUser.setEmail(userDTO.getEmail());
         if (userDTO.getNickname() != foundUser.getUsername()) {
             foundUser.setNickname(userDTO.getNickname());
+        }
+        User updatedUser = userRepository.save(foundUser);
+        return transformUserDTO(updatedUser);
+    }
+
+    public UserDTO updateUserProfile(int userId, String imgPaths) {
+        System.out.println("UserService :: updateUserProfile :: ");
+        System.out.println("imgList :" + imgPaths);
+        System.out.println("imgList? :" + imgPaths.isEmpty());
+
+        User foundUser = userRepository.getReferenceById(userId);
+        if (foundUser.getProfileImg() == null || foundUser.getProfileImg() != imgPaths) {
+            foundUser.setProfileImg(imgPaths);
         }
         User updatedUser = userRepository.save(foundUser);
         return transformUserDTO(updatedUser);
@@ -143,6 +161,7 @@ public class UserService {
                 .nickname(user.getNickname())
                 .createDate(user.getCreateDate())
                 .postIdList(postIdList)
+                .profileImg(user.getProfileImg())
                 .build();
     }
 

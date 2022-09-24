@@ -6,12 +6,14 @@ import { HiOutlineViewGrid } from "react-icons/hi";
 import { HiOutlineX } from "react-icons/hi";
 import profileImg from "../../static/img/profile_default.png";
 import PostUpload from "../S3/PostUpload";
+import ProfileImgUpload from "../S3/ProfileImgUpload";
 import "./Profile.css";
 import axios from "axios";
 
 const Profile = (props) => {
   const [isOpenProfile, setIsOpenProfile] = useState(false);
   const [isOpenPostUpload, setIsOpenPostUpload] = useState(false);
+  const [isOpenProfileImg, setIsOpenProfileImg] = useState(false);
   const [likes, setLikes] = useState(0);
 
   // 유저의 게시물당  좋아요 수 조회
@@ -22,11 +24,15 @@ const Profile = (props) => {
       .then((response) => setLikes(response.data));
   });
 
-  // ProfileModal
+  // Profile Modal
   const openProfileModalHandler = () => {
     setIsOpenProfile(!isOpenProfile);
   };
-  // UploadModal
+  // ProfileImg Modal
+  const openProfileImgUploadModalHandler = () => {
+    setIsOpenProfileImg(!isOpenProfileImg);
+  }
+  // Upload Modal
   const openPostUploadModalHandler = () => {
     setIsOpenPostUpload(!isOpenPostUpload);
   };
@@ -59,9 +65,31 @@ const Profile = (props) => {
     <div className="profile-header">
       <div className="profile">
         <div className="profile-image">
-          <img src={profileImg} alt="" />
+          <img src={props.user.profileImg == null ? profileImg :  "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" + props.user.profileImg} className="btn profile-image-edit-btn" alt="" onClick={openProfileImgUploadModalHandler}/>
+          {isOpenProfileImg === true ? (
+                <div className="backdrop" onClick={openProfileImgUploadModalHandler}>
+                  <div
+                    className="modal-view"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <span
+                      onClick={openProfileImgUploadModalHandler}
+                      className="close-btn"
+                    >
+                      <HiOutlineX />
+                    </span>
+                    <div className="desc">
+                      <form className="modal-form">
+                        <h1 className="header-upload">Upload Profile Image</h1>
+                        <span>Post the profile picture you want.</span>
+                        {/* <PostUpload /> 대신 컴포넌트 만들어서 넣기*/} 
+                        <ProfileImgUpload />
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
         </div>
-
         <div className="profile-user-settings">
           <h1 className="profile-user-name">{props.user.nickname}</h1>
           <button

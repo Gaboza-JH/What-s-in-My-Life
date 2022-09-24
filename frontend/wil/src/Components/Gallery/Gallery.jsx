@@ -58,7 +58,7 @@ const Gallery = (props) => {
         `http://localhost:8080/like/${token}`,
         likeDTO
       );
-      setClickLike(true);
+      // setClickLike(true);
     } catch (e) {
       console.log("error : " + error);
       setError(e);
@@ -96,9 +96,11 @@ const Gallery = (props) => {
     }
   };
 
-  if (clickLike == true) {
-    window.location = "http://localhost:3000/mypage";
-  }
+  // if (clickLike == true) {
+  //   setTimeout(() => {
+  //     window.location = "http://localhost:3000/mypage";
+  //   }, 3000);
+  // }
 
   useEffect(() => {
     allFetchPost();
