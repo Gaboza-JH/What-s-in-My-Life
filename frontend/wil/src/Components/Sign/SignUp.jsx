@@ -49,7 +49,6 @@ const SignUp = () => {
     console.log(e.target.value);
   };
 
-
   // 회원 가입은 등록만 하면 됨
   const clickLocalSignUpubmit = async (e) => {
     try {

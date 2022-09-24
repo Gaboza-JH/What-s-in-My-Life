@@ -3,6 +3,8 @@ import { HiOutlineHeart } from "react-icons/hi";
 import { HiOutlineX } from "react-icons/hi";
 import axios from "axios";
 import "./Gallery.css";
+import HeartImg from "../../static/img/heart.png"
+import EmptyHeartImg from "../../static/img/emptyheart.png"
 
 // 게시물 유무 판별 로직 추가 해야 함
 const Gallery = (props) => {
@@ -58,7 +60,7 @@ const Gallery = (props) => {
         `http://localhost:8080/like/${token}`,
         likeDTO
       );
-      // setClickLike(true);
+      setClickLike(!clickLike);
     } catch (e) {
       console.log("error : " + error);
       setError(e);
@@ -143,6 +145,11 @@ const Gallery = (props) => {
     }
     return result;
   };
+  console.log(postLike);
+  console.log("--------------------------");
+  console.log(clickImg);
+  console.log(clickImgPostId); // 3
+  console.log(modalclickImgPostId); // 2, index 값
 
   return (
     <>
@@ -162,11 +169,28 @@ const Gallery = (props) => {
                 <h1 className="header-profile">게시물</h1>
                 <div className="modal-gallery-container">
                   <div className="gallery-item">
-                    <img
-                      src={clickImg.src}
-                      className="modal-gallery-image"
-                      alt=""
-                    />
+                    <div className="modal-container">
+                      <div>
+                        <img
+                          src={clickImg.src}
+                          className="modal-gallery-image"
+                          alt=""
+                        />
+                      </div>
+                      <div className="modal-heart-box">
+                        <img 
+                          src={clickLike ? HeartImg : EmptyHeartImg} 
+                          className="modal-heart-image" 
+                          />
+                      </div>
+                    </div>
+                    {/* <div className="gallery-item-info">
+                      <ul>
+                        <li className="gallery-item-likes">
+                          <HiOutlineHeart /> {postLike[modalclickImgPostId]}
+                        </li>
+                      </ul>
+                    </div> */}
                   </div>
                 </div>
                 <h3 className="modal-content">
