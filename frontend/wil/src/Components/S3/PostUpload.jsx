@@ -69,9 +69,8 @@ function PostUpload() {
       const token = localStorage.getItem("token");
       console.log(PostDTO);
 
-      // Spring 서버로 게시물 등록 서비스 요청 (content, shown, img)
       const res = await axios.post(
-        `http://localhost:8080/post/${token}`,
+        `http://3.37.184.148:8080/post/${token}`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -109,7 +108,7 @@ function PostUpload() {
       };
         
       // request -> {"senti" : 0 또는 1 }
-      const resultPostRes = await axios.put(`http://localhost:8080/post/${res.data.postId}`, sentiDTO);
+      const resultPostRes = await axios.put(`http://3.37.184.148:8080/post/${res.data.postId}`, sentiDTO);
       console.log(resultPostRes);
       setfinalPost(resultPostRes.data);
 

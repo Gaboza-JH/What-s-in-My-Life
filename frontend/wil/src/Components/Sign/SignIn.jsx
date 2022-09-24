@@ -7,11 +7,11 @@ import axios from "axios";
 import { useEffect } from "react";
 
 const NAVER_LOGIN_URL =
-  "http://localhost:8080/oauth2/authorization/naver?redirect_uri=http://localhost:8080/oauth2/redirect_front";
+  "http://3.37.184.148:8080/oauth2/authorization/naver?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 const KAKAO_LOGIN_URL =
-  "http://localhost:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:8080/oauth2/redirect_front";
+  "http://3.37.184.148:8080/oauth2/authorization/kakao?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 const GOOGLE_LOGIN_URL =
-  "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:8080/oauth2/redirect_front";
+  "http://3.37.184.148:8080/oauth2/authorization/google?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 
 const SignIn = () => {
   const [userLocalPostDTO, setUserLocalPostDTO] = useState(null);
@@ -47,7 +47,7 @@ const SignIn = () => {
       // );
 
       const res = await axios.post(
-        `http://localhost:8080/login`, userLocalPostDTO,
+        `http://3.37.184.148:8080/login`, userLocalPostDTO,
         // {
         //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
         // }
@@ -79,7 +79,7 @@ const SignIn = () => {
 
   return (
     <div className=" form-container sign-in-container">
-      <form className="sign-form">
+    <form className="sign-form">
         <h1 className="header-signin">Sign in</h1>
         <div className="social-container">
           <a className="sign-a" href={GOOGLE_LOGIN_URL}>

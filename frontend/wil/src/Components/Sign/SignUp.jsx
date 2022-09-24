@@ -54,7 +54,7 @@ const SignUp = () => {
   const clickLocalSignUpubmit = async (e) => {
     try {
       const res = await axios.post(
-        `http://localhost:8080/users`, userLocalPostDTO
+        `http://3.37.184.148:8080/users`, userLocalPostDTO
       );
       console.log("success!! 로컬 회원가입 성공");
       console.log("responst : " + res);

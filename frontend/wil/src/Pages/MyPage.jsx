@@ -17,7 +17,7 @@ const MyPage = () => {
       setError(null);
       setUser(null);
       setLoading(true);
-      const response = await axios.get(`http://localhost:8080/users/${token}`);
+      const response = await axios.get(`http://3.37.184.148:8080/users/${token}`);
       setUser(response.data);
     } catch (e) {
       console.log("error" + error);
