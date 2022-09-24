@@ -67,8 +67,9 @@ public class PostController {
 //    }
 
     // token 방식 : token에서 userId 얻어냄
-    @PostMapping("/post/{token}")
+    @RequestMapping(value = "/post/{token}", method= RequestMethod.POST, headers = ("content-type=multipart/*"))
     public PostDTO putUpPost(@PathVariable String token, @RequestPart(value = "PostDTO", required = false) PostDTO postDTO, @RequestPart(value = "image", required = false) List<MultipartFile> multipartFile) throws IOException {
+        System.out.println("-------------------------------------------------------------------");
         System.out.println("/post/{token} postmapping");
 
         // 프론트에 저장되어 있는 토큰
