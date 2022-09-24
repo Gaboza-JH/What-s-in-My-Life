@@ -42,7 +42,7 @@ const ProfileImgUpload = () => {
             const token = localStorage.getItem("token");
 
             const res = await axios.patch(
-                `http://localhost:8080/users/${token}`,
+                `http://3.37.184.148:8080/users/${token}`,
                 formData,
                 {
                     withCredentials: true // 쿠키 cors 통신 설정
