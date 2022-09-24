@@ -175,7 +175,7 @@ function PostUpload() {
             placeholder="Please enter your contents."
           />
           <button
-            type="button"
+            // type="button"
             className="upload-btn"
             onClick={clickPostSubmit}
           > 
