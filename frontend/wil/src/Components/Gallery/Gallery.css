@@ -113,8 +113,8 @@
     position: absolute;
     left: 370px;
     top: 352px;
-    font-size: 28px;
-    color: white;
+    font-size: 30px;
+    color: darkgray;
   }
 
   @supports (display: grid) {
