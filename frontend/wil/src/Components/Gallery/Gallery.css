@@ -90,8 +90,31 @@
 
   .modal-content{
     margin-top: 15px;
-    text-shadow:3px 3px gray;
+    /* text-shadow:3px 3px gray; */
     color:rgb(35, 35, 35);
+  }
+
+  .modal-image-box{
+    position: relative;
+  }
+
+  .modal-heart-box{
+    position: absolute;
+    left: 330px;
+    top: 360px;
+  }
+
+  .modal-heart-image{
+    max-width: 30px;
+    max-height: 30px;
+  }
+
+  .modal-like-num{
+    position: absolute;
+    left: 370px;
+    top: 352px;
+    font-size: 28px;
+    color: white;
   }
 
   @supports (display: grid) {

@@ -17,6 +17,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface LikesRepository extends JpaRepository<Likes, Integer> {
     Optional<Likes> findByUserIdAndPostId(User user, Post post);
+    List<Likes> findAllByPostId(Post post);
     int countByPostId(Post post);
     int countByUserId(User user);
 

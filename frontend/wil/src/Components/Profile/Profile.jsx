@@ -16,7 +16,7 @@ const Profile = (props) => {
   const [isOpenProfileImg, setIsOpenProfileImg] = useState(false);
   const [likes, setLikes] = useState(0);
 
-  // 유저의 게시물당  좋아요 수 조회
+  // 유저의 게시물당 좋아요 수 조회
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
