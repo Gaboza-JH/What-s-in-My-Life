@@ -67,17 +67,34 @@ public class LikeController {
     }
 
     // 좋아요 취소
-    @DeleteMapping("/like/{token}")
-    public ResponseEntity<String> unLike(@PathVariable String token, @RequestBody LikesDTO likesDTO)
+//    @DeleteMapping("/like/{token}")
+//    public ResponseEntity<String> unLike(@PathVariable String token, @RequestBody LikesDTO likesDTO)
+//    {
+//        System.out.println("/like/{token} deletemapping");
+//        if (tokenProvider.validateToken(token)) {
+//            System.out.println("/like/{token} deletemapping tokenProvider.validate = true");
+//            int userId = tokenProvider.getUserIdFromToken(token);
+//            int postId = likesDTO.getPostId();
+//            likesService.cancelLike(userId, postId);
+//        }
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
+    // axios에서
+    // HttpMessageNotReadableException: Required request body is missing
+    // 문제때문에 body 삭제하고 Pathvariable로 전달
+    @DeleteMapping("/like/{token}/{postId}")
+    public boolean unLike(@PathVariable String token, @PathVariable Integer postId)
     {
         System.out.println("/like/{token} deletemapping");
         if (tokenProvider.validateToken(token)) {
             System.out.println("/like/{token} deletemapping tokenProvider.validate = true");
             int userId = tokenProvider.getUserIdFromToken(token);
-            int postId = likesDTO.getPostId();
             likesService.cancelLike(userId, postId);
+            return true;
+        } else {
+            return false;
         }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // 포스트당 좋아요 조회

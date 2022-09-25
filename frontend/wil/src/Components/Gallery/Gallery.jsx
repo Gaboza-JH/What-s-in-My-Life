@@ -19,6 +19,7 @@ const Gallery = (props) => {
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
   const [clickLike, setClickLike] = useState();
   const [userIdListDoLikesByPostId, setUserIdListDoLikesByPostId] = useState([]);
+  const [postLikeId, setPostLikeId] = useState();
 
   // modal 활성화 되었을 때 이벤트핸들러
   const openPostModalHandler = (e) => {
@@ -33,6 +34,11 @@ const Gallery = (props) => {
     setClickImgPostId(e.target.id);
     // 클릭한 이미지에 관한 ImgPostId 정보
     setModalClickImgPostId(Number(e.target.id) - 1);
+
+    if (modalclickImgPostId != 0) {
+      const id = e.target.id - postList[0].postId; // postList[0].postId -> 유저가 업로드한 첫 게시물 id
+      setPostLikeId(id);
+    }
   };
 
   // 전체 게시물 조회
@@ -40,23 +46,21 @@ const Gallery = (props) => {
     try {
       const response = await axios.get(`http://localhost:8080/post/`);
       setAllPost(response.data);
-      if (userIdListDoLikesByPostId[0] == props.user.id) {
-        setClickLike(true);
-      }
     } catch (e) {
       console.log("error : " + error);
       setError(e);
     }
   };
 
+  // 새로고침 하면 useState 때문에 무조건 false로 시작임
   // 좋아요 버튼
-  const clickHandler = async (e) => {
-    const postId = Number(clickImgPostId);
-    const likeDTO = {
-      postId: postId,
-    };
-
+  const likePostHandler = async (e) => {
+    console.log("좋아요 등록 버튼");
     if (clickLike != true) {
+      const postId = Number(clickImgPostId);
+      const likeDTO = {
+        postId: postId,
+      };
       try {
         const token = localStorage.getItem("token");
         // 좋아요 등록
@@ -72,24 +76,30 @@ const Gallery = (props) => {
         console.log("error : " + error);
         setError(e);
       }
-    } else if ( clickLike == true) {
+    }
+  };
+
+  const likeDeleteHandler = async (e) => {
+    console.log("좋아요 취소 버튼");
+    if (clickLike == true) {
       try {
         const token = localStorage.getItem("token");
         // 좋아요 취소
         const response = await axios.delete(
-          `http://localhost:8080/like/${token}`,
-          likeDTO
+          `http://localhost:8080/like/${token}/${modalclickImgPostId + 1}`,
         );
         setClickLike(false);
         fetchPostLike();
         fetchUserIdListDoLikesByPostId();
+        for (let index = 0; index < Object.keys(userIdListDoLikesByPostId).length; index++) {
+          console.log(userIdListDoLikesByPostId[index]); // id list 잘 들어있음
+        }
         console.log("좋아요 취소 완료");
       } catch (e) {
         console.log("error : " + error);
         setError(e);
       }
     }
-
   };
 
   // 유저가 업로드한 게시물 조회
@@ -156,6 +166,7 @@ const Gallery = (props) => {
 
   console.log(postList);
   console.log(clickLike);
+
   // 전체 게시물 rendering 함수
   const rendering = () => {
     const result = [];
@@ -186,6 +197,7 @@ const Gallery = (props) => {
     }
     return result;
   };
+
 
   console.log(postLike);
   console.log("--------------------------");
@@ -225,12 +237,16 @@ const Gallery = (props) => {
                         <img
                           // index 로직 처리 더 해야 함 (좋아요 클릭한 유저가 여러명일 수 있으니까)
                           // src={(clickLike || (userIdListDoLikesByPostId[0] === props.user.id)) ? HeartImg : EmptyHeartImg}
-                          src={clickLike ? HeartImg : EmptyHeartImg}
+                          src={(clickLike) ? HeartImg : EmptyHeartImg}
                           className="modal-heart-image"
                         />
                       </div>
                       <div className="modal-like-num">
-                        {postLike[modalclickImgPostId]}
+                        {/* 모달 타겟에는 게시물 id 정보만 들어있음
+                          근데 postLike는 게시물 id랑은 상관없이
+                          0부터 시작
+                        */}
+                        {postLike[postLikeId]}
                       </div>
                     </div>
                     {/* <div className="gallery-item-info">
@@ -248,7 +264,7 @@ const Gallery = (props) => {
                 <button
                   className="btn-save"
                   type="button"
-                  onClick={clickHandler}
+                  onClick={clickLike ? likeDeleteHandler : likePostHandler}
                 >
                   ❤좋아요❤
                 </button>
