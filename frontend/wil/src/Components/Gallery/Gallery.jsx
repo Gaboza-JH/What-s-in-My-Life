@@ -8,7 +8,7 @@ import EmptyHeartImg from "../../static/img/emptyheart.png"
 
 // 게시물 유무 판별 로직 추가 해야 함
 const Gallery = (props) => {
-  const postIdIndex = props.user.postIdList;
+  const postIdIndex = props.user.postIdList; // 이건 순서대로 들어옴
   const [postList, setPostList] = useState();
   const [error, setError] = useState(null);
   const [postLike, setPostLike] = useState(null);
@@ -21,6 +21,7 @@ const Gallery = (props) => {
   // const [clickLike, setClickLike] = useState();
   const [userIdListDoLikesByPostId, setUserIdListDoLikesByPostId] = useState([]);
   const [postLikeId, setPostLikeId] = useState();
+  const [modalClickContent, setModalClickContent] = useState('');
 
   // modal 활성화 되었을 때 이벤트핸들러
   const openPostModalHandler = (e) => {
@@ -51,7 +52,7 @@ const Gallery = (props) => {
 
   };
 
-  // 전체 게시물 조회
+  // 전체 게시물 조회 (역순)
   const allFetchPost = async () => {
     try {
       const response = await axios.get(`http://localhost:8080/post/`);
@@ -116,7 +117,7 @@ const Gallery = (props) => {
     }
   };
 
-  // 유저가 업로드한 게시물 조회
+  // 유저가 업로드한 게시물 조회 (역순)
   const fetchPost = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -124,6 +125,7 @@ const Gallery = (props) => {
         `http://localhost:8080/post/user/${token}`
       );
       setPostList(postResponse.data);
+      console.log(postResponse.data);
     } catch (e) {
       console.log("error : " + error);
       setError(e);
@@ -204,7 +206,15 @@ const Gallery = (props) => {
             className="gallery-image"
             id={postList[index].postId}
             alt=""
-            onClick={openPostModalHandler}
+            //onClick={openPostModalHandler}
+            onClick={(e) => {
+              setIsOpenPost(!isOpenPost);
+              setClickImg(e.target);
+              setClickImgPostId(e.target.id);
+              setModalClickImgPostId(Number(e.target.id))
+              console.log(index);
+              setModalClickContent(postList[index].content)
+            }} 
           />
           {/* 좋아요 수 표시*/}
           <div className="gallery-item-info">
@@ -283,9 +293,10 @@ const Gallery = (props) => {
                     </div> */}
                   </div>
                 </div>
-                <h3 className="modal-content">
+                {/* <h3 className="modal-content">
                   {allPost[modalclickImgPostId].content}
-                </h3>
+                </h3> */}
+                <h3 className="modal-content">{modalClickContent}</h3>
                 <button
                   className="btn-save"
                   type="button"
