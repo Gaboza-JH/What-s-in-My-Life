@@ -41,6 +41,7 @@
   font-size: 14px;
   text-decoration: none;
   margin: 15px 0;
+  margin-right: 10px;
 }
 
 .sign-botton {
@@ -60,8 +61,8 @@
   background-color:#f98a03;
 }
 
-.btnsignup {
-  margin-top: 20px;
+.btn-signup {
+  margin-top: 10px;
   border-radius: 10px;
   border: 1px solid #fdb254;
   background-color: #fdb254;
