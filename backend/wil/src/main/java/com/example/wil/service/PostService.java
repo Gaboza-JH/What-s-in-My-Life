@@ -117,7 +117,7 @@ public class PostService {
     }
 
 
-    public List<PostDTO> deletePost(int postId) {
+    public String deletePost(int postId) {
         System.out.println("PostService Delete Method Call!");
 
 
@@ -132,7 +132,8 @@ public class PostService {
 
         postRepository.delete(foundPost);
 
-        return transformPostDTOList(postList);
+        //return transformPostDTOList(postList);
+        return "Delete post";
     }
 
     public PostDTO updatePost(int postId, PostDTO postDTO) {

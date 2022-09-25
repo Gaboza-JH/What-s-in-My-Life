@@ -124,7 +124,7 @@ public class PostController {
     public PostDTO findPostByPostId(@PathVariable int postId) { return postService.findPostByPostId(postId); }
 
     @DeleteMapping("/post/{postId}")
-    public List<PostDTO> deletePost(@PathVariable int postId) {return postService.deletePost(postId); }
+    public String deletePost(@PathVariable int postId) {return postService.deletePost(postId); }
 
     // 감정 분석 결과 수정 (update)
     // request -> {"senti" : 0 또는 1 }
