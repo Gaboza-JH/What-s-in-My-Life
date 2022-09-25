@@ -59,6 +59,7 @@ const Profile = (props) => {
       inputs
     );
     console.log("put request의 response : " + response);
+    alert("😊 NickName이 수정되었습니다! 😊");
   };
 
   return (
@@ -81,8 +82,7 @@ const Profile = (props) => {
                     <div className="desc">
                       <form className="modal-form">
                         <h1 className="header-upload">Upload Profile Image</h1>
-                        <span>Post the profile picture you want.</span>
-                        {/* <PostUpload /> 대신 컴포넌트 만들어서 넣기*/} 
+                        <span>Post the profile picture you want.</span> 
                         <ProfileImgUpload />
                       </form>
                     </div>
@@ -118,7 +118,6 @@ const Profile = (props) => {
                       onChange={handleOnChange}
                     />
                     <button
-                      type="button"
                       className="btn-save"
                       onClick={clickHandler}
                     >

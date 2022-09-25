@@ -8,8 +8,8 @@ import "./Senti.css";
 const Senti = (props) => {
   const postIdIndex = props.user.postIdList;
   // const [postList, setPostList] = useState();
-  const [sentiN, setSenti0] = useState(null);
-  const [sentiP, setSenti1] = useState(null);
+  const [sentiN, setSenti0] = useState(0);
+  const [sentiP, setSenti1] = useState(0);
   const [error, setError] = useState(null);
 
   const options = {

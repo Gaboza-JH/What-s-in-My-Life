@@ -18,7 +18,6 @@ const SignIn = () => {
   const [redirect, setRedirect] = useState();
 
   const handleOnChange = (e) => {
-
     if (e.target.placeholder == "Email") {
       setUserLocalPostDTO({
         ...userLocalPostDTO,
@@ -34,6 +33,8 @@ const SignIn = () => {
     }
   };
 
+  console.log(userLocalPostDTO)
+
   // 로그인
   // encodeURI(`email=${userLocalPostDTO.email}&password=${userLocalPostDTO.password}`)
   // --> username null 오류 해결
@@ -46,22 +47,25 @@ const SignIn = () => {
       //   }
       // );
 
-      const res = await axios.post(
-        `http://localhost:8080/login`, userLocalPostDTO,
+      // const res = await axios.post(
+      //   `http://localhost:8080/login`, userLocalPostDTO,
         // {
         //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
         // }
-      );
-      console.log("success!! 로컬 로그인 성공");
-      console.log("response : " + res);
-      console.log(res);
-      console.log(res.request.responseURL);
-      setRedirect(res.request.responseURL);
-      // window.open();
-      // window.location = redirectURL;
-      console.log(e);
+
+      if (userLocalPostDTO.password !== undefined && userLocalPostDTO.email !== undefined && userLocalPostDTO.password !== null && userLocalPostDTO.email !== null && userLocalPostDTO.password !== '' && userLocalPostDTO.email !== ''){
+        const res = await axios.post(`http://localhost:8080/login`, userLocalPostDTO);
+        console.log("로그인 성공");
+        setRedirect(res.request.responseURL);
+        alert("😎 환영합니다! 😎");
+      } else {
+        alert("😢 로그인 실패 정보를 입력해주세요. 😢");
+        window.location = "http://localhost:3000/loginsignup";
+      }
     } catch (err) {
-      console.error(err);
+      console.log("로그인 실패");
+      alert("🙅‍♂️ 로그인 실패했습니다. 다시 로그인해주세요.🙅‍♂️");
+      window.location = "http://localhost:3000/loginsignup";
     }
   };
 

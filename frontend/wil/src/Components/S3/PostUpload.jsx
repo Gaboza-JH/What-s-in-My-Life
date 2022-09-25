@@ -120,6 +120,7 @@ function PostUpload() {
       console.log("request : ", res.request);
       console.log("image upload success!");
       toast.success("success!!  이미지 업로드 성공");
+      alert("🎶 게시물이 등록 되었습니다! 🎶");
       setTimeout(() => {
         setFileName(defaultUpload);
         setFileUrl(null);

@@ -72,23 +72,24 @@ const Gallery = (props) => {
         console.log("error : " + error);
         setError(e);
       }
-    } else if ( clickLike == true) {
-      try {
-        const token = localStorage.getItem("token");
-        // 좋아요 취소
-        const response = await axios.delete(
-          `http://localhost:8080/like/${token}`,
-          likeDTO
-        );
-        setClickLike(false);
-        fetchPostLike();
-        fetchUserIdListDoLikesByPostId();
-        console.log("좋아요 취소 완료");
-      } catch (e) {
-        console.log("error : " + error);
-        setError(e);
-      }
-    }
+    } 
+    // else if ( clickLike == true) {
+    //   try {
+    //     const token = localStorage.getItem("token");
+    //     // 좋아요 취소
+    //     const response = await axios.delete(
+    //       `http://localhost:8080/like/${token}`,
+    //       likeDTO
+    //     );
+    //     setClickLike(false);
+    //     fetchPostLike();
+    //     fetchUserIdListDoLikesByPostId();
+    //     console.log("좋아요 취소 완료");
+    //   } catch (e) {
+    //     console.log("error : " + error);
+    //     setError(e);
+    //   }
+    // }
 
   };
 
