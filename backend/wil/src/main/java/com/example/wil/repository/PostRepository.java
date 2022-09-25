@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
-    List<Post> findAllByUser(Optional<User> user);
-//    List<Post> findAllByUser(Optional<User> user, Sort sort);
+//    List<Post> findAllByUser(Optional<User> user);
+    List<Post> findAllByUser(Optional<User> user, Sort sort);
 
 }

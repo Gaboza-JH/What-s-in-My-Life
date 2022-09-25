@@ -74,8 +74,8 @@ public class LikesService {
     public int countLikesByUser(int userId) {
         User user = userRepository.findById(userId).orElseThrow();
 
-        List<Post> postList = postRepository.findAllByUser(Optional.of(user));
-//        List<Post> postList = postRepository.findAllByUser(Optional.of(user), Sort.by(Sort.Direction.DESC, "postId"));
+//        List<Post> postList = postRepository.findAllByUser(Optional.of(user));
+        List<Post> postList = postRepository.findAllByUser(Optional.of(user), Sort.by(Sort.Direction.DESC, "postId"));
 
         int userPostCnt = 0;
         for (Post post:postList){
