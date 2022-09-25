@@ -11,6 +11,7 @@ import com.example.wil.repository.LikesRepository;
 import com.example.wil.repository.PostRepository;
 import com.example.wil.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,6 +92,7 @@ public class PostService {
 
     public List<PostDTO> findAllPosts() {
         List<Post> postList = postRepository.findAll();
+//        List<Post> postList = postRepository.findAll(Sort.by(Sort.Direction.DESC, "postId"));
         List<Image> imageList = imgRepository.findAll();
 
         List<PostDTO> postDTO = transformPostDTOList(postList);
@@ -106,6 +108,7 @@ public class PostService {
         System.out.println("findAllPostByUserId service");
         Optional<User> user = userRepository.findById(userId);
         List<Post> foundPost = postRepository.findAllByUser(user);
+//        List<Post> foundPost = postRepository.findAllByUser(user, Sort.by(Sort.Direction.DESC, "postId"));
         //return transformPostDTO(foundPost);
         return transformPostDTOList(foundPost);
     }

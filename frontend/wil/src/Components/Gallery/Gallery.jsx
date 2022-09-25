@@ -46,6 +46,7 @@ const Gallery = (props) => {
     try {
       const response = await axios.get(`http://localhost:8080/post/`);
       setAllPost(response.data);
+      console.log(response.data);
     } catch (e) {
       console.log("error : " + error);
       setError(e);
