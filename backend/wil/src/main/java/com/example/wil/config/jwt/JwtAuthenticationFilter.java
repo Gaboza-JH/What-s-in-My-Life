@@ -3,6 +3,7 @@ package com.example.wil.config.jwt;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -167,6 +168,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
         Date time = new Date();
+        format1.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
         String startTime = format1.format(time);
         System.out.println(startTime);
 

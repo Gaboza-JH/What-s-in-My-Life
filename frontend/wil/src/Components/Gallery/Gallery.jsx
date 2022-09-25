@@ -17,6 +17,7 @@ const Gallery = (props) => {
   const [allPost, setAllPost] = useState(null);
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
   const close = useRef();
+  const [clickLike, setClickLike] = useState(false);
 
   // modal 활성화 되었을 때 이벤트핸들러
   const openPostModalHandler = (e) => {
@@ -63,6 +64,7 @@ const Gallery = (props) => {
         `http://localhost:8080/like/${token}`,
         likeDTO
       );
+      setClickLike(true);
     } catch (e) {
       console.log("error : " + error);
       setError(e);
@@ -100,7 +102,11 @@ const Gallery = (props) => {
     }
   };
 
-  useEffect(() => { 
+  if (clickLike == true) {
+    window.location = "http://localhost:3000/mypage";
+  }
+
+  useEffect(() => {
     allFetchPost();
     fetchPost();
     fetchPostLike();

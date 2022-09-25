@@ -6,6 +6,8 @@ import LoginSignupPage from "./Pages/LoginSignupPage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Redshift } from "aws-sdk";
 
+// http://3.37.184.148/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiZXhwIjoxNjYzODI5OTA2fQ.cISIsChWt40POxzSn69g62E20m9NYv4k80SrFvPzpKkFFvoxp_n0LzzwK75FqX7-vpDncVx-m1_ND5l8kT8rDw&expiredTime=600000&startTime=2022-09-22%2006:48:26
+
 // 토큰 받아오기
 function getToken() {
   if (window.location.search !== "") {
@@ -59,8 +61,11 @@ const App = () => {
   const user = { booleanValue: null };
   const time = { start: 0, expiredTime: null };
 
+  // http://localhost:3000/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNjYzODMwMTA0fQ.Ijh6R7d2k-iityGxlRDBkqpAtPQqvt3_bgRlfOrl_FYJBNbK9PElYg8jZ7SE-yMr3ja7wdBZiEw-FDrxdn3Odg&expiredTime=600000&startTime=2022-09-22%2015:51:44
+  // http://3.37.184.148/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiZXhwIjoxNjYzODI5OTA2fQ.cISIsChWt40POxzSn69g62E20m9NYv4k80SrFvPzpKkFFvoxp_n0LzzwK75FqX7-vpDncVx-m1_ND5l8kT8rDw&expiredTime=600000&startTime=2022-09-22%2006:48:26
+
   // 로그인 후 리다이렉트 되었을떄
-  if (window.location.search.split("=")[0] === "?token") {
+  if (window.location.search.split("=")[0] == "?token") {
     localStorage.setItem("token", getToken());
     localStorage.setItem("expiredTime", getExpiredTime());
     localStorage.setItem("startTime", getTokenStartTime());

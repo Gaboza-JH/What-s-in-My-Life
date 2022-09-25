@@ -18,7 +18,7 @@ const Senti = (props) => {
     chart: {
       type: 'donut',
     },
-    colors: ['#ffeb7a', '#cac6af'],
+    colors: ['#cac6af', '#ffeb7a'],
     plotOptions: {
       pie: {
         expandOnClick: false,
@@ -40,9 +40,9 @@ const Senti = (props) => {
       showAlways: false,
     },
     fill: {
-      colors: ['#ffeb7a', '#cac6af']
+      colors: ['#cac6af', '#ffeb7a'],
     },
-    labels: ['긍정이', '부정이'],
+    labels: ['부정이', '긍정이'],
     responsive: [{
       breakpoint: 480,
       options: {
