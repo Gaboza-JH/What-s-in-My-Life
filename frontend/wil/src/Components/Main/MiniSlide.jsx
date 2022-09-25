@@ -35,17 +35,16 @@ const MiniSlide = ({ user, token, userData }) => {
   const [clickImg, setClickImg] = useState(null);
   const [clickImgPostId, setClickImgPostId] = useState(null);
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
+  const [modalClickContent, setModalClickContent] = useState('');
 
   // modal창 활성화 핸들러
   const openPostModalHandler = (e) => {
     console.log("게시물 modal 활성화 / 비활성");
     setIsOpenPost(!isOpenPost);
-    console.log(e);
-    console.log(e.target);
-    console.log(Number(e.target.id)-1);
     setClickImg(e.target);
     setClickImgPostId(e.target.id);
-    setModalClickImgPostId(Number(e.target.id)-1)
+    setModalClickImgPostId(Number(e.target.id))
+
   };
 
   // 좋아요 버튼
@@ -90,6 +89,7 @@ const MiniSlide = ({ user, token, userData }) => {
       // topPostIdIndexList 생성
       const topPostIdIndex = []
       for (let index = 0; index < topResponse.data.length; index++) {
+
         topPostIdIndex.push(topResponse.data[index].postId)
       }
       console.log(topPostIdIndex);
@@ -128,6 +128,9 @@ const MiniSlide = ({ user, token, userData }) => {
 
   const rendering = () => {
     const result = [];
+    console.log('0번째 postid : '+allPost[0].postId);
+    console.log('0번째 content : '+allPost[0].content);
+    console.log('전체게시물 갯수 : '+Object.keys(allPost).length);
     for (let index = 0; index < Object.keys(allPost).length; index++) {
       result.push(
         <div className="gallery-item" key={index} tabindex="0">
@@ -139,8 +142,19 @@ const MiniSlide = ({ user, token, userData }) => {
             className="gallery-image"
             id={allPost[index].postId}
             alt=""
-            onClick={openPostModalHandler}
+            //onClick={openPostModalHandler}
+            onClick={(e) => {
+              setIsOpenPost(!isOpenPost);
+              setClickImg(e.target);
+              setClickImgPostId(e.target.id);
+              setModalClickImgPostId(Number(e.target.id))
+              console.log(index);
+              setModalClickContent(allPost[index].content)
+            }} 
+            
           />
+          
+
           {/* 좋아요 수 표시*/}
           <div className="gallery-item-info">
             <ul>
@@ -210,7 +224,8 @@ const MiniSlide = ({ user, token, userData }) => {
                           <img src={clickImg.src} className="modal-gallery-image" alt="" />
                         </div>
                     </div>
-                    <h3 className="modal-content">{allPost[modalclickImgPostId].content}</h3>
+                    {/* <h3 className="modal-content">{allPost[modalclickImgPostId].content}</h3> */}
+                    <h3 className="modal-content">{modalClickContent}</h3>
                     <button
                       className="btn-save"
                       type="button"

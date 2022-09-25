@@ -43,7 +43,7 @@ public class UserController{
     public String signUp(HttpServletRequest request, HttpServletResponse response, @RequestBody UserDTO userDTO) throws IOException {
         String redirectUrl = userService.signUp(userDTO);
 //        oAuth2AuthenticationSuccessHandler.onLocalLoginSuccess(request, response, redirectUrl);
-        System.out.println("리다이렉트..");
+        System.out.println("Redirect..");
         return redirectUrl;
     }
 
