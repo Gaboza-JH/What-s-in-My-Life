@@ -51,18 +51,28 @@ const SignUp = () => {
 
   // 회원 가입은 등록만 하면 됨
   const clickLocalSignUpubmit = async (e) => {
-    try {
-      const res = await axios.post(
-        `http://localhost:8080/users`, userLocalPostDTO
-      );
-      console.log("success!! 로컬 회원가입 성공");
-      console.log("responst : " + res);
-      console.log(res);
-      // 등록 완료되면 alert 창 띄워주기 (로그인 시도해주라는 내용으로)
-    } catch (err) {
-      console.error(err);
+    if ((userLocalPostDTO.username != "") &&
+      (userLocalPostDTO.nickname != "") &&
+      (userLocalPostDTO.email != "") &&
+      (userLocalPostDTO.password != "")) {
+      try {
+        const res = await axios.post(
+          `http://localhost:8080/users`, userLocalPostDTO
+        );
+        console.log("success!! 로컬 회원가입 성공");
+        console.log("responst : " + res);
+        console.log(res);
+        // 등록 완료되면 alert 창 띄워주기 (로그인 시도해주라는 내용으로)
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      alert("전부 작성해주세요");
     }
   }
+
+  console.log(userLocalPostDTO);
+  // console.log(userLocalPostDTO.length);
 
   return (
     <div className="form-container sign-up-container">
@@ -82,7 +92,7 @@ const SignUp = () => {
         <span className="spansignup">or use your email for registration</span>
         <div onChange={handleOnChange}>
           <input className="interval-signup" type="text" placeholder="Name" />
-          <input className="interval-signup" type="text" placeholder="Nickname"/>
+          <input className="interval-signup" type="text" placeholder="Nickname" />
           <input className="interval-signup" type="email" placeholder="Email" />
           <input className="interval-signup" type="password" placeholder="Password" />
         </div>

@@ -99,7 +99,7 @@ function PostUpload() {
       );
       console.log(modelRes);
       // 모델 API
-      console.log(modelRes.data.sentence);
+      // console.log(modelRes.data.sentence);
 
       // 로컬 테스트 API
       // console.log(modelRes.data.senti);
@@ -136,11 +136,11 @@ function PostUpload() {
   console.log("senti 값까지 update된 post 정보");
   console.log(finalPost);
 
-  // if (clickUpload == true) {
-  //   setTimeout(() => {
-  //     window.location = "http://localhost:3000/mypage";
-  //   }, 1000);
-  // }
+  if (clickUpload == true) {
+    setTimeout(() => {
+      window.location = "http://localhost:3000/mypage";
+    }, 1000);
+  }
 
   return (
     <>
@@ -176,7 +176,7 @@ function PostUpload() {
             placeholder="Please enter your contents."
           />
           <button
-            // type="button"
+            type="button"
             className="upload-btn"
             onClick={clickPostSubmit}
           > 

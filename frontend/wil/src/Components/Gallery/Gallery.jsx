@@ -17,7 +17,8 @@ const Gallery = (props) => {
   const [clickImgPostId, setClickImgPostId] = useState(null);
   const [allPost, setAllPost] = useState(null);
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
-  const [clickLike, setClickLike] = useState(false);
+  const [clickLike, setClickLike] = useState();
+  const [userIdListDoLikesByPostId, setUserIdListDoLikesByPostId] = useState([]);
 
   // modal 활성화 되었을 때 이벤트핸들러
   const openPostModalHandler = (e) => {
@@ -39,6 +40,9 @@ const Gallery = (props) => {
     try {
       const response = await axios.get(`http://localhost:8080/post/`);
       setAllPost(response.data);
+      if (userIdListDoLikesByPostId[0] == props.user.id) {
+        setClickLike(true);
+      }
     } catch (e) {
       console.log("error : " + error);
       setError(e);
@@ -47,24 +51,45 @@ const Gallery = (props) => {
 
   // 좋아요 버튼
   const clickHandler = async (e) => {
-    console.log("좋아요 버튼 클릭");
     const postId = Number(clickImgPostId);
     const likeDTO = {
       postId: postId,
     };
 
-    try {
-      const token = localStorage.getItem("token");
-      // 좋아요 등록
-      const response = await axios.post(
-        `http://localhost:8080/like/${token}`,
-        likeDTO
-      );
-      setClickLike(!clickLike);
-    } catch (e) {
-      console.log("error : " + error);
-      setError(e);
+    if (clickLike != true) {
+      try {
+        const token = localStorage.getItem("token");
+        // 좋아요 등록
+        const response = await axios.post(
+          `http://localhost:8080/like/${token}`,
+          likeDTO
+        );
+        setClickLike(true);
+        fetchPostLike();
+        fetchUserIdListDoLikesByPostId();
+        console.log("좋아요 등록 완료");
+      } catch (e) {
+        console.log("error : " + error);
+        setError(e);
+      }
+    } else if ( clickLike == true) {
+      try {
+        const token = localStorage.getItem("token");
+        // 좋아요 취소
+        const response = await axios.delete(
+          `http://localhost:8080/like/${token}`,
+          likeDTO
+        );
+        setClickLike(false);
+        fetchPostLike();
+        fetchUserIdListDoLikesByPostId();
+        console.log("좋아요 취소 완료");
+      } catch (e) {
+        console.log("error : " + error);
+        setError(e);
+      }
     }
+
   };
 
   // 유저가 업로드한 게시물 조회
@@ -98,6 +123,21 @@ const Gallery = (props) => {
     }
   };
 
+  // 포스트당 좋아요를 누른 유저 id 리스트 조회
+  const fetchUserIdListDoLikesByPostId = async () => {
+    const userIdListDoLikesByPostId = [];
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/like/users/${clickImgPostId}`
+      );
+      console.log(response);
+      setUserIdListDoLikesByPostId(response.data);
+    } catch (e) {
+      console.log("error : " + error);
+      setError(e);
+    }
+  }
+
   // if (clickLike == true) {
   //   setTimeout(() => {
   //     window.location = "http://localhost:3000/mypage";
@@ -115,6 +155,7 @@ const Gallery = (props) => {
   if (!postLike) return null;
 
   console.log(postList);
+  console.log(clickLike);
   // 전체 게시물 rendering 함수
   const rendering = () => {
     const result = [];
@@ -145,11 +186,14 @@ const Gallery = (props) => {
     }
     return result;
   };
+
   console.log(postLike);
   console.log("--------------------------");
   console.log(clickImg);
   console.log(clickImgPostId); // 3
   console.log(modalclickImgPostId); // 2, index 값
+  console.log(userIdListDoLikesByPostId);
+  console.log(props.user);
 
   return (
     <>
@@ -170,7 +214,7 @@ const Gallery = (props) => {
                 <div className="modal-gallery-container">
                   <div className="gallery-item">
                     <div className="modal-container">
-                      <div>
+                      <div className="modal-image-box">
                         <img
                           src={clickImg.src}
                           className="modal-gallery-image"
@@ -178,10 +222,15 @@ const Gallery = (props) => {
                         />
                       </div>
                       <div className="modal-heart-box">
-                        <img 
-                          src={clickLike ? HeartImg : EmptyHeartImg} 
-                          className="modal-heart-image" 
-                          />
+                        <img
+                          // index 로직 처리 더 해야 함 (좋아요 클릭한 유저가 여러명일 수 있으니까)
+                          // src={(clickLike || (userIdListDoLikesByPostId[0] === props.user.id)) ? HeartImg : EmptyHeartImg}
+                          src={clickLike ? HeartImg : EmptyHeartImg}
+                          className="modal-heart-image"
+                        />
+                      </div>
+                      <div className="modal-like-num">
+                        {postLike[modalclickImgPostId]}
                       </div>
                     </div>
                     {/* <div className="gallery-item-info">

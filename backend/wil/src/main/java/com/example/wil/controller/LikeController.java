@@ -67,12 +67,14 @@ public class LikeController {
     }
 
     // 좋아요 취소
-    @DeleteMapping("/like")
-    public ResponseEntity<String> unLike(@RequestBody LikesDTO likesDTO)
+    @DeleteMapping("/like/{token}")
+    public ResponseEntity<String> unLike(@PathVariable String token, @RequestBody LikesDTO likesDTO)
     {
-        int userId = likesDTO.getUserId();
-        int postId = likesDTO.getPostId();
-        if(userId != 0) { // user의 세션을 가지고 와서 session 정보와 맞을때로 변경 필요
+        System.out.println("/like/{token} deletemapping");
+        if (tokenProvider.validateToken(token)) {
+            System.out.println("/like/{token} deletemapping tokenProvider.validate = true");
+            int userId = tokenProvider.getUserIdFromToken(token);
+            int postId = likesDTO.getPostId();
             likesService.cancelLike(userId, postId);
         }
         return new ResponseEntity<>(HttpStatus.OK);
@@ -96,6 +98,12 @@ public class LikeController {
         } else {
             return 0;
         }
+    }
+
+    // 포스트당 좋아요를 누른 유저 id 리스트 조회
+    @GetMapping("/like/users/{postId}")
+    public List<Integer> getUserIdList(@PathVariable int postId){
+        return likesService.getUserIdList(postId);
     }
 
     //인기 게시물 Top 5 조회

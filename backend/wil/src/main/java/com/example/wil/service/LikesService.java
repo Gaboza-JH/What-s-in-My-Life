@@ -81,6 +81,24 @@ public class LikesService {
 
     }
 
+    public List<Integer> getUserIdList(int postId) {
+        List<Integer> likesUserIdListByPostId = new ArrayList<>();
+        Post foundPost = postRepository.getReferenceById(postId);
+        List<Likes> likesListByPostId = likesRepository.findAllByPostId(foundPost);
+        for (Likes likes: likesListByPostId) {
+            likesUserIdListByPostId.add(likes.getUserId().getId());
+        }
+        return likesUserIdListByPostId;
+    }
+
+    private LikesDTO transformLikesDTO(Likes likes) {
+        return LikesDTO.builder()
+                .likeId(likes.getLikeId())
+                .userId(likes.getUserId().getId())
+                .postId(likes.getPostId().getPostId())
+                .build();
+    }
+
 //    public List<Post> topLike() {
 //        List<Likes> likes = likesRepository.findGroupByPostId();
 //        List<Post> postList = new ArrayList<>();
