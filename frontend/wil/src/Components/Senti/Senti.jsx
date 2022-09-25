@@ -1,6 +1,8 @@
+import { getByDisplayValue } from "@testing-library/react";
 import axios from "axios";
 import React, { Component, useEffect, useState } from "react";
 import Chart from 'react-apexcharts';
+import sentinone from "../../static/img/sentinone.png"
 import senti0 from "../../static/img/senti01.png"
 import senti1 from '../../static/img/senti11.png';
 import "./Senti.css";
@@ -8,8 +10,8 @@ import "./Senti.css";
 const Senti = (props) => {
   const postIdIndex = props.user.postIdList;
   // const [postList, setPostList] = useState();
-  const [sentiN, setSenti0] = useState(null);
-  const [sentiP, setSenti1] = useState(null);
+  const [sentiN, setSentiN] = useState(0);
+  const [sentiP, setSentiP] = useState(0);
   const [error, setError] = useState(null);
 
   const options = {
@@ -19,6 +21,7 @@ const Senti = (props) => {
     colors: ['#ffeb7a', '#cac6af'],
     plotOptions: {
       pie: {
+        expandOnClick: false,
         startAngle: -90,
         endAngle: 90,
         offsetY: 10,
@@ -33,6 +36,9 @@ const Senti = (props) => {
         bottom: -80
       }
     },
+    total: {
+      showAlways: false,
+    },
     fill: {
       colors: ['#ffeb7a', '#cac6af']
     },
@@ -46,7 +52,10 @@ const Senti = (props) => {
       }
     }]
   }
-  const series = [sentiN, sentiP];
+  
+  const series = [sentiP, sentiN];
+  // var chart = new Chart(document.querySelector(".Senti"), options);
+  // chart.render();
 
   // chart값 뿌려주기 
   const fetchSenti = async () => {
@@ -59,40 +68,40 @@ const Senti = (props) => {
           `http://localhost:8080/post/${index}`
         );
         if (response.data.senti == 0) {
+          console.log(response.data.Senti)
           sentiN.push(response.data.senti)
-          console.log(sentiN.length)
-          setSenti0(sentiN.length)
+          setSentiN(sentiN.length)
         } else {
           sentiP.push(response.data.senti)
-          console.log(sentiP.length)
-          setSenti1(sentiP.length)
+          setSentiP(sentiP.length)
         }
       }
+      console.log("0값 : " + sentiN.length);
+      console.log("1값 : " + sentiP.length);
     } catch (e) {
       console.log("error : " + error);
       setError(e);
     }
   }
 
+
   useEffect(() => {
     fetchSenti();
   }, []);
+
 
   return (
     <>
       <div className="Senti">
         <div className="Sentilist">
-            <img className="SentiItem1" src={senti1} />
-            <img className="SentiItem0" src={senti0} />
+          <img className= "SentiItem" src={postIdIndex.length ? senti1 : sentinone} onError={sentinone}/>
+          <img className= "SentiItem" src={postIdIndex.length ? senti0 : sentinone} onError={sentinone}/>
         </div>
         <Chart options={options} series={series} type="donut" width="550" />
-          {/* <div className="Sentilist">
-            <img className="SentiItem1" src={senti1} />
-            <img className="SentiItem0" src={senti0} />
-          </div> */}
       </div>
     </>
   );
 };
+
 
 export default Senti;
