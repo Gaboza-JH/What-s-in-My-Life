@@ -73,8 +73,10 @@ public class LikesService {
 
     public int countLikesByUser(int userId) {
         User user = userRepository.findById(userId).orElseThrow();
+
         List<Post> postList = postRepository.findAllByUser(Optional.of(user));
 //        List<Post> postList = postRepository.findAllByUser(Optional.of(user), Sort.by(Sort.Direction.DESC, "postId"));
+
         int userPostCnt = 0;
         for (Post post:postList){
             userPostCnt+=likesRepository.countByPostId(post);
@@ -91,6 +93,16 @@ public class LikesService {
             likesUserIdListByPostId.add(likes.getUserId().getId());
         }
         return likesUserIdListByPostId;
+    }
+
+    public List<Integer> getPostIdList(int userId) {
+        List<Integer> likesPostIdListByUserId = new ArrayList<>();
+        User foundUser = userRepository.getReferenceById(userId);
+        List<Likes> likesListByPostId = likesRepository.findAllByUserId(foundUser);
+        for (Likes likes: likesListByPostId) {
+            likesPostIdListByUserId.add(likes.getPostId().getPostId());
+        }
+        return likesPostIdListByUserId;
     }
 
     private LikesDTO transformLikesDTO(Likes likes) {

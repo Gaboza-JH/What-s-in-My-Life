@@ -123,9 +123,23 @@ public class LikeController {
         return likesService.getUserIdList(postId);
     }
 
+
+    // 유저가 좋아요 누른 게시물 id 리스트
+    @GetMapping("like/user/post/{token}")
+    public List<Integer> getPostIdList(@PathVariable String token) {
+        System.out.println("/like/user/post/{token} getmapping");
+        if (tokenProvider.validateToken(token)) {
+            System.out.println("/like/user/post/{token} getmapping tokenProvider.validate = true");
+            Integer userId = tokenProvider.getUserIdFromToken(token);
+            return likesService.getPostIdList(userId);
+        } else {
+            return null;
+        }
+    }
+
     //인기 게시물 Top 5 조회
     @GetMapping("/like/top_post")
-    public List<PostDTO> topLike(){
+    public List<PostDTO> topLike() {
         return postService.topLike();
     }
 }

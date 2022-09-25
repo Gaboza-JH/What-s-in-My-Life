@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
 import { HiOutlineX } from "react-icons/hi";
@@ -35,6 +35,7 @@ const MiniSlide = ({ user, token, userData }) => {
   const [clickImg, setClickImg] = useState(null);
   const [clickImgPostId, setClickImgPostId] = useState(null);
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
+  const close = useRef();
 
   // modal창 활성화 핸들러
   const openPostModalHandler = (e) => {
@@ -42,10 +43,10 @@ const MiniSlide = ({ user, token, userData }) => {
     setIsOpenPost(!isOpenPost);
     console.log(e);
     console.log(e.target);
-    console.log(Number(e.target.id)-1);
+    console.log(Number(e.target.id) - 1);
     setClickImg(e.target);
     setClickImgPostId(e.target.id);
-    setModalClickImgPostId(Number(e.target.id)-1)
+    setModalClickImgPostId(Number(e.target.id) - 1)
   };
 
   // 좋아요 버튼
@@ -197,18 +198,24 @@ const MiniSlide = ({ user, token, userData }) => {
           </div>
           {/* modal 기능 */}
           {isOpenPost === true ? (
-            <div className="backdrop">
+            <div className="backdrop" ref={close} onClick={(e) => {
+              if (close.current === e.target) {
+                setIsOpenPost(false)
+              }
+            }}>
               <div className="modal-view" onClick={(e) => e.stopPropagation()}>
-                <span onClick={openPostModalHandler} className="close-btn">
-                  <HiOutlineX />
-                </span>
+                <div className="btn-wrapper">
+                  <span onClick={openPostModalHandler} className="close-btn">
+                    <HiOutlineX />
+                  </span>
+                </div>
                 <div className="desc">
                   <form className="modal-form">
                     <h1 className="header-profile">게시물</h1>
                     <div className="modal-gallery-container">
-                        <div className="gallery-item">
-                          <img src={clickImg.src} className="modal-gallery-image" alt="" />
-                        </div>
+                      <div className="gallery-item">
+                        <img src={clickImg.src} className="modal-gallery-image" alt="" />
+                      </div>
                     </div>
                     <h3 className="modal-content">{allPost[modalclickImgPostId].content}</h3>
                     <button

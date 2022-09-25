@@ -8,6 +8,8 @@ const MyPage = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [postLikeBoolean, setPostLikeBoolean] = useState();
+  const [userdoLikePostIdList, setUserdoLikePostIdList] = useState([]);
 
   // 유저 정보 조회
   const fetchUser = async () => {
@@ -26,8 +28,43 @@ const MyPage = () => {
     setLoading(false);
   };
 
+  // 게시물 당 좋아요 수 조회
+  const fetchPostLike = async () => {
+    const likesBoolean = [];
+    try {
+      for (let index = 0; index < user.postIdList.length; index++) {
+        const response = await axios.get(
+          `http://localhost:8080/like/${user.postIdList[index]}`
+        );
+        if (response.data == 0) {
+          likesBoolean.push(false);
+        } else {
+          likesBoolean.push(true);
+        }
+      }
+      setPostLikeBoolean(likesBoolean);
+    } catch (e) {
+      console.log("error : " + error);
+      // setError(e);
+    }
+  };
+
+
+  // // 유저가 좋아요 누른 게시물 id 리스트
+  // const fetchUserdoLikePostId = async () => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     const response = await axios.get(`http://localhost:8080/like/user/post/${token}`);
+  //     setUserdoLikePostIdList(response.data);
+  //   } catch (e) {
+  //     console.log("error" + error);
+  //     // setError(e);
+  //   }
+  // }
+
   useEffect(() => {
     fetchUser();
+    // fetchUserdoLikePostId();
   }, []);
 
   if (loading) return <div>로딩중..</div>;
@@ -37,8 +74,9 @@ const MyPage = () => {
   return (
     <div>
       <Profile user={user} />
-      <Senti user={user}/>
-      <Gallery user={user}/>
+      <Senti user={user} Chart={user}/>
+      <Gallery user={user} postLikeBoolean={postLikeBoolean}/>
+      {/* <Gallery user={user} likedPostList={userdoLikePostIdList}/> */}
     </div>
   );
 };

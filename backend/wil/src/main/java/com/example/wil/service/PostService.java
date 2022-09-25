@@ -91,8 +91,10 @@ public class PostService {
     }
 
     public List<PostDTO> findAllPosts() {
+
         List<Post> postList = postRepository.findAll();
 //        List<Post> postList = postRepository.findAll(Sort.by(Sort.Direction.DESC, "postId"));
+
         List<Image> imageList = imgRepository.findAll();
 
         List<PostDTO> postDTO = transformPostDTOList(postList);
@@ -109,6 +111,7 @@ public class PostService {
         Optional<User> user = userRepository.findById(userId);
         List<Post> foundPost = postRepository.findAllByUser(user);
 //        List<Post> foundPost = postRepository.findAllByUser(user, Sort.by(Sort.Direction.DESC, "postId"));
+
         //return transformPostDTO(foundPost);
         return transformPostDTOList(foundPost);
     }

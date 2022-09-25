@@ -12,12 +12,13 @@ const Gallery = (props) => {
   const [postList, setPostList] = useState();
   const [error, setError] = useState(null);
   const [postLike, setPostLike] = useState(null);
+  const [postLikeBoolean, setPostLikeBoolean] = useState(props.postLikeBoolean);
   const [isOpenPost, setIsOpenPost] = useState(false);
   const [clickImg, setClickImg] = useState(null);
   const [clickImgPostId, setClickImgPostId] = useState(null);
   const [allPost, setAllPost] = useState(null);
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
-  const [clickLike, setClickLike] = useState();
+  // const [clickLike, setClickLike] = useState();
   const [userIdListDoLikesByPostId, setUserIdListDoLikesByPostId] = useState([]);
   const [postLikeId, setPostLikeId] = useState();
 
@@ -28,17 +29,26 @@ const Gallery = (props) => {
     console.log(e);
     console.log(e.target);
     console.log(Number(e.target.id) - 1);
+   
     // 이미지 클릭
     setClickImg(e.target);
     // ImgPostId 정보
     setClickImgPostId(e.target.id);
-    // 클릭한 이미지에 관한 ImgPostId 정보
+    // 클릭한 이미지에 관한 ImgPostId index 정보
     setModalClickImgPostId(Number(e.target.id) - 1);
 
-    if (modalclickImgPostId != 0) {
-      const id = e.target.id - postList[0].postId; // postList[0].postId -> 유저가 업로드한 첫 게시물 id
-      setPostLikeId(id);
+    for (let i = 0; i < Object.keys(postLike).length; i++) {
+      if (e.target.id == postIdIndex[i]) {
+        setPostLikeId(i); // postLikeId : 인덱스 정보
+      }
     }
+
+    // 실패한 로직
+    // if (modalclickImgPostId != 0) {
+    //   const id = e.target.id - postList[0].postId; // postList[0].postId -> 유저가 업로드한 첫 게시물 id
+    //   setPostLikeId(id);
+    // }
+
   };
 
   // 전체 게시물 조회
@@ -54,10 +64,10 @@ const Gallery = (props) => {
   };
 
   // 새로고침 하면 useState 때문에 무조건 false로 시작임
-  // 좋아요 버튼
   const likePostHandler = async (e) => {
     console.log("좋아요 등록 버튼");
-    if (clickLike != true) {
+
+    if (postLikeBoolean[e.target.id] != true) {
       const postId = Number(clickImgPostId);
       const likeDTO = {
         postId: postId,
@@ -69,7 +79,9 @@ const Gallery = (props) => {
           `http://localhost:8080/like/${token}`,
           likeDTO
         );
-        setClickLike(true);
+        let tmplist = postLikeBoolean;
+        tmplist[e.target.id] = true;
+        setPostLikeBoolean(tmplist);
         fetchPostLike();
         fetchUserIdListDoLikesByPostId();
         console.log("좋아요 등록 완료");
@@ -81,20 +93,21 @@ const Gallery = (props) => {
   };
 
   const likeDeleteHandler = async (e) => {
+    console.log(e);
     console.log("좋아요 취소 버튼");
-    if (clickLike == true) {
+
+    if (postLikeBoolean[e.target.id] == true) {
       try {
         const token = localStorage.getItem("token");
         // 좋아요 취소
         const response = await axios.delete(
-          `http://localhost:8080/like/${token}/${modalclickImgPostId + 1}`,
+          `http://localhost:8080/like/${token}/${clickImgPostId}`,
         );
-        setClickLike(false);
+        let tmplist = postLikeBoolean;
+        tmplist[e.target.id] = false;
+        setPostLikeBoolean(tmplist);
         fetchPostLike();
         fetchUserIdListDoLikesByPostId();
-        for (let index = 0; index < Object.keys(userIdListDoLikesByPostId).length; index++) {
-          console.log(userIdListDoLikesByPostId[index]); // id list 잘 들어있음
-        }
         console.log("좋아요 취소 완료");
       } catch (e) {
         console.log("error : " + error);
@@ -120,21 +133,28 @@ const Gallery = (props) => {
   // 게시물 당 좋아요 수 조회
   const fetchPostLike = async () => {
     const likes = [];
+    const likesBoolean = [];
     try {
       for (let index = 0; index < postIdIndex.length; index++) {
         const response = await axios.get(
           `http://localhost:8080/like/${postIdIndex[index]}`
         );
         likes.push(response.data);
+        if (response.data == 0) {
+          likesBoolean.push(false);
+        } else {
+          likesBoolean.push(true);
+        }
       }
       setPostLike(likes);
+      setPostLikeBoolean(likesBoolean);
     } catch (e) {
       console.log("error : " + error);
       setError(e);
     }
   };
 
-  // 포스트당 좋아요를 누른 유저 id 리스트 조회
+  // 게시물 당 좋아요를 누른 유저 id 리스트 조회
   const fetchUserIdListDoLikesByPostId = async () => {
     const userIdListDoLikesByPostId = [];
     try {
@@ -166,7 +186,9 @@ const Gallery = (props) => {
   if (!postLike) return null;
 
   console.log(postList);
-  console.log(clickLike);
+  // console.log(clickLike);
+  console.log(props.user);
+  console.log(props.user.postIdList);
 
   // 전체 게시물 rendering 함수
   const rendering = () => {
@@ -207,6 +229,7 @@ const Gallery = (props) => {
   console.log(modalclickImgPostId); // 2, index 값
   console.log(userIdListDoLikesByPostId);
   console.log(props.user);
+  console.log(postLikeBoolean);
 
   return (
     <>
@@ -238,7 +261,8 @@ const Gallery = (props) => {
                         <img
                           // index 로직 처리 더 해야 함 (좋아요 클릭한 유저가 여러명일 수 있으니까)
                           // src={(clickLike || (userIdListDoLikesByPostId[0] === props.user.id)) ? HeartImg : EmptyHeartImg}
-                          src={(clickLike) ? HeartImg : EmptyHeartImg}
+                          // src={(clickLike) ? HeartImg : EmptyHeartImg}
+                          src={(postLikeBoolean[postLikeId]) ? HeartImg : EmptyHeartImg}
                           className="modal-heart-image"
                         />
                       </div>
@@ -265,7 +289,8 @@ const Gallery = (props) => {
                 <button
                   className="btn-save"
                   type="button"
-                  onClick={clickLike ? likeDeleteHandler : likePostHandler}
+                  id={postLikeId}
+                  onClick={postLikeBoolean[postLikeId] ? likeDeleteHandler : likePostHandler}
                 >
                   ❤좋아요❤
                 </button>
