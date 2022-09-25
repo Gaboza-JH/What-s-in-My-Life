@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import { HiOutlineX } from "react-icons/hi";
+
 import axios from "axios";
 import "./Gallery.css";
 
@@ -15,15 +16,18 @@ const Gallery = (props) => {
   const [clickImgPostId, setClickImgPostId] = useState(null);
   const [allPost, setAllPost] = useState(null);
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
+  const close = useRef();
   const [clickLike, setClickLike] = useState(false);
 
   // modal 활성화 되었을 때 이벤트핸들러
   const openPostModalHandler = (e) => {
     console.log("게시물 modal 활성화 / 비활성");
     setIsOpenPost(!isOpenPost);
-    console.log(e);
+    console.log(!isOpenPost);
     console.log(e.target);
-    console.log(Number(e.target.id) - 1);
+    console.log(Number(e.target.id) - 1); 
+
+
     // 이미지 클릭
     setClickImg(e.target);
     // ImgPostId 정보
@@ -31,6 +35,8 @@ const Gallery = (props) => {
     // 클릭한 이미지에 관한 ImgPostId 정보
     setModalClickImgPostId(Number(e.target.id) - 1);
   };
+
+
 
   // 전체 게시물 조회
   const allFetchPost = async () => {
@@ -142,6 +148,7 @@ const Gallery = (props) => {
     return result;
   };
 
+
   return (
     <>
       <div className="gallery-container">
@@ -149,14 +156,18 @@ const Gallery = (props) => {
         <div className="gallery">{rendering()}</div>
       </div>
       {/* modal 기능 */}
-      {isOpenPost === true ? (
-        <div className="backdrop">
+      {isOpenPost === true ?  (
+        <div className="backdrop" ref={close} onClick={(e)=>{
+          if(close.current === e.target) {
+              setIsOpenPost(false)}}}>
           <div className="modal-view" onClick={(e) => e.stopPropagation()}>
-            <span onClick={openPostModalHandler} className="close-btn">
+            <div className="btn-wrapper">
+              <span onClick={openPostModalHandler} className="close-btn">
               <HiOutlineX />
-            </span>
+              </span>
+            </div>
             <div className="desc">
-              <form className="modal-form">
+              <form className="modal-form" >
                 <h1 className="header-profile">게시물</h1>
                 <div className="modal-gallery-container">
                   <div className="gallery-item">
@@ -181,7 +192,7 @@ const Gallery = (props) => {
             </div>
           </div>
         </div>
-      ) : null}
+     ) : null}
     </>
   );
 };
