@@ -19,6 +19,7 @@ const Gallery = (props) => {
   const [allPost, setAllPost] = useState(null);
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
   // const [clickLike, setClickLike] = useState();
+  const [modalClickContent, setModalClickContent] = useState('');
   const [userIdListDoLikesByPostId, setUserIdListDoLikesByPostId] = useState([]);
   const [postLikeId, setPostLikeId] = useState();
 
@@ -204,7 +205,15 @@ const Gallery = (props) => {
             className="gallery-image"
             id={postList[index].postId}
             alt=""
-            onClick={openPostModalHandler}
+            //onClick={openPostModalHandler}
+            onClick={(e) => {
+              setIsOpenPost(!isOpenPost);
+              setClickImg(e.target);
+              setClickImgPostId(e.target.id);
+              setModalClickImgPostId(Number(e.target.id))
+              console.log(index);
+              setModalClickContent(allPost[index].content)
+            }} 
           />
           {/* 좋아요 수 표시*/}
           <div className="gallery-item-info">
@@ -284,7 +293,8 @@ const Gallery = (props) => {
                   </div>
                 </div>
                 <h3 className="modal-content">
-                  {allPost[modalclickImgPostId].content}
+                  {/* {allPost[modalclickImgPostId].content} */}
+                  {modalClickContent}
                 </h3>
                 <button
                   className="btn-save"
