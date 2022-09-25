@@ -19,9 +19,9 @@ const Gallery = (props) => {
   const [allPost, setAllPost] = useState(null);
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
   // const [clickLike, setClickLike] = useState();
+  const [modalClickContent, setModalClickContent] = useState('');
   const [userIdListDoLikesByPostId, setUserIdListDoLikesByPostId] = useState([]);
   const [postLikeId, setPostLikeId] = useState();
-  const [modalClickContent, setModalClickContent] = useState('');
 
   // modal 활성화 되었을 때 이벤트핸들러
   const openPostModalHandler = (e) => {
@@ -214,6 +214,7 @@ const Gallery = (props) => {
               setModalClickImgPostId(Number(e.target.id))
               console.log(index);
               setModalClickContent(postList[index].content)
+              // setModalClickContent(allPost[index].content)
             }} 
           />
           {/* 좋아요 수 표시*/}
@@ -293,10 +294,10 @@ const Gallery = (props) => {
                     </div> */}
                   </div>
                 </div>
-                {/* <h3 className="modal-content">
-                  {allPost[modalclickImgPostId].content}
-                </h3> */}
-                <h3 className="modal-content">{modalClickContent}</h3>
+                <h3 className="modal-content">
+                  {/* {allPost[modalclickImgPostId].content} */}
+                  {modalClickContent}
+                </h3>
                 <button
                   className="btn-save"
                   type="button"
