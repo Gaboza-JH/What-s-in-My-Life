@@ -129,9 +129,9 @@ const MiniSlide = ({ user, token, userData }) => {
   // 백엔드에서 역순으로 가져옴
   const rendering = () => {
     const result = [];
-    console.log('0번째 postid : '+ allPost[0].postId); // 마지막 게시물 id
-    console.log('0번째 content : '+ allPost[0].content); // 마지막 게시물 content
-    console.log('전체게시물 개수 : '+ Object.keys(allPost).length);
+    // console.log('0번째 postid : '+ allPost[0].postId); // 마지막 게시물 id
+    // console.log('0번째 content : '+ allPost[0].content); // 마지막 게시물 content
+    // console.log('전체게시물 개수 : '+ Object.keys(allPost).length);
     for (let index = 0; index < Object.keys(allPost).length; index++) {
       result.push(
         <div className="gallery-item" key={index} tabindex="0">

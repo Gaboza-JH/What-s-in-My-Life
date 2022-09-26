@@ -64,7 +64,6 @@ public class UserController{
     }
 
 
-    // 닉네임 수정
     @GetMapping("/users/{token}")
     public UserDTO findUserById(@PathVariable String token) {
         System.out.println("/users/{token} getmapping");
