@@ -37,10 +37,8 @@ public class LikesService {
 
     //좋아요 추가
     public boolean addLike(int userId, int postId) {
-        System.out.println("Like Service >> addLike Method!!");
         Post post = postRepository.findById(postId).orElseThrow();
         User user = userRepository.findById(userId).orElseThrow();
-        System.out.println("post: "+post);
         //좋아요 중복 체크
         if(isLike(user, post)){
             likesRepository.save(new Likes(user, post));
@@ -51,7 +49,6 @@ public class LikesService {
 
     //좋아요 중복 체크 로직
     private boolean isLike(User user, Post post) {
-        System.out.println("isLike!!!");
         return likesRepository.findByUserIdAndPostId(user, post).isEmpty();
     }
 
@@ -66,15 +63,11 @@ public class LikesService {
     //게시물당 좋아요 count
     public int countLike(int postId){
         Post post = postRepository.findById(postId).orElseThrow();
-        System.out.println(postId);
-        System.out.println(post);
         return likesRepository.countByPostId(post);
     }
 
     public int countLikesByUser(int userId) {
         User user = userRepository.findById(userId).orElseThrow();
-
-//        List<Post> postList = postRepository.findAllByUser(Optional.of(user));
         List<Post> postList = postRepository.findAllByUser(Optional.of(user), Sort.by(Sort.Direction.DESC, "postId"));
 
         int userPostCnt = 0;
@@ -82,7 +75,6 @@ public class LikesService {
             userPostCnt+=likesRepository.countByPostId(post);
         }
         return userPostCnt;
-
     }
 
     public List<Integer> getUserIdList(int postId) {
@@ -113,18 +105,4 @@ public class LikesService {
                 .build();
     }
 
-//    public List<Post> topLike() {
-//        List<Likes> likes = likesRepository.findGroupByPostId();
-//        List<Post> postList = new ArrayList<>();
-//        for (Likes like:likes){
-//            System.out.println("like1:::" +like.getPostId().getPostId());
-//            int postId = like.getPostId().getPostId();
-//            Post post = postRepository.getReferenceById(postId);
-//            postList.add(post);
-//        }
-//
-//        System.out.println(postList.get(1).getPostId());
-//        return postList;
-//
-//    }
 }

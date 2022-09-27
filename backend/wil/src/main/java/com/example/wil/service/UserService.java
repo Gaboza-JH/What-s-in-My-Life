@@ -96,10 +96,6 @@ public class UserService {
 
     public UserDTO updateUserNickname(int userId, UserDTO userDTO) {
         User foundUser = userRepository.getReferenceById(userId);
-//        String rawPassword = userDTO.getPassword();
-//        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-//        foundUser.setPassword(encPassword);
-//        foundUser.setEmail(userDTO.getEmail());
         if (userDTO.getNickname() != foundUser.getUsername()) {
             foundUser.setNickname(userDTO.getNickname());
         }
@@ -108,9 +104,6 @@ public class UserService {
     }
 
     public UserDTO updateUserProfile(int userId, String imgPaths) {
-        System.out.println("UserService :: updateUserProfile :: ");
-        System.out.println("imgList :" + imgPaths);
-        System.out.println("imgList? :" + imgPaths.isEmpty());
 
         User foundUser = userRepository.getReferenceById(userId);
         if (foundUser.getProfileImg() == null || foundUser.getProfileImg() != imgPaths) {

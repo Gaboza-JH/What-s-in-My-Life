@@ -47,9 +47,6 @@ public class UserController{
     @Autowired
     private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
 
-    // [해야 할 것]
-    // 1. 프론트로 리다이렉트 or 프론트에서 받은 url로 리다이렉트
-    // 2. 로컬 유저가 로그인을 할 때 email, password 보고 유저 찾아서 일치하는 경우 로그인 성공(프론트로 리다이렉트)
     @PostMapping("/users")
     public String signUp(HttpServletRequest request, HttpServletResponse response, @RequestBody UserDTO userDTO) throws IOException {
         String redirectUrl = userService.signUp(userDTO);
@@ -81,11 +78,6 @@ public class UserController{
     public List<UserDTO> deleteUser(@PathVariable int userId) {
         return userService.deleteUser(userId);
     }
-
-//    @PutMapping("/users/{userId}")
-//    public UserDTO updateUser(@PathVariable int userId, @RequestBody UserDTO userDTO) {
-//        return userService.updateUser(userId, userDTO);
-//    }
 
 
     // 닉네임 수정
