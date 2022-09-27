@@ -11,7 +11,7 @@ const BigSlide = (props) => {
   const fetchPost = async () => {
     // 인기 게시물 5개 조회 (뭔가 로직 변경이 필요할 것 같음, 게시물이 없는 경우)
     const topResponse = await axios.get(
-      `http://localhost:8080/like/top_post`
+      `http://3.37.184.148:8080/like/top_post`
     );
     setTopPostLike(topResponse.data);
     console.log(topPostLike);
