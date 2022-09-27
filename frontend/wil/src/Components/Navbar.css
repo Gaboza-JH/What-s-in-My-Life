@@ -6,8 +6,8 @@
 .nav-bar {
   width: 100%;
   height: 10vh;
-  background:#ffeb7a;
-  background-color: #ffeb7a;
+  background:#ffffff;
+  background-color: #ffffff;
   position: fixed;
   z-index: 999;
   padding-top: 20px;
@@ -17,7 +17,7 @@
   width: 85%;
   height: 100%;
   display: flex;
-  background:#ffeb7a;
+  background:#ffffff;
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
@@ -69,7 +69,8 @@
   right: 0;
   width: 100%;
   height: 100vh;
-  background-color: #ffeb7a;
+  /* background-color: #ffeb7a; */
+  background-color: #ffffff;
   transition: all 0.3s ease-in;
   transform: translateX(100%);
   opacity: 0;

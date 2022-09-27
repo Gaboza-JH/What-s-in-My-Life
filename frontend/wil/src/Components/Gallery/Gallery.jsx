@@ -224,14 +224,13 @@ const Gallery = (props) => {
             </span>
             <div className="desc">
               <form className="modal-form">
-                <h1 className="header-profile"></h1>
                 <div className="modal-gallery-container">
                   <div className="gallery-item">
                     <div className="modal-container">
                       <div className="modal-image-box">
                         <img
                           src={clickImg.src}
-                          className="modal-gallery-image"
+                          className="mypage-modal-gallery-image"
                           alt=""
                         />
                       </div>

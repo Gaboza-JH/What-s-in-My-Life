@@ -1,56 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import BigSlide from "../Components/Main/BigSlide";
-// import MiniSlide from "../Components/Main/MiniSlide";
-
-// const Main = ({ user, token }) => {
-//   const [userData, setUserData] = useState(null);
-//   const [error, setError] = useState(null);
-//   const [topLikesPost, setTopLikePost] = useState(null);
-
-//   const fetchUser = async () => {
-//     try {
-//       if (user == true) {
-//         // 특정 유저 정보 조회
-//         const response = await axios.get(
-//           `http://localhost:8080/users/${token}`,
-//           // {
-//           //   withCredentials: true // 쿠키 cors 통신 설정
-//           // },
-//           {
-//             headers: { Authorization: "Bearer " + token },
-//           }
-//         );
-//         setUserData(response.data);
-//       }
-
-//       // 인기 게시물 5개 조회 (뭔가 로직 변경이 필요할 것 같음, 게시물이 없는 경우)
-//       const topResponse = await axios.get(
-//         `http://localhost:8080/like/top_post`
-//       );
-//       setTopLikePost(topResponse.data);
-//     } catch (e) {
-//       console.log("error" + error);
-//       setError(e);
-//     }
-//   };
-//   useEffect(() => {
-//     fetchUser();
-//   }, []);
-
-//   if (error) return <div>에러가 발생했습니다</div>;
-//   if (!topLikesPost) return null;
-
-//   return (
-//     <div>
-//       <BigSlide user={user} token={token} userData={userData} topLikesPost={topLikesPost}/>
-//       <MiniSlide user={user} token={token} userData={userData} />
-//     </div>
-//   );
-// };
-
-// export default Main;
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BigSlide from "../Components/Main/BigSlide";
@@ -61,6 +8,7 @@ const Main = ({ user, token }) => {
   const [topLikesPost, setTopLikePost] = useState(null);
   const [postLikeBoolean, setPostLikeBoolean] = useState();
   const [userdoLikePostIdList, setUserdoLikePostIdList] = useState([]);
+  const [postIdIndex, setPostIdIndex] = useState([]);
   const [allPost, setAllPost] = useState([]);
 
   const fetchUser = async () => {
@@ -71,14 +19,19 @@ const Main = ({ user, token }) => {
           `http://localhost:8080/users/${token}`,
         );
         setUserData(userResponse.data);
-        // 전체 게시물 최신수 조회 
+        const tmpPostIdList = [];
+        for (let index = (userResponse.data.postIdList.length - 1); index >= 0; index--) {
+          tmpPostIdList.push(userResponse.data.postIdList[index]);
+        }
+        setPostIdIndex(tmpPostIdList);
         const response = await axios.get(`http://localhost:8080/post/`);
         setAllPost(response.data);
+
         // 유저가 좋아요 누른 게시물 id 리스트
         const userLikesList = await axios.get(`http://localhost:8080/like/user/post/${token}`);
         setUserdoLikePostIdList(userLikesList.data);
         const likesBoolean = [];
-
+        
         for (let i = 0; i < response.data.length; i++) {
           let flag = false;
           const res = await axios.get(
@@ -101,7 +54,7 @@ const Main = ({ user, token }) => {
         }
         setPostLikeBoolean(likesBoolean);
       }
-      // 인기 게시물 5개 조회
+      // 인기 게시물 5개 조회 (뭔가 로직 변경이 필요할 것 같음, 게시물이 없는 경우)
       const topResponse = await axios.get(
         `http://localhost:8080/like/top_post`
       );
@@ -111,7 +64,6 @@ const Main = ({ user, token }) => {
       setError(e);
     }
   };
-
   useEffect(() => {
     fetchUser();
   }, []);
@@ -121,8 +73,8 @@ const Main = ({ user, token }) => {
 
   return (
     <div>
-      <BigSlide user={user} token={token} userData={userData} topLikesPost={topLikesPost}/>
-      <MiniSlide user={user} token={token} userData={userData} postLikeBoolean={postLikeBoolean} />
+      <BigSlide user={user} token={token} userData={userData} topLikesPost={topLikesPost} />
+      <MiniSlide user={user} token={token} userData={userData} postIdIndex={postIdIndex} postLikeBoolean={postLikeBoolean} />
     </div>
   );
 };

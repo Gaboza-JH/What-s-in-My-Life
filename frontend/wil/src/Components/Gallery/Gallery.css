@@ -89,6 +89,14 @@
   border-radius: 20px;
 }
 
+.mypage-modal-gallery-image {
+  width: 400px;
+  height: 400px;
+  margin-top: 40px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
 .modal-content{
   margin-top: 15px;
   color:rgb(35, 35, 35);
