@@ -75,7 +75,8 @@ const BigSlide = (props) => {
   return (
     <div>
       {props.user ? (
-        Object.keys(props.topLikesPost).forEach(element => {
+        <Carousel>
+        ${Object.keys(props.topLikesPost).forEach(element => {
           <Carousel.Item>
             <img
               className="d-block"
@@ -86,7 +87,8 @@ const BigSlide = (props) => {
               alt="First slide"
             />
           </Carousel.Item>  
-        })
+        })}
+        </Carousel>
         //<Carousel>{props.topLikesPost}</Carousel>
       ) : (
         <Carousel>
