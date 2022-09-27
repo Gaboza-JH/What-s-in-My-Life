@@ -28,21 +28,9 @@ public class ImageController {
         }
         List<String> imgPath = imageService.upload(multipartFile, "static");
 
-//        awsS3Service.upload(multipartFile, "static");
         return "image upload success!!";
     }
 
-//    @GetMapping("/images/{token}")
-//    public List<Image> findImages(@PathVariable String token) {
-//        System.out.println("/images/{token} getmapping");
-//        if (tokenProvider.validateToken(token)) {
-//            System.out.println("/images/{token} getmapping tokenProvider.validate = true");
-//            Integer userId = tokenProvider.getUserIdFromToken(token);
-//            return imageService.findImages(userId);
-//        } else {
-//            return null;
-//        }
-//    }
 
     @GetMapping("/images/{postId}")
     public List<Image> findImages(@PathVariable int postId) {

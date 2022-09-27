@@ -12,12 +12,10 @@ import com.example.wil.repository.PostRepository;
 import com.example.wil.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,62 +39,41 @@ public class PostService {
 
     @Transactional
     public PostDTO putUpPost(PostDTO postDTO, List<String> imgPaths) {
-        System.out.println("PostService :: PutUpPost :: ");
-        System.out.println("imgList :" + imgPaths);
-        System.out.println("imgList? :" + imgPaths.isEmpty());
         Post post = transformPost(postDTO);
-        System.out.println("postDTO::::"+post.getUser());
         post = postRepository.save(post);
-        System.out.println("post value ?? : : : " + post);
 
         List<String> imgUrlList = new ArrayList<>();
-
         if(!imgPaths.isEmpty()) {
             for (String imgUrl : imgPaths) {
                 Image img = new Image(imgUrl, post);
-                System.out.println("img::::" + img);
                 imgRepository.save(img);
-                System.out.println("repository success");
                 imgUrlList.add(imgUrl);
             }
         }
-        System.out.println("imgURLList : : : " + imgUrlList);
         return transformPostDTO(post);
     }
 
     @Transactional
     public PostDTO putUpPost(Integer userId, PostDTO postDTO, List<String> imgPaths) {
-        System.out.println("PostService :: PutUpPost :: ");
-        System.out.println("imgList :" + imgPaths); // imgList :[static/95aab3da-cd60-44ac-ba6e-1f239ca13951조명.jpg]
-        System.out.println("imgList? :" + imgPaths.isEmpty()); // imgList? :false
         Post post = transformPost(postDTO, userId);
-        System.out.println("postDTO::::"+ post.getUser());
-        System.out.println("postDTO content : " + postDTO.getContent());
         post = postRepository.save(post);
-        System.out.println("post value ?? : : : " + post);
 
         List<String> imgUrlList = new ArrayList<>();
 
         if(!imgPaths.isEmpty()) {
             for (String imgUrl : imgPaths) {
                 Image img = new Image(imgUrl, post);
-                System.out.println("img::::" + img); // img::::Image(img_id=0, file_name=static/95aab3da-cd60-44ac-ba6e-1f239ca13951조명.jpg, post=com.example.wil.model.Post@2df05337)
                 imgRepository.save(img);
-                System.out.println("repository success");
+                System.out.println("img repository success");
                 imgUrlList.add(imgUrl);
             }
         }
-        System.out.println("imgURLList : : : " + imgUrlList); // imgURLList : : : [static/95aab3da-cd60-44ac-ba6e-1f239ca13951조명.jpg]
         return transformPostDTO(post);
     }
 
     public List<PostDTO> findAllPosts() {
-
-//        List<Post> postList = postRepository.findAll();
         List<Post> postList = postRepository.findAll(Sort.by(Sort.Direction.DESC, "postId"));
-
         List<Image> imageList = imgRepository.findAll();
-
         List<PostDTO> postDTO = transformPostDTOList(postList);
         return transformPostDTOList(postList);
     }
@@ -107,40 +84,28 @@ public class PostService {
     }
 
     public List<PostDTO> findAllPostByUserId(int userId) {
-        System.out.println("findAllPostByUserId service");
         Optional<User> user = userRepository.findById(userId);
-//        List<Post> foundPost = postRepository.findAllByUser(user);
         List<Post> foundPost = postRepository.findAllByUser(user, Sort.by(Sort.Direction.DESC, "postId"));
-
-        //return transformPostDTO(foundPost);
         return transformPostDTOList(foundPost);
     }
 
 
     public String deletePost(int postId) {
-        System.out.println("PostService Delete Method Call!");
-
-
+        // post DB 삭제
         Post foundPost = postRepository.getReferenceById(postId);
         List<Post> postList = postRepository.findAll();
-/**
- * s3 버킷에 있는 이미지도 삭제
- */
+        
+        //s3 버킷에 있는 이미지 및 image_post DB 모두 삭제
         List<Image> imgs = imgRepository.findAllByPost(foundPost);
-        System.out.println("imgs ::"+imgs);
         imgService.deleteS3(imgs);
-
         postRepository.delete(foundPost);
 
-        //return transformPostDTOList(postList);
-        return "Delete post";
+        return "게시물 삭제 완료";
     }
 
     public PostDTO updatePost(int postId, PostDTO postDTO) {
         Post foundPost = postRepository.getReferenceById(postId);
         foundPost.setSenti(postDTO.getSenti());
-//        foundPost.setContent(postDTO.getContent());
-//        foundPost.setShown(postDTO.isShown());
         Post updatedPost = postRepository.save(foundPost);
         return transformPostDTO(updatedPost);
     }
@@ -160,7 +125,6 @@ public class PostService {
 
     private Post transformPost(PostDTO postDTO, Integer userId){
         User user = userRepository.getReferenceById(userId);
-        System.out.println("user : " + user);
         return Post
                 .builder()
                 .postId(postDTO.getPostId())
@@ -197,11 +161,9 @@ public class PostService {
         List<Likes> likes = likesRepository.findGroupByPostId();
         List<Post> postList = new ArrayList<>();
         for (Likes like:likes){
-            System.out.println("like1:::" +like.getPostId().getPostId());
             int postId = like.getPostId().getPostId();
             Post post = postRepository.getReferenceById(postId);
             postList.add(post);
-
         }
         return transformPostDTOList(postList);
     }

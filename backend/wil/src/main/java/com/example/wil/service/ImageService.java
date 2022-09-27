@@ -49,14 +49,7 @@ public class ImageService {
     private UserRepository userRepository;
 
     public String upload(MultipartFile file, String dirName) throws IOException {
-        System.out.println("List upload method >> file!! " + file);
-        System.out.println("upload 메서드 진입");
-
-//        File uploadFile = convert(multipartFile).orElseThrow(() -> new IllegalArgumentException("파일 전환 실패"));
-
-        System.out.println(file.getName()); // imgae
-        System.out.println(file.getOriginalFilename()); // 조명.jpg
-
+        System.out.println(file.getOriginalFilename()); // upload_image file name
         String fileName = dirName + "/" + UUID.randomUUID() + file.getOriginalFilename();
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentLength(file.getSize());
@@ -69,18 +62,14 @@ public class ImageService {
         } catch (IOException err) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드 실패!");
         }
-        System.out.println("imageService 139 line fileName : " + fileName); // static/95aab3da-cd60-44ac-ba6e-1f239ca13951조명.jpg
-
         return fileName;
-
-//        return upload(uploadFile, dirName);
     }
 
 
     // S3로 파일 업로드하기
     private String upload(File uploadFile, String dirName) {
         System.out.println("s3 upload" + uploadFile);
-        // dirName -> upload 폴더명으로 바꾸기 (유저 프로필에서)
+
         String fileName = dirName + "/" + UUID.randomUUID() + uploadFile.getName();   // S3에 dirName(static/) 폴더로 파일 이름을 UUID(범용 고유 식별자 Universally Unique Identifier) 고유값으로 변환하여 저장
         String uploadImageUrl = putS3(uploadFile, fileName); // s3로 업로드
         System.out.println(uploadImageUrl);
@@ -89,14 +78,12 @@ public class ImageService {
         image.setFile_name(fileName);
         repository.save(image);
 
-
-        removeNewFile(uploadFile); // client로부터 업로드 될 이미지 파일 (로컬 이미지 파일)
+        removeNewFile(uploadFile); // client로부터 업로드 될 이미지 파일 (로컬 이미지 파일)은 서버에 저장되지 않도록 삭제
         return uploadImageUrl;
     }
 
     // S3로 업로드
     private String putS3(File uploadFile, String fileName) {
-        System.out.println("Put3");
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
         return amazonS3Client.getUrl(bucket, fileName).toString();
     }
@@ -106,9 +93,8 @@ public class ImageService {
         return amazonS3Client.getUrl(bucket, fileName).toString();
     }
 
-    // 로컬에 저장된 이미지 지우기
-    private void removeNewFile(File targetFile) {
-        System.out.println("remove" + targetFile); // 현재 파일(client로 부터 받은 이미지 파일)을 로컬에 저장하지 않고 S3에 바로 저장하기 위해 로컬 이미지 삭제
+
+    private void removeNewFile(File targetFile) { // 로컬에 저장되는 이미지 삭제
         if (targetFile.delete()) {
             log.info("File delete success");
             return;
@@ -118,7 +104,6 @@ public class ImageService {
 
     private Optional<File> convert(MultipartFile multipartFile) throws IOException {
         File convertFile = new File(System.getProperty("user.dir") + "/" + multipartFile.getOriginalFilename());
-        // 바로 위에서 지정한 경로에 File이 생성됨 (경로가 잘못되었다면 생성 불가능)
         if (convertFile.createNewFile()) {
             try (FileOutputStream fos = new FileOutputStream(convertFile)) { // FileOutputStream 데이터를 파일에 바이트 스트림으로 저장하기 위함
                 fos.write(multipartFile.getBytes());
@@ -130,12 +115,8 @@ public class ImageService {
 
     public List<String> upload(List<MultipartFile> multipartFile, String dirName) throws IOException {
         List<String> imgUrlList = new ArrayList<>();
-        System.out.println("List upload method >> file!! " + multipartFile);
 
         for (MultipartFile file : multipartFile) {
-            System.out.println(file.getName()); // imgae
-            System.out.println(file.getOriginalFilename()); // 조명.jpg
-
             String fileName = dirName + "/" + UUID.randomUUID() + file.getOriginalFilename();
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentLength(file.getSize());
@@ -144,41 +125,24 @@ public class ImageService {
             try (InputStream inputStream = file.getInputStream()) {
                 amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
-
-//                List<Image> images = Arrays.asList(new Image(fileName));
-//                repository.saveAll(images);
-
             } catch (IOException err) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드 실패!");
             }
             imgUrlList.add(fileName);
-            System.out.println("imageService 139 line imgUrlList : " + imgUrlList); // [static/95aab3da-cd60-44ac-ba6e-1f239ca13951조명.jpg]
-            System.out.println("imageService 139 line fileName : " + fileName); // static/95aab3da-cd60-44ac-ba6e-1f239ca13951조명.jpg
         }
         return imgUrlList;
     }
 
     public void deleteS3(List<Image> imgs) {
-        System.out.println("deleteS3 method Call!!!");
         for (Image img : imgs) {
             System.out.println(img.getFile_name());
             amazonS3.deleteObject(bucket, img.getFile_name());
         }
     }
 
-//    public List<Image> findImages(int userId) {
-//        User foundUser = userRepository.getReferenceById(userId);
-//
-//        Post foundPost = (Post) postRepository.findAllByUser(Optional.of(foundUser));
-//        List<Image> imageList = repository.findAllByPost(foundPost);
-//        System.out.println(imageList);
-//        return imageList;
-//    }
-
     public List<Image> findImages(int postId) {
         Post foundPost = postRepository.getReferenceById(postId);
         List<Image> imageList = repository.findAllByPost(foundPost);
-        System.out.println(imageList);
         return imageList;
     }
 
