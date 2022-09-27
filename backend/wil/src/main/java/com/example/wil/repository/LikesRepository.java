@@ -24,7 +24,7 @@ public interface LikesRepository extends JpaRepository<Likes, Integer> {
             "SELECT ANY_VALUE(wil_db.c.like_id) as like_id, ANY_VALUE(wil_db.c.user_id) as user_id, ANY_VALUE(wil_db.c.post_id) as post_id" +
             "FROM likes AS c " +
             "GROUP BY c.post_id " +
-            "ORDER BY count(c.post_id) DESC " +
+            "ORDER BY count(wil_db.c.post_id) DESC " +
             "limit 5 ", nativeQuery = true )
     List<Likes> findGroupByPostId();
 
