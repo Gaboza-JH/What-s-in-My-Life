@@ -26,10 +26,13 @@ const BigSlide = (props) => {
 
   // 추천수 많은 5개 게시물 조회 및 리스트에 추가
   const topLikes = []
+  console.log("개수???"+Object.keys(topPostLike).length);
   if (Object.keys(topPostLike).length != null) {
     try {
       console.log(props.user);
+      topLikes=[];
       for ( let index = 0; index < Object.keys(topPostLike).length; index++) {
+        topLikes.push(
           <Carousel.Item>
             <img
               className="d-block"
@@ -40,6 +43,7 @@ const BigSlide = (props) => {
               alt="First slide"
             />
           </Carousel.Item>
+        );
       }
     } catch (e) {
       console.log("error " + e);
