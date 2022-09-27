@@ -21,8 +21,7 @@ public interface LikesRepository extends JpaRepository<Likes, Integer> {
     int countByUserId(User user);
 
     @Query(value =
-            "SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))" +
-            "SELECT c.like_id, c.user_id, c.post_id " +
+            "SELECT ANY_VALUE(wil_db.c.like_id), ANY_VALUE(wil_db.c.user_id), c.post_id " +
             "FROM likes AS c " +
             "GROUP BY c.post_id, wil_db.c.like_id " +
             "ORDER BY count(c.post_id) DESC " +
