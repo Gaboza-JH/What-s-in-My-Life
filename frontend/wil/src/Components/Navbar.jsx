@@ -23,55 +23,29 @@ const Menubar = ({ user }) => {
         <nav className="nav-bar">
           <div className="nav-container">
             <div className="logo">
-              <a href="/">
-                <img src={WilLogo} alt="erro img" />
-              </a>
+              <a href="/"><img src={WilLogo} alt="erro img" /></a>
             </div>
             <ul className={isNavOpen ? "nav-links open" : "nav-links"}>
-              <a href="/" className="nav-link">
-                Home
-              </a>
-              <a href="/mypage" className="nav-link">
-                MyPage
-              </a>
-              <a href="/" className="nav-link" onClick={handleOnClick}>
-                Logout
-              </a>
+              <a href="/" className="nav-link">Home</a>
+              <a href="/mypage" className="nav-link">MyPage</a>
+              <a href="/" className="nav-link" onClick={handleOnClick}>Logout</a>
             </ul>
-            <FiMenu
-              className={isNavOpen ? "burger inactive" : "burger"}
-              onClick={toggleNav}
-            />
-            <CgClose
-              className={isNavOpen ? "close" : "close inactive"}
-              onClick={toggleNav}
-            />
+            <FiMenu className={isNavOpen ? "burger inactive" : "burger"} onClick={toggleNav}/>
+            <CgClose className={isNavOpen ? "close" : "close inactive"} onClick={toggleNav}/>
           </div>
         </nav>
       ) : (
         <nav className="nav-bar">
           <div className="nav-container">
             <div className="logo">
-              <a href="/">
-                <img src={WilLogo} alt="erro img" />
-              </a>
+              <a href="/"><img src={WilLogo} alt="erro img" /></a>
             </div>
             <ul className={isNavOpen ? "nav-links open" : "nav-links"}>
-              <a href="/" className="nav-link">
-                Home
-              </a>
-              <a href="/loginsignup" className="nav-link">
-                Login
-              </a>
+              <a href="/" className="nav-link">Home</a>
+              <a href="/loginsignup" className="nav-link">Login</a>
             </ul>
-            <FiMenu
-              className={isNavOpen ? "burger inactive" : "burger"}
-              onClick={toggleNav}
-            />
-            <CgClose
-              className={isNavOpen ? "close" : "close inactive"}
-              onClick={toggleNav}
-            />
+            <FiMenu className={isNavOpen ? "burger inactive" : "burger"} onClick={toggleNav}/>
+            <CgClose className={isNavOpen ? "close" : "close inactive"} onClick={toggleNav}/>
           </div>
         </nav>
       )}

@@ -20,7 +20,7 @@
 }
 
 .header-signin {
-  color: #ed8f03;
+  color: #ffeb7a;
   margin-top: 5px;
 }
 
@@ -32,10 +32,6 @@
   margin: 20px 0 30px;
 }
 
-/* span {
-  font-size: 12px;
-} */
-
 .sign-a {
   color: #333;
   font-size: 14px;
@@ -46,8 +42,8 @@
 
 .sign-botton {
   border-radius: 10px;
-  border: 1px solid #fdb254;
-  background-color: #fdb254;
+  border: 1px solid #ffeb7a;
+  background-color: #ffeb7a;
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
@@ -58,14 +54,14 @@
 }
 
 .sign-botton:hover{
-  background-color:#f98a03;
+  background-color:#FFC102;
 }
 
 .btn-signup {
   margin-top: 10px;
   border-radius: 10px;
-  border: 1px solid #fdb254;
-  background-color: #fdb254;
+  border: 1px solid #ffeb7a;
+  background-color: #ffeb7a;
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
@@ -76,16 +72,8 @@
 }
 
 .btnsignup:hover{
-  background-color:#f98a03;
+  background-color:#FFC102;
 }
-
-/* button:active {
-  transform: scale(0.95);
-}
-
-button:focus {
-  outline: none;
-} */
 
 .btn-overlay {
   background-color: transparent;
@@ -99,7 +87,7 @@ button:focus {
 }
 
 .btn-overlay:hover{
-  background-color:#f98a03;
+  background-color:#FFC102;
 }
 
 .sign-form {
@@ -112,15 +100,6 @@ button:focus {
   height: 100%;
   text-align: center;
 }
-
-/* input {
-  background-color: #eee;
-  border: none;
-  padding: 12px 15px;
-  margin: 8px 0;
-  width: 100%;
-  border-radius: 5px;
-} */
 
 .container {
   background-color: #fff;
@@ -194,9 +173,9 @@ button:focus {
 }
 
 .overlay {
-  background: #ffb75e;
-  background: -webkit-linear-gradient(to right, #ed8f03, #ffb75e);
-  background: linear-gradient(to right, #ed8f03, #ffb75e);
+  background: #ffeb7a;
+  background: -webkit-linear-gradient(to right, #ffeb7a, #ffb75e);
+  background: linear-gradient(to right, #ffeb7a, #ffb75e);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
@@ -280,7 +259,6 @@ button:focus {
   background-color: #eee;
   border: none;
   padding: 10px 15px;
-  /* margin: 8px 0; */
   width: 100%;
   border-radius: 5px;
 }

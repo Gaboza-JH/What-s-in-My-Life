@@ -27,7 +27,4 @@ const LoginSignupPage = () => {
   );
 };
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<LoginSignupPage />, rootElement);
-
 export default LoginSignupPage;

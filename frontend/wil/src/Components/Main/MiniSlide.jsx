@@ -11,17 +11,17 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 4,
-    slidesToSlide: 4, // optional, default to 1.
+    slidesToSlide: 4,
   },
   tablet: {
     breakpoint: { max: 1024, min: 768 },
     items: 3,
-    slidesToSlide: 3, // optional, default to 1.
+    slidesToSlide: 3,
   },
   mobile: {
     breakpoint: { max: 767, min: 464 },
     items: 2,
-    slidesToSlide: 1, // optional, default to 1.
+    slidesToSlide: 1,
   },
 };
 
@@ -35,30 +35,28 @@ const MiniSlide = ({ user, token, userData }) => {
   const [clickImg, setClickImg] = useState(null);
   const [clickImgPostId, setClickImgPostId] = useState(null);
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
-  const [modalClickContent, setModalClickContent] = useState('');
+  const [modalClickContent, setModalClickContent] = useState("");
   const close = useRef();
 
   // modal창 활성화 핸들러
   const openPostModalHandler = (e) => {
-    console.log("게시물 modal 활성화 / 비활성");
     setIsOpenPost(!isOpenPost);
     setClickImg(e.target);
     setClickImgPostId(e.target.id);
-    setModalClickImgPostId(Number(e.target.id))
+    setModalClickImgPostId(Number(e.target.id));
   };
 
-  // 좋아요 버튼
+  // 좋아요 등록
   const clickHandler = async (e) => {
-    console.log("좋아요 버튼 클릭");
     const postId = Number(clickImgPostId);
     const likeDTO = {
-      "postId": postId
+      postId: postId,
     };
     try {
       const token = localStorage.getItem("token");
-      // 좋아요 등록
       const response = await axios.post(
-        `http://localhost:8080/like/${token}`, likeDTO
+        `http://localhost:8080/like/${token}`,
+        likeDTO
       );
     } catch (e) {
       console.log("error : " + error);
@@ -70,48 +68,45 @@ const MiniSlide = ({ user, token, userData }) => {
     try {
       // 전체 게시물 조회
       const response = await axios.get(`http://localhost:8080/post/`);
-      console.log(response.data);
       setAllPost(response.data);
 
-      // 좋아요 수 Top5 게시물 조회 
-      const topResponse = await axios.get(`http://localhost:8080/like/top_post`);
-      console.log(topResponse.data);
+      // 좋아요 수 Top5 게시물 조회
+      const topResponse = await axios.get(
+        `http://localhost:8080/like/top_post`
+      );
       setTopPost(topResponse.data);
-      console.log(topPostLike);
 
       // postIdIndexList 생성
       const postIdIndex = [];
       for (let index = 0; index < response.data.length; index++) {
         postIdIndex.push(response.data[index].postId);
       }
-      console.log(postIdIndex);
 
       // topPostIdIndexList 생성
-      const topPostIdIndex = []
+      const topPostIdIndex = [];
       for (let index = 0; index < topResponse.data.length; index++) {
-
-        topPostIdIndex.push(topResponse.data[index].postId)
+        topPostIdIndex.push(topResponse.data[index].postId);
       }
-      console.log(topPostIdIndex);
 
       // 포스트 당 좋아요 수 조회
-      const likes = []
+      const likes = [];
       for (let index = 0; index < postIdIndex.length; index++) {
-        const response = await axios.get(`http://localhost:8080/like/${postIdIndex[index]}`);
-        likes.push(response.data)
+        const response = await axios.get(
+          `http://localhost:8080/like/${postIdIndex[index]}`
+        );
+        likes.push(response.data);
       }
       setPostLike(likes);
-      console.log(likes);
 
       // 인기 포스트 당 좋아요 수 조회
-      const topLikes = []
+      const topLikes = [];
       for (let index = 0; index < topPostIdIndex.length; index++) {
-        const response = await axios.get(`http://localhost:8080/like/${topPostIdIndex[index]}`);
-        topLikes.push(response.data)
+        const response = await axios.get(
+          `http://localhost:8080/like/${topPostIdIndex[index]}`
+        );
+        topLikes.push(response.data);
       }
       setTopPostLike(topLikes);
-      console.log(topLikes);
-
     } catch (e) {
       console.log("error : " + error);
       setError(e);
@@ -126,12 +121,9 @@ const MiniSlide = ({ user, token, userData }) => {
   if (!allPost) return null;
   if (!postLike) return null;
 
-  // 백엔드에서 역순으로 가져옴
+  // 최신순으로 rendering
   const rendering = () => {
     const result = [];
-    // console.log('0번째 postid : '+ allPost[0].postId); // 마지막 게시물 id
-    // console.log('0번째 content : '+ allPost[0].content); // 마지막 게시물 content
-    // console.log('전체게시물 개수 : '+ Object.keys(allPost).length);
     for (let index = 0; index < Object.keys(allPost).length; index++) {
       result.push(
         <div className="gallery-item" key={index} tabindex="0">
@@ -143,23 +135,18 @@ const MiniSlide = ({ user, token, userData }) => {
             className="gallery-image"
             id={allPost[index].postId}
             alt=""
-            //onClick={openPostModalHandler}
             onClick={(e) => {
               setIsOpenPost(!isOpenPost);
               setClickImg(e.target);
               setClickImgPostId(e.target.id);
-              setModalClickImgPostId(Number(e.target.id))
-              console.log(index);
-              setModalClickContent(allPost[index].content)
-            }} 
-            
+              setModalClickImgPostId(Number(e.target.id));
+              setModalClickContent(allPost[index].content);
+            }}
           />
-          {/* 좋아요 수 표시*/}
           <div className="gallery-item-info">
             <ul>
               <li className="gallery-item-likes">
                 <span className="visually-hidden">Likes:</span>
-                {/* 게시물 마다 좋아요 눌러진 수 만큼 출력되야된다  */}
                 <HiOutlineHeart aria-hidden="true" /> {postLike[index]}
               </li>
             </ul>
@@ -185,7 +172,6 @@ const MiniSlide = ({ user, token, userData }) => {
             alt=""
             onClick={openPostModalHandler}
           />
-          {/* 좋아요 수 표시*/}
           <div className="gallery-item-info">
             <ul>
               <li className="gallery-item-likes">
@@ -198,7 +184,7 @@ const MiniSlide = ({ user, token, userData }) => {
       );
     }
     return result;
-  }
+  };
 
   return (
     <div>
@@ -208,13 +194,16 @@ const MiniSlide = ({ user, token, userData }) => {
             <h1 className="main-h1">전체 게시물</h1>
             <div className="gallery">{rendering()}</div>
           </div>
-          {/* modal 기능 */}
           {isOpenPost === true ? (
-            <div className="backdrop" ref={close} onClick={(e) => {
-              if (close.current === e.target) {
-                setIsOpenPost(false)
-              }
-            }}>
+            <div
+              className="backdrop"
+              ref={close}
+              onClick={(e) => {
+                if (close.current === e.target) {
+                  setIsOpenPost(false);
+                }
+              }}
+            >
               <div className="modal-view" onClick={(e) => e.stopPropagation()}>
                 <div className="btn-wrapper">
                   <span onClick={openPostModalHandler} className="close-btn">
@@ -223,13 +212,16 @@ const MiniSlide = ({ user, token, userData }) => {
                 </div>
                 <div className="desc">
                   <form className="modal-form">
-                    <h1 className="header-profile">게시물</h1>
+                    <h1 className="header-profile"></h1>
                     <div className="modal-gallery-container">
                       <div className="gallery-item">
-                        <img src={clickImg.src} className="modal-gallery-image" alt="" />
+                        <img
+                          src={clickImg.src}
+                          className="modal-gallery-image"
+                          alt=""
+                        />
                       </div>
                     </div>
-                    {/* <h3 className="modal-content">{allPost[modalclickImgPostId].content}</h3> */}
                     <h3 className="modal-content">{modalClickContent}</h3>
                     <button
                       className="btn-save"
@@ -260,7 +252,6 @@ const MiniSlide = ({ user, token, userData }) => {
               return (
                 <div className="slider" key={index} tabindex="0">
                   <img src={imageUrl.props.children[0].props.src} alt="error" />
-
                 </div>
               );
             })}

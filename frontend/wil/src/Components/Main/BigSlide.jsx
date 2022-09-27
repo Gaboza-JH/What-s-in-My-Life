@@ -2,15 +2,16 @@ import { Carousel } from "react-bootstrap";
 import introduction from "../../static/gif/wil.gif";
 import "./BigSlide.css";
 
-
 const BigSlide = (props) => {
-
   // 추천수 많은 5개 게시물 조회 및 리스트에 추가
-  const topLikes = []
+  const topLikes = [];
   if (Object.keys(props.topLikesPost).length != null) {
     try {
-      console.log(props.user);
-      for ( let index = 0; index < Object.keys(props.topLikesPost).length; index++) {
+      for (
+        let index = 0;
+        index < Object.keys(props.topLikesPost).length;
+        index++
+      ) {
         topLikes.push(
           <Carousel.Item>
             <img

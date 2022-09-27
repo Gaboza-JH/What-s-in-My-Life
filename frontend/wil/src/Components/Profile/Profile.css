@@ -67,7 +67,6 @@
   line-height: 1.8;
   border: 0.1rem solid #dbdbdb;
   border-radius: 0.3rem;
-  /* padding: 0 2.4rem; */
 }
   
 .profile-stats {
@@ -118,15 +117,9 @@
 }
   
 .desc {
-  /* margin-top: 25px; */
-  /* margin-bottom: 25px; */
   display :flex; 
   align-items : center;
   justify-content : center; 
-
-  /* max-height: 100%; */
-  /* overflow-y:scroll; */
-
 }
 
 .modal-form{
