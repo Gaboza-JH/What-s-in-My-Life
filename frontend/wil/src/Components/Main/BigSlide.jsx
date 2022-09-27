@@ -6,7 +6,7 @@ import "./BigSlide.css";
 
 const BigSlide = (props) => {
 
-  //const [topPostLike, setTopPostLike] = useState([]);
+  const [topPostLike, setTopPostLike] = useState([]);
 
   // const fetchPost = async () => {
   //   // 인기 게시물 5개 조회 (뭔가 로직 변경이 필요할 것 같음, 게시물이 없는 경우)
@@ -32,7 +32,7 @@ const BigSlide = (props) => {
       console.log(props.user);
       
       for ( let index = 0; index < Object.keys(props.topLikesPost).length; index++) {
-        topLikes.push(
+        setTopPostLike.push(
           <Carousel.Item>
             <img
               className="d-block"
@@ -49,11 +49,11 @@ const BigSlide = (props) => {
       console.log("error " + e);
     }
   } else if (Object.keys(props.topLikesPost).length >= 5) {
-    topLikes = [];
+    setTopPostLike = [];
     fetchPost();
     try {
       for ( let index = 0; index < Object.keys(props.topLikesPost).length; index++) {
-        topLikes.push(
+        setTopPostLike.push(
           <Carousel.Item>
             <img
               className="d-block"
@@ -75,7 +75,19 @@ const BigSlide = (props) => {
   return (
     <div>
       {props.user ? (
-        <Carousel>{topLikes}</Carousel>
+        Object.keys(props.topLikesPost).forEach(element => {
+          <Carousel.Item>
+            <img
+              className="d-block"
+              src={
+                "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
+                element.imgList[0].file_name
+              }
+              alt="First slide"
+            />
+          </Carousel.Item>  
+        })
+        //<Carousel>{props.topLikesPost}</Carousel>
       ) : (
         <Carousel>
           <Carousel.Item>
