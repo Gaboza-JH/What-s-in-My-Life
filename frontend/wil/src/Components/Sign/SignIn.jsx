@@ -42,11 +42,11 @@ const SignIn = () => {
         alert("😎 환영합니다! 😎");
       } else {
         alert("😢 로그인 실패 정보를 입력해주세요. 😢");
-        window.location = "http://3.37.184.148:3000/loginsignup";
+        window.location = "http://3.37.184.148/loginsignup";
       }
     } catch (err) {
       alert("🙅‍♂️ 로그인 실패했습니다. 다시 로그인해주세요.🙅‍♂️");
-      window.location = "http://3.37.184.148:3000/loginsignup";
+      window.location = "http://3.37.184.148/loginsignup";
     }
   };
   if (redirect != undefined) {

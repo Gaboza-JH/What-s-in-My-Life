@@ -64,7 +64,8 @@ function PostUpload() {
       );
 
       const modelRes = await axios.post(
-        `http://3.37.184.148:8080/predict/`,
+        //`http://3.37.184.148:8080/predict/`,
+        'http://3.35.30.11:8000/predict/',
         textDTO,
         {
           withCredentials: true,
@@ -106,7 +107,7 @@ function PostUpload() {
 
   if (clickUpload == true) {
     setTimeout(() => {
-      window.location = "http://3.37.184.148:3000/mypage";
+      window.location = "http://3.37.184.148/mypage";
     }, 1000);
   }
 

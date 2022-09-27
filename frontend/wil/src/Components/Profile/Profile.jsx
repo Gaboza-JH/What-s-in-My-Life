@@ -58,7 +58,7 @@ const Profile = (props) => {
       inputs
     );
     alert("😊 NickName이 수정되었습니다! 😊");
-    window.location = "http://3.37.184.148:3000/mypage";
+    window.location = "http://3.37.184.148/mypage";
   };
 
   return (
