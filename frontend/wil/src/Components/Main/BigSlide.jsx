@@ -3,94 +3,70 @@ import { Carousel } from "react-bootstrap";
 import introduction from "../../static/gif/wil.gif";
 import axios from "axios";
 import "./BigSlide.css";
-
 const BigSlide = (props) => {
-
-  //const [topPostLike, setTopPostLike] = useState([]);
-
-  // const fetchPost = async () => {
-  //   // 인기 게시물 5개 조회 (뭔가 로직 변경이 필요할 것 같음, 게시물이 없는 경우)
-  //   const topResponse = await axios.get(
-  //     `http://3.37.184.148:8080/like/top_post`
-  //   );
-  //   setTopPostLike(topResponse.data);
-  //   console.log("topPostLike:"+topPostLike);
-  //   console.log(Object.keys(topPostLike).length);
-  // }
- 
- 
-  // useEffect(() => {
-  //   fetchPost();
-  // }, []);
-
-
+  console.log(props.topLikesPost);
+  const [topPostLike, setTopPostLike] = useState([]);
+  const fetchPost = async () => {
+    // 인기 게시물 5개 조회 (뭔가 로직 변경이 필요할 것 같음, 게시물이 없는 경우)
+    const topResponse = await axios.get(
+      `http://3.37.184.148:8080/like/top_post`
+    );
+    setTopPostLike(topResponse.data);
+    console.log(topPostLike);
+  }
+  useEffect(() => {
+    fetchPost();
+  }, []);
   // 추천수 많은 5개 게시물 조회 및 리스트에 추가
-  // let topLikes = []
-  // console.log("개수???"+Object.keys(props.topLikesPost).length);
-  // if (Object.keys(props.topLikesPost).length != null && topLikes <= 5) {
-  //   try {
-  //     console.log(props.user);
-      
-  //     for ( let index = 0; index < Object.keys(props.topLikesPost).length; index++) {
-  //       setTopPostLike.push(
-  //         <Carousel.Item>
-  //           <img
-  //             className="d-block"
-  //             src={
-  //               "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
-  //               props.topLikesPost[index].imgList[0].file_name
-  //             }
-  //             alt="First slide"
-  //           />
-  //         </Carousel.Item>
-  //       );
-  //     }
-  //   } catch (e) {
-  //     console.log("error " + e);
-  //   }
-  // } else if (Object.keys(props.topLikesPost).length >= 5) {
-  //   setTopPostLike = [];
-  //   fetchPost();
-  //   try {
-  //     for ( let index = 0; index < Object.keys(props.topLikesPost).length; index++) {
-  //       setTopPostLike.push(
-  //         <Carousel.Item>
-  //           <img
-  //             className="d-block"
-  //             src={
-  //               "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
-  //               props.topLikesPost[index].imgList[0].file_name
-  //             }
-  //             alt="First slide"
-  //           />
-  //         </Carousel.Item>
-  //       );
-  //     }
-  //   } catch (e) {
-  //     console.log("error" + e);
-  //   }
-  // }
-
-
-  return (
-    <div>
-      {props.user ? (
-        <Carousel>
-        ${Object.keys(props.topLikesPost).forEach(element => {
-          console.log("궁금하다"+element.imgList[0].file_name);
+  let topLikes = [];
+  if (Object.keys(topPostLike).length != null && topLikes.length < 5) {
+    try {
+      for ( let index = 0; index < Object.keys(topPostLike).length; index++) {
+        topLikes.push(
           <Carousel.Item>
             <img
               className="d-block"
               src={
                 "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
-                element.imgList[0].file_name
+                topPostLike[index].imgList[0].file_name
               }
               alt="First slide"
             />
-          </Carousel.Item>  
-        })}
-        </Carousel>
-        //<Carousel>{props.topLikesPost}</Carousel>
+          </Carousel.Item>
+        );
+        console.log(topLikes[index]);
+      }
+    } catch (e) {
+      console.log("error " + e);
+    }
+  } else if (topLikes.length >= 5) {
+    topLikes = [];
+    fetchPost();
+    try {
+      for ( let index = 0; index < Object.keys(topPostLike).length; index++) {
+        topLikes.push(
+          <Carousel.Item>
+            <img
+              className="d-block"
+              src={
+                "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
+                topPostLike[index].imgList[0].file_name
+              }
+              alt="First slide"
+            />
+          </Carousel.Item>
+        );
+      }
+    } catch (e) {
+      console.log("error " + e);
+    }
+  }
+  console.log(topLikes.length);
+  console.log(topLikes);
+  return (
+    <div>
+      {props.user ? (
+        <Carousel>{topLikes}</Carousel>
       ) : (
         <Carousel>
           <Carousel.Item>
@@ -105,5 +81,4 @@ const BigSlide = (props) => {
     </div>
   );
 };
-
 export default BigSlide;
