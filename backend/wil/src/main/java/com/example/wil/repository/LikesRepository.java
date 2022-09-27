@@ -21,10 +21,10 @@ public interface LikesRepository extends JpaRepository<Likes, Integer> {
     int countByUserId(User user);
 
     @Query(value =
-            "SELECT c.like_id, c.user_id, c.post_id " +
+            "SELECT wil_db.c.like_id, wil_db.c.user_id, wil_db.c.post_id " +
             "FROM likes AS c " +
-            "GROUP BY c.post_id, wil_db.c.like_id " +
-            "ORDER BY count(c.post_id) DESC " +
+            "GROUP BY wil_db.c.post_id, wil_db.c.like_id " +
+            "ORDER BY count(wil_db.c.post_id) DESC " +
             "limit 5 ", nativeQuery = true )
     List<Likes> findGroupByPostId();
 
