@@ -14,7 +14,8 @@ const BigSlide = (props) => {
       `http://3.37.184.148:8080/like/top_post`
     );
     setTopPostLike(topResponse.data);
-    console.log(topPostLike);
+    console.log("topPostLike:"+topPostLike);
+    console.log(Object.keys(topPostLike).length);
   }
  
  
