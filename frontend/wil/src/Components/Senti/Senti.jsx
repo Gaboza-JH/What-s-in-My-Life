@@ -16,7 +16,7 @@ const Senti = (props) => {
     chart: {
       type: "donut",
     },
-    colors: ["#CECECE", "#FFEA7D"],
+    colors: ['#FFEA7D', '#CECECE'],
     plotOptions: {
       pie: {
         expandOnClick: false,
@@ -38,9 +38,9 @@ const Senti = (props) => {
       showAlways: false,
     },
     fill: {
-      colors: ["#CECECE", "#FFEA7D"],
+      colors: ['#FFEA7D', '#CECECE'],
     },
-    labels: ["부정이", "긍정이"],
+    labels: ["긍정이", "부정이"],
     responsive: [
       {
         breakpoint: 480,
@@ -53,7 +53,7 @@ const Senti = (props) => {
     ],
   };
 
-  const series = [sentiN, sentiP];
+  const series = [sentiP, sentiN];
 
   // chart 값 출력
   const fetchSenti = async () => {
