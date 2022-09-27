@@ -32,7 +32,7 @@ const ProfileImgUpload = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.patch(
-        `http://localhost:8080/users/${token}`,
+        `http://3.37.184.148:8080/users/${token}`,
         formData,
         {
           withCredentials: true,
@@ -64,7 +64,7 @@ const ProfileImgUpload = () => {
 
   if (clickUpload === true) {
     setTimeout(() => {
-      window.location = "http://3.37.184.148:3000/mypage";
+      window.location = "http://3.37.184.148/mypage";
     }, 1000);
   }
 
