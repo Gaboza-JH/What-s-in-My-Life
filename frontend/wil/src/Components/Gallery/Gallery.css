@@ -100,26 +100,51 @@
 .modal-content{
   margin-top: 15px;
   color:rgb(35, 35, 35);
+  font-size: 39px;
 }
-.modal-image-box{
+
+.mypage-modal-image-box{
   position: relative;
 }
 
-.modal-heart-box{
+.mypage-modal-heart-image{
+  max-width: 30px;
+  max-height: 30px;
+}
+
+.mypage-modal-heart-box{
+  position: absolute;
+  left: 330px;
+  top: 400px;
+}
+
+.mypage-modal-like-num{
+  position: absolute;
+  left: 370px;
+  top: 390px;
+  font-size: 30px;
+  color: darkgray;
+}
+
+.main-modal-image-box{
+  position: relative;
+}
+
+.main-modal-heart-image{
+  max-width: 30px;
+  max-height: 30px;
+}
+
+.main-modal-heart-box{
   position: absolute;
   left: 330px;
   top: 360px;
 }
 
-.modal-heart-image{
-  max-width: 30px;
-  max-height: 30px;
-}
-
-.modal-like-num{
+.main-modal-like-num{
   position: absolute;
   left: 370px;
-  top: 352px;
+  top: 350px;
   font-size: 30px;
   color: darkgray;
 }

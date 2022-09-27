@@ -227,25 +227,25 @@ const Gallery = (props) => {
                 <div className="modal-gallery-container">
                   <div className="gallery-item">
                     <div className="modal-container">
-                      <div className="modal-image-box">
+                      <div className="mypage-modal-image-box">
                         <img
                           src={clickImg.src}
                           className="mypage-modal-gallery-image"
                           alt=""
                         />
                       </div>
-                      <div className="modal-heart-box">
+                      <div className="mypage-modal-heart-box">
                         <img
                           src={
                             postLikeBoolean[postLikeId]
                               ? HeartImg
                               : EmptyHeartImg
                           }
-                          className="modal-heart-image"
+                          className="mypage-modal-heart-image"
                           alt=""
                         />
                       </div>
-                      <div className="modal-like-num">
+                      <div className="mypage-modal-like-num">
                         {postLike[postLikeId]}
                       </div>
                     </div>

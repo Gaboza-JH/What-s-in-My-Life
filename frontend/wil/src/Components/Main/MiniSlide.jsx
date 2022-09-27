@@ -257,21 +257,21 @@ const MiniSlide = ({ user, token, userData, postLikeBoolean, postIdIndex }) => {
                     <div className="modal-gallery-container">
                       <div className="gallery-item">
                         <div className="modal-container">
-                          <div className="modal-image-box">
+                          <div className="main-modal-image-box">
                             <img
                               src={clickImg.src}
                               className="modal-gallery-image"
                               alt=""
                             />
                           </div>
-                          <div className="modal-heart-box">
+                          <div className="main-modal-heart-box">
                             <img
                               src={(likeBoolean[postLikeId]) ? HeartImg : EmptyHeartImg}
-                              className="modal-heart-image"
+                              className="main-modal-heart-image"
                               alt=""
                             />
                           </div>
-                          <div className="modal-like-num">
+                          <div className="main-modal-like-num">
                             {postLike[postLikeId]}
                           </div>
                         </div>
