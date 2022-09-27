@@ -14,6 +14,27 @@ const BigSlide = (props) => {
       `http://3.37.184.148:8080/like/top_post`
     );
     setTopPostLike(topResponse.data);
+    if (Object.keys(topPostLike).length != null) {
+      try {
+        console.log(props.user);
+        for ( let index = 0; index < Object.keys(topPostLike).length; index++) {
+          topLikes.push(
+            <Carousel.Item>
+              <img
+                className="d-block"
+                src={
+                  "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
+                  topPostLike[index].imgList[0].file_name
+                }
+                alt="First slide"
+              />
+            </Carousel.Item>
+          );
+        }
+      } catch (e) {
+        console.log("error " + e);
+      }
+    }
     console.log(topPostLike);
   }
  
@@ -24,32 +45,12 @@ const BigSlide = (props) => {
 
 
   // 추천수 많은 5개 게시물 조회 및 리스트에 추가
-  const topLikes = []
-  if (Object.keys(topPostLike).length != null) {
-    try {
-      console.log(props.user);
-      for ( let index = 0; index < Object.keys(topPostLike).length; index++) {
-        topLikes.push(
-          <Carousel.Item>
-            <img
-              className="d-block"
-              src={
-                "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
-                topPostLike[index].imgList[0].file_name
-              }
-              alt="First slide"
-            />
-          </Carousel.Item>
-        );
-      }
-    } catch (e) {
-      console.log("error " + e);
-    }
-  }
+  //const topLikes = []
+  
   return (
     <div>
       {props.user ? (
-        <Carousel>{topLikes}</Carousel>
+        <Carousel>{topPostLike}</Carousel>
       ) : (
         <Carousel>
           <Carousel.Item>
