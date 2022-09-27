@@ -25,31 +25,53 @@ const BigSlide = (props) => {
 
 
   // 추천수 많은 5개 게시물 조회 및 리스트에 추가
-  const topLikes = []
+  let topLikes = []
   console.log("개수???"+Object.keys(props.topLikesPost).length);
-  if (Object.keys(props.topLikesPost).length != null) {
+  if (Object.keys(props.topLikesPost).length != null && topLikes <= 5) {
     try {
       console.log(props.user);
-      if (topLikes <= 5){
-        for ( let index = 0; index < Object.keys(props.topLikesPost).length; index++) {
-          topLikes.push(
-            <Carousel.Item>
-              <img
-                className="d-block"
-                src={
-                  "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
-                  props.topLikesPost[index].imgList[0].file_name
-                }
-                alt="First slide"
-              />
-            </Carousel.Item>
-          );
-        }
-    }
+      
+      for ( let index = 0; index < Object.keys(props.topLikesPost).length; index++) {
+        topLikes.push(
+          <Carousel.Item>
+            <img
+              className="d-block"
+              src={
+                "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
+                props.topLikesPost[index].imgList[0].file_name
+              }
+              alt="First slide"
+            />
+          </Carousel.Item>
+        );
+      }
     } catch (e) {
       console.log("error " + e);
     }
+  } else if (Object.keys(props.topLikesPost).length >= 5) {
+    topLikes = [];
+    fetchPost();
+    try {
+      for ( let index = 0; index < Object.keys(props.topLikesPost).length; index++) {
+        topLikes.push(
+          <Carousel.Item>
+            <img
+              className="d-block"
+              src={
+                "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
+                props.topLikesPost[index].imgList[0].file_name
+              }
+              alt="First slide"
+            />
+          </Carousel.Item>
+        );
+      }
+    } catch (e) {
+      console.log("error" + e);
+    }
   }
+
+
   return (
     <div>
       {props.user ? (
