@@ -22,7 +22,7 @@ public class WilApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://3.37.184.148:3000");
+				registry.addMapping("/**").allowedOrigins("http://3.37.184.148:3000/");
 			}
 		};
 	}

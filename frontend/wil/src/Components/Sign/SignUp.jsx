@@ -54,14 +54,14 @@ const SignUp = () => {
       ) {
         await axios.post(`http://3.37.184.148:8080/users`, userLocalPostDTO);
         alert("😎 회원가입 축하합니다! 😎");
-        window.location = "http://3.37.184.148:3000/loginsignup";
+        window.location = "http://3.37.184.148/loginsignup";
       } else {
         alert("😢 회원가입 실패했습니다. 정보를 입력해주세요. 😢");
-        window.location = "http://3.37.184.148:3000/loginsignup";
+        window.location = "http://3.37.184.148/loginsignup";
       }
     } catch (err) {
       alert("🙅‍♂️ 회원가입 실패했습니다. 다시 회원가입 해주세요.🙅‍♂️");
-      window.location = "http://3.37.184.148:3000/loginsignup";
+      window.location = "http://3.37.184.148/loginsignup";
     }
   };
 
