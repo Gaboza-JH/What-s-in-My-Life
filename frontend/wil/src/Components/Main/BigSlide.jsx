@@ -6,32 +6,31 @@ import "./BigSlide.css";
 
 const BigSlide = (props) => {
 
-  const [topPostLike, setTopPostLike] = useState([]);
+  // const [topPostLike, setTopPostLike] = useState([]);
 
-  const fetchPost = async () => {
-    // 인기 게시물 5개 조회 (뭔가 로직 변경이 필요할 것 같음, 게시물이 없는 경우)
-    const topResponse = await axios.get(
-      `http://3.37.184.148:8080/like/top_post`
-    );
-    setTopPostLike(topResponse.data);
-    console.log("topPostLike:"+topPostLike);
-    console.log(Object.keys(topPostLike).length);
-  }
+  // const fetchPost = async () => {
+  //   // 인기 게시물 5개 조회 (뭔가 로직 변경이 필요할 것 같음, 게시물이 없는 경우)
+  //   const topResponse = await axios.get(
+  //     `http://3.37.184.148:8080/like/top_post`
+  //   );
+  //   setTopPostLike(topResponse.data);
+  //   console.log("topPostLike:"+topPostLike);
+  //   console.log(Object.keys(topPostLike).length);
+  // }
  
  
-  useEffect(() => {
-    fetchPost();
-  }, []);
+  // useEffect(() => {
+  //   fetchPost();
+  // }, []);
 
 
   // 추천수 많은 5개 게시물 조회 및 리스트에 추가
   const topLikes = []
-  console.log("개수???"+Object.keys(topPostLike).length);
-  if (Object.keys(topPostLike).length != null) {
+  console.log("개수???"+Object.keys(props.topLikesPost).length);
+  if (Object.keys(props.topLikesPost).length != null) {
     try {
       console.log(props.user);
-      topLikes=[];
-      for ( let index = 0; index < Object.keys(topPostLike).length; index++) {
+      for ( let index = 0; index < Object.keys(props.topLikesPost).length; index++) {
         topLikes.push(
           <Carousel.Item>
             <img
