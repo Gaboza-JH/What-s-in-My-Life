@@ -105,4 +105,7 @@ public class LikesService {
                 .build();
     }
 
+    public List<Likes> likesFindAll() {
+        return likesRepository.findAll();
+    }
 }

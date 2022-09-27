@@ -106,5 +106,5 @@ public class LikeController {
         return postService.topLike();
     }
     @GetMapping("/likes")
-    public List<Likes> likesList() { return likesService.getLikesRepository().findAll(); }
+    public List<Likes> likesList() { return likesService.likesFindAll(); }
 }
