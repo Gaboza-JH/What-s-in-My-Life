@@ -3,6 +3,7 @@ package com.example.wil.controller;
 import com.example.wil.DTO.LikesDTO;
 import com.example.wil.DTO.PostDTO;
 import com.example.wil.config.jwt.TokenProvider;
+import com.example.wil.model.Likes;
 import com.example.wil.service.LikesService;
 import com.example.wil.service.PostService;
 import com.example.wil.service.UserService;
@@ -104,4 +105,6 @@ public class LikeController {
     public List<PostDTO> topLike() {
         return postService.topLike();
     }
+    @GetMapping("/likes")
+    public List<Likes> likesList() { return likesService.getLikesRepository().findAll(); }
 }
