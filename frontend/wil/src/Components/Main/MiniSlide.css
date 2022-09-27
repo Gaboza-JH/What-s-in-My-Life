@@ -28,3 +28,26 @@
 .react-multi-carousel-list{
   position: unset !important;
 }
+
+/* .modal-image-box{
+  position: relative;
+}
+
+.modal-heart-box{
+  position: absolute;
+  left: 330px;
+  top: 360px;
+}
+
+.modal-heart-image{
+  max-width: 30px;
+  max-height: 30px;
+}
+
+.modal-like-num{
+  position: absolute;
+  left: 370px;
+  top: 352px;
+  font-size: 30px;
+  color: darkgray;
+} */

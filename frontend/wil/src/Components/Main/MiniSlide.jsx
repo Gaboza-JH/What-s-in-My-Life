@@ -6,6 +6,8 @@ import { HiOutlineHeart } from "react-icons/hi";
 import "react-multi-carousel/lib/styles.css";
 import "./MiniSlide.css";
 import "../Gallery/Gallery.css";
+import HeartImg from "../../static/img/heart.png"
+import EmptyHeartImg from "../../static/img/emptyheart.png"
 
 const responsive = {
   desktop: {
@@ -25,7 +27,8 @@ const responsive = {
   },
 };
 
-const MiniSlide = ({ user, token, userData }) => {
+const MiniSlide = ({ user, token, userData, postLikeBoolean, postIdIndex }) => {
+  const postIdReverseIndex = postIdIndex;
   const [allPost, setAllPost] = useState(null);
   const [topPost, setTopPost] = useState(null);
   const [error, setError] = useState(null);
@@ -38,6 +41,14 @@ const MiniSlide = ({ user, token, userData }) => {
   const [modalClickContent, setModalClickContent] = useState('');
   const close = useRef();
 
+  const list = [];
+  for (let i = 0; i < postLikeBoolean.length; i++) {
+    list.push(postLikeBoolean[i]);
+  }
+  const [likeBoolean, setLikeBoolean] = useState(list);
+  const [postLikeId, setPostLikeId] = useState();
+
+
   // modal창 활성화 핸들러
   const openPostModalHandler = (e) => {
     console.log("게시물 modal 활성화 / 비활성");
@@ -47,24 +58,60 @@ const MiniSlide = ({ user, token, userData }) => {
     setModalClickImgPostId(Number(e.target.id))
   };
 
-  // 좋아요 버튼
-  const clickHandler = async (e) => {
-    console.log("좋아요 버튼 클릭");
-    const postId = Number(clickImgPostId);
-    const likeDTO = {
-      "postId": postId
-    };
-    try {
-      const token = localStorage.getItem("token");
-      // 좋아요 등록
-      const response = await axios.post(
-        `http://localhost:8080/like/${token}`, likeDTO
-      );
-    } catch (e) {
-      console.log("error : " + error);
-      setError(e);
+  const likePostHandler = async (e) => {
+    console.log("좋아요 등록 버튼");
+
+    if (likeBoolean[e.target.id] != true) {
+      const postId = Number(clickImgPostId);
+      const likeDTO = {
+        postId: postId,
+      };
+      try {
+        const token = localStorage.getItem("token");
+        // 좋아요 등록
+        const response = await axios.post(
+          `http://localhost:8080/like/${token}`,
+          likeDTO
+        );
+        let tmplist = likeBoolean;
+        tmplist[e.target.id] = true;
+        setLikeBoolean(tmplist);
+        fetchPost();
+        // fetchUserdoLikePostId();
+        // fetchUserIdListDoLikesByPostId();
+        console.log("좋아요 등록 완료");
+      } catch (e) {
+        console.log("error : " + error);
+        setError(e);
+      }
     }
   };
+
+  const likeDeleteHandler = async (e) => {
+    console.log(e);
+    console.log("좋아요 취소 버튼");
+
+    if (likeBoolean[e.target.id] == true) {
+      try {
+        const token = localStorage.getItem("token");
+        // 좋아요 취소
+        const response = await axios.delete(
+          `http://localhost:8080/like/${token}/${clickImgPostId}`,
+        );
+        let tmplist = likeBoolean;
+        tmplist[e.target.id] = false;
+        setLikeBoolean(tmplist);
+        fetchPost();
+        // fetchUserdoLikePostId();
+        // fetchUserIdListDoLikesByPostId();
+        console.log("좋아요 취소 완료");
+      } catch (e) {
+        console.log("error : " + error);
+        setError(e);
+      }
+    }
+  };
+
 
   const fetchPost = async () => {
     try {
@@ -151,8 +198,15 @@ const MiniSlide = ({ user, token, userData }) => {
               setModalClickImgPostId(Number(e.target.id))
               console.log(index);
               setModalClickContent(allPost[index].content)
-            }} 
-            
+
+              for (let i = 0; i < Object.keys(postLike).length; i++) {
+                if (e.target.id == allPost[i].postId) {
+                  console.log(i);
+                  setPostLikeId(i); // postLikeId : 인덱스 정보
+                }
+              }
+            }}
+
           />
           {/* 좋아요 수 표시*/}
           <div className="gallery-item-info">
@@ -226,15 +280,32 @@ const MiniSlide = ({ user, token, userData }) => {
                     <h1 className="header-profile">게시물</h1>
                     <div className="modal-gallery-container">
                       <div className="gallery-item">
-                        <img src={clickImg.src} className="modal-gallery-image" alt="" />
+                        <div className="modal-container">
+                          <div className="modal-image-box">
+                            <img
+                              src={clickImg.src}
+                              className="modal-gallery-image"
+                              alt=""
+                            />
+                          </div>
+                          <div className="modal-heart-box">
+                            <img
+                              src={(likeBoolean[postLikeId]) ? HeartImg : EmptyHeartImg}
+                              className="modal-heart-image"
+                            />
+                          </div>
+                          <div className="modal-like-num">
+                            {postLike[postLikeId]}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    {/* <h3 className="modal-content">{allPost[modalclickImgPostId].content}</h3> */}
                     <h3 className="modal-content">{modalClickContent}</h3>
                     <button
                       className="btn-save"
                       type="button"
-                      onClick={clickHandler}
+                      id={postLikeId}
+                      onClick={likeBoolean[postLikeId] ? likeDeleteHandler : likePostHandler}
                     >
                       ❤ 좋아요 ❤
                     </button>
