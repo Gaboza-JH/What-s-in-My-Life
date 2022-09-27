@@ -4,7 +4,6 @@ import introduction from "../../static/gif/wil.gif";
 import axios from "axios";
 import "./BigSlide.css";
 
-
 const BigSlide = (props) => {
 
   const [topPostLike, setTopPostLike] = useState([]);

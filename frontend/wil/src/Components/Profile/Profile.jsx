@@ -31,7 +31,7 @@ const Profile = (props) => {
   // ProfileImg Modal
   const openProfileImgUploadModalHandler = () => {
     setIsOpenProfileImg(!isOpenProfileImg);
-  }
+  };
   // Upload Modal
   const openPostUploadModalHandler = () => {
     setIsOpenPostUpload(!isOpenPostUpload);
@@ -48,7 +48,6 @@ const Profile = (props) => {
       ...inputs,
       [e.target.name]: e.target.value,
     });
-    console.log(e.target.value);
   };
 
   // 닉네임 수정
@@ -58,37 +57,47 @@ const Profile = (props) => {
       `http://localhost:8080/users/${token}`,
       inputs
     );
-    console.log("put request의 response : " + response);
     alert("😊 NickName이 수정되었습니다! 😊");
+    window.location = "http://localhost:3000/mypage";
   };
 
   return (
     <div className="profile-header">
       <div className="profile">
         <div className="profile-image">
-          <img src={props.user.profileImg == null ? profileImg :  "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" + props.user.profileImg} className="btn profile-image-edit-btn" alt="" onClick={openProfileImgUploadModalHandler}/>
+          <img
+            src={
+              props.user.profileImg == null
+                ? profileImg
+                : "https://wil-s3.s3.ap-northeast-2.amazonaws.com/" +
+                  props.user.profileImg
+            }
+            className="btn profile-image-edit-btn"
+            alt=""
+            onClick={openProfileImgUploadModalHandler}
+          />
           {isOpenProfileImg === true ? (
-                <div className="backdrop" onClick={openProfileImgUploadModalHandler}>
-                  <div
-                    className="modal-view"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <span
-                      onClick={openProfileImgUploadModalHandler}
-                      className="close-btn"
-                    >
-                      <HiOutlineX />
-                    </span>
-                    <div className="desc">
-                      <form className="modal-form">
-                        <h1 className="header-upload">Upload Profile Image</h1>
-                        <span>Post the profile picture you want.</span> 
-                        <ProfileImgUpload />
-                      </form>
-                    </div>
-                  </div>
+            <div
+              className="backdrop"
+              onClick={openProfileImgUploadModalHandler}
+            >
+              <div className="modal-view" onClick={(e) => e.stopPropagation()}>
+                <span
+                  onClick={openProfileImgUploadModalHandler}
+                  className="close-btn"
+                >
+                  <HiOutlineX />
+                </span>
+                <div className="desc">
+                  <form className="modal-form">
+                    <h1 className="header-upload">Upload Profile Image</h1>
+                    <span>Post the profile picture you want.</span>
+                    <ProfileImgUpload />
+                  </form>
                 </div>
-              ) : null}
+              </div>
+            </div>
+          ) : null}
         </div>
         <div className="profile-user-settings">
           <h1 className="profile-user-name">{props.user.nickname}</h1>
@@ -117,10 +126,7 @@ const Profile = (props) => {
                       name="nickname"
                       onChange={handleOnChange}
                     />
-                    <button
-                      className="btn-save"
-                      onClick={clickHandler}
-                    >
+                    <button className="btn-save" onClick={clickHandler}>
                       Save
                     </button>
                   </form>

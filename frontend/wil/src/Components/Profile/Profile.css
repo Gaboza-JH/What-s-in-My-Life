@@ -1,11 +1,14 @@
 .profile-header {
-  max-width: 93.5rem;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
+  background:#dad8da;
 }
 
 .profile {
-  padding: 6rem 5% 3rem 12%;
+  padding: 7rem 1rem 1rem 12%;
+  margin-bottom: 10rem;
+  max-width: 100%;
 }
   
 .profile::after {
@@ -67,7 +70,6 @@
   line-height: 1.8;
   border: 0.1rem solid #dbdbdb;
   border-radius: 0.3rem;
-  /* padding: 0 2.4rem; */
 }
   
 .profile-stats {
@@ -118,15 +120,9 @@
 }
   
 .desc {
-  /* margin-top: 25px; */
-  /* margin-bottom: 25px; */
   display :flex; 
   align-items : center;
   justify-content : center; 
-
-  /* max-height: 100%; */
-  /* overflow-y:scroll; */
-
 }
 
 .modal-form{
