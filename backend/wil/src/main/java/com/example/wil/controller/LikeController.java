@@ -105,6 +105,7 @@ public class LikeController {
     public List<PostDTO> topLike() {
         return postService.topLike();
     }
+    
     @GetMapping("/likes")
     public List<Likes> likesList() { return likesService.likesFindAll(); }
 }

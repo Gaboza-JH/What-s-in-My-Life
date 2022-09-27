@@ -56,7 +56,7 @@ const Main = ({ user, token }) => {
         `http://3.37.184.148:8080/like/top_post`
       );
       setTopLikePost(topResponse.data);
-      console.log("topTopTop"+topLikesPost);
+      console.log("topTopTop"+topLikesPost.data);
     } catch (e) {
       console.log("error" + error);
       setError(e);
