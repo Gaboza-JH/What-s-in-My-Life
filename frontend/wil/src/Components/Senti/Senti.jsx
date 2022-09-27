@@ -40,7 +40,7 @@ const Senti = (props) => {
     fill: {
       colors: ['#FFEA7D', '#CECECE'],
     },
-    labels: ["부정이", "긍정이"],
+    labels: ["긍정이", "부정이"],
     responsive: [
       {
         breakpoint: 480,
