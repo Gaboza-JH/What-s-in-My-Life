@@ -54,7 +54,8 @@ const Main = ({ user, token }) => {
         }
         setPostLikeBoolean(likesBoolean);
       }
-      // 인기 게시물 5개 조회 (뭔가 로직 변경이 필요할 것 같음, 게시물이 없는 경우)
+      
+      // 인기 게시물 5개 조회
       const topResponse = await axios.get(
         `http://localhost:8080/like/top_post`
       );
