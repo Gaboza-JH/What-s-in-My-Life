@@ -67,7 +67,7 @@ public class UserService {
         String startTime = format1.format(time);
         System.out.println(startTime);
 
-        String redirectUrl = UriComponentsBuilder.fromHttpUrl("http://localhost:3000/")
+        String redirectUrl = UriComponentsBuilder.fromHttpUrl("http://3.37.184.148/")
                 .queryParam("token", token)
                 .queryParam("expiredTime", expiredTime) // 만료 시간도 같이 보내줌
                 .queryParam("startTime", startTime)

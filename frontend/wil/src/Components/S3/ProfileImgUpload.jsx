@@ -64,7 +64,7 @@ const ProfileImgUpload = () => {
 
   if (clickUpload === true) {
     setTimeout(() => {
-      window.location = "http://localhost:3000/mypage";
+      window.location = "http://3.37.184.148:3000/mypage";
     }, 1000);
   }
 

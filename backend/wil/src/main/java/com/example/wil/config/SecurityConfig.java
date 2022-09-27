@@ -121,7 +121,7 @@ public class SecurityConfig {
                 .and()
                 // form-data 방식 로그인, form 로그인 인증 기능이 작동함
                 .formLogin()
-                .loginPage("http://localhost:3000/loginsignup") // 사용자 정의 로그인 페이지의 url 설정, default: /login
+                .loginPage("http://3.37.184.148/loginsignup") // 사용자 정의 로그인 페이지의 url 설정, default: /login
                 .usernameParameter("email") // 아이디 파라미터명 설정, default: username
                 .passwordParameter("password") // 패스워드 파라미터명 설정, default: password
                 .loginProcessingUrl("/login") // 사용자 이름과 암호를 제출할 URL, 로그인 Form Action Url, default: /login

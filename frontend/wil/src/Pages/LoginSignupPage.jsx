@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import SignUp from "../Components/Sign/SignUp";
 import SignIn from "../Components/Sign/SignIn";
 import OverLay from "../Components/Sign/OverLay";

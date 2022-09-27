@@ -19,7 +19,7 @@ const MyPage = () => {
       setError(null);
       setUser(null);
       setLoading(true);
-      const response = await axios.get(`http://localhost:8080/users/${token}`);
+      const response = await axios.get(`http://3.37.184.148:8080/users/${token}`);
       setUser(response.data);
 
       const tmpPostIdList = [];
@@ -30,7 +30,7 @@ const MyPage = () => {
 
       // 유저가 좋아요 누른 게시물 id 리스트
       const userLikesList = await axios.get(
-        `http://localhost:8080/like/user/post/${token}`
+        `http://3.37.184.148:8080/like/user/post/${token}`
       );
       setUserdoLikePostIdList(userLikesList.data);
 
@@ -39,7 +39,7 @@ const MyPage = () => {
         let flag = false;
 
         const res = await axios.get(
-          `http://localhost:8080/like/${tmpPostIdList[i]}`
+          `http://3.37.184.148:8080/like/${tmpPostIdList[i]}`
         );
 
         if (res.data == 0) {
@@ -77,7 +77,7 @@ const MyPage = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:8080/like/user/post/${token}`
+        `http://3.37.184.148:8080/like/user/post/${token}`
       );
       setUserdoLikePostIdList(response.data);
     } catch (e) {

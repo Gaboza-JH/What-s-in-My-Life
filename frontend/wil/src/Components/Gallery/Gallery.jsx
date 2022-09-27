@@ -44,7 +44,7 @@ const Gallery = (props) => {
   // 전체 게시물 조회 (최신순)
   const allFetchPost = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/post/`);
+      const response = await axios.get(`http://3.37.184.148:8080/post/`);
       setAllPost(response.data);
     } catch (e) {
       console.log("error : " + error);
@@ -62,7 +62,7 @@ const Gallery = (props) => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.post(
-          `http://localhost:8080/like/${token}`,
+          `http://3.37.184.148:8080/like/${token}`,
           likeDTO
         );
         let tmplist = postLikeBoolean;
@@ -83,7 +83,7 @@ const Gallery = (props) => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.delete(
-          `http://localhost:8080/like/${token}/${clickImgPostId}`
+          `http://3.37.184.148:8080/like/${token}/${clickImgPostId}`
         );
         let tmplist = postLikeBoolean;
         tmplist[e.target.id] = false;
@@ -102,7 +102,7 @@ const Gallery = (props) => {
     try {
       const token = localStorage.getItem("token");
       const postResponse = await axios.get(
-        `http://localhost:8080/post/user/${token}`
+        `http://3.37.184.148:8080/post/user/${token}`
       );
       setPostList(postResponse.data);
     } catch (e) {
@@ -117,7 +117,7 @@ const Gallery = (props) => {
     try {
       for (let index = 0; index < postIdIndex.length; index++) {
         const response = await axios.get(
-          `http://localhost:8080/like/${postIdIndex[index]}`
+          `http://3.37.184.148:8080/like/${postIdIndex[index]}`
         );
         likes.push(response.data);
       }
@@ -137,7 +137,7 @@ const Gallery = (props) => {
     const userIdListDoLikesByPostId = [];
     try {
       const response = await axios.get(
-        `http://localhost:8080/like/users/${clickImgPostId}`
+        `http://3.37.184.148:8080/like/users/${clickImgPostId}`
       );
       setUserIdListDoLikesByPostId(response.data);
     } catch (e) {
@@ -150,7 +150,7 @@ const Gallery = (props) => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:8080/like/user/post/${token}`
+        `http://3.37.184.148:8080/like/user/post/${token}`
       );
       setUserdoLikePostIdList(response.data);
     } catch (e) {

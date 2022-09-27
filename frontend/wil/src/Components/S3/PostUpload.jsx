@@ -56,7 +56,7 @@ function PostUpload() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        `http://localhost:8080/post/${token}`,
+        `http://3.37.184.148:8080/post/${token}`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -64,7 +64,7 @@ function PostUpload() {
       );
 
       const modelRes = await axios.post(
-        `http://localhost:8080/predict/`,
+        `http://3.37.184.148:8080/predict/`,
         textDTO,
         {
           withCredentials: true,
@@ -84,7 +84,7 @@ function PostUpload() {
       };
 
       const resultPostRes = await axios.put(
-        `http://localhost:8080/post/${res.data.postId}`,
+        `http://3.37.184.148:8080/post/${res.data.postId}`,
         sentiDTO
       );
       setfinalPost(resultPostRes.data);
@@ -106,7 +106,7 @@ function PostUpload() {
 
   if (clickUpload == true) {
     setTimeout(() => {
-      window.location = "http://localhost:3000/mypage";
+      window.location = "http://3.37.184.148:3000/mypage";
     }, 1000);
   }
 

@@ -6,11 +6,11 @@ import { SiNaver } from "react-icons/si";
 import axios from "axios";
 
 const NAVER_LOGIN_URL =
-  "http://localhost:8080/oauth2/authorization/naver?redirect_uri=http://localhost:8080/oauth2/redirect_front";
+  "http://3.37.184.148:8080/oauth2/authorization/naver?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 const KAKAO_LOGIN_URL =
-  "http://localhost:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:8080/oauth2/redirect_front";
+  "http://3.37.184.148:8080/oauth2/authorization/kakao?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 const GOOGLE_LOGIN_URL =
-  "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:8080/oauth2/redirect_front";
+  "http://3.37.184.148:8080/oauth2/authorization/google?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 
 const SignIn = () => {
   const [userLocalPostDTO, setUserLocalPostDTO] = useState(null);
@@ -37,16 +37,16 @@ const SignIn = () => {
   const clickLocalSignInsubmit = async (e) => {
     try {
       if (userLocalPostDTO.password !== undefined && userLocalPostDTO.email !== undefined && userLocalPostDTO.password !== null && userLocalPostDTO.email !== null && userLocalPostDTO.password !== '' && userLocalPostDTO.email !== ''){
-        const res = await axios.post(`http://localhost:8080/login`, userLocalPostDTO);
+        const res = await axios.post(`http://3.37.184.148:8080/login`, userLocalPostDTO);
         setRedirect(res.request.responseURL);
         alert("😎 환영합니다! 😎");
       } else {
         alert("😢 로그인 실패 정보를 입력해주세요. 😢");
-        window.location = "http://localhost:3000/loginsignup";
+        window.location = "http://3.37.184.148:3000/loginsignup";
       }
     } catch (err) {
       alert("🙅‍♂️ 로그인 실패했습니다. 다시 로그인해주세요.🙅‍♂️");
-      window.location = "http://localhost:3000/loginsignup";
+      window.location = "http://3.37.184.148:3000/loginsignup";
     }
   };
   if (redirect != undefined) {
@@ -55,7 +55,7 @@ const SignIn = () => {
 
   return (
     <div className=" form-container sign-in-container">
-      <form className="sign-form">
+    <form className="sign-form">
         <h1 className="header-signin">Sign in</h1>
         <div className="social-container">
           <a className="sign-a" href={GOOGLE_LOGIN_URL}><ImGoogle2 className="google" /></a>

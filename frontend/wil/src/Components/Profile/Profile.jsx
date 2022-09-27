@@ -20,7 +20,7 @@ const Profile = (props) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`http://localhost:8080/like/user/${token}`)
+      .get(`http://3.37.184.148:8080/like/user/${token}`)
       .then((response) => setLikes(response.data));
   });
 
@@ -54,11 +54,11 @@ const Profile = (props) => {
   const clickHandler = async (e) => {
     const token = localStorage.getItem("token");
     const response = await axios.put(
-      `http://localhost:8080/users/${token}`,
+      `http://3.37.184.148:8080/users/${token}`,
       inputs
     );
     alert("😊 NickName이 수정되었습니다! 😊");
-    window.location = "http://localhost:3000/mypage";
+    window.location = "http://3.37.184.148:3000/mypage";
   };
 
   return (

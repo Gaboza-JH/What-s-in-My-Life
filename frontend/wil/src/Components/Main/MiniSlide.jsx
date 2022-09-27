@@ -64,7 +64,7 @@ const MiniSlide = ({ user, token, userData, postLikeBoolean, postIdIndex }) => {
         const token = localStorage.getItem("token");
         // 좋아요 등록
         const response = await axios.post(
-          `http://localhost:8080/like/${token}`,
+          `http://3.37.184.148:8080/like/${token}`,
           likeDTO
         );
         let tmplist = likeBoolean;
@@ -84,7 +84,7 @@ const MiniSlide = ({ user, token, userData, postLikeBoolean, postIdIndex }) => {
         const token = localStorage.getItem("token");
         // 좋아요 취소
         const response = await axios.delete(
-          `http://localhost:8080/like/${token}/${clickImgPostId}`,
+          `http://3.37.184.148:8080/like/${token}/${clickImgPostId}`,
         );
         let tmplist = likeBoolean;
         tmplist[e.target.id] = false;
@@ -100,12 +100,12 @@ const MiniSlide = ({ user, token, userData, postLikeBoolean, postIdIndex }) => {
   const fetchPost = async () => {
     try {
       // 전체 게시물 조회
-      const response = await axios.get(`http://localhost:8080/post/`);
+      const response = await axios.get(`http://3.37.184.148:8080/post/`);
       setAllPost(response.data);
 
       // 좋아요 수 Top5 게시물 조회
       const topResponse = await axios.get(
-        `http://localhost:8080/like/top_post`
+        `http://3.37.184.148:8080/like/top_post`
       );
       setTopPost(topResponse.data);
 
@@ -125,7 +125,7 @@ const MiniSlide = ({ user, token, userData, postLikeBoolean, postIdIndex }) => {
       const likes = [];
       for (let index = 0; index < postIdIndex.length; index++) {
         const response = await axios.get(
-          `http://localhost:8080/like/${postIdIndex[index]}`
+          `http://3.37.184.148:8080/like/${postIdIndex[index]}`
         );
         likes.push(response.data);
       }
@@ -135,7 +135,7 @@ const MiniSlide = ({ user, token, userData, postLikeBoolean, postIdIndex }) => {
       const topLikes = [];
       for (let index = 0; index < topPostIdIndex.length; index++) {
         const response = await axios.get(
-          `http://localhost:8080/like/${topPostIdIndex[index]}`
+          `http://3.37.184.148:8080/like/${topPostIdIndex[index]}`
         );
         topLikes.push(response.data);
       }

@@ -16,7 +16,7 @@ const Main = ({ user, token }) => {
       if (user == true) {
         // 특정 유저 정보 조회
         const userResponse = await axios.get(
-          `http://localhost:8080/users/${token}`,
+          `http://3.37.184.148:8080/users/${token}`,
         );
         setUserData(userResponse.data);
         const tmpPostIdList = [];
@@ -24,18 +24,18 @@ const Main = ({ user, token }) => {
           tmpPostIdList.push(userResponse.data.postIdList[index]);
         }
         setPostIdIndex(tmpPostIdList);
-        const response = await axios.get(`http://localhost:8080/post/`);
+        const response = await axios.get(`http://3.37.184.148:8080/post/`);
         setAllPost(response.data);
 
         // 유저가 좋아요 누른 게시물 id 리스트
-        const userLikesList = await axios.get(`http://localhost:8080/like/user/post/${token}`);
+        const userLikesList = await axios.get(`http://3.37.184.148:8080/like/user/post/${token}`);
         setUserdoLikePostIdList(userLikesList.data);
         const likesBoolean = [];
         
         for (let i = 0; i < response.data.length; i++) {
           let flag = false;
           const res = await axios.get(
-            `http://localhost:8080/like/${response.data[i].postId}`
+            `http://3.37.184.148:8080/like/${response.data[i].postId}`
           );
           if (res.data == 0) {
             likesBoolean.push(false);
@@ -56,7 +56,7 @@ const Main = ({ user, token }) => {
       }
       // 인기 게시물 5개 조회 (뭔가 로직 변경이 필요할 것 같음, 게시물이 없는 경우)
       const topResponse = await axios.get(
-        `http://localhost:8080/like/top_post`
+        `http://3.37.184.148:8080/like/top_post`
       );
       setTopLikePost(topResponse.data);
     } catch (e) {

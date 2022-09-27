@@ -61,7 +61,7 @@ const Senti = (props) => {
     const sentiP = [];
     try {
       for (let index = 1; index <= postIdIndex.length; index++) {
-        const response = await axios.get(`http://localhost:8080/post/${index}`);
+        const response = await axios.get(`http://3.37.184.148:8080/post/${index}`);
         if (response.data.senti == 0) {
           sentiN.push(response.data.senti);
           setSentiN(sentiN.length);

@@ -172,7 +172,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String startTime = format1.format(time);
         System.out.println(startTime);
 
-        String redirectUrl = UriComponentsBuilder.fromHttpUrl("http://localhost:3000/")
+        String redirectUrl = UriComponentsBuilder.fromHttpUrl("http://3.37.184.148/")
                 .queryParam("token", jwtToken)
                 .queryParam("expiredTime", JwtProperties.EXPIRATION_TIME) // 만료 시간도 같이 보내줌
                 .queryParam("startTime", startTime)
