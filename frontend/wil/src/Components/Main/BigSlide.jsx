@@ -47,7 +47,7 @@ const BigSlide = (props) => {
   return (
     <div>
       {props.user ? (
-        <Carousel>{topLikes}</Carousel>
+        <Carousel>{topPostLike}</Carousel>
       ) : (
         <Carousel>
           <Carousel.Item>
