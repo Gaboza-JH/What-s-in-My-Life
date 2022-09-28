@@ -81,7 +81,7 @@ function PostUpload() {
         }
       );
       const sentiDTO = {
-        senti: modelRes.data.senti,
+        senti: modelRes.data.sentence,
       };
 
       const resultPostRes = await axios.put(
