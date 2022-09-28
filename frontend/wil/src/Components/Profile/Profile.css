@@ -2,7 +2,10 @@
   max-width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
-  background:#372f64;
+  background:#ffffff;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  position: fixed;
 }
 
 .profile {
