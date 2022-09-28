@@ -60,23 +60,21 @@ const Senti = (props) => {
     const sentiN = [];
     const sentiP = [];
     try {
-      //for (let index = 1; index <= postIdIndex.length; index++) {
-        postIdIndex.forEach(async (element) => {
-          const response = await axios.get(`http://3.37.184.148:8080/post/${element}`);
-          if (response.data.senti == 0) {
-            console.log("senti1"+response.data.senti);
-            sentiN.push(response.data.senti);
-            console.log("sentiN"+sentiN);
-            setSentiN(sentiN.length);
-          } else {
-            console.log("senti2"+response.data.senti);
-            sentiP.push(response.data.senti);
-            console.log("sentiP"+sentiP);
-            setSentiP(sentiP.length);
-          }
-        })
-        
-      } catch (e) {
+      for (let index = 1; index <= postIdIndex.length; index++) {
+        const response = await axios.get(`http://3.37.184.148:8080/post/${postIdIndex}`);
+        if (response.data.senti == 0) {
+          console.log("senti1"+response.data.senti);
+          sentiN.push(response.data.senti);
+          console.log("sentiN"+sentiN);
+          setSentiN(sentiN.length);
+        } else {
+          console.log("senti2"+response.data.senti);
+          sentiP.push(response.data.senti);
+          console.log("sentiP"+sentiP);
+          setSentiP(sentiP.length);
+        }
+      }
+    } catch (e) {
       console.log("error : " + error);
       setError(e);
     }
