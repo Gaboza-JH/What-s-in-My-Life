@@ -43,10 +43,18 @@ const Senti = (props) => {
     labels: ["긍정이", "부정이"],
     responsive: [
       {
+        breakpoint: 769,
+        options: {
+          chart:{
+            width: 480,
+          }
+        }
+      },
+      {
         breakpoint: 480,
         options: {
           chart: {
-            width: 200,
+            width: 320,
           },
         },
       },
@@ -60,22 +68,16 @@ const Senti = (props) => {
     const sentiN = [];
     const sentiP = [];
     try {
-      //for (let index = 1; index <= postIdIndex.length; index++) {
         postIdIndex.forEach(async (element) => {
           const response = await axios.get(`http://3.37.184.148:8080/post/${element}`);
           if (response.data.senti == 0) {
-            console.log("senti1"+response.data.senti);
             sentiN.push(response.data.senti);
-            console.log("sentiN"+sentiN);
             setSentiN(sentiN.length);
           } else {
-            console.log("senti2"+response.data.senti);
             sentiP.push(response.data.senti);
-            console.log("sentiP"+sentiP);
             setSentiP(sentiP.length);
           }
         })
-        
       } catch (e) {
       console.log("error : " + error);
       setError(e);
@@ -103,7 +105,7 @@ const Senti = (props) => {
             alt=""
           />
         </div>
-        <Chart options={options} series={series} type="donut" width="550" />
+        <Chart options={options} series={series} type="donut" width="600" />
       </div>
     </>
   );

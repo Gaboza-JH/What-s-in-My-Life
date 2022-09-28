@@ -52,7 +52,6 @@ const App = () => {
     localStorage.setItem("token", getToken());
     localStorage.setItem("expiredTime", getExpiredTime());
     localStorage.setItem("startTime", getTokenStartTime());
-    console.log(localStorage.getItem);
   }
 
   time.start = localStorage.getItem("startTime");

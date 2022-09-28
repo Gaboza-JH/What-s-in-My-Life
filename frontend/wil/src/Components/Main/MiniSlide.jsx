@@ -39,7 +39,6 @@ const MiniSlide = ({ user, token, userData, postLikeBoolean, postIdIndex }) => {
   const [modalclickImgPostId, setModalClickImgPostId] = useState(null);
   const [modalClickContent, setModalClickContent] = useState("");
   const close = useRef();
-
   const [likeBoolean, setLikeBoolean] = useState(postLikeBoolean);
   const [postLikeId, setPostLikeId] = useState();
 
@@ -173,17 +172,14 @@ const MiniSlide = ({ user, token, userData, postLikeBoolean, postIdIndex }) => {
               setClickImg(e.target);
               setClickImgPostId(e.target.id);
               setModalClickImgPostId(Number(e.target.id))
-              console.log(index);
               setModalClickContent(allPost[index].content)
 
               for (let i = 0; i < Object.keys(postLike).length; i++) {
                 if (e.target.id == allPost[i].postId) {
-                  console.log(i);
                   setPostLikeId(i); 
                 }
               }
             }}
-
           />
           <div className="gallery-item-info">
             <ul>

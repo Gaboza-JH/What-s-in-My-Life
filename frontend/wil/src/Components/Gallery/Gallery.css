@@ -10,21 +10,61 @@
   border-radius: 10px;
 }
 
-.gallery {
-  position: relative;
-  justify-content: space-around;
-  align-content : space-around;
-  text-align: center;
-  display: grid;
-  margin-left: 5%;
-  margin-right: 5%;
-  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
-  padding-top: 1rem;
-  row-gap: 10px;
-  column-gap: 10px;
-  grid-auto-rows: 1fr;
-  height: 80%;
-}
+@media all and (min-width: 1025px) {
+  .gallery{
+    position: relative;
+    justify-content: space-around;
+    align-content : space-around;
+    text-align: center;
+    display: grid;
+    margin-left: 5%;
+    margin-right: 5%;
+    grid-template-columns: repeat(4, 1fr);;
+    padding-top: 1rem;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-auto-rows: 1fr;
+    height: 80%;
+    }
+  }
+  
+/* tablet */
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .gallery{     
+    position: relative;
+    justify-content: space-around;
+    align-content : space-around;
+    text-align: center;
+    display: grid;
+    margin-left: 5%;
+    margin-right: 5%;
+    grid-template-columns: repeat(3, 1fr);;
+    padding-top: 1rem;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-auto-rows: 1fr;
+    height: 80%;
+    }
+  }
+  
+  /* phone */
+@media all and (max-width: 767px) {
+  .gallery{
+    position: relative;
+    justify-content: space-around;
+    align-content : space-around;
+    text-align: center;
+    display: grid;
+    margin-left: 5%;
+    margin-right: 5%;
+    grid-template-columns: repeat(2, 1fr);;
+    padding-top: 1rem;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-auto-rows: 1fr;
+    height: 80%;
+    }
+  }
 
 .gallery-item {
   overflow: hidden;
@@ -63,7 +103,6 @@
 }
 
 .gallery-item-likes {
-  /* margin : 10 0 0 10; */
   margin-right: 1rem;
 }
 

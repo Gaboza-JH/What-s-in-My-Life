@@ -5,7 +5,6 @@ import baseURL from ".";
 export const postInfoAPI = (data) =>
   fetch(`${baseURL}/api/info/`, {
     method: "POST",
-    // mode: 'no-cors',
     headers: {
       "Content-Type": "application/json",
     },
@@ -15,7 +14,6 @@ export const postInfoAPI = (data) =>
 export const postImagesAPI = (data) =>
   fetch(`${baseURL}/api/images/`, {
     method: "POST",
-    // mode: 'no-cors',
     headers: {
       "Content-Type": "application/json",
     },
@@ -25,7 +23,6 @@ export const postImagesAPI = (data) =>
 export const getImagesAPI = () =>
   fetch(`${baseURL}/api/info/images`, {
     method: "Get",
-    // mode: 'no-cors',
     headers: {
       "Content-Type": "application/json",
     },

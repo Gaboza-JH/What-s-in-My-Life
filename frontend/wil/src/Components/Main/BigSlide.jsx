@@ -7,12 +7,11 @@ const BigSlide = (props) => {
   console.log(props.topLikesPost);
   const [topPostLike, setTopPostLike] = useState([]);
   const fetchPost = async () => {
-    // 인기 게시물 5개 조회 (뭔가 로직 변경이 필요할 것 같음, 게시물이 없는 경우)
+    // 인기 게시물 5개 조회
     const topResponse = await axios.get(
       `http://3.37.184.148:8080/like/top_post`
     );
     setTopPostLike(topResponse.data);
-    console.log(topPostLike);
   }
   useEffect(() => {
     fetchPost();
@@ -34,7 +33,6 @@ const BigSlide = (props) => {
             />
           </Carousel.Item>
         );
-        console.log(topLikes[index]);
       }
     } catch (e) {
       console.log("error " + e);
@@ -61,17 +59,16 @@ const BigSlide = (props) => {
       console.log("error " + e);
     }
   }
-  console.log(topLikes.length);
-  console.log(topLikes);
+
   return (
-    <div>
+    <div className="d-block-wrapper">
       {props.user ? (
         <Carousel>{topLikes}</Carousel>
       ) : (
         <Carousel>
           <Carousel.Item>
             <img
-              className="d-block w-100"
+              className="d-block-w-100"
               src={introduction}
               alt="First slide"
             />

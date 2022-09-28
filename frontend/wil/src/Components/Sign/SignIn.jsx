@@ -10,7 +10,6 @@ const NAVER_LOGIN_URL =
 const KAKAO_LOGIN_URL =
   "http://ec2-3-37-184-148.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/kakao?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 const GOOGLE_LOGIN_URL =
-  //"http://3.37.184.148:8080/oauth2/authorization/google?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
   "http://ec2-3-37-184-148.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google?redirect_uri=http://3.37.184.148:8080/oauth2/redirect_front";
 
 const SignIn = () => {

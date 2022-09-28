@@ -43,7 +43,6 @@ const MyPage = () => {
         );
 
         if (res.data == 0) {
-          // 좋아요 수가 0이면 무조건 false
           likesBoolean.push(false);
         } else {
           for (let j = 0; j < userLikesList.data.length; j++) {

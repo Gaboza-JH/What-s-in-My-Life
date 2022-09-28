@@ -26,6 +26,13 @@
   width: 64px;
   height: 64px;
 }
+
+.close-btn {
+  margin: 15px;
+  width: 32px;
+  height: 32px;
+  float: left;
+}
   
 .react-multi-carousel-list {
   padding: 0rem 0 0rem 0;

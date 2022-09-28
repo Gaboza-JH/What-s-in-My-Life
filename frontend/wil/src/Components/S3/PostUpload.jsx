@@ -64,7 +64,6 @@ function PostUpload() {
       );
 
       const modelRes = await axios.post(
-        //`http://3.37.184.148:8080/predict/`,
         'http://3.35.30.11:8000/predict/',
         textDTO,
         {
