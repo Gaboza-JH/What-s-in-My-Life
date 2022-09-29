@@ -1,0 +1,317 @@
+@font-face {
+  font-family: "Yeongnamnu";
+  src: url("../../fonts/MYYeongnamnu.ttf");
+  }
+  
+.gallery-container {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+@media all and (min-width: 1025px) {
+  .gallery{
+    position: relative;
+    justify-content: space-around;
+    align-content : space-around;
+    text-align: center;
+    display: grid;
+    margin-left: 5%;
+    margin-right: 5%;
+    grid-template-columns: repeat(4, 1fr);;
+    padding-top: 1rem;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-auto-rows: 1fr;
+    height: 80%;
+    }
+  }
+  
+/* tablet */
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .gallery{     
+    position: relative;
+    justify-content: space-around;
+    align-content : space-around;
+    text-align: center;
+    display: grid;
+    margin-left: 5%;
+    margin-right: 5%;
+    grid-template-columns: repeat(3, 1fr);;
+    padding-top: 1rem;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-auto-rows: 1fr;
+    height: 80%;
+    }
+  }
+  
+  /* phone */
+@media all and (max-width: 767px) {
+  .gallery{
+    position: relative;
+    justify-content: space-around;
+    align-content : space-around;
+    text-align: center;
+    display: grid;
+    margin-left: 5%;
+    margin-right: 5%;
+    grid-template-columns: repeat(2, 1fr);;
+    padding-top: 1rem;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-auto-rows: 1fr;
+    height: 80%;
+    }
+  }
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: 5px;
+  position: relative;
+  color: #fff;
+  margin: 0;
+  padding: 0.5rem;
+  cursor: pointer;
+  object-fit: cover;
+  height: 80%;
+}
+
+.gallery-item:hover .gallery-item-info,
+.gallery-item:focus .gallery-item-info {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  margin: 0;
+  margin-top: 5px;
+  top: 0;
+  width: 32%;
+  height: 32%;
+  border-radius: 10px;
+  background-color: rgba(202, 199, 199, 0.3);
+}
+
+.gallery-item-info {
+  display: none;
+}
+
+.gallery-item-info li {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: 30%;
+}
+
+.gallery-item-likes {
+  margin-right: 1rem;
+}
+
+.gallery-item-type {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2.5rem;
+  text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.modal-gallery-image {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.mypage-modal-gallery-image {
+  width: 400px;
+  height: 400px;
+  margin-top: 40px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.modal-content{
+  margin-top: 15px;
+  color:rgb(35, 35, 35);
+  font-size: 39px;
+}
+
+.mypage-modal-image-box{
+  position: relative;
+}
+
+.mypage-modal-heart-image{
+  max-width: 30px;
+  max-height: 30px;
+}
+
+.mypage-modal-heart-box{
+  position: absolute;
+  left: 330px;
+  top: 400px;
+}
+
+.mypage-modal-like-num{
+  position: absolute;
+  left: 370px;
+  top: 390px;
+  font-size: 30px;
+  color: darkgray;
+}
+
+.main-modal-image-box{
+  position: relative;
+}
+
+.main-modal-heart-image{
+  max-width: 30px;
+  max-height: 30px;
+}
+
+.main-modal-heart-box{
+  position: absolute;
+  left: 330px;
+  top: 360px;
+}
+
+.main-modal-like-num{
+  position: absolute;
+  left: 370px;
+  top: 350px;
+  font-size: 30px;
+  color: darkgray;
+}
+
+.modal-btn-container{
+  display: flex;
+  justify-content:center;
+}
+
+.btn-like {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  margin-right: 15px;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  width: 50%;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid #fdb254;
+  background-color: #fdb254;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in; 
+}
+
+.btn-like:hover{
+  background-color:#f98a03;
+}
+
+.btn-delete {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  margin-right: 15px;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  width: 50%;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid #fdb254;
+  background-color: #fdb254;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in; 
+}
+
+.btn-delete:hover{
+  background-color:#f98a03;
+}
+
+.main-h1{
+text-align : center;
+font-family: "Yeongnamnu";
+margin-top: 2rem;
+margin-bottom: 2rem;
+}  
+
+.backdrop {
+position: fixed;
+z-index: 999;
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+background-color: rgba(0, 0, 0, 0.250);
+display: none;
+place-items: center;
+}
+    
+.modal-view {
+border-radius: 10px;
+background-color: #ffffff;
+max-height: calc(100vh - 100px);
+width: 800px;
+overflow-y: auto;
+}
+
+.btn-wrapper {
+width: 64px;
+height: 64px;
+}
+
+.close-btn {
+margin: 15px;
+width: 32px;
+height: 32px;
+float: left;
+}
+
+.desc {
+
+display :flex; 
+align-items : center;
+justify-content : center; 
+max-height: 100%;
+}
+  
+.modal-form{
+background-color: #ffffff;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+padding: 0 50px;
+height: 100%;
+text-align: center;
+}
+
+.post-wrap {
+  width: 100%;
+  margin: 10px auto;
+  position: relative;
+}
+
+.post-content {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}

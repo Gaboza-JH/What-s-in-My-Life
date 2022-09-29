@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'GangwonEduSaeeum_OTFMediumA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduSaeeum_OTFMediumA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.parent {
+  background: white;
+  position:relative;
+}
+
+.slider {
+  margin:0 8px;
+  overflow:"hidden";
+  padding:1rem 0;
+}
+  
+.slider img {
+  width: 100%;
+  border-radius:10px;
+  height: 300px;
+}
+
+.btn-wrapper {
+  width: 64px;
+  height: 64px;
+}
+
+.close-btn {
+  margin: 15px;
+  width: 32px;
+  height: 32px;
+  float: left;
+}
+  
+.react-multi-carousel-list {
+  padding: 0rem 0 0rem 0;
+}
+
+.react-multi-carousel-list{
+  position: unset !important;
+}
+
+.modal-content{
+  font-family: 'GangwonEduSaeeum_OTFMediumA';
+  font-size: 2rem;
+}
