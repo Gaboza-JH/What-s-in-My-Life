@@ -6,6 +6,17 @@
 ## 파트별 현재 진행 상황 및 주간 계획 (~ 09/16)
 <hr>
 
+
+### [BE+FE 프로젝트 계획 특이사항]
+- BE+FE 담당 인원 1명 결원 발생
+- Database 테이블 축소
+    - Hashtag 관련 테이블 삭제
+    - 댓글 관련 테이블 보류
+    - 팔로우 테이블 보류
+    >![image](https://user-images.githubusercontent.com/103571758/190538100-5c0fb73d-6c5c-4186-921e-ab10a513116d.png)
+
+
+
 ## BE
 > 각 테이블 CRUD 처리
  - User Table : 회원 추가, 수정, 삭제 처리
@@ -55,6 +66,7 @@ front server Docker Container 띄울 예정
     - 게시물 클릭시 화면에 보여줄 modal창 수정 및 연동 예정
     - 빅슬라이드에 금주의 게시물 연동 예정
 
+
 ### [BE+FE 프로젝트 계획 특이사항]
 - BE+FE 담당 인원 1명 결원 발생
 - Database 테이블 축소
@@ -62,6 +74,7 @@ front server Docker Container 띄울 예정
     - 댓글 관련 테이블 보류
     - 팔로우 테이블 보류
     >![image](https://user-images.githubusercontent.com/103571758/190538100-5c0fb73d-6c5c-4186-921e-ab10a513116d.png)
+
 
 <br>
 <hr>
