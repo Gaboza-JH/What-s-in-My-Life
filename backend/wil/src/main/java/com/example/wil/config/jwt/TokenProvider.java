@@ -15,8 +15,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.attribute.UserPrincipal;
-import java.security.SignatureException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
@@ -29,8 +27,6 @@ public class TokenProvider {
     public String createToken(Authentication authentication) {
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 
-//        Jwts.builder().compact(); 이 방식이랑 무슨 차이인지 찾아보기
-        // Access Token 생성
         Date accessTokenExpiresIn = new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_TOKEN_EXPIRE_TIME);
 
         String accessToken = JWT.create()
@@ -38,14 +34,6 @@ public class TokenProvider {
                 .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_TOKEN_EXPIRE_TIME)) // payload "exp": 1516239022 (예시)
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET)); // header "alg": "HS512"
 
-//        String accessToken = JWT.create()
-//                .withSubject(principal.getUser().getUsername()) // payload "sub": "name"
-//                .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_TOKEN_EXPIRE_TIME)) // payload "exp": 1516239022 (예시)
-//                .withClaim("auth", principal.getUser().getRole()) // payload "auth": "ROLE_USER"
-//                .withClaim("id", principal.getUser().getId())
-//                .withClaim("nickname", principal.getUser().getNickname())
-//                .sign(Algorithm.HMAC512(JwtProperties.SECRET)); // header "alg": "HS512"
-
         System.out.println("Access Token : " + accessToken);
 
         // Refresh Token 생성
@@ -54,19 +42,11 @@ public class TokenProvider {
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
         return accessToken;
-
-//        return TokenDto.builder()
-//                .grantType(JwtProperties.TOKEN_PREFIX)
-//                .accessToken(accessToken)
-//                .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
-//                .refreshToken(refreshToken)
-//                .build();
     }
 
 
     public String createTokenLocal(Integer userId) {
 
-        // Access Token 생성
         Date accessTokenExpiresIn = new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_TOKEN_EXPIRE_TIME);
 
         String accessToken = JWT.create()
@@ -74,14 +54,6 @@ public class TokenProvider {
                 .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_TOKEN_EXPIRE_TIME)) // payload "exp": 1516239022 (예시)
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET)); // header "alg": "HS512"
 
-//        String accessToken = JWT.create()
-//                .withSubject(principal.getUser().getUsername()) // payload "sub": "name"
-//                .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.ACCESS_TOKEN_EXPIRE_TIME)) // payload "exp": 1516239022 (예시)
-//                .withClaim("auth", principal.getUser().getRole()) // payload "auth": "ROLE_USER"
-//                .withClaim("id", principal.getUser().getId())
-//                .withClaim("nickname", principal.getUser().getNickname())
-//                .sign(Algorithm.HMAC512(JwtProperties.SECRET)); // header "alg": "HS512"
-
         System.out.println("Access Token : " + accessToken);
 
         // Refresh Token 생성
@@ -90,13 +62,6 @@ public class TokenProvider {
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
         return accessToken;
-
-//        return TokenDto.builder()
-//                .grantType(JwtProperties.TOKEN_PREFIX)
-//                .accessToken(accessToken)
-//                .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
-//                .refreshToken(refreshToken)
-//                .build();
     }
 
     // JWT 토큰 정보 확인
@@ -108,8 +73,6 @@ public class TokenProvider {
                 .getBody();
 
         System.out.println("id : " + claims.getSubject());
-//        System.out.println("username : " + claims.get("username"));
-//        System.out.println("nickname : " + claims.get("nickname"));
 
         return Integer.parseInt(claims.getSubject());
     }
@@ -138,7 +101,6 @@ public class TokenProvider {
 
         if (validateToken(token)) {
 
-            // 토큰 복호화
             Claims claims = Jwts.parserBuilder()
                     .setSigningKey(JwtProperties.SECRET)
                     .build()
@@ -147,7 +109,6 @@ public class TokenProvider {
 
             System.out.println("claims.getSubject() : " + claims.getSubject());
 
-            // 클레임에서 권한 정보 가져오기
             Collection<? extends GrantedAuthority> authorities =
                     Arrays.stream(claims.get(JwtProperties.HEADER_STRING).toString().split(","))
                             .map(SimpleGrantedAuthority::new)

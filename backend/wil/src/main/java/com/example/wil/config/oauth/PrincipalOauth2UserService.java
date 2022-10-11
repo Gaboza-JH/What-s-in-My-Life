@@ -1,7 +1,6 @@
 package com.example.wil.config.oauth;
 
 import com.example.wil.config.auth.PrincipalDetails;
-import com.example.wil.config.jwt.JwtProperties;
 import com.example.wil.config.jwt.TokenProvider;
 import com.example.wil.config.oauth.provider.GoogleUserInfo;
 import com.example.wil.config.oauth.provider.KakaoUserInfo;
@@ -10,17 +9,12 @@ import com.example.wil.config.oauth.provider.OAuth2UserInfo;
 import com.example.wil.model.User;
 import com.example.wil.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import java.util.Date;
 import java.util.Optional;
 
 @Service

@@ -2,7 +2,6 @@ package com.example.wil.controller;
 
 import com.amazonaws.util.CollectionUtils;
 import com.example.wil.DTO.PostDTO;
-import com.example.wil.DTO.UserDTO;
 import com.example.wil.DTO.test.ResultDTO;
 import com.example.wil.DTO.test.TestDTO;
 import com.example.wil.config.jwt.TokenProvider;
@@ -14,7 +13,6 @@ import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import javax.servlet.MultipartConfigElement;
 import java.io.IOException;
@@ -71,12 +69,9 @@ public class PostController {
     public PostDTO putUpPost(@PathVariable String token, @RequestPart(value = "PostDTO", required = false) PostDTO postDTO, @RequestPart(value = "image", required = false) List<MultipartFile> multipartFile) throws IOException {
         System.out.println("/post/{token} postmapping");
 
-        // 프론트에 저장되어 있는 토큰
-        // 저장된 토큰을 이용해서 값을 리턴해주는 메서드를 만듦
         if (tokenProvider.validateToken(token)) {
             System.out.println("/post/{token} postmapping tokenProvider.validate = true");
             Integer userId = tokenProvider.getUserIdFromToken(token);
-//            if(postDTO.getUserId() == userId)
             List<String> imgPaths = new ArrayList<>();
             System.out.println("imgPaths : " + imgPaths);
             System.out.println("putUpPost !!!");

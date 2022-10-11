@@ -1,24 +1,17 @@
 package com.example.wil.service;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
+
 import com.example.wil.DTO.UserDTO;
-import com.example.wil.DTO.UserNicknameRequestDto;
 import com.example.wil.config.jwt.JwtProperties;
 import com.example.wil.config.jwt.TokenProvider;
-import com.example.wil.model.Image;
 import com.example.wil.model.Post;
 import com.example.wil.model.User;
 import com.example.wil.repository.ImageRepository;
 import com.example.wil.repository.PostRepository;
 import com.example.wil.repository.UserRepository;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.text.SimpleDateFormat;
